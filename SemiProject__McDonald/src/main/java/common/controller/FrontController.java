@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 		description = "사용자가 웹에서 *.run 을 했을 경우 이 서블릿이 응답을 해주도록 한다.",
 		urlPatterns = { "*.run" }, 
 		initParams = { 
-				@WebInitParam(name = "propertyConfig", value = "C:/NCS/workspace(jsp)/SemiProject__McDonald/src/main/webapp/WEB-INF/Command.properties",
+				@WebInitParam(name = "propertyConfig", value = "C:/git/SemiProject__McDonald/SemiProject__McDonald/src/main/webapp/WEB-INF/Command.properties",
 						description = "*.run 에 대한 클래스의 매핑파일")
 		})
 
@@ -108,7 +108,7 @@ public class FrontController extends HttpServlet {
 			}// end of while
 			
 		} catch (FileNotFoundException e) {
-			System.out.println(" >>> C:/NCS/workspace(jsp)/SemiProject__McDonald/src/main/webapp/WEB-INF/Command.properties에 파일이 없습니다. <<< ");
+			System.out.println(" >>>C:/git/SemiProject__McDonald/SemiProject__McDonald/src/main/webapp/WEB-INF/Command.properties에 파일이 없습니다. <<< ");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
