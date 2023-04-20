@@ -1,7 +1,6 @@
 package member.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,32 +54,6 @@ public class MemberDAO implements InterMemberDAO {
 			e.printStackTrace();
 		}
 	    
-	}
-
-
-	@Override
-	public int insertCheck() throws SQLException {
-
-		
-		int result = 0;
-		
-		try {
-			
-			conn = ds.getConnection();   // datesourse 에서 가져옴
-			
-			String sql = " insert into tbl_test values(1,'테스트')";
-			
-			// 우편배달부
-			pstmt = conn.prepareStatement(sql);
-			
-			result = pstmt.executeUpdate();
-			
-		}
-		finally {
-			close();
-		}
-	
-		return result;
 	}
 
 }
