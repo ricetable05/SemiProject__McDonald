@@ -12,6 +12,27 @@
 		padding:0;
 	}
 </style>
+
+<script>
+ 
+ window.onresize = function() { <%-- 윈도우 창의 크기변화 이벤트 onresize --%>
+	  const width = window.innerWidth;	
+	  		  
+	  console.log(width);
+	  
+	  if(width <= 991){ <%-- 만약 브라우저 너비가 991 이하가 되면--%>
+		  $("div#div_flex1").hide(); <%-- 사이드 메뉴바 hide --%>
+		  $("div#div_flex2").hide();
+		  $("div#div_flex3").hide();		  
+	  }
+	  else {
+		  $("div#div_flex1").show();
+		  $("div#div_flex2").show();
+		  $("div#div_flex3").show();
+	  }
+
+};
+</script>
 <section style="background-color:#eee; width:80%; margin:0 auto;">
 	<div class="container-fluid px-0 m-0" style="padding-top:8%;">
 		   <div id="carouselBanners" class="carousel slide" data-ride="carousel">
