@@ -1,4 +1,4 @@
-package member.controller;
+package jangjh.member.controller;
 
 public interface InterMemberDAO {
 
