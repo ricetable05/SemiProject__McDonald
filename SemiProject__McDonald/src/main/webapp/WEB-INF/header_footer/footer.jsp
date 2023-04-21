@@ -26,7 +26,7 @@
 								<li><a class="text-light" href="https://www.facebook.com/McDonaldsKorea"><i class="fa-brands fa-facebook fa-2x"></i></a></li>
 								<li><a class="text-light" href="https://www.instagram.com/mcdonalds_kr/"><i class="fa-brands fa-instagram fa-2x"></i></a></li>
 								<li><a class="text-light" href="https://www.youtube.com/user/McDonaldsKor"><i class="fa-brands fa-youtube fa-2x"></i></a></li>
-								<li><a class="text-dark"  href="https://story.kakao.com/ch/mcdonalds/feed"><img src="<%= request.getContextPath() %>/images/kakao_story.png" alt="이미지가 없습니다." width="36" height="32" style="position:relative;bottom:7px;"/></a></li>
+								<li><a class="text-dark"  href="https://story.kakao.com/ch/mcdonalds/feed"><img src="<%= request.getContextPath() %>/images/header_footer/kakao_story.png" alt="이미지가 없습니다." width="36" height="32" style="position:relative;bottom:7px;"/></a></li>
 							</ul>										 
 					 </div>
 				 </div>
