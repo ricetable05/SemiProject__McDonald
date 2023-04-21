@@ -81,7 +81,7 @@
 
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맥도날드</title>
 </head>
 <body>
 
@@ -91,7 +91,7 @@
 		
 		<div style="display:flex; margin:0 auto;">
 		<!-- Brand/logo --> <!-- Font Awesome 6 Icons -->
-		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=request.getContextPath() %>/images/logo.png" alt="이미지가 존재하지 않습니다."/></a>
+		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=request.getContextPath() %>/images/header_footer/logo.png" alt="이미지가 존재하지 않습니다."/></a>
 		
 		<!-- 아코디언 같은 Navigation Bar 만들기 -->
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -106,29 +106,26 @@
 		        <ul class="depth2" style="position: relative; left: 45px;"><%-- 평소에 가려지는 부분 --%>
 						<li><a href="#">버거</a></li>
 						<li><a href="#">맥런치</a></li>
+						<li><a href="#">사이드</a></li>
+						<li><a href="#">디저트</a></li>
 						<li><a href="#">맥카페&음료</a></li>
 				</ul>
 		     </li>
 		     <li class="nav-item">
 		     	<a class="nav-link menufont_size pt-5 pl-5 ml-5" href="#"><span>Store</span></a>
 	     		<ul class="depth2" style="position: relative;left: 45px;"><%-- 평소에 가려지는 부분 --%>
-						<li><a href="#">매장찾기</a></li>
-						<li><a href="#">주문하기</a></li>
+						<li><a href="#">맥딜리버리</a></li>
 				</ul>
 		     </li>
 			 <li class="nav-item">
               <a class="nav-link menufont_size pt-5 pl-2 ml-5" href="#"><span>What's New</span></a>
 				<ul class="depth2" style="position: relative;left: 25px;"><%-- 평소에 가려지는 부분 --%>
 					<li><a href="#">프로모션</a></li>
-					<li><a href="#">새로운 소식</a></li>
-					<li><a href="#">이달의 해피밀</a></li>
 				</ul>              
              </li>
              <li class="nav-item">
               <a class="nav-link menufont_size pt-5 pl-5 ml-5" href="#"><span>Story</span></a>
 				<ul class="depth2" style="position: relative;left: 45px;"><%-- 평소에 가려지는 부분 --%>
-							<li><a href="#">브랜드 소개</a></li>
-							<li><a href="#">사회적 책임과 지원</a></li>
 							<li><a href="#">맥도날드 품질 이야기</a></li>
 							<li><a href="#">맥도날드 사람들</a></li>
 				</ul>              
@@ -142,12 +139,6 @@
 				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning">주문하기</a>
 			</li >
 			
-			<li class="nav-item pt-3 px-1">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4" style="font-size:7pt; width:50px; position:relative; bottom:4px;"><img src="<%= request.getContextPath() %>/images/ico_search.png" alt="이미지가 없습니다"/></a>
-			</li>
-             
-
-			 
 		  </ul>
 		</div>
 		
@@ -155,13 +146,13 @@
     
     
 	    <div id="div_flex1">
-	      <a href="#"><img src="<%= request.getContextPath() %>/images/btn_story.png"></a>
+	      <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_story.png"></a>
 	    </div>
 	    <div id="div_flex2">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_delivery.png"></a>
+	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_delivery.png"></a>
 	    </div>
 	    <div id="div_flex3">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_top.png"></a>
+	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_top.png"></a>
 	    </div>
 	</nav>
 		
