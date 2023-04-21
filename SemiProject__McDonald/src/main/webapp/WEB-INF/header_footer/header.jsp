@@ -141,10 +141,6 @@
 			<li class="nav-item pt-3 px-3">
 				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning">주문하기</a>
 			</li >
-			
-			<li class="nav-item pt-3 px-1">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4" style="font-size:7pt; width:50px; position:relative; bottom:4px;"><img src="<%= request.getContextPath() %>/images/header_footer/ico_search.png" alt="이미지가 없습니다"/></a>
-			</li>
              
 
 			 
