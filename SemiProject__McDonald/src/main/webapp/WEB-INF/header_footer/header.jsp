@@ -26,6 +26,7 @@
 
 <script type="text/javascript">
 	
+	<%-- 네비게이션 시작 --%>
 	$(document).ready(function(){
 		
 		$("ul.depth2").hide(); // 처음에는 depth2 메뉴를 hide()
@@ -71,9 +72,6 @@
 					$("li.nav-item > a > span").removeClass("menuhover");
 				}
 		);
-		
-		
-		
 	});
 	
 </script>
@@ -132,8 +130,8 @@
               
              </li>
              
-          	<li class="nav-item pt-3 px-3" style="margin-left:5%;">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning">로그인</a>
+          	<li id="login" class="nav-item pt-3 px-3" style="margin-left:5%;">
+				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning" href="<%= request.getContextPath() %>/login.run">로그인</a><%-- 로그인 창 --%>
 			</li >
 			<li class="nav-item pt-3 px-3">
 				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning">주문하기</a>

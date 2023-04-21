@@ -3,36 +3,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>맥도날드</title>
+<title>맥도날드</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+
+<style type="text/css">
+
+#name {
+	font-size: 40pt;
+	font-family:'Malgun Gothic';
+	font-weight: bold;
+	text-align: center; 
+}
+
+#indexdetail {
+	margin-left: 70px;
+	
+}
+
+#carouselExampleIndicators {
+	margin-top: 138px;
+}
+
+</style>
     
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
     
-    <style type="text/css">
-    
-    #name {
-    	font-size: 40pt;
-    	font-family:'Malgun Gothic';
-    	font-weight: bold;
-    	text-align: center; 
-    }
-    
-    #indexdetail {
-    	margin-left: 70px;
-    	
-    }
-    
-    #carouselExampleIndicators {
-    	margin-top: 138px;
-    }
-    
-    </style>
-    
-  </head>
+</head>
 </head>
 <body>
 	
