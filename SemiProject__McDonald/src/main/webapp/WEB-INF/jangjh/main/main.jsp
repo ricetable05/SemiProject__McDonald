@@ -36,7 +36,6 @@
 </head>
 <body>
 	
-	<jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
 	
 	<!-- carousel 시작 -->
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
