@@ -1,4 +1,4 @@
-package jangjh.member.controller;
+package jangjh.member.model;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
