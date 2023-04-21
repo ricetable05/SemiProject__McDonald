@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
 
 <style type="text/css">
 	div.card-footer{
@@ -33,6 +32,7 @@
 
 };
 </script>
+<jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
 <section style="background-color:#eee; width:80%; margin:0 auto;">
 	<div class="container-fluid px-0 m-0" style="padding-top:8%;">
 		   <div id="carouselBanners" class="carousel slide" data-ride="carousel">
