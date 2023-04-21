@@ -91,7 +91,7 @@
 		
 		<div style="display:flex; margin:0 auto;">
 		<!-- Brand/logo --> <!-- Font Awesome 6 Icons -->
-		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=request.getContextPath() %>/images/logo.png" alt="이미지가 존재하지 않습니다."/></a>
+		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=request.getContextPath() %>/images/header_footer/logo.png" alt="이미지가 존재하지 않습니다."/></a>
 		
 		<!-- 아코디언 같은 Navigation Bar 만들기 -->
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -143,7 +143,7 @@
 			</li >
 			
 			<li class="nav-item pt-3 px-1">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4" style="font-size:7pt; width:50px; position:relative; bottom:4px;"><img src="<%= request.getContextPath() %>/images/ico_search.png" alt="이미지가 없습니다"/></a>
+				<a class="btn btn-white hMenu mb-4 py-2 mt-4" style="font-size:7pt; width:50px; position:relative; bottom:4px;"><img src="<%= request.getContextPath() %>/images/header_footer/ico_search.png" alt="이미지가 없습니다"/></a>
 			</li>
              
 
@@ -155,13 +155,13 @@
     
     
 	    <div id="div_flex1">
-	      <a href="#"><img src="<%= request.getContextPath() %>/images/btn_story.png"></a>
+	      <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_story.png"></a>
 	    </div>
 	    <div id="div_flex2">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_delivery.png"></a>
+	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_delivery.png"></a>
 	    </div>
 	    <div id="div_flex3">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_top.png"></a>
+	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_top.png"></a>
 	    </div>
 	</nav>
 		
