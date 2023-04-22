@@ -10,6 +10,9 @@ public class ItemVO {
 	int item_price; // 제품 가격        
 	int morning_availability; // 아침판매여부         
 	int is_burger; // 버거 여부
+	
+	
+	String categoryName; // select 용
 
 	ItemDetailVO itemDetailVO; // JOIN 을 위해 넣어준 필드
 	
@@ -103,7 +106,17 @@ public class ItemVO {
 	public void setItemDetailVO(ItemDetailVO itemDetailVO) {
 		this.itemDetailVO = itemDetailVO;
 	}
+
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	
 	
+
 	
 }
