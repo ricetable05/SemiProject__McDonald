@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+    String ctxPath = request.getContextPath();
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,21 +13,21 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
  <%-- Bootstrap CSS --%>
- <link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" type="text/css">
+ <link rel="stylesheet" href="<%=ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" type="text/css">
  
  <%-- Font Awesome 6 Icons --%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
  
 <%-- header footer CSS --%> 
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header_footer/header_footer.css" type="text/css"/>
+ <link rel="stylesheet" href="<%=ctxPath%>/css/header_footer/header_footer.css" type="text/css"/>
  
  <%-- Optional JavaScript --%>
- <script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js" type="text/javascript"></script>
- <script src="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script> 
-
+ <script src="<%=ctxPath%>/js/jquery-3.6.4.min.js" type="text/javascript"></script>
+ <script src="<%=ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script> 
+ 
 <%-- jQueryUI CSS 및 JS  --%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-ui-1.13.1.custom/jquery-ui.min.css" />  
-<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.css" />  
+<script type="text/javascript" src="<%=ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 	
@@ -89,7 +94,7 @@
 		
 		<div style="display:flex; margin:0 auto;">
 		<!-- Brand/logo --> <!-- Font Awesome 6 Icons -->
-		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=request.getContextPath() %>/images/header_footer/logo.png" alt="이미지가 존재하지 않습니다."/></a>
+		<a class="navbar-brand ml-5 mt-1" href="#"><img src="<%=ctxPath%>/images/header_footer/logo.png" alt="이미지가 존재하지 않습니다."/></a>
 		
 		<!-- 아코디언 같은 Navigation Bar 만들기 -->
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -130,11 +135,11 @@
               
              </li>
              
-          	<li id="login" class="nav-item pt-3 px-3" style="margin-left:5%;">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning" href="<%= request.getContextPath() %>/login.run">로그인</a><%-- 로그인 창 --%>
+          	<li id="login" class="nav-item pt-5 pl-5 ml-5">
+				<a class="btn btn-outline-warning btn-lg" style="font-weight: bold;" href="<%=ctxPath%>/login/login.run">LOGIN</a><%-- 로그인 창 --%>
 			</li >
-			<li class="nav-item pt-3 px-3">
-				<a class="btn btn-white hMenu mb-4 py-2 mt-4 text-warning">주문하기</a>
+			<li class="nav-item pt-5 pl-3 ml-5" >
+				<a class="btn btn-outline-warning btn-lg" style="font-weight: bold;">McDelivery</a>
 			</li >
 			
 		  </ul>
@@ -144,13 +149,13 @@
     
     
 	    <div id="div_flex1">
-	      <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_story.png"></a>
+	      <a href="#"><img src="<%=ctxPath%>/images/header_footer/btn_story.png"></a>
 	    </div>
 	    <div id="div_flex2">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_delivery.png"></a>
+	         <a href="#"><img src="<%=ctxPath%>/images/header_footer/btn_delivery.png"></a>
 	    </div>
 	    <div id="div_flex3">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_top.png"></a>
+	         <a href="#"><img src="<%=ctxPath%>/images/header_footer/btn_top.png"></a>
 	    </div>
 	</nav>
 		
