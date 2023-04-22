@@ -37,6 +37,13 @@
 		margin-left:50px;
 	}
 	
+	<style type="text/css">
+	tr.itemInfo:hover {
+		background-color: #e6ffe6;
+		cursor: pointer;
+	}
+	
+	
 </style>
 
 <script type="text/javascript">
@@ -52,22 +59,58 @@
 	
 		<div class="container col-md-2 col-lg-3 my-5 p-4">
 			<ul id="category_list" class="border border-primary" style="background-color:white">
-			<li class="mb-3 mt-0"><a href="<%=request.getContextPath()%>/item/itemRegister.run">전체 카테고리</a></li>
+			<li class="mb-3 mt-0"><a href="<%=request.getContextPath()%>/item/itemList.run">전체 카테고리</a></li>
 			<c:forEach var="ctmap" items="${requestScope.categoryList}">
-				<li><a href="<%=request.getContextPath()%>/item/itemRegister.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
+				<li><a href="<%=request.getContextPath()%>/item/itemList.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
 			</c:forEach>
 			</ul>
 					
 		</div>
 		
 		<div class="container col-md-10 col-lg-9 mt-5 border border-danger">
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
-				제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.제품목록입니다.
+			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px;">
+		        <thead>
+		           <tr>
+		              <th>제품코드</th>
+		              <th>카테고리명</th>
+		              <th>제품명</th>
+		              <th>제품가격</th>
+		              <th>판매시간대</th>
+		              <th>제품설명</th>
+		           </tr>
+		        </thead>
+		        
+		        <tbody>
+		
+		    		<c:if test="${not empty requestScope.ItemList}">
+		    				<c:forEach var="ivo" items="${requestScope.ItemList}" > <%-- items 에는 배열이나 list 가 온다. --%>
+		   					  <tr class="itemInfo">
+					              <td class="item_no">${ivo.item_no}</td>
+					              <td>${ivo.categoryName}</td>
+					              <td>${ivo.item_name}</td>
+					              <td>${ivo.item_price}</td>
+					              <td>${ivo.morning_availability}</td>
+					              <td>${ivo.item_info}</td>
+		          			  </tr>
+		    				</c:forEach>
+		    		</c:if>
+		        
+		        	<c:if test="${empty requestScope.ItemList}">
+			    			<tr>
+		 	    			  <td colspan="4">가입된 회원이 없습니다.</td>
+			    			</tr>    	
+		    		</c:if>
+		
+		        </tbody>
+		    </table>	
+		    
+			<nav class="my-5">
+		        <div style='display:flex; width:80%;'>
+		          <ul class="pagination" style='margin:auto;'>
+		          	${requestScope.pageBar}
+		          </ul>
+		       </div>
+		    </nav>
 		</div>
 	
 	</div>

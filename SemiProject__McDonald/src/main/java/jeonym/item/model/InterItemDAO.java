@@ -10,6 +10,12 @@ public interface InterItemDAO {
 	List<ItemVO> getOrderMainItemList() throws SQLException;
 
 	// 카테고리 리스트 가져오는 메소드
-	List<Map<String, String>> getCategoryList() throws SQLException; 
+	List<Map<String, String>> getCategoryList() throws SQLException;
+
+	// 페이징처리를 위해 totalPage를 구하는 메소드
+	int getTotalPage(Map<String, String> paraMap) throws SQLException;
+
+	// 제품목록 리스트를 가져오는 메소드
+	List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException;
 	
 }

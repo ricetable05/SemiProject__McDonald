@@ -41,7 +41,7 @@ public class ItemDAO implements InterItemDAO {
 			 e.printStackTrace();
 	     }
 	    
-	}// end of public ProductDAO
+	}// end of public ItemDAO
 	
 	
 	
@@ -93,7 +93,7 @@ public class ItemDAO implements InterItemDAO {
 			close();
 		}
 		return OrderMainItemList;
-	}
+	} // end of public List<ItemVO> getOrderMainItemList() throws SQLException {} -------------------
 
 	@Override
 	public List<Map<String, String>> getCategoryList() throws SQLException {
@@ -128,6 +128,118 @@ public class ItemDAO implements InterItemDAO {
 		}
 		return categoryList;
 		
+		
+	} // end of public List<Map<String, String>> getCategoryList() throws SQLException {} -----------------
+
+	@Override
+	public int getTotalPage(Map<String, String> paraMap) throws SQLException{
+
+		int totalPage = 0;
+		String columnName = "";
+        
+		try {
+	            conn = ds.getConnection();
+	            
+	            String sql = " select ceil(count(*)/10) " // sizePerPage 일단 10으로 고정
+	            		   + " from tbl_item ";
+	            	                        
+	            if(!"".equals(paraMap.get("category_id"))) {
+	            	columnName = paraMap.get("category_id");    
+	            	sql += " where fk_category_no = " + columnName; // tbl_item 에는 fk_category_no 라는 이름으로 존재함
+	            }
+	             
+	            pstmt = conn.prepareStatement(sql); 
+	                        
+	            rs = pstmt.executeQuery();
+	            
+	            rs.next();
+	            
+	            totalPage = rs.getInt(1);
+	                     
+	            
+         } finally {
+            close();
+         }
+	         
+	     return totalPage;
+		
+		
+	}
+
+	@Override
+	public List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException {
+		
+		List<ItemVO> ItemList = new ArrayList<>();
+		
+		try {
+			
+			conn = ds.getConnection();			
+			String sql = " select item_no, category_name, item_name, item_price, morning_availability, item_info "
+					   + " from "
+					   + " ( "
+					   + "    select rownum as RNO, item_no, category_name, item_name, item_price, morning_availability, item_info "
+					   + "    from( "
+					   + "            ( "
+					   + "                select item_no, fk_category_no, item_name, item_price, morning_availability, item_info "
+					   + "                from tbl_item "
+					   + "                order by 1 "
+					   + "            ) I  "
+					   + "            JOIN "
+					   + "            ( "
+					   + "                select category_id, category_name "
+					   + "                from tbl_category ";
+					   
+				   if(!"".equals(paraMap.get("category_id"))) { // category_id 가 "" 인지 아닌지에 따라 sql 문이 달라짐
+					   sql += "       where category_id = ? ";
+				   }
+					   	   
+				   sql += "            ) C "
+					   + "            on I.fk_category_no = C.category_id "
+					   + "    ) "
+					   + " )     "
+					   + " where RNO between ? and ? ";
+			// SQL 문 안에 ;(세미콜론)이 들어가면 안된다. 그러면, SYNTAX 에러가 뜸
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int currentShowPageNo = Integer.parseInt(paraMap.get("currentShowPageNo"));
+			int sizePerPage = 10; // 한 페이지당 화면상에 보여줄 제품의 갯수는 10 으로 한다.
+			
+			if(!"".equals(paraMap.get("category_id"))) {
+				
+				
+				pstmt.setInt(1, Integer.parseInt(paraMap.get("category_id")));
+				pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+				pstmt.setInt(3,(currentShowPageNo * sizePerPage));
+			}
+			else {
+				pstmt.setInt(1,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+				pstmt.setInt(2,(currentShowPageNo * sizePerPage));
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ItemVO ivo = new ItemVO();
+				
+				ivo.setItem_no(rs.getInt("ITEM_NO"));
+				ivo.setCategoryName(rs.getString("CATEGORY_NAME"));
+				ivo.setItem_name(rs.getString("ITEM_NAME"));
+				ivo.setItem_price(rs.getInt("ITEM_PRICE"));
+				ivo.setMorning_availability(rs.getInt("MORNING_AVAILABILITY"));
+				ivo.setItem_info(rs.getString("ITEM_INFO"));
+				
+				ItemList.add(ivo);
+				
+	             
+			} // end of while(){} ------------------------------------------
+	
+		} finally {
+			close() ;
+		}
+		
+		return ItemList;
 		
 	}
 	
