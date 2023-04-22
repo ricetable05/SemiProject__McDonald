@@ -13,7 +13,7 @@
 <style type="text/css">
 
 	div#divRegisterFrm {
-		margin-top: 150px;
+		margin-top: 137px;
 	}
 
 	table#tblMemberRegister {
@@ -27,7 +27,6 @@
 	
 		padding: 30px;
 		text-align: center;
-		background-color: #eee;
 		font-size: 25pt;
 		
 	}
@@ -45,9 +44,29 @@
 		font-size: 13pt;
 	} 
 	
+	span.essential { 
+		color: white;
+		font-weight: bold; 
+		font-size: 13pt;
+	} 
+	
+	
 	#tblMemberRegister > tbody > tr > td.gap {
 		padding-left: 100px;
 	}
+	
+	p {
+	  border: 1em violet;
+	  padding: 55px;
+	  font-size: 45pt; 
+	  color: white;
+	  
+	}
+	.bg1 {
+	  background-image: url(<%= ctxPath%>/images/top_image/브랜드소개상단이미지.jpg);  
+	  background-clip: border-box;
+	}
+		
 	
 </style>
     
@@ -520,13 +539,17 @@
 	
 </script>
 
-<div class="row" id="divRegisterFrm">
+<div class="row" id="divRegisterFrm" style="font-family:SpeedeeK; font-weight:600;">
   <div class="col-md-12" align="center">
    <form name="registerFrm">
+   
+   	<div>
+	  <p class="bg1">회원가입&nbsp;&nbsp;&nbsp;<span class="star">*</span><span class="essential">표시는 필수입력사항</span></p>
+	</div>
+   
    	<table id="tblMemberRegister">
       <thead>
 	      <tr>
-	         <th colspan="3" id="th">회원가입&nbsp;&nbsp;&nbsp;<span style="font-size: 10pt;"><span class="star">*</span>표시는 필수입력사항</span></th>
 	      </tr>
       </thead>
       <tbody>
@@ -575,7 +598,7 @@
 	             <span class="error">이메일 형식에 맞지 않습니다.</span>
 	             
 	             <%-- 이메일 중복체크 --%>
-	             <span style="display: inline-block; font-size: 7pt; cursor: pointer;" class="btn btn-dark"  onclick="isExistEmailCheck();">이메일 중복 확인</span> 
+	             <span style="display: inline-block; font-size: 7pt; cursor: pointer; margin-left: 5px;" class="btn btn-dark"  onclick="isExistEmailCheck();">이메일 중복 확인</span> 
 	             <span id="emailCheckResult"></span>
 	         </td>
 	      </tr>

@@ -1,7 +1,10 @@
 package common.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public abstract class AbstractController implements InterCommand{
 
@@ -48,7 +51,18 @@ public abstract class AbstractController implements InterCommand{
 		this.viewPage = viewPage;
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////
+	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
+	public void getCategoryList(HttpServletRequest request) throws SQLException {
+	
+	InterMenuDAO pdao = new MenuDAO();
+	List<Map<String, String>> categoryList = pdao.getCategoryList();
+	
+	request.setAttribute("categoryList", categoryList);
 	
 	
+	
+	}//end of public void getCategoryList(HttpServletRequest request)
+		
 	
 }
