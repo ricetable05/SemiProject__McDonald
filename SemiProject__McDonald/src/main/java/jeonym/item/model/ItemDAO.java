@@ -94,5 +94,41 @@ public class ItemDAO implements InterItemDAO {
 		}
 		return OrderMainItemList;
 	}
+
+	@Override
+	public List<Map<String, String>> getCategoryList() throws SQLException {
+
+		List<Map<String, String>> categoryList = new ArrayList<>(); // 빈 ArrayList 객체 생성
+		
+		try {
+			
+			conn = ds.getConnection();
+			String sql = " select category_id, category_name "
+					   + " from tbl_category "
+					   + " order by 1 ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Map<String, String> ctMap = new HashMap<>();
+				
+				ctMap.put("category_id", String.valueOf(rs.getInt(1)));
+				ctMap.put("category_name", rs.getString(2));
+				
+				categoryList.add(ctMap);
+
+			}
+
+		}
+		finally {
+			close();
+		}
+		return categoryList;
+		
+		
+	}
 	
 }
