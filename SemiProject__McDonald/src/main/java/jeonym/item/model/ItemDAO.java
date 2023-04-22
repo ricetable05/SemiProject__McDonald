@@ -206,8 +206,7 @@ public class ItemDAO implements InterItemDAO {
 			int sizePerPage = 10; // 한 페이지당 화면상에 보여줄 제품의 갯수는 10 으로 한다.
 			
 			if(!"".equals(paraMap.get("category_id"))) {
-				
-				
+						
 				pstmt.setInt(1, Integer.parseInt(paraMap.get("category_id")));
 				pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
 				pstmt.setInt(3,(currentShowPageNo * sizePerPage));

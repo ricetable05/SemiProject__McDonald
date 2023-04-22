@@ -17,15 +17,12 @@
 		text-align: center;
 	}
 	
-	table#itemTbl th{
-		width:60px;
-	}
 	
 	ul#category_list {
 		width: 202px;
 		list-style-type: none;
 		padding: 0;
-		margin: 0;
+		margin: 0 auto;
 	}
 	
 	ul#category_list > li{
@@ -84,7 +81,7 @@
 					
 		</div>
 		
-		<div class="container col-md-10 col-lg-9 mt-5 ">
+		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
 			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px;">
 		        <thead>
 		           <tr>
@@ -106,7 +103,21 @@
 					              <td>${ivo.categoryName}</td>
 					              <td>${ivo.item_name}</td>
 					              <td><fmt:formatNumber value="${ivo.item_price}" pattern="#,###"/></td>
-					              <td>${ivo.morning_availability}</td>
+					              
+					              <c:choose>
+					              	<c:when test="${ivo.morning_availability eq 0}">
+					              	  <td>10:30AM~04:00AM</td>
+					              	</c:when>
+					              	<c:when test="${ivo.morning_availability eq 1}">
+					              	  <td>4:00AM~10:30AM</td>
+					              	</c:when>
+									<c:otherwise>
+									  <td>All time</td>
+									</c:otherwise>					              	
+					              	
+						            
+					              </c:choose>
+					              
 					              
 					              <td>					              
 						              <c:if test="${fn:length(ivo.item_info) > 10}"> <%-- 10글자 이상인 경우 --%>
