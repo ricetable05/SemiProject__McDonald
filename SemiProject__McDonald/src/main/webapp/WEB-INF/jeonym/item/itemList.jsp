@@ -113,11 +113,8 @@
 					              	</c:when>
 									<c:otherwise>
 									  <td>All time</td>
-									</c:otherwise>					              	
-					              	
-						            
+									</c:otherwise>					              			            
 					              </c:choose>
-					              
 					              
 					              <td>					              
 						              <c:if test="${fn:length(ivo.item_info) > 10}"> <%-- 10글자 이상인 경우 --%>
