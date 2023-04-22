@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import parksj.menu.model.InterMenuDAO;
+import parksj.menu.model.MenuDAO;
+
 public abstract class AbstractController implements InterCommand{
 
 	// interface 의 Override 를 implements 한 클래스가 아니라
