@@ -32,10 +32,24 @@ public class MemberVO {
 	public MemberVO() {} // 기본생성자를 만든다.
 	
 	public MemberVO(String userid, String pwd, String member_name, String email, String member_tel, String postcode,
+			String address, String detail_address, String ref_address, String birthday) {
+		
+		this.userid = userid;
+		this.pwd = pwd;
+		this.member_name = member_name;
+		this.email = email;
+		this.member_tel = member_tel;
+		this.postcode = postcode;
+		this.address = address;
+		this.detail_address = detail_address;
+		this.ref_address = ref_address;
+		this.birthday = birthday;
+	}
+	
+	public MemberVO(String userid, String pwd, String member_name, String email, String member_tel, String postcode,
 			String address, String detail_address, String ref_address, String birthday, String registerday,
 			String last_pwd_change_date, int is_deactivate, int is_dormant, boolean requirePwdChange) {
 		
-		super();
 		this.userid = userid;
 		this.pwd = pwd;
 		this.member_name = member_name;
