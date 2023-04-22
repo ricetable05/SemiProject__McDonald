@@ -139,7 +139,7 @@
 				<a class="btn btn-outline-warning btn-lg" style="font-weight: bold;" href="<%=ctxPath%>/login/login.run">LOGIN</a><%-- 로그인 창 --%>
 			</li >
 			<li class="nav-item pt-5 pl-3 ml-5" >
-				<a class="btn btn-outline-warning btn-lg" style="font-weight: bold;">McDelivery</a>
+				<a class="btn btn-outline-warning btn-lg" style="font-weight: bold;" href="<%=request.getContextPath()%>/order/orderMain.run">McDelivery</a>
 			</li >
 			
 		  </ul>
@@ -152,7 +152,7 @@
 	      <a href="#"><img src="<%= request.getContextPath() %>/images/btn_story.png"></a>
 	    </div>
 	    <div id="div_flex2">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_delivery.png"></a>
+	         <a href="<%=request.getContextPath()%>/order/orderMain.run"><img src="<%= request.getContextPath() %>/images/btn_delivery.png"></a>
 	    </div>
 	    <div id="div_flex3">
 	         <a href="#"><img src="<%= request.getContextPath() %>/images/btn_top.png"></a>
