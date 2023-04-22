@@ -53,39 +53,46 @@ public class ItemListAction extends AbstractController {
 		}
 	*/
 
-		String category_id = request.getParameter("category_id");
-		
-		if(category_id == null) {
-			category_id = "";
-		}
-		
-		
-		String currentShowPageNo = request.getParameter("currentShowPageNo");
+		String category_id = request.getParameter("category_id"); // 초기치 null
+				
+		String currentShowPageNo = request.getParameter("currentShowPageNo"); // 현재 보고자하는 페이지바의 번호
 		// currentShowPageNo 은 사용자가 보고자 하는 페이지바의 페이지 번호이다.
 		// 카테고리 메뉴에서 카테고림 명만을 클릭했을 경우에는 currentShowPageNo 는 null 이 된다.
 		// currentShowPageNo 가 null 이라면 currentShowPageNo 를 1 페이지로 바꾸어야 한다.
 		
-		int totalPage = 0;
+		int totalPage = 0; // 페이징 처리를 위해 총 페이지수를 구해야 한다.
 		
-		if(currentShowPageNo == null) {
+		if(currentShowPageNo == null) { // 초기치에는 1을 준다.
 			currentShowPageNo = "1";
+		}
+		
+		if(category_id == null) { // null 인경우 공백 넣어줌
+			category_id = "";
 		}
 		
 		try {
 			
 			if(Integer.parseInt(currentShowPageNo) < 1) { // paraMap에 값이 들어가기 전에 처리해야한다.
-				currentShowPageNo = "1";
-			}				
+				currentShowPageNo = "1"; // 음수일 경우 1을 준다.
+			}
+			
+			if(!category_id.trim().isEmpty() && Integer.parseInt(category_id) < 1) { // category_id 가 공백이 아니면서 음수라면
+				category_id = "";
+			}
+			
 			
 		}catch (NumberFormatException e) {
-			currentShowPageNo = "1"; 
+			currentShowPageNo = "1"; // 문자를 입력할 경우 1을 준다.
+			category_id = "";
 		}
+		
+		// TODO.. 존재하지 않는 category_id 가 넘어왔는지 check
 
 
 		Map<String, String> paraMap = new HashMap<>();
 		
-		paraMap.put("currentShowPageNo", currentShowPageNo);
-		paraMap.put("category_id", category_id);
+		paraMap.put("currentShowPageNo", currentShowPageNo); // 초기치 1
+		paraMap.put("category_id", category_id); // 초기치 ""
 		
 	
 		totalPage = idao.getTotalPage(paraMap); // category_id의 유무에 따라 totalPage는 달라진다.
@@ -96,7 +103,7 @@ public class ItemListAction extends AbstractController {
 		} // url 로 currentShowPageNo 를 장난치는 것을 막아주기
 		
 		
-		List<ItemVO> ItemList = idao.getItemList(paraMap);
+		List<ItemVO> ItemList = idao.getItemList(paraMap); // 페이지에 보여줄 제품의 리스트를 구해온다.
 		
 		request.setAttribute("ItemList", ItemList);
 		
