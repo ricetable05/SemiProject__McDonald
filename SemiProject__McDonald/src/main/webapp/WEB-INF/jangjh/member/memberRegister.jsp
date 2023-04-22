@@ -72,9 +72,9 @@
 	$(document).ready(function(){
 		
 		$("span.error").hide();
-		$("input:text[id='name']").focus();
+		$("input:text[id='member_name']").focus();
 		 
- 		$("input:text[id='name']").blur( function(e) {  
+ 		$("input:text[id='member_name']").blur( function(e) {  
  			
  			if( $(e.target).val().trim() == "" ){
  				
@@ -271,17 +271,17 @@
 		                        extraAddr = ' (' + extraAddr + ')';
 		                    }
 		                    // 조합된 참고항목을 해당 필드에 넣는다.
-		                    document.getElementById("extraAddress").value = extraAddr;
+		                    document.getElementById("ref_address").value = extraAddr;
 		                
 		                } else {
-		                    document.getElementById("extraAddress").value = '';
+		                    document.getElementById("ref_address").value = '';
 		                }
 
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 		                document.getElementById('postcode').value = data.zonecode;
 		                document.getElementById("address").value = addr;
 		                // 커서를 상세주소 필드로 이동한다.
-		                document.getElementById("detailAddress").focus();
+		                document.getElementById("detail_address").focus();
 		            }
 		        }).open();
 						
@@ -357,7 +357,7 @@
         //jQuery를 사용한 Ajax
         $.ajax({
         	
-        	url:"<%= ctxPath %>/member/idDuplicateCheck.up",  
+        	url:"<%= ctxPath %>/member/idDuplicateCheck.run",  
         	data:{"userid":$("input#userid").val()},  // data는 /MyMVC/member/idDuplicateCheck.up"로 전송
         	type:"post",                              
         	dataType:"json",                       
@@ -400,7 +400,7 @@
         //jQuery를 사용한 Ajax
         $.ajax({
         	
-        	url:"<%= ctxPath %>/member/emailDuplicateCheck.up",  
+        	url:"<%= ctxPath %>/member/emailDuplicateCheck.run",  
         	data:{"email":$("input#email").val()},  // data는 /MyMVC/member/emailDuplicateCheck.up"로 전송
         	type:"post",     
         	dataType:"json",
@@ -500,7 +500,7 @@
 	            }
 	            
 	            // 상세주소 유효성검사
-	            if($("input#detailAddress").val() == ""){
+	            if($("input#detail_address").val() == ""){
 	               alert("상세주소를 입력하세요")
 	               return;
 	            }   
@@ -534,7 +534,7 @@
 	      	 <td class="gap"></td>
 	         <td style="width: 20%; font-weight: bold;">성명&nbsp;<span class="star">*</span></td>
 	         <td style="width: 80%; text-align: left;">
-	             <input type="text" name="name" id="name" class="requiredInfo" /> 
+	             <input type="text" name="member_name" id="member_name" class="requiredInfo" /> 
 	            <span class="error">성명은 필수입력 사항입니다.</span>
 	         </td>
 	      </tr>
@@ -546,7 +546,7 @@
 	             <span class="error">아이디는 필수입력 사항입니다.</span>
 	             
 	             <%-- 아이디 중복체크 --%>
-	             <span style="display: inline-block; cursor: pointer;" class="btn btn-dark" onclick="isExistIdCheck();">아이디 중복 확인</span> 
+	             <span style="display: inline-block; font-size: 7pt; cursor: pointer;" class="btn btn-dark" onclick="isExistIdCheck();">아이디 중복 확인</span> 
 	             <span id="idcheckResult"></span>
 	             
 	         </td> 
@@ -575,7 +575,7 @@
 	             <span class="error">이메일 형식에 맞지 않습니다.</span>
 	             
 	             <%-- 이메일 중복체크 --%>
-	             <span style="display: inline-block; cursor: pointer;" class="btn btn-dark"  onclick="isExistEmailCheck();">이메일 중복 확인</span> 
+	             <span style="display: inline-block; font-size: 7pt; cursor: pointer;" class="btn btn-dark"  onclick="isExistEmailCheck();">이메일 중복 확인</span> 
 	             <span id="emailCheckResult"></span>
 	         </td>
 	      </tr>
@@ -599,7 +599,7 @@
 	            <span class="error">우편번호 형식이 아닙니다.</span>
 	            
 	            <%-- 우편번호 찾기 --%>
-	            <span id="zipcodeSearch" style="display: inline-block; cursor: pointer;" class="btn btn-dark">우편번호 찾기</span> 
+	            <span id="zipcodeSearch" style="display: inline-block; font-size: 7pt; cursor: pointer;" class="btn btn-dark">우편번호 찾기</span> 
 	            
 	         </td>
 	      </tr>
@@ -609,7 +609,7 @@
 	         <td style="width: 20%; font-weight: bold;">주소</td>
 	         <td style="width: 80%; text-align: left;">
 	            <input type="text" id="address" name="address" size="40" placeholder="주소" /><br/>
-	            <input type="text" id="detailAddress" name="detailAddress" size="40" placeholder="상세주소" />&nbsp;<input type="text" id="extraAddress" name="extraAddress" size="40" placeholder="참고항목" /> 
+	            <input type="text" id="detail_address" name="detail_address" size="40" placeholder="상세주소" />&nbsp;<input type="text" id="ref_address" name="ref_address" size="40" placeholder="참고항목" /> 
 	            <span class="error">주소를 입력하세요</span>
 	         </td>
 	      </tr>
@@ -621,56 +621,9 @@
 	            <input type="number" id="birthyyyy" name="birthyyyy" min="1950" max="2050" step="1" value="1995" style="width: 80px;" required />
 	            
 	            <select id="birthmm" name="birthmm" style="margin-left: 2%; width: 60px; padding: 8px;">
-	            <%--    
-	               <option value ="01">01</option>
-	               <option value ="02">02</option>
-	               <option value ="03">03</option>
-	               <option value ="04">04</option>
-	               <option value ="05">05</option>
-	               <option value ="06">06</option>
-	               <option value ="07">07</option>
-	               <option value ="08">08</option>
-	               <option value ="09">09</option>
-	               <option value ="10">10</option>
-	               <option value ="11">11</option>
-	               <option value ="12">12</option>
-	             --%>   
 	            </select> 
 	            
 	            <select id="birthdd" name="birthdd" style="margin-left: 2%; width: 60px; padding: 8px;">
-	            <%--    
-	               <option value ="01">01</option>
-	               <option value ="02">02</option>
-	               <option value ="03">03</option>
-	               <option value ="04">04</option>
-	               <option value ="05">05</option>
-	               <option value ="06">06</option>
-	               <option value ="07">07</option>
-	               <option value ="08">08</option>
-	               <option value ="09">09</option>
-	               <option value ="10">10</option>
-	               <option value ="11">11</option>
-	               <option value ="12">12</option>
-	               <option value ="13">13</option>
-	               <option value ="14">14</option>
-	               <option value ="15">15</option>
-	               <option value ="16">16</option>
-	               <option value ="17">17</option>
-	               <option value ="18">18</option>
-	               <option value ="19">19</option>
-	               <option value ="20">20</option>
-	               <option value ="21">21</option>
-	               <option value ="22">22</option>
-	               <option value ="23">23</option>
-	               <option value ="24">24</option>
-	               <option value ="25">25</option>
-	               <option value ="26">26</option>
-	               <option value ="27">27</option>
-	               <option value ="28">28</option>
-	               <option value ="29">29</option>
-	               <option value ="30">30</option>
-	               <option value ="31">31</option>
-	             --%>   
 	            </select> 
 	         </td>
 	      </tr>
@@ -698,7 +651,7 @@
 	      </tr>
 	      
        </tbody>
-     </table>  v
+     </table> 
    </form>
   </div>
 </div>
