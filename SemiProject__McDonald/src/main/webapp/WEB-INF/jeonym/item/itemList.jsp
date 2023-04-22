@@ -132,7 +132,7 @@
 		        
 		        	<c:if test="${empty requestScope.ItemList}">
 			    			<tr>
-		 	    			  <td colspan="4">가입된 회원이 없습니다.</td>
+		 	    			  <td colspan="4">등록된 제품이 없습니다.</td>
 			    			</tr>    	
 		    		</c:if>
 		
