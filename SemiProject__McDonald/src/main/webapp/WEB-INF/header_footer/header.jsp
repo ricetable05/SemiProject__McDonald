@@ -147,7 +147,7 @@
 	      <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_story.png"></a>
 	    </div>
 	    <div id="div_flex2">
-	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_delivery.png"></a>
+	         <a href="<%= request.getContextPath() %>/order/orderMain.run"><img src="<%= request.getContextPath() %>/images/header_footer/btn_delivery.png"></a>
 	    </div>
 	    <div id="div_flex3">
 	         <a href="#"><img src="<%= request.getContextPath() %>/images/header_footer/btn_top.png"></a>
