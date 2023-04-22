@@ -11,7 +11,7 @@ import jangjh.member.model.MemberVO;
 
 
 
-public class ItemRegisterAction extends AbstractController {
+public class ItemListAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,7 +51,7 @@ public class ItemRegisterAction extends AbstractController {
 		super.getCategoryList(request);
 		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/jeonym/item/itemRegister.jsp");	// 제품등록 페이지
+		super.setViewPage("/WEB-INF/jeonym/item/itemList.jsp");	// 제품목록 페이지
 		
 		
 	}
