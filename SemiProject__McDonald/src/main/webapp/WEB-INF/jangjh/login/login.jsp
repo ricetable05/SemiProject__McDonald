@@ -11,7 +11,7 @@
     <title>로그인</title>
     
     
-    <style type="text/css">
+<style type="text/css">
     
     div#container{
     	display: flex;
@@ -36,9 +36,88 @@
     	font-size: 25pt;  text-align: center; padding-left:50px;
     }
     
-    
-    
-    </style>
+</style>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		
+		// 로그인을 하지 않는 상태일 때 
+		if(${empty sessionScope.loginuser}){
+			
+			const loginUserid = localStorage.getItem("saveid"); 
+			
+			if(loginUserid != null){
+				$("input#loginUserid").val(loginUserid);
+				$("input:checkbox[id='saveid']").prop("checked",true);
+			}
+			
+		}
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		
+		$("button#btnSubmit").click(function(){
+			goLogin(); //로그인 시도한다.
+		});
+		
+		$("input#loginPwd").bind("keydown",function(e){
+			if(e.keyCode == 13) { //암호입력란에 엔터를 했을 경우
+				goLogin(); // 로그인 시도한다.
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+	});//end of $(document).ready(function() --------------------------------------
+			
+			
+	// Function Declaration
+	// -- 로그인 처리 함수 --
+	function goLogin() {
+		
+		const loginUserid = $("input#loginUserid").val().trim();
+		const loginPwd = $("input#loginPwd").val().trim();
+		
+		if(loginUserid == "") {
+			alert("아이디를 입력하세요!");
+			$("input#loginUserid").val("");
+			$("input#loginUserid").focus();
+			return; // goLogin(); 함수 종료
+		}
+		
+		if(loginPwd == "") {
+			alert("암호를 입력하세요!");
+			$("input#loginPwd").val(""); 
+			$("input#loginPwd").focus();
+			return; // goLogin(); 함수 종료
+		}
+		
+		
+		if($("input:checkbox[id='saveid']").prop("checked")) {
+			//alert("아이디저장 체크박스에 체크를 하셨네요.")
+			localStorage.setItem("saveid",$("input#loginUserid").val());
+		}
+		else {
+			localStorage.removeItem("saveid");
+		}   
+		   
+		const frm = document.loginFrm;
+		frm.action = "<%= request.getContextPath()%>/login/login.up"; 
+		frm.method = "POST";
+		frm.submit(); 
+		
+	}//end of function goLogin()----------------------------------------------------		
+			
+
+</script>
+
+
     
   </head>
 </head>
@@ -48,7 +127,7 @@
 	
 <div id="container">
 	<%-- === 사이드 시작 === --%>
-	<div id="side" class="customDisplay">
+	<div id="side" class="customDisplay" style="font-family:SpeedeeK; font-weight:600;">
 		<form name="loginFrm">
 	       <table id="loginTbl">
 	         <thead>
@@ -153,7 +232,7 @@
 	<%-- === 사이드 끝 === --%>
 	
 	<%-- === 내용 시작 === --%>
-	<div id="contents">
+	<div id="contents" style="font-family:SpeedeeK; font-weight:600;">
 		<div style="font-size: 40pt; font-weight: bold; text-align: center;">Welcome to McDonald's!</div>
 		<div class="embed-responsive embed-responsive-21by9">
 		   <iframe width="560" src="https://www.youtube.com/embed/g7EzMPH8Ir0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

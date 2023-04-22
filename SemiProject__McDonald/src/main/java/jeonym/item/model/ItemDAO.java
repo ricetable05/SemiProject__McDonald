@@ -189,7 +189,7 @@ public class ItemDAO implements InterItemDAO {
 					   + "                select category_id, category_name "
 					   + "                from tbl_category ";
 					   
-				   if(!"".equals(paraMap.get("category_id"))) { // category_id 가 "" 인지 아닌지에 따라 sql 문이 달라짐
+				   if( paraMap.get("category_id") != null && !paraMap.get("category_id").trim().isEmpty()) { // category_id 가 "" 인지 아닌지에 따라 sql 문이 달라짐
 					   sql += "       where category_id = ? ";
 				   }
 					   	   
@@ -205,9 +205,8 @@ public class ItemDAO implements InterItemDAO {
 			int currentShowPageNo = Integer.parseInt(paraMap.get("currentShowPageNo"));
 			int sizePerPage = 10; // 한 페이지당 화면상에 보여줄 제품의 갯수는 10 으로 한다.
 			
-			if(!"".equals(paraMap.get("category_id"))) {
-				
-				
+			if(paraMap.get("category_id") != null && !paraMap.get("category_id").trim().isEmpty()) {
+						
 				pstmt.setInt(1, Integer.parseInt(paraMap.get("category_id")));
 				pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
 				pstmt.setInt(3,(currentShowPageNo * sizePerPage));

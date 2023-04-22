@@ -1,14 +1,13 @@
 package common.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import jeonym.item.model.InterItemDAO;
-import jeonym.item.model.ItemDAO;
+import parksj.menu.model.InterMenuDAO;
+import parksj.menu.model.MenuDAO;
 
 public abstract class AbstractController implements InterCommand{
 
@@ -54,26 +53,19 @@ public abstract class AbstractController implements InterCommand{
 	public void setViewPage(String viewPage) {
 		this.viewPage = viewPage;
 	}
-
 	
-	
-	// 카테고리 리스트를 가져오는 메소드
+	//////////////////////////////////////////////////////////////////////////////////
+	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
 	public void getCategoryList(HttpServletRequest request) throws SQLException {
-		
-		InterItemDAO idao = new ItemDAO();
-		
-		List<Map<String, String>> categoryList = idao.getCategoryList(); // VO가 아닌 Map 을 사용한다.
-		
-		if(categoryList.size() > 0) {
-			request.setAttribute("categoryList", categoryList);
-		}
-		else {
-			System.out.println("카테고리가 존재하지 않습니다.");
-		}
-		
-	}
+	
+	InterMenuDAO pdao = new MenuDAO();
+	List<Map<String, String>> categoryList = pdao.getCategoryList();
+	
+	request.setAttribute("categoryList", categoryList);
 	
 	
 	
+	}//end of public void getCategoryList(HttpServletRequest request)
+		
 	
 }
