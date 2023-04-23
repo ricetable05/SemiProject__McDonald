@@ -11,6 +11,11 @@ public interface InterMenuDAO {
 	
 	// === Ajax(JSON)를 사용하여 HIT 상품목록을 "더보기" 방식으로 페이징 처리 해주기 위해 카테고리아이디별로 제품의 전체개수 알아오기 //
 	int totalctidCount(String fk_category_no) throws SQLException;
+	
+	// 특정 카테고리에 속하는 제품들을 조회해오기 (select)
+	List<ItemVO> selectCtno(Map<String, String> paraMap) throws SQLException;
+
+
 
 
 }

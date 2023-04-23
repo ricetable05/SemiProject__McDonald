@@ -10,7 +10,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/버거상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/top_image/사이드상단이미지.jpg) 50% 50% no-repeat;
 }
 
 </style>
@@ -25,28 +25,30 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 		$("span#countItem").hide();
 		// HIT상품 게시물을 더보기 위하여 "더보기..." 버튼 클릭액션에 대한 초기값 호출하기 
 	    // 즉, 맨처음에는 "더보기..." 버튼을 클릭하지 않더라도 클릭한 것 처럼 8개의 HIT상품을 게시해주어야 한다는 말이다. 
-		displayBurger("1");
+		displaySide("1");
 		
+				
 		// HIT 상품 게시물을 더보기 위하여 "더보기..." 버튼 클릭액션 이벤트 등록하기
-		$("button#btnBurger").click(function(){
+		$("button#btnSide").click(function(){
 			
-			displayBurger($(this).val());
-	         
-		});//end of $("button#btnMoreHIT").click(function()
 			
+				displayHIT($(this).val());
+		
+			
+		});//end of $("button#btnMoreHIT").click(function()		
 				
 	});// end of $(document).ready(function()
 			
-	let lenBurger = 6;
+	let lenSide = 6;
 	
-	function displayBurger(start){
+	function displaySide(start){
 		$.ajax({
-			url:"<%= request.getContextPath()%>/menu/burgerJSON.run",
+			url:"<%= request.getContextPath()%>/menu/sideJSON.run",
 			type:"get",
 			data:{
-				"category_name":"버거",
+				"category_name":"사이드",
 				"start":start,
-				"len":lenBurger},
+				"len":lenSide},
 			dataType:"json",
 			async:true,
 			success:function(json){
@@ -60,14 +62,14 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 					html += "현재 상품 준비중....";
 					
 					// Burger 상품 결과물 출력하기
-					$("div#displayBurger").html(html);
+					$("div#displaySide").html(html);
 				}
 				else if(json.length > 0){
 					
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
 								 	+ "<div class='card card-1'>"
-								 		+ "<img src='/SemiProject__McDonald/images/burger/burger_bg/1_1955트리플어니언_배경.png' class='card-img-top' style='width: 100%' />"
+								 		+ "<img src='/SemiProject__McDonald/images/side_menu/side_menu_bg/1_슈림프스낵랩_배경.png' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
 								 			+ "<a href='/SemiProject__McDonald/#?item_no="+item.item_no+"' class='stretched-link'></a>"
@@ -77,10 +79,10 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 					}); // end of $.each(json, function(index, item)		
 					
 					// Burger 상품 결과물 출력하기
-					$("div#displayBurger").append(html);
+					$("div#displaySide").append(html);
 					
 					// >>> !!! 중요 !!! 더보기... 버튼의 value 속성에 값을 지정하기 <<< //
-					$("button#btnBurger").val( Number(start)+lenBurger );
+					$("button#btnSide").val( Number(start)+lenSide );
 					
 					// span#countItem 에 지금까지 출력된 상품의 개수를 누적해서 기록한다.
 					$("span#countItem").text(Number($("span#countItem").text())+json.length );
@@ -88,7 +90,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 					// 더보기... 버튼을 계속해서 클릭하여 countHIT 값과 totalHITCount 값이 일치하는 경우 
 					if( $("span#totalCount").text() == $("span#countItem").text() ){
 						
-						$("button#btnBurger").hide();
+						$("button#btnSide").hide();
 						
 					}
 				}// end of else if(json.length > 0)
@@ -104,9 +106,9 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 	<div class="user-warp">
 		<div class="user-image"></div>
 		<div class="user-text">
-			<h1 class="titDep1">버거</h1>
-			<p style="margin-top: 15px;">빅맥<sub>®</sub>에서 맥스파이시<sub>®</sub> 상하이버거까지, </p>
-			<p>주문 즉시 바로 조리해 더욱 맛있는, 맥도날드의 다양한 버거를 소개합니다.</p>
+			<h1 class="titDep1">사이드</h1>
+			<p style="margin-top: 15px;">가볍게 즐겨도, 버거와 함께 푸짐하게 즐겨도, </p>
+			<p>언제나 맛있는 사이드메뉴!</p>
 		</div>
 		<div class="user-text2">
 			<ul>
@@ -119,15 +121,15 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 	<div class="container" style="padding: 20px 15px; ">
 	
 		<div class="menu_tab_change text-center" style="margin-bottom: 30px; ">
-			<button type="button" class="danpum active">단품메뉴</button>
+			<button type="button" class="danpum active">디저트</button>
 		</div>
 	    <!-- 중앙 컨텐츠 시작 -->
-		<div class="row" id="displayBurger">
+		<div class="row" id="displaySide">
 		</div>
 		<!-- row 끝-->
 		
 		<div class="text-center">
-			<button class="extendbtn text-center" id="btnBurger" style="border: solid 0px green; background-color:#FFFFFF;">
+			<button class="extendbtn text-center" id="btnSide" style="border: solid 0px green; background-color:#FFFFFF;">
 				<img src="<%= request.getContextPath() %>/images/main_image/btn_more.png">
 			</button>
 			<span id="totalCount">${requestScope.totalCount}</span>
