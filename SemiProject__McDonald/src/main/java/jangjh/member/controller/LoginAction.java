@@ -28,7 +28,6 @@ public class LoginAction extends AbstractController{
 		// ==> 클라이언트의 IP 주소를 알아오는 것 <==
 		String access_ip = request.getRemoteAddr();
 		
-		System.out.println("~~~ 확인용: userid:"+ userid + ", pwd:"+ pwd+ ", 클라이언트의 IP:"+access_ip);
 		
 		Map<String, String> paraMap = new HashMap<>();
 		
@@ -40,7 +39,6 @@ public class LoginAction extends AbstractController{
 		
 		MemberVO loginuser = mdao.selectOneMember(paraMap);
 		
-		System.out.println(">> 확인용 로그인한 사용자명 : "+loginuser.getMember_name());
 		
 		
 		if(loginuser != null) {
