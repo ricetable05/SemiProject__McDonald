@@ -11,11 +11,23 @@
 
 <style type="text/css">
 	
+	table#itemTbl{
+	    background-color: #e9f7f6;
+	    color: #738776;
+	    font-weight: bold;
+	}
+
 	table#itemTbl th, table#itemTbl td{
 		font-size: 11pt;
 		vertical-align: middle;
 		text-align: center;
+		border:1px solid #738776;
 	}
+	
+	table#itemTbl th{
+		color: #000;
+	}
+	
 	
 	
 	ul#category_list {
@@ -23,11 +35,15 @@
 		list-style-type: none;
 		padding: 0;
 		margin: 0 auto;
+		background-color: #e9f7f6;
+		
 	}
 	
 	ul#category_list > li{
 		width: 200px;
-		margin: 0px auto 10px auto;
+		margin: 0px auto;
+		padding: 10px 0 10px 0;
+		border:1px solid #738776;
 	}
 	
 	ul#category_list > li:last-child{
@@ -49,19 +65,79 @@
 		display:inline-block;
 	}
 	
-	<style type="text/css">
+	
 	tr.itemInfo:hover {
 		background-color: #e6ffe6;
 		cursor: pointer;
 	}
 	
+	.itemListPage > li > a
+	{
+	    background-color: #e9f7f6;
+	    color: #738776;
+	}
 	
+	.itemListPage > li > a:focus,
+	.itemListPage > li > a:hover,
+	.itemListPage > li > span:focus,
+	.itemListPage > li > span:hover
+	{
+	    color: #5a5a5a;
+	    background-color: #eee;
+	    border-color: #ddd;
+	}
 	
+
+		
 	
 </style>
 
 <script type="text/javascript">
 	
+	$("document").ready(function(){
+		
+		$("tr.itemInfo").hover(
+		
+		function(e){
+			$(e.target).parent().find("td").css({"background-color":"#88a68c","color":"beige"});
+		},
+		
+		function(e){
+			$(e.target).parent().find("td").css({"background-color":"", "color":""});
+		}) // 제품목록 리스트 hover 효과
+		
+		
+		$("tr.itemInfo > td").click(function(e){	
+			// alert($(e.target).parent().find("td.item_no").text()); // 101
+			const item_no = $(e.target).parent().find("td.item_no").text();
+			
+			goItemDetail(item_no);
+			
+		}) // td를 누르면 td의 부모인 제품목록 행 (tr)로 가서 item_no 값을 가져온다.
+		
+		
+	}); 
+	
+	function goItemDetail(item_no){
+		
+		// 제품 상세정보창 띄우기
+		const url = "<%=request.getContextPath()%>/item/itemDetail.up?item_no="+item_no;
+		
+		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
+		const pop_width  = 800;
+		const pop_height = 680;
+		const pop_left = Math.ceil((window.screen.width - pop_width) / 2); <%-- 정수로 만듦 ceil 올림 floor 내림 --%>
+		const pop_top = Math.ceil((window.screen.height - pop_height) / 2);					
+		
+
+						
+						
+		window.open(url,"ItemDetail",
+		"left="+pop_left+", top="+pop_top+", width="+pop_width+", height="+pop_height); 
+		// px 을 붙이면 안된다.
+
+		
+	}
 	
 	
 </script>
@@ -72,10 +148,10 @@
 	<div class="row">
 	
 		<div class="container col-md-2 col-lg-3 my-5 p-4">
-			<ul id="category_list" class="border border-primary" style="background-color:white">
-			<li class="mb-3 mt-0"><a href="<%=request.getContextPath()%>/item/itemList.run">전체 카테고리</a></li>
+			<ul id="category_list" class="border border-dark">
+			<li class="pb-3 mt-0 border-bottom border-dark"><a href="<%=request.getContextPath()%>/item/itemList.run">전체 카테고리</a></li>
 			<c:forEach var="ctmap" items="${requestScope.categoryList}">
-				<li><a href="<%=request.getContextPath()%>/item/itemList.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
+				<li class="border-bottom border-dark"><a href="<%=request.getContextPath()%>/item/itemList.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
 			</c:forEach>
 			</ul>
 					
@@ -141,7 +217,7 @@
 		    
 			<nav class="my-5">
 		        <div style='display:flex; width:80%;'>
-		          <ul class="pagination" style='margin:auto;'>
+		          <ul class="itemListPage pagination" style='margin:auto;'>
 		          	${requestScope.pageBar}
 		          </ul>
 		       </div>

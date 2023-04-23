@@ -28,7 +28,6 @@ public class LoginAction extends AbstractController{
 		// ==> 클라이언트의 IP 주소를 알아오는 것 <==
 		String access_ip = request.getRemoteAddr();
 		
-		System.out.println("~~~ 확인용: userid:"+ userid + ", pwd:"+ pwd+ ", 클라이언트의 IP:"+access_ip);
 		
 		Map<String, String> paraMap = new HashMap<>();
 		
@@ -40,7 +39,6 @@ public class LoginAction extends AbstractController{
 		
 		MemberVO loginuser = mdao.selectOneMember(paraMap);
 		
-		System.out.println(">> 확인용 로그인한 사용자명 : "+loginuser.getMember_name());
 		
 		
 		if(loginuser != null) {
@@ -61,8 +59,6 @@ public class LoginAction extends AbstractController{
 			}
 			
 			//로그인 성공시
-			System.out.println(">> 확인용 로그인한 사용자명 : "+loginuser.getMember_name());
-			
 			HttpSession session = request.getSession();
 			// WAS 메모리에 생성되어져 있는 session을 불러오는 것이다.
 			
@@ -78,35 +74,40 @@ public class LoginAction extends AbstractController{
 				request.setAttribute("loc", loc);
 				
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
+				super.setViewPage("/WEB-INF/jangjh/msg.jsp");
+				
+				return; //매소드 종료
 			}
 			else {
+				
 				// 비밀번호를 변경한지 3개월 이내인 경우
 				super.setRedirect(true);
 				super.setViewPage(request.getContextPath()+"/main.run");
+				
+				return; //매소드 종료
 			}
 			
 		}
 		else {
 			
-			String message = "로그인 실패";
+			String message = "아이디 또는 비밀번호를 잘못 입력하셨습니다.";
 			String loc = "javascript:history.back()";
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
 			
 			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/msg.jsp");
+			super.setViewPage("/WEB-INF/jangjh/msg.jsp");
+			
+			return; //매소드 종료
 			
 		}
 		
 		
 	}
-		
 		//POST 방식으로 넘어온 것이 아니라면
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/jangjh/login/login.jsp");
-		
 
 	}
 
