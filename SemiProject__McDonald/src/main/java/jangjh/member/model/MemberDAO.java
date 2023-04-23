@@ -152,6 +152,103 @@ public class MemberDAO implements InterMemberDAO {
 			
 			return isExists;
 		}//end of public boolean emailDulicateCheck(String email) throws SQLException ------------
+
+		// 임력받은 paraMap을 가지고 한명의 회원정보를 리턴시켜주는 메소드(로그인 처리)
+		@Override
+		public MemberVO selectOneMember(Map<String, String> paraMap) throws SQLException {
+			
+			MemberVO member = null;
+			
+			try {
+				conn = ds.getConnection();
+				
+				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,        \n"+
+						 	 " birthyyyy, birthmm, birthdd, registerday, pwdchangegap,       \n"+
+							 " NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap  \n"+
+							 " from  \n"+
+							 " (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address      \n"+
+							 " , substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd       \n"+
+							 " , to_char(registerday,'yyyymmdd') AS registerday       \n"+
+							 " , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap  \n"+
+							 " from tbl_member  \n"+
+							 " where is_deactivate = '1' and userid = ? and pwd= ?  \n"+
+							 " ) M  \n"+
+							 " CROSS JOIN  \n"+
+							 " (  \n"+
+							 " select trunc(months_between(sysdate, max(login_date))) AS lastlogingap  \n"+
+							 " from tbl_login_history\n"+
+							 " where fk_userid = ?  \n"+
+							 " ) H ";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, paraMap.get("userid"));
+				pstmt.setString(2, Sha256.encrypt(paraMap.get("pwd")));
+				pstmt.setString(3, paraMap.get("userid"));
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					
+					member = new MemberVO();
+					
+					member.setUserid(rs.getString(1));
+					member.setMember_name((rs.getString(2)));
+					member.setEmail(aes.decrypt(rs.getString(3)));
+					member.setMember_tel(aes.decrypt(rs.getString(4)));
+					member.setPostcode(rs.getString(5));
+					member.setAddress(rs.getString(6));
+					member.setDetail_address(rs.getString(7));
+					member.setRef_address(rs.getString(8));
+					member.setBirthday(rs.getString(9) + rs.getString(10) + rs.getString(11) );
+					member.setRegisterday(rs.getString(12));
+					
+					if( rs.getInt(13) >= 3) {
+						//마지막으로 암호를 변경한 날짜가 현재시각으로부터 3개월이 지났으면 true
+						//마지막으로 암호를 변경한 날짜가 현재시각으로부터 3개월이 지나지 않았으면 false
+						
+						member.setRequirePwdChange(true); // 로그인시 암호를 변경해라는 alert를 띄우도록 할 때 사용한다.
+					}
+					
+					if(rs.getInt(14) >= 12) {
+						//마지막으로 암호를 변경한 날짜가 현재시각으로부터 1년이 지났으면 휴먼으로 지정
+						
+						member.setIs_dormant(1);
+						
+						// == tbl_member 테이블의 idle 컬럼의 값을 1로 변경하기 == //
+						sql = " update tbl_member set is_dormant = 1 "
+							+ " where userid = ? ";
+						
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, paraMap.get("userid"));
+						
+						pstmt.executeUpdate();
+					}
+					
+					// == tbl_lastlogingap(로그인 기록) 테이블에 insert 하기 == //
+					if(member.getIs_dormant()!= 1) {
+						
+						sql = " insert into tbl_login_history(fk_userid, access_ip) "
+							+ " values(?, ?) ";	
+						
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, paraMap.get("userid"));
+						pstmt.setString(2, paraMap.get("access_ip"));
+						
+						pstmt.executeUpdate();
+						
+					}
+	 				
+				}//end of if(rs.next()) ------------------------------------------------------
+				
+			}catch(GeneralSecurityException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			return member;
+		}//end of public MemberVO selectOneMember(Map<String, String> paraMap) throws SQLException ----------
 		
 
 }

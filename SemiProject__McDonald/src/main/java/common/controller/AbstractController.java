@@ -55,6 +55,11 @@ public abstract class AbstractController implements InterCommand{
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	/*
 	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
 	public void getMenuCategoryList(HttpServletRequest request) throws SQLException {
 	   
@@ -65,7 +70,6 @@ public abstract class AbstractController implements InterCommand{
 	   
 	}//end of public void getCategoryList(HttpServletRequest request)
 	
-	}//end of public void getCategoryList(HttpServletRequest request)
-		
+	*/	
 	
 }
