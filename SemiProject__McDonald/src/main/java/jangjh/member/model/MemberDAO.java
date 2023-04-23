@@ -168,7 +168,7 @@ public class MemberDAO implements InterMemberDAO {
 						" from  \n"+
 						" (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address      \n"+
 						" , substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd       \n"+
-						" , to_char(registerday,'yyyymmdd') AS registerday       \n"+
+						" , registerday       \n"+
 						" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap  \n"+
 						" from tbl_member  \n"+
 						" where is_deactivate = '1' and userid = ? and pwd= ? \n"+

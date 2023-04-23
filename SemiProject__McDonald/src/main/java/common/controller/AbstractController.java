@@ -76,14 +76,13 @@ public abstract class AbstractController implements InterCommand{
 	
 	
 	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
-	public void getMenuCategoryList(HttpServletRequest request) throws SQLException {
-	   
-	InterMenuDAO pdao = new MenuDAO();
-	List<Map<String, String>> categoryList = pdao.getCategoryList();
-	   
-	request.setAttribute("categoryList", categoryList);
-	   
-	}//end of public void getCategoryList(HttpServletRequest request)
-	
+    public void getMenuCategoryList(HttpServletRequest request) throws SQLException {
+        
+    	InterMenuDAO pdao = new MenuDAO();
+    	List<Map<String, String>> menucategoryList= pdao.getMenuCategoryList();
+    	      
+    	request.setAttribute("menucategoryList", menucategoryList);
+    	      
+    	}//end of public void getMenuCategoryList(HttpServletRequest request)
 	
 }
