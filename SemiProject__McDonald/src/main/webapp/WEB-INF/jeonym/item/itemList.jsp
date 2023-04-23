@@ -140,7 +140,7 @@
 </script>
 
 
-<div class="container-fluid border border-danger" style="margin-top:100px; background-color:#fafafa;">
+<div class="container-fluid" style="margin-top:200px; background-color:#fafafa;">
 
 	<div class="row">
 	
