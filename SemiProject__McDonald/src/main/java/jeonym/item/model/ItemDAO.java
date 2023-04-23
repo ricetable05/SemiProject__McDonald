@@ -164,7 +164,7 @@ public class ItemDAO implements InterItemDAO {
 	     return totalPage;
 		
 		
-	}
+	}// end of public int getTotalPage(Map<String, String> paraMap) throws SQLException{} -----------------
 
 	@Override
 	public List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException {
@@ -240,6 +240,34 @@ public class ItemDAO implements InterItemDAO {
 		
 		return ItemList;
 		
-	}
+	}// end of 	public List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException {} --------------
+
+	
+	// item_no 가 존재하는지 여부 파악 메소드
+	@Override
+	public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException{
+		
+		boolean is_Exist_item_no = false;
+		try {
+			
+			conn = ds.getConnection();			
+			String sql  = " select * "
+						+ " from tbl_item "
+						+ " where item_no = ? ";
+					   
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("item_no"));
+			rs = pstmt.executeQuery();
+
+			is_Exist_item_no = rs.next(); // 존재하면 true 존재하지 않으면 false
+	
+		} finally {
+			close() ;
+		}
+		
+		return is_Exist_item_no;
+		
+	} // end of public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException {} -------------
 	
 }
