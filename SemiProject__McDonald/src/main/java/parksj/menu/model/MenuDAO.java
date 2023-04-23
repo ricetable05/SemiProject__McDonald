@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
 public class MenuDAO implements InterMenuDAO {
 	
 	private DataSource ds; //DataSource ds 는 아파치톰캣이 제공하는 DBCP(DB Connection Pool)이다.
@@ -33,7 +34,7 @@ public class MenuDAO implements InterMenuDAO {
 		try {
 			Context initContext = new InitialContext();
 		    Context envContext  = (Context)initContext.lookup("java:/comp/env");
-		    ds = (DataSource)envContext.lookup("jdbc/myoracle");
+		    ds = (DataSource)envContext.lookup("jdbc/semi_oracle");
 		}catch(NamingException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +62,7 @@ public class MenuDAO implements InterMenuDAO {
 			while(rs.next()) {
 				
 				Map<String, String> map = new HashMap<>();
-				map.put("category_id", rs.getString(1));
+				map.put("category_id", String.valueOf(rs.getInt(1)));
 				map.put("category_name", rs.getString(2));
 				
 				menucategoryList.add(map);
@@ -86,7 +87,7 @@ public class MenuDAO implements InterMenuDAO {
 			conn = ds.getConnection();
 			String sql = " select count(*) "
 					   + " from TBL_ITEM "
-					   + " where fk_snum = ? ";
+					   + " where fk_category_no = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, fk_category_no);
@@ -102,6 +103,56 @@ public class MenuDAO implements InterMenuDAO {
 		}
 		
 		return totalCount;
+	}
+	
+	
+	// 특정 카테고리에 속하는 제품들을 조회해오기 (select)
+	@Override
+	public List<ItemVO> selectCtno(Map<String, String> paraMap) throws SQLException {
+
+		List<ItemVO> BurgerList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			String sql = " select item_no, category_id, category_name, item_name, item_image "
+					   + "from "
+					   + "( "
+					   + "    select row_number() over(order by item_no asc) AS RNO, I.item_no, C.category_id, category_name, item_name, item_image "
+					   + "    from tbl_item I "
+					   + "    JOIN tbl_category C "
+					   + "    ON I.fk_category_no = C.category_id "
+					   + "    where category_name = ? "
+					   + ") V "
+					   + "where RNO between ? and ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("category_name"));
+			pstmt.setString(2, paraMap.get("start"));
+			pstmt.setString(3, paraMap.get("end"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemVO ivo = new ItemVO();
+				ivo.setItem_no(rs.getInt(1));
+				
+				CategoryVO cvo = new CategoryVO();
+				cvo.setCategory_id(rs.getInt(2));	// 카테고리 코드
+				cvo.setCategory_name(rs.getString(3));
+				ivo.setCatevo(cvo);
+				
+				
+				ivo.setItem_name(rs.getString(4));
+				ivo.setItem_image(rs.getString(5));
+				
+				BurgerList.add(ivo);
+			}
+			
+		}finally {
+			close();
+		}
+		
+		return BurgerList;
 	}
 	
 	

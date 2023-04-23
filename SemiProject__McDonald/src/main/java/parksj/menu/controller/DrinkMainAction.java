@@ -7,11 +7,10 @@ import common.controller.AbstractController;
 import parksj.menu.model.InterMenuDAO;
 import parksj.menu.model.MenuDAO;
 
-public class BurgerMainAction extends AbstractController {
+public class DrinkMainAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		super.getMenuCategoryList(request);
 		
 		InterMenuDAO mdao = new MenuDAO();
@@ -22,7 +21,7 @@ public class BurgerMainAction extends AbstractController {
 		request.setAttribute("totalCount", totalCount);
 		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/parksj/menu/burger.jsp");
+		super.setViewPage("/WEB-INF/parksj/menu/drink.jsp");
 		
 	}
 

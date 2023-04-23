@@ -3,24 +3,24 @@ package parksj.menu.model;
 public class ItemVO {
 
 	
-	int item_no;   
+	int item_no;
+	int fk_category_no; // 카테고리 번호
 	String item_name;
 	String item_image;
-	String categoryName;
-
 	
+	private CategoryVO catevo;
+
+
 	public ItemVO() {};
 	
-	public ItemVO(int item_no, String item_name, String item_image) {
+	public ItemVO(int item_no, int fk_category_no, String item_name, String item_image) {
 
 		this.item_no = item_no;
+		this.fk_category_no = fk_category_no;
 		this.item_name = item_name;
 		this.item_image = item_image;
 		
 	}
-	
-	
-
 	
 	
 	public int getItem_no() {
@@ -47,13 +47,21 @@ public class ItemVO {
 	public void setItem_image(String item_image) {
 		this.item_image = item_image;
 	}
-	
-	public String getCategoryName() {
-		return categoryName;
+
+	public int getFk_category_no() {
+		return fk_category_no;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setFk_category_no(int fk_category_no) {
+		this.fk_category_no = fk_category_no;
+	}
+	
+	public CategoryVO getCatevo() {
+		return catevo;
+	}
+
+	public void setCatevo(CategoryVO catevo) {
+		this.catevo = catevo;
 	}
 	
 	
