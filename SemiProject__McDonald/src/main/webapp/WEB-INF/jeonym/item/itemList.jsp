@@ -120,7 +120,22 @@
 	
 	function goItemDetail(item_no){
 		
+		// 제품 상세정보창 띄우기
+		const url = "<%=request.getContextPath()%>/item/itemDetail.up?item_no="+item_no;
 		
+		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
+		const pop_width  = 800;
+		const pop_height = 680;
+		const pop_left = Math.ceil((window.screen.width - pop_width) / 2); <%-- 정수로 만듦 ceil 올림 floor 내림 --%>
+		const pop_top = Math.ceil((window.screen.height - pop_height) / 2);					
+		
+
+						
+						
+		window.open(url,"ItemDetail",
+		"left="+pop_left+", top="+pop_top+", width="+pop_width+", height="+pop_height); 
+		// px 을 붙이면 안된다.
+
 		
 	}
 	
