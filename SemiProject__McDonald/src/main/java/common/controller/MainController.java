@@ -8,8 +8,8 @@ public class MainController extends AbstractController {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
-			super.setViewPage("/WEB-INF/jangjh/main/main.jsp");
+		
+		super.setViewPage("/WEB-INF/jangjh/main/main.jsp");
 			
 	}
 

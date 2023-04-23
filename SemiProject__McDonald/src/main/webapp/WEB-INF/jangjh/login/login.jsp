@@ -4,12 +4,14 @@
 <%
     String ctxPath = request.getContextPath();
 %>
+
     
 <!DOCTYPE html>
 <html>
 <head>
     <title>로그인</title>
     
+<jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
     
 <style type="text/css">
     
@@ -72,8 +74,6 @@
 		
 		
 		
-		
-		
 	});//end of $(document).ready(function() --------------------------------------
 			
 			
@@ -108,13 +108,14 @@
 		}   
 		   
 		const frm = document.loginFrm;
-		frm.action = "<%= request.getContextPath()%>/login/login.up"; 
+		frm.action = "<%= request.getContextPath()%>/login/login.run"; 
 		frm.method = "POST";
 		frm.submit(); 
 		
 	}//end of function goLogin()----------------------------------------------------		
 			
-
+	
+	
 </script>
 
 
@@ -123,13 +124,11 @@
 </head>
 <body>
 	
-<jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
-	
 <div id="container">
 	<%-- === 사이드 시작 === --%>
 	<div id="side" class="customDisplay" style="font-family:SpeedeeK; font-weight:600;">
 		<form name="loginFrm">
-	       <table id="loginTbl">
+	       <table id="loginTbl" style="margin-top: 22px;">
 	         <thead>
 	            <tr>
 	               <th colspan="2" id="th">LOGIN</th>
