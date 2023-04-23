@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import common.controller.AbstractController;
 import jeonym.item.model.InterItemDAO;
 import jeonym.item.model.ItemDAO;
+import jeonym.item.model.ItemDetailVO;
+import jeonym.item.model.ItemVO;
 
 public class ItemDetailAction extends AbstractController {
 
@@ -52,7 +54,7 @@ public class ItemDetailAction extends AbstractController {
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("item_no",item_no);
 		
-		boolean is_Exist_item_no = idao.is_Exist_item_no(paraMap);
+		boolean is_Exist_item_no = idao.is_Exist_item_no(paraMap); // item_no 가 DB에 존재하는지 여부 파악
 		
 		if(!is_Exist_item_no) {
 			message = "item_no 가 DB에 존재하지 않습니다.";
@@ -61,7 +63,10 @@ public class ItemDetailAction extends AbstractController {
 
 		if(!wrong_data_in_url) {
 			
-			request.setAttribute("item_no", item_no);
+			ItemDetailVO idvo = idao.selectOneItem(paraMap);
+			
+			request.setAttribute("idvo", idvo);
+			
 			setRedirect(false);
 			setViewPage("/WEB-INF/jeonym/item/itemDetailList.jsp");
 			
