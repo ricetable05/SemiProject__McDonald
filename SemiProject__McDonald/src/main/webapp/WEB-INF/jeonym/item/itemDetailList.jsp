@@ -87,11 +87,16 @@
 		          			  </tr>
 							  <tr>
 		    			      	  <td>알레르기 정보</td>
-					              <td>${requestScope.idvo.allergens}</td>
+					              <td>
+					              	<c:if test="${requestScope.idvo.allergens eq '0'}">-</c:if>
+					              	<c:if test="${requestScope.idvo.allergens ne '0'}">${requestScope.idvo.allergens}</c:if>					              					              
 		          			  </tr>
 							  <tr>
 		    			      	  <td>원산지 정보</td>
-					              <td>${requestScope.idvo.coa}</td>
+					              <td>
+					              	<c:if test="${requestScope.idvo.coa eq '0'}">-</c:if>
+					              	<c:if test="${requestScope.idvo.coa ne '0'}">${requestScope.idvo.coa}</c:if>					              					              					              
+					              </td>
 		          			  </tr>
 
 		          			  

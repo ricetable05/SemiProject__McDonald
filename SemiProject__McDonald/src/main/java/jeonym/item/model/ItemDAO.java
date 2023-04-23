@@ -283,11 +283,11 @@ public class ItemDAO implements InterItemDAO {
 			
 			conn = ds.getConnection();			
 			
-			String sql  = " select pk_fk_item_no, item_name, weight_g, nvl(weight_ml,'0') as weight_ml "
-				   	    + "       , calories, carbo, protein, fat, sodium, nvl(caffeine,'0') as caffeine "
-				   	    + "       , allergens ,coa "
-				   	    + " from tbl_item_detail "
-				   	    + " where pk_fk_item_no = ? ";
+			String sql  = " select pk_fk_item_no, item_name, weight_g, weight_ml "
+						+ "       , calories, carbo, protein, fat, sodium, caffeine "
+						+ "       , allergens ,coa "
+						+ " from tbl_item_detail "
+						+ " where pk_fk_item_no = ? ";
 					   
 			pstmt = conn.prepareStatement(sql);
 			
