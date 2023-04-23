@@ -228,17 +228,16 @@ public class MemberDAO implements InterMemberDAO {
 					// == tbl_lastlogingap(로그인 기록) 테이블에 insert 하기 == //
 					if(member.getIs_dormant()!= 1) {
 						
-						sql = " insert into tbl_login_history(fk_userid, access_ip) "
-							+ " values(?, ?) ";	
+						sql = " insert into tbl_login_history values(login_histroy_seq.nextval, ?, sysdate, ?) ";
 						
 						pstmt = conn.prepareStatement(sql);
 						pstmt.setString(1, paraMap.get("userid"));
 						pstmt.setString(2, paraMap.get("access_ip"));
 						
 						pstmt.executeUpdate();
-						
+					
 					}
-	 				
+					
 				}//end of if(rs.next()) ------------------------------------------------------
 				
 			}catch(GeneralSecurityException | UnsupportedEncodingException e) {
