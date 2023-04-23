@@ -17,5 +17,11 @@ public interface InterItemDAO {
 
 	// 제품목록 리스트를 가져오는 메소드
 	List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException;
+
+	// item_no 가 존재하는지 여부 파악 메소드
+	boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException;
+
+	// 제품의 상세정보페이지를 위해 제품하나를 select 하는 메소드
+	ItemDetailVO selectOneItem(Map<String, String> paraMap) throws SQLException;
 	
 }

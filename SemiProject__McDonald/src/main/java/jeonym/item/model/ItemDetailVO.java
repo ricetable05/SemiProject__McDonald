@@ -9,18 +9,18 @@ public class ItemDetailVO {
 	private int calories;         
 	private int carbo;         
 	private int protein;         
-	private int fat;         
+	private float fat;         
 	private int sodium;         
 	private int caffeine;         
-	private int allergens; 
-	private int coa;
+	private String allergens; 
+	private String coa;
 
 	
 	
 	public ItemDetailVO() {}; // 생성자 오버로딩 시에는 기본생성자를 꼭 선언해야한다.
 	
 	public ItemDetailVO(int pk_fk_item_no, String item_name, int weight_g, int weight_ml, int calories, int carbo,
-			int protein, int fat, int sodium, int caffeine, int allergens, int coa) {
+			int protein, float fat, int sodium, int caffeine, String allergens, String coa) {
 
 		this.pk_fk_item_no = pk_fk_item_no;
 		this.item_name = item_name;
@@ -78,12 +78,15 @@ public class ItemDetailVO {
 	public void setProtein(int protein) {
 		this.protein = protein;
 	}
-	public int getFat() {
+
+	public float getFat() {
 		return fat;
 	}
-	public void setFat(int fat) {
+
+	public void setFat(float fat) {
 		this.fat = fat;
 	}
+
 	public int getSodium() {
 		return sodium;
 	}
@@ -96,18 +99,23 @@ public class ItemDetailVO {
 	public void setCaffeine(int caffeine) {
 		this.caffeine = caffeine;
 	}
-	public int getAllergens() {
+
+	public String getAllergens() {
 		return allergens;
 	}
-	public void setAllergens(int allergens) {
+
+	public void setAllergens(String allergens) {
 		this.allergens = allergens;
 	}
-	public int getCoa() {
+
+	public String getCoa() {
 		return coa;
 	}
-	public void setCoa(int coa) {
+
+	public void setCoa(String coa) {
 		this.coa = coa;
-	} 
+	}
+
 	
 	
 }

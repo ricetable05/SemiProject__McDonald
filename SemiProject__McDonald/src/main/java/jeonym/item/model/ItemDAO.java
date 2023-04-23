@@ -7,6 +7,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import jeonym.util.JeonymUtil;
+
 public class ItemDAO implements InterItemDAO {
 
 	private Connection conn ;
@@ -164,7 +166,7 @@ public class ItemDAO implements InterItemDAO {
 	     return totalPage;
 		
 		
-	}
+	}// end of public int getTotalPage(Map<String, String> paraMap) throws SQLException{} -----------------
 
 	@Override
 	public List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException {
@@ -239,6 +241,87 @@ public class ItemDAO implements InterItemDAO {
 		}
 		
 		return ItemList;
+		
+	}// end of 	public List<ItemVO> getItemList(Map<String, String> paraMap) throws SQLException {} --------------
+
+	
+	// item_no 가 존재하는지 여부 파악 메소드
+	@Override
+	public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException{
+		
+		boolean is_Exist_item_no = false;
+		try {
+			
+			conn = ds.getConnection();			
+			String sql  = " select * "
+						+ " from tbl_item "
+						+ " where item_no = ? ";
+					   
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("item_no"));
+			rs = pstmt.executeQuery();
+
+			is_Exist_item_no = rs.next(); // 존재하면 true 존재하지 않으면 false
+	
+		} finally {
+			close() ;
+		}
+		
+		return is_Exist_item_no;
+		
+	} // end of public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException {} -------------
+
+	
+	// 제품의 상세정보페이지를 위해 제품하나를 select 하는 메소드
+	@SuppressWarnings("null")
+	@Override
+	public ItemDetailVO selectOneItem(Map<String, String> paraMap) throws SQLException{
+
+		ItemDetailVO idvo = null; // null 이라면 제품에 대한 정보가 없는 것인데 이미 Exist 여부를 검사했기 때문에 괜찮다.
+		try {
+			
+			conn = ds.getConnection();			
+			
+			String sql  = " select pk_fk_item_no, item_name, weight_g, nvl(weight_ml,'0') as weight_ml "
+				   	    + "       , calories, carbo, protein, fat, sodium, nvl(caffeine,'0') as caffeine "
+				   	    + "       , allergens ,coa "
+				   	    + " from tbl_item_detail "
+				   	    + " where pk_fk_item_no = ? ";
+					   
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("item_no"));
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				idvo = new ItemDetailVO();
+				
+				idvo.setPk_fk_item_no(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(1))));
+				idvo.setItem_name(JeonymUtil.null_to_empty(rs.getString(2)));
+				idvo.setWeight_g(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(3))));
+				idvo.setWeight_ml(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(4))));
+				idvo.setCalories(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(5))));
+				idvo.setCarbo(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(6))));
+				idvo.setProtein(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(7))));
+				idvo.setFat(Float.parseFloat(JeonymUtil.null_to_empty(rs.getFloat(8)))); // fat은 소수점 단위가 나온다.
+				idvo.setSodium(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(9))));
+				idvo.setCaffeine(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(10))));
+				
+				idvo.setAllergens(JeonymUtil.null_to_empty(rs.getString(11)));
+				idvo.setCoa(JeonymUtil.null_to_empty(rs.getString(12)));
+
+				
+			}
+
+			
+		} finally {
+			close();
+		}
+		
+		return idvo;
+
 		
 	}
 	
