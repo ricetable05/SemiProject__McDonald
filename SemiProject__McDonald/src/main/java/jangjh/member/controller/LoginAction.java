@@ -90,7 +90,7 @@ public class LoginAction extends AbstractController{
 		else {
 			
 			String message = "로그인 실패";
-			String loc = "/WEB-INF/jangjh/login/login.jsp)";
+			String loc = "javascript:history.back()";
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
@@ -101,7 +101,7 @@ public class LoginAction extends AbstractController{
 		}
 		
 		
-		}
+	}
 		
 		//POST 방식으로 넘어온 것이 아니라면
 		super.setRedirect(false);

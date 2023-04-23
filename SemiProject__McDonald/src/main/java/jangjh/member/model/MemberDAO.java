@@ -54,7 +54,7 @@ public class MemberDAO implements InterMemberDAO {
 		} catch(UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-	    
+	     
 	}
 
 	// 회원가입을 해주는 메소드(tbl_member 테이블에 insert)
@@ -163,22 +163,22 @@ public class MemberDAO implements InterMemberDAO {
 				conn = ds.getConnection();
 				
 				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,        \n"+
-						 	 " birthyyyy, birthmm, birthdd, registerday, pwdchangegap,       \n"+
-							 " NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap  \n"+
-							 " from  \n"+
-							 " (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address      \n"+
-							 " , substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd       \n"+
-							 " , to_char(registerday,'yyyymmdd') AS registerday       \n"+
-							 " , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap  \n"+
-							 " from tbl_member  \n"+
-							 " where is_deactivate = '1' and userid = ? and pwd= ?  \n"+
-							 " ) M  \n"+
-							 " CROSS JOIN  \n"+
-							 " (  \n"+
-							 " select trunc(months_between(sysdate, max(login_date))) AS lastlogingap  \n"+
-							 " from tbl_login_history\n"+
-							 " where fk_userid = ?  \n"+
-							 " ) H ";
+						" birthyyyy, birthmm, birthdd, registerday, pwdchangegap,       \n"+
+						" NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap  \n"+
+						" from  \n"+
+						" (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address      \n"+
+						" , substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd       \n"+
+						" , to_char(registerday,'yyyymmdd') AS registerday       \n"+
+						" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap  \n"+
+						" from tbl_member  \n"+
+						" where is_deactivate = '1' and userid = ? and pwd= ? \n"+
+						" ) M  \n"+
+						" CROSS JOIN  \n"+
+						" (  \n"+
+						" select trunc(months_between(sysdate, max(login_date))) AS lastlogingap  \n"+
+						" from tbl_login_history\n"+
+						" where fk_userid = ?\n"+
+						" ) H ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
