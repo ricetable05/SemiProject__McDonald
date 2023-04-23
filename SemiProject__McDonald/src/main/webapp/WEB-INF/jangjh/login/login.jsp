@@ -114,7 +114,8 @@
 		
 	}//end of function goLogin()----------------------------------------------------		
 			
-
+	
+	
 </script>
 
 
@@ -127,7 +128,7 @@
 	<%-- === 사이드 시작 === --%>
 	<div id="side" class="customDisplay" style="font-family:SpeedeeK; font-weight:600;">
 		<form name="loginFrm">
-	       <table id="loginTbl">
+	       <table id="loginTbl" style="margin-top: 22px;">
 	         <thead>
 	            <tr>
 	               <th colspan="2" id="th">LOGIN</th>
