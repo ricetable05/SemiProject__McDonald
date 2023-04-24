@@ -11,21 +11,26 @@
 
 <style type="text/css">
 	
+	body {
+		font-family:SpeedeeK;
+  		font-weight:600;
+	}
+	
 	table#itemTbl{
-	    background-color: #e9f7f6;
 	    color: #738776;
 	    font-weight: bold;
+	    border:none;
 	}
 
 	table#itemTbl th, table#itemTbl td{
-		font-size: 11pt;
 		vertical-align: middle;
 		text-align: center;
-		border:1px solid #738776;
 	}
 	
 	table#itemTbl th{
 		color: #000;
+		font-size: 13pt;
+		font-weight: bold;
 	}
 	
 	
@@ -35,34 +40,33 @@
 		list-style-type: none;
 		padding: 0;
 		margin: 0 auto;
-		background-color: #e9f7f6;
-		
+		border: solid 0px grey;
+		<%--background-color: #ffff66; --%>
+
 	}
 	
 	ul#category_list > li{
 		width: 200px;
 		margin: 0px auto;
-		padding: 10px 0 10px 0;
-		border:1px solid #738776;
+		padding: 25px 0 25px 0;
+		border-bottom: 1px solid black;
+		text-align: center;
+		<%--border:1px solid #ffbc0d; --%>
 	}
 	
 	ul#category_list > li:last-child{
 		margin: 0px auto;
+		border:none;
 	}
 	
-	
-	ul#category_list > li:hover{
-		background-color: #ccc;
-	}
 	
 	
 	ul#category_list li > a{
 		text-decoration: none;
-		color: black;
 		font-weight: bold;
-		padding-left:50px;
 		width:200px;
 		display:inline-block;
+		color:#000;
 	}
 	
 	
@@ -87,6 +91,18 @@
 	    border-color: #ddd;
 	}
 	
+   p {
+     border: 1em violet;
+     padding: 55px;
+     font-size: 45pt; 
+     color: white;
+     
+   }
+   .bg1 {
+     background-image: url(<%=request.getContextPath()%>/images/top_image/품질이야기상단이미지.jpg);  
+     background-clip: border-box;
+     font-size:35pt;
+   }
 
 		
 	
@@ -99,12 +115,34 @@
 		$("tr.itemInfo").hover(
 		
 		function(e){
-			$(e.target).parent().find("td").css({"background-color":"#88a68c","color":"beige"});
+			$(e.target).parent().find("td").css({"background-color":"#fff","color":"#db0007"});
 		},
 		
 		function(e){
 			$(e.target).parent().find("td").css({"background-color":"", "color":""});
 		}) // 제품목록 리스트 hover 효과
+		
+
+		
+		$("ul#category_list > li").hover(function(e){
+			
+			$(e.target).css("color","#db0007");
+			
+		},
+		function(e){
+			$(e.target).css("color","");
+		});
+		
+		
+		$("ul#category_list > li > a").hover(function(e){
+			
+			$(e.target).parent().find("a").css("color","#db0007");
+			
+		},
+		function(e){
+			$(e.target).parent().find("a").css("color","");
+		});
+		
 		
 		
 		$("tr.itemInfo > td").click(function(e){	
@@ -127,7 +165,7 @@
 		const pop_width  = 800;
 		const pop_height = 680;
 		const pop_left = Math.ceil((window.screen.width - pop_width) / 2); <%-- 정수로 만듦 ceil 올림 floor 내림 --%>
-		const pop_top = Math.ceil((window.screen.height - pop_height) / 2);					
+		const pop_top = Math.ceil((window.screen.height - pop_height) / 2) - 100;					
 								
 		window.open(url,"ItemDetail",
 					"left="+pop_left+", top="+pop_top+", width="+pop_width+", height="+pop_height); 
@@ -139,23 +177,26 @@
 	
 </script>
 
+<div style="margin-top:140px; text-align:center;">
+     <p class="bg1">제품목록</p>
+</div>
 
-<div class="container-fluid border border-danger" style="margin-top:100px; background-color:#fafafa;">
+<div class="container-fluid" style="background-color:#fafafa;">
 
 	<div class="row">
 	
 		<div class="container col-md-2 col-lg-3 my-5 p-4">
-			<ul id="category_list" class="border border-dark">
-			<li class="pb-3 mt-0 border-bottom border-dark"><a href="<%=request.getContextPath()%>/item/itemList.run">전체 카테고리</a></li>
+			<ul id="category_list" class="">
+			<li class="pb-3 mt-0 h5"><a href="<%=request.getContextPath()%>/item/itemList.run">전체 카테고리</a></li>
 			<c:forEach var="ctmap" items="${requestScope.categoryList}">
-				<li class="border-bottom border-dark"><a href="<%=request.getContextPath()%>/item/itemList.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
+				<li class=""><a href="<%=request.getContextPath()%>/item/itemList.run?category_id=${ctmap.category_id}">${ctmap.category_name}</a></li>
 			</c:forEach>
 			</ul>
 					
 		</div>
 		
 		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
-			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px;">
+			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px; border:none;">
 		        <thead>
 		           <tr>
 		              <th>제품코드</th>
@@ -175,7 +216,7 @@
 					              <td class="item_no">${ivo.item_no}</td>
 					              <td>${ivo.categoryName}</td>
 					              <td>${ivo.item_name}</td>
-					              <td><fmt:formatNumber value="${ivo.item_price}" pattern="#,###"/></td>
+					              <td>￦<fmt:formatNumber value="${ivo.item_price}" pattern="#,###"/></td>
 					              
 					              <c:choose>
 					              	<c:when test="${ivo.morning_availability eq 0}">
