@@ -67,7 +67,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/맥모닝상단�
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
 								 	+ "<div class='card card-1'>"
-								 		+ "<img src='/SemiProject__McDonald/images/mc_moring/mc_morning_bg/1_베이컨에그맥그리들_배경.png' class='card-img-top' style='width: 100%' />"
+								 		+ "<img src='/SemiProject__McDonald/images/mc_moring/mc_morning_bg/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
 								 			+ "<a href='/SemiProject__McDonald/#?item_no="+item.item_no+"' class='stretched-link'></a>"
