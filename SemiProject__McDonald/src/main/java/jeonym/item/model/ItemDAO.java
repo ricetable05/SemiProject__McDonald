@@ -284,10 +284,23 @@ public class ItemDAO implements InterItemDAO {
 			conn = ds.getConnection();			
 			
 			String sql  = " select pk_fk_item_no, item_name, weight_g, weight_ml "
-						+ "       , calories, carbo, protein, fat, sodium, caffeine "
-						+ "       , allergens ,coa "
-						+ " from tbl_item_detail "
-						+ " where pk_fk_item_no = ? ";
+						+ "           , calories, carbo, protein, fat, sodium, caffeine "
+						+ "           , allergens, coa, item_info, item_image, fk_category_no "
+						+ " from "
+						+ " ( "
+						+ "    select pk_fk_item_no, item_name, weight_g, weight_ml "
+						+ "           , calories, carbo, protein, fat, sodium, caffeine "
+						+ "           , allergens ,coa "
+						+ "    from tbl_item_detail "
+						+ "    where pk_fk_item_no = ? "
+						+ " ) IDT "
+						+ " JOIN "
+						+ " ( "
+						+ "    select item_no, item_info, item_image, fk_category_no "
+						+ "    from tbl_item "
+						+ " ) I "
+						+ " on IDT.pk_fk_item_no = I.item_no ";
+
 					   
 			pstmt = conn.prepareStatement(sql);
 			
@@ -311,6 +324,13 @@ public class ItemDAO implements InterItemDAO {
 				
 				idvo.setAllergens(JeonymUtil.null_to_empty(rs.getString(11)));
 				idvo.setCoa(JeonymUtil.null_to_empty(rs.getString(12)));
+
+				ItemVO ivo = new ItemVO();
+				ivo.setItem_info(rs.getString(13)); // not null
+				ivo.setItem_image(rs.getString(14)); // not null
+				ivo.setFk_category_no(rs.getInt(15)); // not null
+				
+				idvo.setIvo(ivo); // itemDetailVO 의 ItemVO 객체타입 필드에 담는다.
 
 				
 			}

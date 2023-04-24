@@ -14,6 +14,8 @@ public class ItemDetailVO {
 	private int caffeine;         
 	private String allergens; 
 	private String coa;
+	
+	private ItemVO ivo; // JOIN 용
 
 	
 	
@@ -36,6 +38,8 @@ public class ItemDetailVO {
 		this.coa = coa;
 		
 	}
+
+
 	public int getPk_fk_item_no() {
 		return pk_fk_item_no;
 	}
@@ -116,6 +120,12 @@ public class ItemDetailVO {
 		this.coa = coa;
 	}
 
-	
+	public ItemVO getIvo() {
+		return ivo;
+	}
+
+	public void setIvo(ItemVO ivo) {
+		this.ivo = ivo;
+	}
 	
 }

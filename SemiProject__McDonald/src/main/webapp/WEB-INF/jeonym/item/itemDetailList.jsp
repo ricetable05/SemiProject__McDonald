@@ -14,6 +14,15 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script> 
 
+
+<style type="text/css">
+	
+	table#itemTbl > tbody > tr > td:first-child {
+		width: 130px;
+		vertical-align: middle;
+	}
+	
+</style>
    
 <!DOCTYPE html>
 
@@ -25,6 +34,26 @@
 		        <tbody>
 				
 		    		<c:if test="${not empty requestScope.idvo}">
+		    				  <tr>
+		    				  	   <c:choose>
+		    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 1}">
+		    				  	   			<c:set var="category" value="burger"></c:set>
+		    				  	   		</c:when>
+		    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 2}">
+		    				  	   			<c:set var="category" value="mc_morning"></c:set>
+		    				  	   		</c:when>
+		    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 3}">
+		    				  	   			<c:set var="category" value="side_menu"></c:set>
+		    				  	   		</c:when>
+		    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 4}">
+		    				  	   			<c:set var="category" value="dessert"></c:set>
+		    				  	   		</c:when>
+		    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 5}">
+		    				  	   			<c:set var="category" value="drink"></c:set>
+		    				  	   		</c:when>
+		    				  	   </c:choose>
+		    				  	   <td colspan="2" style="text-align:center;"><img src="<%=request.getContextPath()%>/images/${category}/${category}_nbg/${requestScope.idvo.ivo.item_image}" width="250" height="200"/></td>
+		    				  </tr>
 		    			      <tr class="itemDetailInfo">
 		    			      	  <td>제품명</td>
 					              <td class="item_name">${requestScope.idvo.item_name}</td>
@@ -96,6 +125,12 @@
 					              <td>
 					              	<c:if test="${requestScope.idvo.coa eq '0'}">-</c:if>
 					              	<c:if test="${requestScope.idvo.coa ne '0'}">${requestScope.idvo.coa}</c:if>					              					              					              
+					              </td>
+		          			  </tr>
+							  <tr>
+		    			      	  <td>제품 상세정보</td>
+					              <td>
+										${requestScope.idvo.ivo.item_info}					              					              					              
 					              </td>
 		          			  </tr>
 

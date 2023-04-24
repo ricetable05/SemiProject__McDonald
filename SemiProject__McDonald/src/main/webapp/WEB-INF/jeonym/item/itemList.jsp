@@ -11,6 +11,11 @@
 
 <style type="text/css">
 	
+	body {
+		font-family:SpeedeeK;
+  		font-weight:600;
+	}
+	
 	table#itemTbl{
 	    color: #738776;
 	    font-weight: bold;
@@ -86,6 +91,18 @@
 	    border-color: #ddd;
 	}
 	
+   p {
+     border: 1em violet;
+     padding: 55px;
+     font-size: 45pt; 
+     color: white;
+     
+   }
+   .bg1 {
+     background-image: url(<%=request.getContextPath()%>/images/top_image/품질이야기상단이미지.jpg);  
+     background-clip: border-box;
+     font-size:35pt;
+   }
 
 		
 	
@@ -160,8 +177,11 @@
 	
 </script>
 
+<div style="margin-top:140px; text-align:center;">
+     <p class="bg1">제품목록</p>
+</div>
 
-<div class="container-fluid" style="padding-top:200px; background-color:#fafafa;">
+<div class="container-fluid" style="background-color:#fafafa;">
 
 	<div class="row">
 	
