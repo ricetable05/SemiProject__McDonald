@@ -53,7 +53,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/사이드상단�
 			async:true,
 			success:function(json){
 				
-				console.log("확인용 json => "+ JSON.stringify(json) );
+				//console.log("확인용 json => "+ JSON.stringify(json) );
 				
 				let html = "";
 				  
