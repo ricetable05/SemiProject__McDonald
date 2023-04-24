@@ -32,7 +32,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/사이드상단�
 		$("button#btnSide").click(function(){
 			
 			
-				displayHIT($(this).val());
+			displaySide($(this).val());
 		
 			
 		});//end of $("button#btnMoreHIT").click(function()		
