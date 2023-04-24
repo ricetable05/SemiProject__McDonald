@@ -51,7 +51,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 			async:true,
 			success:function(json){
 				
-				console.log("확인용 json => "+ JSON.stringify(json) );
+				//console.log("확인용 json => "+ JSON.stringify(json) );
 				
 				let html = "";
 				  
@@ -67,7 +67,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
 								 	+ "<div class='card card-1'>"
-								 		+ "<img src='/SemiProject__McDonald/images/burger/burger_bg/1_1955트리플어니언_배경.png' class='card-img-top' style='width: 100%' />"
+								 		+ "<img src='/SemiProject__McDonald/images/burger/burger_bg/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
 								 			+ "<a href='/SemiProject__McDonald/#?item_no="+item.item_no+"' class='stretched-link'></a>"

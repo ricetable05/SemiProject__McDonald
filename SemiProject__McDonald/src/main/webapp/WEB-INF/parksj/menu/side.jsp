@@ -32,7 +32,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/사이드상단�
 		$("button#btnSide").click(function(){
 			
 			
-				displayHIT($(this).val());
+			displaySide($(this).val());
 		
 			
 		});//end of $("button#btnMoreHIT").click(function()		
@@ -53,7 +53,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/사이드상단�
 			async:true,
 			success:function(json){
 				
-				console.log("확인용 json => "+ JSON.stringify(json) );
+				//console.log("확인용 json => "+ JSON.stringify(json) );
 				
 				let html = "";
 				  
@@ -69,7 +69,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/사이드상단�
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
 								 	+ "<div class='card card-1'>"
-								 		+ "<img src='/SemiProject__McDonald/images/side_menu/side_menu_bg/1_슈림프스낵랩_배경.png' class='card-img-top' style='width: 100%' />"
+								 		+ "<img src='/SemiProject__McDonald/images/side_menu/side_menu_bg/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
 								 			+ "<a href='/SemiProject__McDonald/#?item_no="+item.item_no+"' class='stretched-link'></a>"
