@@ -4,15 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 
-<style type="text/css">
-	div.card-footer{
-		background:none;
-	}
-	
-	hr {
-		padding:0;
-	}
-</style>
+
 
 <script>
  
@@ -41,6 +33,22 @@
 };
 </script>
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
+
+<style type="text/css">
+	body {
+		font-family:SpeedeeK;
+		font-weight: 600;
+	}
+	
+	div.card-footer{
+		background:none;
+	}
+	
+	hr {
+		padding:0;
+	}
+</style>
+
 <section style="background-color:#eee; width:80%; margin:0 auto;">
 
 	<div class="container-fluid px-0 m-0" style="padding-top:8%;">
@@ -52,7 +60,7 @@
 			  </ol>
 			  
 			  
-			   <div class="carousel-inner mycarousel">
+			   <div class="carousel-inner mycarousel mt-4">
 			    
 				    <div class="carousel-item active">
 				      <img src="<%= request.getContextPath() %>/images/jeonym_img/banner_1.jpg" class="d-block w-100" alt="..."> 
@@ -94,7 +102,7 @@
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
 					    	<img src="<%= request.getContextPath() %>/images/burger/burger_nbg/${ivo.item_image}" class="card-img-top" alt="...">
-					     	<h5 class="font-weight-light"><small>${ivo.item_name}</small></h5>
+					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>
 					    <div class="card-footer border-0 row">
@@ -121,7 +129,7 @@
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
 					    	<img src="<%= request.getContextPath() %>/images/burger/burger_nbg/${ivo.item_image}" class="card-img-top" alt="...">
-					     	<h5 class="font-weight-light"><small>${ivo.item_name}</small></h5>
+					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>
 					    <div class="card-footer border-0 row">
