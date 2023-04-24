@@ -140,7 +140,7 @@
 </script>
 
 
-<div class="container-fluid" style="margin-top:200px; background-color:#fafafa;">
+<div class="container-fluid" style="padding-top:200px; background-color:#fafafa;">
 
 	<div class="row">
 	
@@ -175,7 +175,7 @@
 					              <td class="item_no">${ivo.item_no}</td>
 					              <td>${ivo.categoryName}</td>
 					              <td>${ivo.item_name}</td>
-					              <td><fmt:formatNumber value="${ivo.item_price}" pattern="#,###"/></td>
+					              <td><fmt:formatNumber value="${ivo.item_price}" pattern="#,###"/>￦</td>
 					              
 					              <c:choose>
 					              	<c:when test="${ivo.morning_availability eq 0}">
