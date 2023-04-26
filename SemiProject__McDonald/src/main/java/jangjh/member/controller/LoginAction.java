@@ -39,21 +39,17 @@ public class LoginAction extends AbstractController{
 		
 		MemberVO loginuser = mdao.selectOneMember(paraMap);
 		
-		
-		
 		if(loginuser != null) {
 			
 			if(loginuser.getIs_dormant() == 1) {
 				
-				String message = "로그인을 한지 1년이 지나서 휴면상태로 되었습니다. 관리자에게 문의 바랍니다.";
-				String loc = request.getContextPath() +"/main.run";
-				// 원래는 위와 같이 index.up이 아니라 휴면인 계정을 풀어주는 페이지로 잡아주어야 한다. 프로젝트에서
+				System.out.println(loginuser.getUserid());
 				
-				request.setAttribute("message", message);
-				request.setAttribute("loc", loc);
+				
+				
 				
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
+				super.setViewPage("/WEB-INF/jangjh/login/login.jsp");
 				
 				return; //매소드 종료
 			}
@@ -79,7 +75,6 @@ public class LoginAction extends AbstractController{
 				return; //매소드 종료
 			}
 			else {
-				
 				// 비밀번호를 변경한지 3개월 이내인 경우
 				super.setRedirect(true);
 				super.setViewPage(request.getContextPath()+"/main.run");

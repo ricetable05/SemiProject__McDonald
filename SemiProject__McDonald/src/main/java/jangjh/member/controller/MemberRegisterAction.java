@@ -1,6 +1,8 @@
 package jangjh.member.controller;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +43,10 @@ public class MemberRegisterAction extends AbstractController {
 			String member_tel = hp1+hp2+hp3;
 			
 			String birthday = birthyyyy+birthmm+birthdd; //19930425
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyddmm");
+			
+			Date format = (Date) sdf.parse(birthday);
 			
 			MemberVO member = new MemberVO( userid,  pwd,  member_name,  email,  member_tel,  postcode, address,  detail_address,  ref_address,  birthday);
 			

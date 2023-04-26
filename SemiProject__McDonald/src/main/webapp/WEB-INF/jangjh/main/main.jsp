@@ -179,29 +179,11 @@
 		  </div>
 		</div>
 		
-		<div id="indexdetail" class="card mb-3" style="width: 19rem;">
-		  <img src="<%= request.getContextPath() %>/images/main_image/index10.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
-		  <div class="card-body">
-		    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">‘로날드 맥도날드어린이 축구교실’은 무엇인가요?</h5>
-		    <a href="#" class="stretched-link"></a>
-		  </div>
-		</div>
-		
-		<div id="indexdetail" class="card mb-3" style="width: 19rem;">
-		  <img src="<%= request.getContextPath() %>/images/main_image/index11.png" class="card-img-top" alt="프로모션" style="width: 100%" />
-		  <div class="card-body">
-		    <h5 class="card-title" style="text-align:center; font-family:SpeedeeK; font-weight:600;">귀하의 토지,건물에 맥도날드를 유치하세요.</h5>
-		    <a href="#" class="stretched-link"></a>
-		  </div>
-		</div>
 	  </div>
 	</div>
 	<!-- McDonald's LIVE 내용물 끝 -->
 	
 	<!-- 더보기 버튼 시작 -->
-		<div class="text-center" id="btn_more" style="background-color: #FFFFFF; border: solid 0px;">
-		<img src="<%= request.getContextPath() %>/images/main_image/btn_more.png">
-	    </div>
 	<!-- 더보기 버튼 끝 -->
 
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>

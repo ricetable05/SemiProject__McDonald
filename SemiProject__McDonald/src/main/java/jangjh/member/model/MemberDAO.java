@@ -162,23 +162,20 @@ public class MemberDAO implements InterMemberDAO {
 			try {
 				conn = ds.getConnection();
 				
-				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,        \n"+
-						" birthyyyy, birthmm, birthdd, registerday, pwdchangegap,       \n"+
-						" NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap  \n"+
-						" from  \n"+
-						" (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address      \n"+
-						" , substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd       \n"+
-						" , registerday       \n"+
-						" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap  \n"+
-						" from tbl_member  \n"+
-						" where is_deactivate = '1' and userid = ? and pwd= ? \n"+
-						" ) M  \n"+
-						" CROSS JOIN  \n"+
-						" (  \n"+
-						" select trunc(months_between(sysdate, max(login_date))) AS lastlogingap  \n"+
-						" from tbl_login_history\n"+
-						" where fk_userid = ?\n"+
-						" ) H ";
+				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,         \n"+
+							" substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd, registerday, pwdchangegap,        \n"+
+							" NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap   \n"+
+							" from   \n"+
+							" (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address       \n"+
+							" ,  to_char(birthday,'yyyymmdd') as birthday , registerday        \n"+
+							" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap   \n"+
+							" from tbl_member   \n"+
+							" where is_deactivate = '1' and userid = ? and pwd= ?\n"+
+							" ) M   \n"+
+							" CROSS JOIN   \n"+
+							" (   select trunc(months_between(sysdate, max(login_date))) AS lastlogingap   \n"+
+							" from tbl_login_history where fk_userid = ? \n"+
+							" ) H ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -211,7 +208,7 @@ public class MemberDAO implements InterMemberDAO {
 					}
 					
 					if(rs.getInt(14) >= 12) {
-						//마지막으로 암호를 변경한 날짜가 현재시각으로부터 1년이 지났으면 휴먼으로 지정
+						//마지막으로 로그인한 날짜가 현재시각으로부터 1년이 지났으면 휴먼으로 지정
 						
 						member.setIs_dormant(1);
 						
@@ -248,6 +245,184 @@ public class MemberDAO implements InterMemberDAO {
 			
 			return member;
 		}//end of public MemberVO selectOneMember(Map<String, String> paraMap) throws SQLException ----------
+
+
+		// 아이디 찾기(성명, 이메일을 입력받아서 해당 사용자의 아이디를 알려준다.)
+		@Override
+		public String findUserid(Map<String, String> paraMap) throws SQLException {
+			
+			String userid = null;
+			
+			try {
+				 conn = ds.getConnection();	
+				
+				 String sql = " select userid "+
+						 	  " from tbl_member "+
+							  " where is_deactivate = 1 and member_name = ? and email = ? ";
+						 				 
+				 pstmt = conn.prepareStatement(sql);
+				 
+				 pstmt.setString(1, paraMap.get("member_name"));
+				 pstmt.setString(2, aes.encrypt(paraMap.get("email")));
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 if(rs.next()) {
+					 userid = rs.getString(1);
+				 }
+				 
+			}catch(GeneralSecurityException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			return userid;
+		}//end of public String findUserid(Map<String, String> paraMap) throws SQLException  ---------
+
+
+		// 비밀번호 찾기(아이디, 이메일을 입력받아서 해당 사용자가 존재하는지 유무를 알려준다.)
+		@Override
+		public boolean isUserExist(Map<String, String> paraMap) throws SQLException {
+			
+			boolean isUserExist = false;
+			
+			try {
+				 conn = ds.getConnection();	
+				
+				 String sql = " select userid "
+						    + " from tbl_member "
+						    + " where is_deactivate = 1 and userid = ? and email = ? ";
+				 
+				 pstmt = conn.prepareStatement(sql);
+				 
+				 pstmt.setString(1,paraMap.get("userid"));
+				 pstmt.setString(2, aes.encrypt(paraMap.get("email")));
+				 
+				 rs = pstmt.executeQuery();
+				 
+				 isUserExist = rs.next();
+				 
+			}catch(GeneralSecurityException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			return isUserExist;
+		}//end of public boolean isUserExist(Map<String, String> paraMap) ----------------------------
+
+
+		// 암호변경하기
+		@Override
+		public int pwdUpdate(Map<String, String> paraMap) throws SQLException {
+			
+			int result = 0;
+			
+			try {
+				
+				   conn = ds.getConnection();
+				   
+				   String sql = " update tbl_member set pwd = ? "
+						   	   +"                ,last_pwd_change_date = sysdate "	
+						       +" where userid = ? ";
+				   
+				   pstmt = conn.prepareStatement(sql);
+				   
+				   pstmt.setString(1,Sha256.encrypt(paraMap.get("pwd")));
+				   pstmt.setString(2,paraMap.get("userid"));
+				   
+				   result = pstmt.executeUpdate();
+				   
+				}finally {
+					close();
+				}
+			
+			return result;
+		}
+
+
+		// 암호 변경시 현재 사용중인 암호인지 아닌지 알아오기
+		@Override
+		public int duplicatePwdCheck(Map<String, String> paraMap) throws SQLException {
+
+			int n = 0;
+			
+			try {
+				conn = ds.getConnection();
+				
+				String sql =  " select count(*) "
+							+ " from tbl_member "
+							+ " where userid = ? and pwd = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, paraMap.get("userid"));
+				pstmt.setString(2, Sha256.encrypt(paraMap.get("new_pwd")));
+				
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				
+				n = rs.getInt(1);
+				
+				
+			}
+			finally {
+				close();
+			}
+			
+			return n;
+		}// end of public int duplicatePwdCheck(Map<String, String> paraMap) throws SQLException 
+
 		
+		// 회원의 개인 정보 변경하기
+		@Override
+		public int updateMember(MemberVO member) throws SQLException {
+
+			int result = 0;	
+			
+			try {
+				
+				conn = ds.getConnection();   // datesourse 에서 가져옴
+				
+				String sql = " update tbl_member set pwd = ? "
+						   + " 				   , member_name = ? "
+						   + " 				   , email = ? "
+						   + " 				   , member_tel = ? "
+						   + " 				   , postcode = ? "
+						   + " 				   , address = ? "
+						   + " 				   , detail_address = ? "
+						   + " 				   , ref_address = ? "
+						   + " 				   , birthday = ? "
+						   + " 				   , last_pwd_change_date = sysdate "
+						   + " where userid = ? ";
+				
+				// 우편배달부
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, Sha256.encrypt(member.getPwd()));
+				pstmt.setString(2, member.getMember_name());
+				pstmt.setString(3, aes.encrypt(member.getEmail()));
+				pstmt.setString(4, aes.encrypt(member.getMember_tel()));
+				pstmt.setString(5, member.getPostcode());
+				pstmt.setString(6, member.getAddress());
+				pstmt.setString(7, member.getDetail_address());
+				pstmt.setString(8, member.getRef_address());
+				pstmt.setString(9, member.getBirthday());
+				pstmt.setString(10, member.getUserid());
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			catch(GeneralSecurityException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close();
+			}
+			
+			return result;
+		} // end of public int updateMember(MemberVO member) throws SQLException {}----------
+
 
 }

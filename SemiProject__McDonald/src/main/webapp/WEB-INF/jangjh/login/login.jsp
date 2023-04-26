@@ -5,6 +5,7 @@
     String ctxPath = request.getContextPath();
 %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -44,6 +45,7 @@
 
 	$(document).ready(function(){
 		
+		console.log('${sessionScope.loginuser.userid}');
 		
 		// 로그인을 하지 않는 상태일 때 
 		if(${empty sessionScope.loginuser}){
@@ -69,7 +71,23 @@
 			}
 		});
 		
-		
+		$("button.idFindClose").click(function(){
+			
+			const iframe_idFind = document.getElementById("iframe_idFind");
+			// 대상 아이프레임을 선택한다.
+			
+			const iframe_windows = iframe_idFind.contentWindow;
+			// iframe 요소에 접근하는 contentWindow 와 contentDocument 의 차이점은 아래와 같다.
+            // contentWindow 와 contentDocument 둘 모두 iframe 하위 요소에 접근 할 수 있는 방법이다.
+            // contentWindow 는 iframe의 window(전체)을 의미하는 것이다.
+            // 참고로, contentWindow.document 은 contentDocument 와 같은 것이다.
+            // contentWindow 가 contentDocument 의 상위 요소이다.
+			
+			
+			iframe_windows.func_form_reset_empty();
+			// func_form_reset_empty() 함수는 idFind.jsp에 정의해 두었다.
+			
+		});
 		
 		
 		
@@ -80,6 +98,7 @@
 	// Function Declaration
 	// -- 로그인 처리 함수 --
 	function goLogin() {
+		
 		
 		const loginUserid = $("input#loginUserid").val().trim();
 		const loginPwd = $("input#loginPwd").val().trim();
@@ -106,7 +125,8 @@
 		else {
 			localStorage.removeItem("saveid");
 		}   
-		   
+		
+		
 		const frm = document.loginFrm;
 		frm.action = "<%= request.getContextPath()%>/login/login.run"; 
 		frm.method = "POST";
@@ -115,12 +135,8 @@
 	}//end of function goLogin()----------------------------------------------------		
 			
 	
-	
 </script>
 
-
-    
-  </head>
 </head>
 <body>
 	
@@ -180,21 +196,21 @@
 	      
 	        <!-- Modal header -->
 	        <div class="modal-header">
-	          <h4 class="modal-title">아이디 찾기</h4>
+	          <h4 class="modal-title" style="font-family:SpeedeeK; font-weight: 600;">아이디 찾기</h4>
 	          <button type="button" class="close idFindClose" data-dismiss="modal">&times;</button>
 	        </div>
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body">
 	          <div id="idFind">
-	             <iframe id="iframe_idFind" style="border: none; width: 100%; height: 350px;" src="<%= request.getContextPath()%>/login/idFind.up">
+	             <iframe id="iframe_idFind" style="border: none; width: 100%; height: 280px;" src="<%= request.getContextPath()%>/login/idFind.run">
 	             </iframe>
 	          </div>
 	        </div>
 	        
 	        <!-- Modal footer -->
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-danger idFindClose" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-dark idFindClose" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>
 	    </div>
@@ -214,17 +230,16 @@
 	        <!-- Modal body -->
 	        <div class="modal-body">
 	          <div id="idFind">
-	             <iframe id="iframe_idFind" style="border: none; width: 100%; height: 350px;" src="<%= request.getContextPath()%>/login/pwdFind.up">
+	             <iframe id="iframe_idFind" style="border: none; width: 100%; height: 280px;" src="<%= request.getContextPath()%>/login/pwdFind.run">
 	             </iframe>
 	          </div>
 	        </div>
 	        
 	        <!-- Modal footer -->
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-danger passwdFindClose" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-dark passwdFindClose" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>
-	      
 	    </div>
 	  </div>
 	</div>  
@@ -238,7 +253,8 @@
 		</div>
 	</div>
 	<%-- === 내용 끝 === --%>
-
+	
+	
 </div>	
 	
 	
