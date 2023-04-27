@@ -91,7 +91,7 @@
 			
 </script>
 
-<form name="pwdFindFrm">
+<form name="pwdFindFrm" style="font-family:SpeedeeK; font-weight:600;">
 
 	<ul style="list-style-type: none">
          <li style="margin: 25px 0">
@@ -109,10 +109,10 @@
        <button type="button" class="btn btn-dark" id="btnFind">찾기</button>
     </p>
    </div>
-
+   
 </form>
 
-	<div class="my-3" id="div_findResult">
+	<div class="my-3" id="div_findResult" style="font-family:SpeedeeK; font-weight:600;" >
         <p class="text-center">
         	
         	<c:if test="${requestScope.isUserExist == false}">

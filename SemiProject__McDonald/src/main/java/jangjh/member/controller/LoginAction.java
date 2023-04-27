@@ -42,14 +42,14 @@ public class LoginAction extends AbstractController{
 		if(loginuser != null) {
 			
 			if(loginuser.getIs_dormant() == 1) {
+				String message = "로그인을 한지 1년이 지나서 휴면상태로 되었습니다. 관리자에게 문의 바랍니다.";
+				String loc = request.getContextPath() + "/member/is_dormant.run";
 				
-				System.out.println(loginuser.getUserid());
-				
-				
-				
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
 				
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/jangjh/login/login.jsp");
+				super.setViewPage("/WEB-INF/msg.jsp");
 				
 				return; //매소드 종료
 			}

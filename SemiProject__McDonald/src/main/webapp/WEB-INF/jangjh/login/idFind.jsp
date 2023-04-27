@@ -75,7 +75,7 @@
 			
 </script>
 
-<form name="idFindFrm">
+<form name="idFindFrm" style="font-family:SpeedeeK; font-weight:600;">
 
 	<ul style="list-style-type: none">
 	
@@ -99,7 +99,7 @@
 
 </form>
 
-	<div class="my-3" id="div_findResult">
+	<div class="my-3" id="div_findResult" style="font-family:SpeedeeK; font-weight:600;">
         <p class="text-center" style="font-family:SpeedeeK; font-weight: 600;">
           ID :&nbsp;&nbsp; <span style="color: #ff1a1a;">${requestScope.userid}</span> 
         </p>

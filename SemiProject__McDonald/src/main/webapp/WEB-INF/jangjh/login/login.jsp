@@ -45,8 +45,6 @@
 
 	$(document).ready(function(){
 		
-		console.log('${sessionScope.loginuser.userid}');
-		
 		// 로그인을 하지 않는 상태일 때 
 		if(${empty sessionScope.loginuser}){
 			

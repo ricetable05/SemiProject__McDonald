@@ -117,7 +117,7 @@
 	} 
 </style>
     
-</head>
+</head> 
 <body>
 <script type="text/javascript">
 	

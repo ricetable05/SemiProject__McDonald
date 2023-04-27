@@ -44,10 +44,6 @@ public class MemberRegisterAction extends AbstractController {
 			
 			String birthday = birthyyyy+birthmm+birthdd; //19930425
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyddmm");
-			
-			Date format = (Date) sdf.parse(birthday);
-			
 			MemberVO member = new MemberVO( userid,  pwd,  member_name,  email,  member_tel,  postcode, address,  detail_address,  ref_address,  birthday);
 			
 			String message = "";
