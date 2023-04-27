@@ -208,7 +208,7 @@
 	        
 	        <!-- Modal footer -->
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-dark idFindClose" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-dark idFindClose" data-dismiss="modal" style="font-family:SpeedeeK; font-weight: 500;">Close</button>
 	        </div>
 	      </div>
 	    </div>
@@ -235,7 +235,7 @@
 	        
 	        <!-- Modal footer -->
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-dark passwdFindClose" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-dark passwdFindClose" data-dismiss="modal" style="font-family:SpeedeeK; font-weight: 500;">Close</button>
 	        </div>
 	      </div>
 	    </div>

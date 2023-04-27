@@ -135,7 +135,7 @@
 
 	<table id="memberTbl" class="table" style="width: 90%; margin-top: 20px; text-align: center; ">
         <thead>
-           <tr>
+           <tr style="font-size: 14pt;">
               <th>아이디</th>
               <th>회원명</th> 
               <th>이메일</th>
@@ -146,7 +146,7 @@
 
     		<c:if test="${not empty requestScope.memberList}">
     				<c:forEach var="mvo" items="${requestScope.memberList}" > <%-- items 에는 배열이나 list 가 온다. --%>
-   					  <tr class="memberInfo">
+   					  <tr class="memberInfo"  style="font-size: 12pt;">
 			              <td class="userid">${mvo.userid}</td>
 			              <td>${mvo.member_name}</td>
 			              <td style=" ">${mvo.email}</td>

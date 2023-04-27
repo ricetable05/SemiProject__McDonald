@@ -65,10 +65,22 @@
    }   
    
    body {
-   	margin-top: 147px;
+   	margin-top: 137px;
   	font-family:SpeedeeK; 
 	font-weight:600;
    }
+   
+   p {
+	  border: 1em violet;
+	  padding: 55px;
+	  font-size: 35pt; 
+	  color: white;
+	  
+	}
+	.bg1 {
+	  background-image: url(<%= ctxPath%>/images/top_image/품질이야기상단이미지.jpg);  
+	  background-clip: border-box;
+	} 
    
 </style>
 
@@ -145,9 +157,12 @@
 	<c:if test="${not empty requestScope.mvo}">
 	   <c:set var="member_tel" value="${requestScope.mvo.member_tel}" />
 	   <c:set var="birthday" value="${requestScope.mvo.birthday}" />
-	   <h3 style="margin-top:20px; text-align: center; font-weight:600;"> ${requestScope.mvo.member_name}님의 회원 상세정보</h3>
-	
-	   <div id="mvoInfo" style="margin-top: 30px; margin-left: 590px;">
+	   
+	    <div>
+		  <p class="bg1" style="text-align: center; font-weight:600;">"${requestScope.mvo.member_name}"<a style="font-size: 20pt;">님의 회원 상세정보</a></p>
+		</div>
+	   
+	   <div id="mvoInfo" style="margin-top: 30px; margin-left: 500px;">
 	    <ol>   
 	       <li><span class="myli">아이디 : </span>${requestScope.mvo.userid}</li>
 	       <li><span class="myli">회원명 : </span>${requestScope.mvo.member_name}</li>
@@ -161,20 +176,17 @@
 	   </div>
 	   
 	   <%-- ==== 휴대폰 SMS(문자) 보내기 ==== --%>
-	   <div id="sms" align="left" style="margin-top: 40px; margin-left: 520px;">
-	        <span id="smsTitle">&gt;&gt;휴대폰 SMS(문자) 보내기 내용 입력란&lt;&lt;</span>
+	   <div id="sms" align="left" style="margin-top: 30px; margin-left: 440px;">
+	        <span id="smsTitle">= 휴대폰 SMS(문자) 보내기 내용 입력란 =</span>
 	        <div style="margin: 10px 0 20px 0">
 	           발송예약일&nbsp;<input type="date" id="reservedate" />&nbsp;<input type="time" id="reservetime" />
 	        </div>
 	        <textarea rows="4" cols="40" id="smsContent"></textarea>
-	        <button id="btnSend">전송</button>
+	        <button id="btnSend" style="font-weight: bold;">전송</button>
 	        <div id="smsResult"></div>
 	   </div>
 	</c:if>
 	
-<div>
-   <button style="margin: 30px 0px 30px 120px; font-weight:600;" type="button" class="btn btn-secondary" onclick="javascript:history.back();">회원목록</button>
-</div>
 
 
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>

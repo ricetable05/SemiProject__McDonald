@@ -95,7 +95,7 @@
 
 	<ul style="list-style-type: none">
          <li style="margin: 25px 0">
-            <label for="userid" style="display: inline-block; width: 90px">아이디</label>
+            <label for="userid" style="display: inline-block; width: 90px; ">아이디</label>
             <input type="text" name="userid" id="userid" size="25" placeholder="ID" autocomplete="off" required />
          </li>
          <li style="margin: 25px 0">
@@ -106,7 +106,7 @@
    
    <div class="my-3" id="div_btnFind">
     <p class="text-center">
-       <button type="button" class="btn btn-dark" id="btnFind">찾기</button>
+       <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
     </p>
    </div>
    
