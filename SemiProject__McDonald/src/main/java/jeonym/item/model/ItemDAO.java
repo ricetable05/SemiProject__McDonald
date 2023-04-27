@@ -344,5 +344,72 @@ public class ItemDAO implements InterItemDAO {
 
 		
 	}
+
+	@Override
+	public ItemVO selectOneItem_total_info(String pk_fk_item_no) throws SQLException {
+	
+		ItemVO ivo = null; // null 이라면 제품에 대한 정보가 없는 것인데 이미 Exist 여부를 검사했기 때문에 괜찮다.
+		try {
+			
+			conn = ds.getConnection();			
+			
+			String sql  = " select I.item_name, fk_category_no, item_image, item_price "
+						+ "           , morning_availability, is_burger, item_info, weight_g, weight_ml, calories "
+						+ "           , carbo, protein, fat, sodium, caffeine, allergens, coa "
+						+ " from "
+						+ " ( "
+						+ "    select * "
+						+ "    from tbl_item_detail "
+						+ "    where pk_fk_item_no = ? "
+						+ " ) IDT "
+						+ " JOIN tbl_item I "
+						+ " on IDT.pk_fk_item_no = I.item_no ";
+
+					   
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pk_fk_item_no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				ivo = new ItemVO();
+				
+				ivo.setItem_name(JeonymUtil.null_to_empty(rs.getString(1)));
+				ivo.setFk_category_no(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(2))));
+				ivo.setItem_image(JeonymUtil.null_to_empty(rs.getString(3)));
+				ivo.setItem_price(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(4))));
+				ivo.setMorning_availability(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(5))));
+				ivo.setIs_burger(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(6))));
+				ivo.setItem_info(JeonymUtil.null_to_empty(rs.getString(7)));
+				
+				
+				
+				ItemDetailVO idvo = new ItemDetailVO();
+				
+				idvo.setWeight_g(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(8))));
+				idvo.setWeight_ml(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(9))));
+				idvo.setCalories(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(10))));
+				idvo.setCarbo(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(11))));
+				idvo.setProtein(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(12))));
+				idvo.setFat(Float.parseFloat(JeonymUtil.null_to_empty(rs.getFloat(13)))); // fat은 소수점 단위가 나온다.
+				idvo.setSodium(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(14))));
+				idvo.setCaffeine(Integer.parseInt(JeonymUtil.null_to_empty(rs.getString(15))));
+				idvo.setAllergens(JeonymUtil.null_to_empty(rs.getString(16)));
+				idvo.setCoa(JeonymUtil.null_to_empty(rs.getString(17)));
+				
+				ivo.setItemDetailVO(idvo);
+				
+			}
+
+			
+		} finally {
+			close();
+		}
+		
+		return ivo;
+		
+	}
 	
 }

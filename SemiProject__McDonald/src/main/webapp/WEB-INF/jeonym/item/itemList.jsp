@@ -71,14 +71,14 @@
 	
 	
 	tr.itemInfo:hover {
-		background-color: #e6ffe6;
+		background-color: #000;
 		cursor: pointer;
 	}
 	
 	.itemListPage > li > a
 	{
-	    background-color: #e9f7f6;
-	    color: #738776;
+	    background-color: #fff;
+	    color: #333;
 	}
 	
 	.itemListPage > li > a:focus,
@@ -86,7 +86,7 @@
 	.itemListPage > li > span:focus,
 	.itemListPage > li > span:hover
 	{
-	    color: #5a5a5a;
+	    color: #5a5a5a; 
 	    background-color: #eee;
 	    border-color: #ddd;
 	}
@@ -111,6 +111,7 @@
 <script type="text/javascript">
 	
 	$("document").ready(function(){
+		
 		
 		$("tr.itemInfo").hover(
 		
@@ -161,9 +162,9 @@
 		// 제품 상세정보창 띄우기
 		const url = "<%=request.getContextPath()%>/item/itemDetail.run?item_no="+item_no;
 		
-		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
-		const pop_width  = 800;
-		const pop_height = 680;
+		// 너비 600, 높이 900 인 팝업창을 화면 가운데 위치시키기
+		const pop_width  = 600;
+		const pop_height = 900;
 		const pop_left = Math.ceil((window.screen.width - pop_width) / 2); <%-- 정수로 만듦 ceil 올림 floor 내림 --%>
 		const pop_top = Math.ceil((window.screen.height - pop_height) / 2) - 100;					
 								
@@ -171,6 +172,13 @@
 					"left="+pop_left+", top="+pop_top+", width="+pop_width+", height="+pop_height); 
 		// px 을 붙이면 안된다.
 
+		
+	}
+	
+	
+	function goItemUpdate(pk_fk_item_no){
+		
+		location.href='<%= request.getContextPath() %>/item/itemUpdate.run?pk_fk_item_no='+ pk_fk_item_no;
 		
 	}
 	

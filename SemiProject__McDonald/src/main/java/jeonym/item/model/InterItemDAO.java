@@ -23,5 +23,8 @@ public interface InterItemDAO {
 
 	// 제품의 상세정보페이지를 위해 제품하나를 select 하는 메소드
 	ItemDetailVO selectOneItem(Map<String, String> paraMap) throws SQLException;
+
+	// 하나의 제품의 모든 정보를 가져오는 메소드
+	ItemVO selectOneItem_total_info(String pk_fk_item_no) throws SQLException;
 	
 }

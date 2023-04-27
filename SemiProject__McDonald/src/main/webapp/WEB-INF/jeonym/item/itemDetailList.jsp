@@ -18,9 +18,6 @@
 <style type="text/css">
 	
 	body{
-		background-image: url(<%=request.getContextPath()%>/images/top_image/브랜드소개상단이미지.jpg);
-		background-repeat: no-repeat;
-		background-size: 100%;
 		 
 	}
 	
@@ -28,6 +25,12 @@
 		font-family:SpeedeeK;
   		font-weight:400;
   		background-color: white;
+  		border:none;
+  		margin:0 auto;
+	}
+	
+	table#itemTbl > tbody > tr:first-child{
+		height:100px;
 	}
 	
 	table#itemTbl > tbody > tr > td:first-child {
@@ -35,26 +38,62 @@
 		vertical-align: middle;
 		font-family:SpeedeeK;
 		font-weight: 600;
+		border-right: 2px solid grey;
+		 
 	}
 	
 	table#itemTbl td {
-		border: 1px solid grey;
+		border-bottom: 2px solid grey; 
+		border-top: none;
 	}
+
+	img#top_img {
 	
-	
+		min-width: 100%;
+		height: 100px;
+		padding: 0 4% 0 0;
+		
+	}
 </style>
    
+   
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		
+		
+		$("p#itemUpdateBtn").click(function(){
+			
+			const pk_fk_item_no = '${requestScope.idvo.pk_fk_item_no}';
+			
+			window.opener.goItemUpdate(pk_fk_item_no);
+			self.close();
+			//alert('클릭됨');
+		});
+		
+	});
+
+</script>   
 <!DOCTYPE html>
 <body>
-	<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
-				<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px;">
+	
+	<div class="container-fluid col-md-10 col-lg-9 px-0">
+				<img id="top_img" src="<%=request.getContextPath()%>/images/top_image/품질이야기상단이미지.jpg" style="margin:0"/>
+				<table id="itemTbl" class="table" style="width: 90%; padding-top:1px;">
 			        <thead>
 			        </thead>
 			        
 			        <tbody>
 					
 			    		<c:if test="${not empty requestScope.idvo}">
-			    				  <tr>
+			    				  
+			    			      <tr class="itemDetailInfo">
+			    			      	  <td style="border-top: 2px solid grey;">제품명</td>
+						              <td class="item_name" style="border-top: 2px solid grey; vertical-align: middle; text-align: center; font-weight:600; font-size:30pt;">${requestScope.idvo.item_name}</td>
+			          			  </tr>
+			          			  <tr>
+			          			  	   <td>제품사진</td>	
 			    				  	   <c:choose>
 			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 1}">
 			    				  	   			<c:set var="category" value="burger"></c:set>
@@ -72,12 +111,9 @@
 			    				  	   			<c:set var="category" value="drink"></c:set>
 			    				  	   		</c:when>
 			    				  	   </c:choose>
-			    				  	   <td colspan="2" style="text-align:center;background: none;"><img src="<%=request.getContextPath()%>/images/${category}/${category}_bg/${requestScope.idvo.ivo.item_image}" width="250" height="200"/></td>
+			    				  	   <td style="text-align:center;background: none;"><img src="<%=request.getContextPath()%>/images/${category}/${category}_bg/${requestScope.idvo.ivo.item_image}" width="250" height="200"/></td>
 			    				  </tr>
-			    			      <tr class="itemDetailInfo">
-			    			      	  <td>제품명</td>
-						              <td class="item_name">${requestScope.idvo.item_name}</td>
-			          			  </tr>
+			          			  
 			    			      <tr>
 			    			      	  <td>중량(g)</td>
 						              <td>
@@ -153,10 +189,7 @@
 											${requestScope.idvo.ivo.item_info}					              					              					              
 						              </td>
 			          			  </tr>
-	
-			          			  
-			          			  
-			          			  
+			  
 			    				
 			    		</c:if>
 			        
@@ -167,6 +200,8 @@
 			    		</c:if>
 			
 			        </tbody>
-			    </table>	
+			    </table>
+			    <div class="pl-4 pt-1"><p id="itemUpdateBtn" class="btn btn-info">제품정보 수정</p></div>
+			     	
 	</div>
 </body>

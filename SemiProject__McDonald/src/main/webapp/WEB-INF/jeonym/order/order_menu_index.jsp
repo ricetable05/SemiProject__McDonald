@@ -106,7 +106,7 @@
 					    </div>
 					    <hr/>
 					    <div class="card-footer border-0 row">
-					    	<div class="col-6 p-2 pl-4">
+					    	<div class="col-6 p-2 pl-3">
 					    		<i class="fa-solid fa-circle-info fa-2xs pr-2" style="color: #04ecdd;"></i>${ivo.itemDetailVO.calories}kcal
 					    	</div>
 					    	<div class="col-6 px-0">
@@ -133,7 +133,7 @@
 					    </div>
 					    <hr/>
 					    <div class="card-footer border-0 row">
-					    	<div class="col-6 p-2 pl-4">
+					    	<div class="col-6 p-2 pl-3">
 					    		<i class="fa-solid fa-circle-info fa-2xs pr-2" style="color: #04ecdd;"></i>${ivo.itemDetailVO.calories}kcal
 					    	</div>
 					    	<div class="col-6 px-0">
