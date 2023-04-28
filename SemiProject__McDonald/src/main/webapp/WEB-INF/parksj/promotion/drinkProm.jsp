@@ -4,92 +4,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%-- burger CSS --%> 
+<%-- promotion CSS --%> 
  <link rel="stylesheet" href="<%= request.getContextPath()%>/css/promotion/promotion.css" type="text/css"/>
 
 <style type="text/css">
 
-@font-face {
-  font-family:SpeedeeK;
-  font-weight:400;
-  font-style:normal;
-  src: url(../css/font/Speedee_K_L.woff) format('woff')}
-@font-face {
-  font-family:SpeedeeK;
-  font-weight:500;
-  font-style:normal;
-  src: url(../css/font/Speedee_K_L.woff) format('woff')}
-@font-face {
-  font-family:SpeedeeK;
-  font-weight:600;
-  font-style:normal;
-  src: url(../css/font/Speedee_K_L.woff) format('woff')} 
-
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/프로모션상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/프로모션상단이미지.jpg) 50% 50% no-repeat;
 }
 
-.titl{
-border-bottom:solid 4px black;
-height: 140px;
-padding-top: 20px;
-padding-bottom: 16px;
+.next,
+.prev{
+background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 }
-
-.tex{
-border:solid 0px red;
-height: 100px;
-padding-top: 20px;
-padding-bottom: 20px;
-font-family:SpeedeeK;
-font-weight:600;
-
-}
-
-.btnArea{
-margin-top:100px;
-text-align:center; 
-display:flex;
-justify-content:space-between;
-margin-top:60px;
-}
-
-
-.btnMC{
-margin:0 12px; 
-display:inline-block; 
-color:#292929; 
-font-weight:600; 
-background:#ffbc0d
-}
-
-.btnM{
-min-width:172px;
-padding:0 38px;
-font-size:15px;
-line-height:70px;
-border-radius:70px
-}
-
-.btnArea .next
-{width:70px;
-height:70px;
-font-size:1px;
-transform:rotate(180deg);
-border: none;
-} 
-
-.btnMC:hover{
-	color: black;
-	text-decoration: none;
-}
-
-.next{
-background:url(<%= request.getContextPath()%>/images/jangjh_img/btn_bbs_prev.png);
-}
-
-
-
 </style>
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"/>
@@ -117,7 +44,7 @@ background:url(<%= request.getContextPath()%>/images/jangjh_img/btn_bbs_prev.png
 			</div>
 		</div>
 		<div class="main" style="margin-top: 50px;">
-			<img src="<%= request.getContextPath()%>/images/jangjh_img/promotion_1.jpg" style="width:100%;">
+			<img src="<%= request.getContextPath()%>/images/promotion_1.jpg" style="width:100%;">
 		</div>
 		
 		<hr>

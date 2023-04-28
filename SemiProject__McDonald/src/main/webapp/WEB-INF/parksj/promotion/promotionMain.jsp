@@ -13,20 +13,6 @@
 background:url(<%= request.getContextPath() %>/images/top_image/프로모션상단이미지.jpg) 50% 50% no-repeat;
 }
 
-.divshadow {
-	box-shadow: 3px 5px 3px #4950576e;
-	height: 100%;
-	border-radius: 3%;
-}
-
-#sepc{
-    padding-top: 35px;
-}
-
-#indexdetail{
-	border-bo-radius: 3%;
-	border: solid 0px;
-}
 
 </style>
 
@@ -53,7 +39,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 			
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 				  <div class="divshadow">
-					<img src="<%= request.getContextPath() %>/images/main_image/index3.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
+					<img src="<%= request.getContextPath() %>/images/index3.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 					  <div class="card-body">
 					    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">상콤달콤! <br/> 자두 천도복숭아 칠러 출시!</h5>
 					    <a href="<%= request.getContextPath() %>/promotion/drinkProm.run" class="stretched-link"></a>
@@ -63,7 +49,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 				
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 					<div class="divshadow" id="spec">
-					  <img src="<%= request.getContextPath() %>/images/main_image/index2.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
+					  <img src="<%= request.getContextPath() %>/images/index2.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 					  <div class="card-body" style="padding-top:38px;">
 					    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">단짠촉촉 맥그리들 is back!</h5>
 					    <a href="<%= request.getContextPath() %>/promotion/mcMorningProm.run" class="stretched-link"></a>
@@ -73,7 +59,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 				
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 				  <div class="divshadow">
-					  <img src="<%= request.getContextPath() %>/images/main_image/index.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
+					  <img src="<%= request.getContextPath() %>/images/index.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 					  <div class="card-body">
 					    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">68년 노하우의 클래스 <br/> 1955 트리플 어니언</h5>
 					    <a href="<%= request.getContextPath() %>/promotion/burgerProm.run" class="stretched-link"></a>
@@ -83,7 +69,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 				
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 				  <div class="divshadow">
-					  <img src="<%= request.getContextPath() %>/images/main_image/index5.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
+					  <img src="<%= request.getContextPath() %>/images/index5.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 					  <div class="card-body">
 					    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">갓성비 간식 맛집<br/>맥도날드 해피스낵!</h5>
 					    <a href="<%= request.getContextPath() %>/promotion/sideProm.run" class="stretched-link"></a>
@@ -93,7 +79,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 				
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 				  <div class="divshadow">
-					  <img src="<%= request.getContextPath() %>/images/main_image/index7.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
+					  <img src="<%= request.getContextPath() %>/images/index7.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 					  <div class="card-body">
 					    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">첫 적립 시 2000포인트 제공!<br/>새로워진 맥도날드 리워드!</h5>
 					    <a href="<%= request.getContextPath() %>/promotion/rewardProm.run" class="stretched-link"></a>
