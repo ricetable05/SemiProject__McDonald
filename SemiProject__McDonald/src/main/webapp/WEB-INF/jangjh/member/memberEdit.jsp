@@ -112,7 +112,7 @@
 	  
 	}
 	.bg1 {
-	  background-image: url(<%= ctxPath%>/images/top_image/브랜드소개상단이미지.jpg);  
+	  background-image: url(<%= ctxPath%>/images/브랜드소개상단이미지.jpg);  
 	  background-clip: border-box;
 	} 
 </style>
@@ -389,7 +389,7 @@
 		
 		
    		 // "우편번호찾기" 을 클릭했을때 이벤트 처리하기
-         $("img#zipcodeSearch").click(function(){	
+         $("span#zipcodeSearch").click(function(){	
         	 b_flag_zipcodeSearch_click = true;
          });
          
@@ -586,7 +586,7 @@
 	      
 	      <tr>
 	         <td class="gap"></td>
-	         <td style="width: 20%; font-weight: bold;">비밀번호확인&nbsp;<span class="star">*</span></td>
+	         <td style="width: 20%; font-weight: bold; font-size: 10pt;">비밀번호확인&nbsp;<span class="star">*</span></td>
 	         <td style="width: 80%; text-align: left;"><input type="password" id="pwdcheck" class="requiredInfo" /> 
 	            <span class="error">암호가 일치하지 않습니다.</span>
 	         </td>

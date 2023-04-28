@@ -50,7 +50,7 @@
 	  
 	}
 	.bg1 {
-	  background-image: url(<%= ctxPath%>/images/top_image/품질이야기상단이미지.jpg);  
+	  background-image: url(<%= ctxPath%>/images/품질이야기상단이미지.jpg);  
 	  background-clip: border-box;
 	} 	
 		

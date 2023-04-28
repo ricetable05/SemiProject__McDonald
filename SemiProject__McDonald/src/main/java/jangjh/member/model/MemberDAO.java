@@ -620,18 +620,17 @@ public class MemberDAO implements InterMemberDAO {
 			return member;
 		}
 
-		// 휴면 계정 풀기 
+		// 휴면 계정 풀기를 위해서 login_date 업데이트하기
 		@Override
-		public int is_dormantUpdate(String userid) throws SQLException {
-			
+		public int login_date_Update(String userid) throws SQLException {
 			int result = 0;	
 			
 			try {
 				
-				conn = ds.getConnection();   // datesourse 에서 가져옴
+				conn = ds.getConnection();  
 				
-				String sql = " update tbl_member set lastlogingap = 0 "
-						   + " where userid = ? ";
+				String sql = " update tbl_login_history set login_date = sysdate "
+						   + " where fk_userid = ? ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -645,7 +644,7 @@ public class MemberDAO implements InterMemberDAO {
 			}
 			
 			return result;
-		}//end of public int is_dormantUpdate() throws SQLException ------------------------------
+		}//end of public int login_date_Update(String userid) throws SQLException ---------------
 
 
 		

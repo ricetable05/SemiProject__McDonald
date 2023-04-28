@@ -1,8 +1,5 @@
 package jangjh.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,10 +19,9 @@ public class Is_dormantUpdateEndAction extends AbstractController {
 		if("POST".equalsIgnoreCase(method)) {
 			//암호변경하기 버튼을 클릭한 경우
 			
-			
 			InterMemberDAO mdao = new MemberDAO();
 			
-			int n = mdao.is_dormantUpdate(userid);
+			int n = mdao.login_date_Update(userid);
 			
 			request.setAttribute("n",n);
 			

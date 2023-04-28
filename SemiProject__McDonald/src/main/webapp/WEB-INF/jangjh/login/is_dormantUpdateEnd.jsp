@@ -65,7 +65,7 @@
 		$("button#btnUpdate").click(function(){
 			
 				const frm = document.is_dormantUpdateEndFrm;
-				frm.action = "<%= ctxPath%>/login/pwdUpdateEnd.run";
+				frm.action = "<%= ctxPath%>/login/is_dormantUpdateEnd.run";
 				frm.method = "POST";
 				frm.submit();
 			

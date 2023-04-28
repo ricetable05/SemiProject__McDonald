@@ -43,8 +43,8 @@ public interface InterMemberDAO {
 	// userid 값을 입력받아서 회원 1명에 대한 상세정보를 알아오기
 	MemberVO memberOneDetail(String userid) throws SQLException;
 	
-	// 휴면 계정 풀기 
-	int is_dormantUpdate(String userid) throws SQLException;
+	// 휴면 계정 풀기를 위해서 login_date 업데이트하기
+	int login_date_Update(String userid) throws SQLException;
 
 	
 	
