@@ -34,11 +34,11 @@ public class SideViewAction extends AbstractController {
 		DetailDetailVO ivo_detail = idao.selectOneProduct_DetailByitem_no(item_no);
 		
 		// 제품번호를 가지고서 해당제품 다음 정보를 조회해오기
-	    DetailVO ivo_next = idao.selectOneProductByitem_no(item_no+1);
+	    DetailVO ivo_next = idao.selectOneProductByitem_no(item_no-1);
 	   // System.out.println("ivo_next : "+ ivo_next);
 				
 		// 제품번호를 가지고서 해당제품 이전 정보를 조회해오기
-	    DetailVO ivo_prev = idao.selectOneProductByitem_no(item_no-1);
+	    DetailVO ivo_prev = idao.selectOneProductByitem_no(item_no+1);
 		
 	    
 	    // 넘어온 제품번호가 속한 카테고리가 테이블에서 몇개나 있는지 조회하기

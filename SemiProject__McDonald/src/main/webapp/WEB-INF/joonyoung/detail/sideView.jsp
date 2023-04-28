@@ -260,20 +260,22 @@ $(document).ready(function() {
 					
 							
 								
-							<c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
+						 <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
 						
-								<script>
-								
-									$(document).ready(function(){
-										
-										$(".prev").prop("disabled",true);
-										$(".prev").css("opacity", 0);
-										$(".prev").css("cursor", "auto");
-									});
-								
-								</script>
+									<script>
+									
+										$(document).ready(function(){
+											
+											$(".prev").prop("disabled",true);
+											$(".prev").css("opacity", 0);
+											$(".prev").css("cursor", "auto");
+										});
+									
+									</script>
 						
 							</c:if>
+							
+							
 								
 							    <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/sideView.run?item_no=${requestScope.ivo_prev.item_no}'">
 									   <img class="prev" src="<%=request.getContextPath()%>/images/joonyoung_img/prevIcon.png">
@@ -296,18 +298,18 @@ $(document).ready(function() {
 						
 						
 						
-						   <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
+						    <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
 						
-									<script>
-									
-										$(document).ready(function(){
-											
-											$(".next").prop("disabled",true);
-											$(".next").css("opacity", 0);
-											$(".next").css("cursor", "auto");
-										});
-									
-									</script>
+								<script>
+								
+									$(document).ready(function(){
+										
+										$(".next").prop("disabled",true);
+										$(".next").css("opacity", 0);
+										$(".next").css("cursor", "auto");
+									});
+								
+								</script>
 						
 							</c:if>
 						
