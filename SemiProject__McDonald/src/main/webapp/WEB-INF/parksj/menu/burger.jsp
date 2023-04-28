@@ -70,7 +70,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/버거상단이�
 								 		+ "<img src='/SemiProject__McDonald/images/burger/burger_bg/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
-								 			+ "<a href='/SemiProject__McDonald/#?item_no="+item.item_no+"' class='stretched-link'></a>"
+								 			+ "<a href='/SemiProject__McDonald/detail/burgerView.run?item_no="+item.item_no+"' class='stretched-link'></a>"
 								 		+ "</div>"
 								 	+ "</div>"
 								 + "</div>";								 
