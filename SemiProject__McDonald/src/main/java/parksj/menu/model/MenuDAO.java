@@ -122,6 +122,7 @@ public class MenuDAO implements InterMenuDAO {
 					   + "    JOIN tbl_category C "
 					   + "    ON I.fk_category_no = C.category_id "
 					   + "    where category_name = ? "
+					   + " 	  order by item_no desc	"
 					   + ") V "
 					   + "where RNO between ? and ?";
 			
