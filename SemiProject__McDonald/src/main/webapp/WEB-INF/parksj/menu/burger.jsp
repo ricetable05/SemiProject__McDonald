@@ -66,7 +66,7 @@ background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg)
 					
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
-								 	+ "<div class='card card-1'>"
+								 	+ "<div id='bgcard' class='card card-1'>"
 								 		+ "<img src='/SemiProject__McDonald/images/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
@@ -102,7 +102,6 @@ background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg)
 
 <div class="MC_content">
 	<div class="user-warp">
-		<div class="user-image"></div>
 		<div class="user-text">
 			<h1 class="titDep1">버거</h1>
 			<p style="margin-top: 15px;">빅맥<sub>®</sub>에서 맥스파이시<sub>®</sub> 상하이버거까지, </p>

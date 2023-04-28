@@ -10,7 +10,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/프로모션상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/프로모션상단이미지.jpg) 50% 50% no-repeat;
 }
 
 
@@ -34,8 +34,8 @@ background:url(<%= request.getContextPath() %>/images/top_image/프로모션상�
 	</div>
 	<!-- 상단이미지 끝-->
 	
-		<div class="container-2" style="width: 100%; position: relative; margin-bottom: 40px;" >
-			<div class="row"style="width:100%; padding-left: 100px;">
+		<div class="container-2" style="width: 80%; position: relative; margin:auto; margin-bottom: 40px;" >
+			<div class="row"style="width:100%; padding-left: 8%;">
 			
 				<div id="indexdetail" class="card col-3 mb-3" style="width: 18rem; padding-right: 0px; padding-left: 0px;">
 				  <div class="divshadow">
