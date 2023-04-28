@@ -68,7 +68,7 @@ background:url(<%= request.getContextPath() %>/images/사이드상단이미지.j
 					
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
-								 	+ "<div class='card card-1'>"
+								 	+ "<div id='bgcard' class='card card-1'>"
 								 		+ "<img src='/SemiProject__McDonald/images/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
@@ -104,7 +104,6 @@ background:url(<%= request.getContextPath() %>/images/사이드상단이미지.j
 
 <div class="MC_content">
 	<div class="user-warp">
-		<div class="user-image"></div>
 		<div class="user-text">
 			<h1 class="titDep1">사이드</h1>
 			<p style="margin-top: 15px;">가볍게 즐겨도, 버거와 함께 푸짐하게 즐겨도, </p>
