@@ -64,37 +64,10 @@
 		
 		$("button#btnUpdate").click(function(){
 			
-			const pwd = $("input#pwd").val();
-			const pwd2 = $("input#pwd2").val();
-			
-			const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
-			
-			const bool = regExp.test(pwd);
-			
-			if(!bool) {
-				
-				alert("암호는 8글자 이상 15글자 이하에 영문자, 숫자, 특수기호가 혼합되어야만 합니다.");
-				
-				$("input#pwd").val("");
-				$("input#pwd2").val("");
-				
-				return;
-			}
-			else if(bool && pwd != pwd2) {
-				
-				alert("암호가 일치하지 않습니다.");
-				
-				$("input#pwd").val("");
-				$("input#pwd2").val("");
-				
-				return;
-			}
-			else {
-				const frm = document.pwdUpdateEndFrm;
+				const frm = document.is_dormantUpdateEndFrm;
 				frm.action = "<%= ctxPath%>/login/pwdUpdateEnd.run";
 				frm.method = "POST";
 				frm.submit();
-			}
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
@@ -103,31 +76,20 @@
 			
 </script>
 
-<form name="pwdUpdateEndFrm" style="font-family:SpeedeeK; font-weight:600;">
-
-   <div id="div_pwd" align="center">
-      <span>새암호</span><br/> 
-      <input type="password" name="pwd" id="pwd" size="25" placeholder="PASSWORD" required />
-   </div>
-   
-   <div id="div_pwd2" align="center">
-        <span>새암호확인</span><br/>
-      <input type="password" id="pwd2" size="25" placeholder="PASSWORD" required />
-   </div>
+<form name="is_dormantUpdateEndFrm" style="font-family:SpeedeeK; font-weight:600;">
 
    <input type="hidden" name="userid" value="${requestScope.userid}"/>
 	
 	<c:if test="${requestScope.method == 'GET'}">
 		<div id="div_btnUpdate" align="center" style="margin-top: 20px;">
-	           <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>
+	       <button type="button" class="btn btn-dark" id="btnUpdate">휴면 계정 풀기</button>
 	    </div> 
 	</c:if>
-
 </form>
 
 	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
 		<div id="div_updateResult" align="center" >
-	           사용자 ID ${requestScope.userid}님의 암호가 새롭게 변경되었습니다.
+	           사용자 ID ${requestScope.userid}님의 휴면 계정이 풀렸습니다.
 	    </div> 
 	</c:if>
 

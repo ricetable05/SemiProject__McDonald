@@ -620,6 +620,33 @@ public class MemberDAO implements InterMemberDAO {
 			return member;
 		}
 
+		// 휴면 계정 풀기 
+		@Override
+		public int is_dormantUpdate(String userid) throws SQLException {
+			
+			int result = 0;	
+			
+			try {
+				
+				conn = ds.getConnection();   // datesourse 에서 가져옴
+				
+				String sql = " update tbl_member set lastlogingap = 0 "
+						   + " where userid = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, userid);
+				
+				result = pstmt.executeUpdate();
+				
+			}
+			finally {
+				close();
+			}
+			
+			return result;
+		}//end of public int is_dormantUpdate() throws SQLException ------------------------------
+
 
 		
 

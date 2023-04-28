@@ -22,16 +22,10 @@ public class Is_dormantUpdateEndAction extends AbstractController {
 		if("POST".equalsIgnoreCase(method)) {
 			//암호변경하기 버튼을 클릭한 경우
 			
-			String pwd = request.getParameter("pwd");
-			
-			Map<String, String> paraMap = new HashMap<>();
-			
-			paraMap.put("pwd", pwd);
-			paraMap.put("userid", userid);
 			
 			InterMemberDAO mdao = new MemberDAO();
 			
-			int n = mdao.pwdUpdate(paraMap);
+			int n = mdao.is_dormantUpdate(userid);
 			
 			request.setAttribute("n",n);
 			
