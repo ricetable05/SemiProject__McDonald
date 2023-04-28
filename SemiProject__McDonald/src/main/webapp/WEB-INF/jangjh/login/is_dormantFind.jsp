@@ -74,7 +74,7 @@
 		//인증하기
 		$("button#btnConfirmCode").click(function(){
 			
-			const frm = document.verifyCertificationFrm;
+			const frm = document.verifyCertificationEmailFrm;
 			
 			frm.userCertificationCode.value = $("input#input_confirmCode").val();
 			frm.userid.value = $("input#userid").val();
@@ -135,7 +135,7 @@
    </div>
    
 <%-- 인증하기 form --%>
-<form name="verifyCertificationFrm">
+<form name="verifyCertificationEmailFrm">
 	<input type="hidden" name="userCertificationCode" />
 	<input type="hidden" name="userid" />
 </form>

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 
-public class verifyCertification_email extends AbstractController {
+public class VerifyCertification_emailAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
