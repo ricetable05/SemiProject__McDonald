@@ -71,8 +71,8 @@
 		$("div#div_findResult > p.text-center").empty();
 		
 	}//end of function func_form_reset_empty() ------------------------------------
-			
-			
+	
+	
 </script>
 
 <form name="idFindFrm" style="font-family:SpeedeeK; font-weight:600;">
@@ -88,7 +88,6 @@
             <label for="email" style="display: inline-block; width: 90px">이메일</label>
             <input type="text" name="email" id="email" size="25" placeholder="McDonald@gmail.com" autocomplete="off" required />
          </li>
-         
    </ul>
    
    <div class="my-3">
