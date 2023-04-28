@@ -33,4 +33,7 @@ public interface InterItemDAO {
 	// 제품정보 수정 메소드
 	int updateItemInfo(String pk_fk_item_no, ItemVO ivo) throws SQLException;
 	
+	// 제품정보 등록 메소드
+	int registItem(ItemVO ivo, Map<String, String> paraMap) throws SQLException;
+	
 }

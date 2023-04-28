@@ -63,6 +63,7 @@ public class ItemUpdateAction extends AbstractController {
 		}
 		else { // "POST"
 			
+
 			MultipartRequest mtrequest = null;
 			
 			ServletContext svlCtx = session.getServletContext();
@@ -70,7 +71,7 @@ public class ItemUpdateAction extends AbstractController {
 				// 아래의 부분을 내가 조절을해서 등록하는 카테고리에 해당하는 폴더에 넣어야 한다.
 				
 				
-			String uploadFileDir = svlCtx.getRealPath("/images/item"); // 실제 images 폴더의 경로가 나온다.
+			String uploadFileDir = svlCtx.getRealPath("/images"); // 실제 images 폴더의 경로가 나온다.
 				
 				// System.out.println("===== 첨부되어지는 이미지 파일이 올라가는 절대경로 uploadFileDir ==> " + uploadFileDir);
 	
@@ -155,7 +156,7 @@ public class ItemUpdateAction extends AbstractController {
 				isSuccess = idao.updateItemInfo(pk_fk_item_no, ivo);
 				
 				if(isSuccess > 0) {
-					// 수정이 된다면 해당 제품의 이미지를 다른 폴더에 집어 넣어야 한다.
+					
 					message = "성공적으로 수정되었습니다.";
 					loc = request.getContextPath() + "/item/itemList.run";
 							
@@ -169,7 +170,6 @@ public class ItemUpdateAction extends AbstractController {
 
 				
 			}catch(SQLException e) {
-				e.printStackTrace();
 				message = "수정이 실패하였습니다 ㅜㅜ";
 				loc = request.getContextPath() + "/item/itemList.run";
 										
