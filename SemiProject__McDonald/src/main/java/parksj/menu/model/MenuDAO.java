@@ -117,7 +117,7 @@ public class MenuDAO implements InterMenuDAO {
 			String sql = " select item_no, category_id, category_name, item_name, item_image "
 					   + "from "
 					   + "( "
-					   + "    select row_number() over(order by item_no asc) AS RNO, I.item_no, C.category_id, category_name, item_name, item_image "
+					   + "    select row_number() over(order by item_no desc) AS RNO, I.item_no, C.category_id, category_name, item_name, item_image "
 					   + "    from tbl_item I "
 					   + "    JOIN tbl_category C "
 					   + "    ON I.fk_category_no = C.category_id "
