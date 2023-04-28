@@ -178,7 +178,12 @@
 	
 	function goItemUpdate(pk_fk_item_no){
 		
-		location.href='<%= request.getContextPath() %>/item/itemUpdate.run?pk_fk_item_no='+ pk_fk_item_no;
+		if(pk_fk_item_no == ''){
+			location.href='<%= request.getContextPath() %>/item/itemRegister.run';
+		}
+		else{
+			location.href='<%= request.getContextPath() %>/item/itemUpdate.run?pk_fk_item_no='+ pk_fk_item_no;			
+		}
 		
 	}
 	
@@ -268,6 +273,9 @@
 		          </ul>
 		       </div>
 		    </nav>
+		    
+		    <button class="btn btn-success" type="button" onclick="goItemUpdate('')">제품등록하기</button>
+		    
 		</div>
 	
 	</div>

@@ -26,5 +26,11 @@ public interface InterItemDAO {
 
 	// 하나의 제품의 모든 정보를 가져오는 메소드
 	ItemVO selectOneItem_total_info(String pk_fk_item_no) throws SQLException;
+
+	// 카테고리에 따른 시퀀스를 채번해오는 메소드
+	Map<String, String> getItem_no_by_category(String fk_category_no) throws SQLException;
+
+	// 제품정보 수정 메소드
+	int updateItemInfo(String pk_fk_item_no, ItemVO ivo) throws SQLException;
 	
 }

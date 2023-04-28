@@ -78,18 +78,26 @@
 			
 		} 
 		
+		if(${not empty requestScope.ivo}){ 			 
 		
+			$("input[name='pk_fk_item_no']").val('${requestScope.pk_fk_item_no}'); // 제품번호 초기설정
+			$("select[name='fk_category_no']").val('${requestScope.ivo.fk_category_no}'); // 카테고리 초기설정
+			$("input[name='category_no']").val('${requestScope.ivo.fk_category_no}'); // 카테고리 폼 초기설정
+			$("input:text[name='item_name']").val('${requestScope.ivo.item_name}'); // 제품명 초기설정
+			
+			// 이미지는 보안상 value 값을 지정할 수 없다고 한다.
+			
+			$("input:text[name='item_price']").val('${requestScope.ivo.item_price}'); // 제품판매가 초기설정
+			$("select[name='morning_availability']").val('${requestScope.ivo.morning_availability}'); // 판매시간대 초기설정
+			$("input:radio[name='is_burger']:input[value='${requestScope.ivo.is_burger}']").prop("checked", true); // 버거여부 초기치 설정
+			$("input:text[name='item_price']").val('${requestScope.ivo.item_price}'); // 제품판매가 초기설정
+			$("textarea[name='item_info']").val('${requestScope.ivo.item_info}'); // 제품판매가 초기설정
+	
+			$("input:file[name='item_image']").removeClass("infoData"); // 수정의 경우 이미지파일은 필수가 아니게 된다. 
+			
+			
+		}
 		
-		$("select[name='fk_category_no']").val('${requestScope.ivo.fk_category_no}'); // 카테고리 초기설정	
-		$("input:text[name='item_name']").val('${requestScope.ivo.item_name}'); // 제품명 초기설정
-		
-		// 이미지는 보안상 value 값을 지정할 수 없다고 한다.
-		
-		$("input:text[name='item_price']").val('${requestScope.ivo.item_price}'); // 제품판매가 초기설정
-		$("select[name='morning_availability']").val('${requestScope.ivo.morning_availability}'); // 판매시간대 초기설정
-		$("input:radio[name='is_burger']:input[value='${requestScope.ivo.is_burger}']").prop("checked", true); // 버거여부 초기치 설정
-		$("input:text[name='item_price']").val('${requestScope.ivo.item_price}'); // 제품판매가 초기설정
-		$("textarea[name='item_info']").val('${requestScope.ivo.item_info}'); // 제품판매가 초기설정
 		
 		
 		
@@ -107,7 +115,7 @@
 			});
 		});
 
-
+		$("input:text[name='coa']").val('${requestScope.ivo.itemDetailVO.coa}'); // 원산지정보 초기설정
 		
 	   
         $(document).on("change", "input.img_file", function(e){ // 이미지 추가할 때 이미지 미리보기 기능
@@ -130,8 +138,45 @@
        $(".infoData").change(function(e){ // infoData 에 change 이벤트가 실행되면 에러 메시지 사라지도록
     	   $(e.target).parent().find("span.error").hide();
        });
-       
-       
+
+               
+      // 추가이미지 파일에 스피너 달아주기
+      $("input#spinnerImgQty").spinner({
+	         spin:function(event,ui){
+	            if(ui.value > 2) {
+	               $(this).spinner("value", 2);
+	               return false;
+	            }
+	            else if(ui.value < 0) {
+	               $(this).spinner("value", 0);
+	               return false;
+	            }
+	         }
+	   });// end of $("#spinnerImgQty").spinner()--------
+	      
+	   // #### 스피너의 이벤트는 click 도 아니고 change 도 아니고 "spinstop" 이다. #### //  
+
+       $("input#spinnerImgQty").bind("spinstop",function(){
+    	   
+    	  let html = ``;
+    	  let cnt = $(this).val();
+    	  
+    /*	  
+    	  console.log("~~ 확인용 cnt : " + cnt);
+    	  console.log("~~ 확인용 cnt : " + typeof cnt);
+		  // ~~ 확인용 cnt : string
+    */
+    	  for(let i=0;i<Number(cnt);i++){
+    		  html += `<br><input type="file" name="attach\${i}" class="btn btn-default img_file" accept='image/*' />`;
+    	  }// end of for ---------------------------------------------------------------------	
+    	  
+    	  $("div#divfileattach").html(html);
+    	  $("input#attachCount").val(cnt);
+    
+       });// end of $("input#spinnerImgQty").bind("spinstop",function(){})--------------------  
+
+        
+        
        // 제품등록하기
        $("input#btnRegister").click(function(){
     	  
@@ -151,6 +196,7 @@
     		   
     		   
     		   const frm = document.prodInputFrm;
+
     		    
 				let arr_allergens = [];
 				document.querySelectorAll("input.item_aller").forEach(function(item) {
@@ -162,7 +208,18 @@
 				});
 				// alert(arr_allergens.join(','));
 				$("input[name='allergens']").val(arr_allergens.join(',')); // 알러지 정보 실어서 보냄
+				
+				if(${not empty requestScope.ivo}){
+				   // 회원정보 수정의 경우에만 ajax						
+			    	frm.action="<%= request.getContextPath()%>/item/itemUpdate.run";
+		    	
+				}
+				else{
+					frm.action="<%= request.getContextPath()%>/item/itemRegister.run";
+				}
+				
 				frm.submit();  
+
     	   }
     	   else{
     		   return;
@@ -215,11 +272,7 @@
 			}	
 			
 		});
-		
-		
-		
-		
-		
+	
 		
 		return bool;
 	}
@@ -237,10 +290,11 @@
 <%-- 폼에서 파일을 업로드 하려면 반드시 method 는 POST 이어야 하고 
      enctype="multipart/form-data" 으로 지정해주어야 한다.!! --%>
 <form name="prodInputFrm"
-      action="<%= request.getContextPath()%>/main.run"
       method="POST"                         
-      enctype="multipart/form-data"> 
-      
+      enctype="multipart/form-data">
+       
+<input type="hidden" name="pk_fk_item_no" value=""/>
+  
 <table id="tblProdInput" style="width: 80%;">
 <tbody>
    <tr>
@@ -332,14 +386,29 @@
 		 		</thead>
 		 		<tbody>
 				<tr>
-					<td width="10%"><input type="text" id="weight_g" class="item_nut dec" name="weight_g" maxlength="6" value="${requestScope.ivo.itemDetailVO.weight_g}"/></td>
-			 		<td width="10%"><input type="text" id="weight_ml" class="item_nut dec" name="weight_ml" maxlength="6" value="${requestScope.ivo.itemDetailVO.weight_ml}"/></td>
-			 		<td width="10%"><input type="text" id="calories" class="item_nut dec" name="calories" maxlength="6" value="${requestScope.ivo.itemDetailVO.calories}"/></td>
-			 		<td width="10%"><input type="text" id="carbo" class="item_nut dec" name="carbo" maxlength="6" value="${requestScope.ivo.itemDetailVO.carbo}"/></td>
-			 		<td width="10%"><input type="text" id="protein" class="item_nut dec" name="protein" maxlength="6" value="${requestScope.ivo.itemDetailVO.protein}"/></td>
-			 		<td width="10%"><input type="text" id="fat" class="item_nut ft" name="fat" maxlength="6" value="${requestScope.ivo.itemDetailVO.fat}"/></td>
-			 		<td width="10%"><input type="text" id="sodium" class="item_nut dec" name="sodium" maxlength="6" value="${requestScope.ivo.itemDetailVO.sodium}"/></td>
-			 		<td width="10%"><input type="text" id="caffeine" class="item_nut dec" name="caffeine" maxlength="6" value="${requestScope.ivo.itemDetailVO.caffeine}"/></td>
+				
+					<c:if test="${not empty requestScope.ivo}">
+						<td width="10%"><input type="text" id="weight_g" class="item_nut dec" name="weight_g" maxlength="6" value="${requestScope.ivo.itemDetailVO.weight_g}"/></td>
+				 		<td width="10%"><input type="text" id="weight_ml" class="item_nut dec" name="weight_ml" maxlength="6" value="${requestScope.ivo.itemDetailVO.weight_ml}"/></td>
+				 		<td width="10%"><input type="text" id="calories" class="item_nut dec" name="calories" maxlength="6" value="${requestScope.ivo.itemDetailVO.calories}"/></td>
+				 		<td width="10%"><input type="text" id="carbo" class="item_nut dec" name="carbo" maxlength="6" value="${requestScope.ivo.itemDetailVO.carbo}"/></td>
+				 		<td width="10%"><input type="text" id="protein" class="item_nut dec" name="protein" maxlength="6" value="${requestScope.ivo.itemDetailVO.protein}"/></td>
+				 		<td width="10%"><input type="text" id="fat" class="item_nut ft" name="fat" maxlength="6" value="${requestScope.ivo.itemDetailVO.fat}"/></td>
+				 		<td width="10%"><input type="text" id="sodium" class="item_nut dec" name="sodium" maxlength="6" value="${requestScope.ivo.itemDetailVO.sodium}"/></td>
+				 		<td width="10%"><input type="text" id="caffeine" class="item_nut dec" name="caffeine" maxlength="6" value="${requestScope.ivo.itemDetailVO.caffeine}"/></td>					
+					</c:if>
+					
+					<c:if test="${empty requestScope.ivo}">
+						<td width="10%"><input type="text" id="weight_g" class="item_nut dec" name="weight_g" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="weight_ml" class="item_nut dec" name="weight_ml" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="calories" class="item_nut dec" name="calories" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="carbo" class="item_nut dec" name="carbo" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="protein" class="item_nut dec" name="protein" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="fat" class="item_nut ft" name="fat" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="sodium" class="item_nut dec" name="sodium" maxlength="6" value=""/></td>
+				 		<td width="10%"><input type="text" id="caffeine" class="item_nut dec" name="caffeine" maxlength="6" value=""/></td>					
+					</c:if>
+					
 			 		
 			 	
 		 		</tr>
@@ -379,6 +448,19 @@
       </td>
    </tr>
    
+   <tr>
+          <td width="25%" class="prodInputName" style="padding-bottom: 10px;">추가이미지파일(선택)</td>
+          <td>
+             <label for="spinnerImgQty">파일갯수 : </label>
+          <input id="spinnerImgQty" value="0" style="width: 30px; height: 20px;">
+             <div id="divfileattach"></div>
+              
+             <input type="hidden" name="attachCount" id="attachCount" />
+              
+          </td>
+    </tr>
+   
+   
     
    
    <tr style="height: 70px;">
@@ -393,6 +475,7 @@
 </tbody>
 </table>
 </form>
+
 </div>
 	
 	
