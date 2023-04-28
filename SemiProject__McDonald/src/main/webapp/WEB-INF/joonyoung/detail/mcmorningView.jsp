@@ -16,7 +16,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/맥모닝상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/맥모닝상단이미지.jpg) 50% 50% no-repeat;
 }
 
 

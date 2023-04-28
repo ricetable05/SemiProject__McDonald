@@ -14,7 +14,6 @@ public class DrinkViewAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		
-		super.getMenuCategoryList(request);
 
 		
 		InterDetailDAO idao = new DetailDAO();

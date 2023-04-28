@@ -16,7 +16,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/디저트상단이미지.png) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/디저트상단이미지.png) 50% 50% no-repeat;
 }
 
 
