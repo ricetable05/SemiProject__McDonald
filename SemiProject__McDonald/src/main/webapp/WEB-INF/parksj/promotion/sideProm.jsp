@@ -17,6 +17,7 @@ background:url(<%= request.getContextPath() %>/images/프로모션상단이미�
 .prev{
 background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 }
+
 </style>
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"/>
@@ -39,19 +40,17 @@ background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 	<div class="container" style="width: 100%; position: relative; margin-bottom: 40px;" >
 		<div class="titl">
 			<div class="tex">
-				<h2 style="font-size:15pt;">갓성비 간식 맛집</h2>
-				<h2 style="font-size:15pt;">맥도날드 해피스낵!</h2>
+				<h2 style="font-size:15pt;">68년 노하우의 클래스</h2>
+				<h2 style="font-size:15pt;">1955 트리플 어니언</h2>
 			</div>
 		</div>
 		
-		
-		<div class="main" style="margin-top: 50px; position: relative; top: 10px;">
-			<img src="<%= request.getContextPath()%>/images/promotion_4.jpg" style="width:100%;">
-		</div>
-		
-		<div class="embed-responsive embed-responsive-21by9" style="position: relative; top: -6080px; z-index: 2;" >
-	     	<iframe width="560" height="315" src="https://www.youtube.com/embed/6mvZ0hWVEYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	     </div>
+		<div class="test" style="display: block;">
+			<div class="main" style="margin-top: 50px; position: relative;">
+			 <img src="<%= request.getContextPath()%>/images/promotion_3.jpg" style="width:100%;">
+			 <iframe width="780" height="448" src="https://www.youtube.com/embed/g7EzMPH8Ir0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe>
+			</div>
+		</div>	
 		
 		<hr>
 		
