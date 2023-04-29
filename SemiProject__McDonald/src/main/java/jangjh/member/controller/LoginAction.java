@@ -63,9 +63,8 @@ public class LoginAction extends AbstractController{
 			//session(세션)에 로그인 되어진 사용자정보인 loginuser을 키 이름을 "loginuser"으로 저장시켜주는 것이다.
 			
 			if(loginuser.isRequirePwdChange()) {
-				String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경하세요 !!";
+				String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경해주세요. !!";
 				String loc = request.getContextPath()+"/main.run";
-				// 원래는 위와 같이 index.up이 아니라 사용자의 암호를 변경해주는 페이지로 잡아주어야 한다.
 				
 				request.setAttribute("message", message);
 				request.setAttribute("loc", loc);

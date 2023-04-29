@@ -17,7 +17,7 @@ public class MemberOneDetailAction extends AbstractController {
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 		
-		if(loginuser != null && loginuser.getUserid().equals("admin")) {
+		if(loginuser != null && loginuser.getUserid().equals("kingkingadmin")) {
 			// 관리자로 로그인 했을 때만
 			
 			String userid = request.getParameter("userid");

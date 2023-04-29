@@ -10,64 +10,13 @@
 <head>
     <title>회원가입</title>
     
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/member/memberRegister.css" type="text/css"/>
+    
 <style type="text/css">
-
-	div#divRegisterFrm {
-		margin-top: 137px;
-	}
-
-	table#tblMemberRegister {
-	
-		width: 80%;
-		margin: 10px;
-		
-	}
-	
-	table#tblMemberRegister #th{
-	
-		padding: 30px;
-		text-align: center;
-		font-size: 25pt;
-		
-	}
-	
-	table#tblMemberRegister td{
-	
-		line-height: 30px;
-		padding: 8px 0; 
-		
-	}
-	
-	span.star { 
-		color: red;
-		font-weight: bold; 
-		font-size: 13pt;
-	} 
-	
-	span.essential { 
-		color: white;
-		font-weight: bold; 
-		font-size: 13pt;
-	} 
-	
-	
-	#tblMemberRegister > tbody > tr > td.gap {
-		padding-left: 100px;
-	}
-	
-	p {
-	  border: 1em violet;
-	  padding: 55px;
-	  font-size: 45pt; 
-	  color: white;
-	  
-	}
 	.bg1 {
 	  background-image: url(<%= ctxPath%>/images/브랜드소개상단이미지.jpg);  
 	  background-clip: border-box;
 	}
-		
-	
 </style>
     
 </head>

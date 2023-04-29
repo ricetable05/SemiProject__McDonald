@@ -11,49 +11,16 @@
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"/>
 
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/member/memberList.css" type="text/css"/>
+
+
 <style type="text/css">
-	tr.memberInfo:hover {
-		cursor: pointer;
-		color: #db0007;
-	}
-	
-	body {
-		font-family:SpeedeeK; 
-		font-weight:600;
-		margin-top: 138px;
-	}
-	
-	table {
-		margin-left: 100px;
-	}
-	
-	 .page-link {
-	  color: #000; 
-	  background-color: #fff;
-	  border: 1px solid #ccc; 
-	}
-	
-	.page-item.active .page-link {
-	 z-index: 1;
-	 color: white;
-	 font-weight:bold;
-	 background-color: #29293d;
-	 border-color: #ccc;
-	 
-	}
-		
-	p {
-	  border: 1em violet;
-	  padding: 55px;
-	  font-size: 35pt; 
-	  color: white;
-	  
-	}
+
 	.bg1 {
 	  background-image: url(<%= ctxPath%>/images/품질이야기상단이미지.jpg);  
 	  background-clip: border-box;
 	} 	
-		
+		 
 		
 </style>
 
