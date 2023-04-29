@@ -430,24 +430,24 @@ public class ItemDAO implements InterItemDAO {
 				switch (fk_category_no) {
 
 					case "1":
-						seq_name = "TEST_ITEM_BURGER_SEQ";
-						detail_seq_name = "TEST_ITEM_BURGER_DETAIL_SEQ";
+						seq_name = "ITEM_BURGER_SEQ";
+						detail_seq_name = "ITEM_BURGER_DETAIL_SEQ";
 						break;
 					case "2":
-						seq_name = "TEST_ITEM_MC_MORNING_SEQ";
-						detail_seq_name = "TEST_ITEM_MC_MORNING_DETAIL_SEQ";						
+						seq_name = "ITEM_MC_MORNING_SEQ";
+						detail_seq_name = "ITEM_MC_MORNING_DETAIL_SEQ";						
 						break;
 					case "3":
-						seq_name = "TEST_ITEM_SIDE_SEQ";
-						detail_seq_name = "TEST_ITEM_SIDE_DETAIL_SEQ";
+						seq_name = "ITEM_SIDE_SEQ";
+						detail_seq_name = "ITEM_SIDE_DETAIL_SEQ";
 						break;
 					case "4":
-						seq_name = "TEST_ITEM_DESSERT_SEQ";
-						detail_seq_name = "TEST_ITEM_DESSERT_DETAIL_SEQ";
+						seq_name = "ITEM_DESSERT_SEQ";
+						detail_seq_name = "ITEM_DESSERT_DETAIL_SEQ";
 						break;
 					case "5":
-						seq_name = "TEST_ITEM_DRINK_SEQ";
-						detail_seq_name = "TEST_ITEM_DRINK_DETAIL_SEQ";
+						seq_name = "ITEM_DRINK_SEQ";
+						detail_seq_name = "ITEM_DRINK_DETAIL_SEQ";
 						break;
 					
 				default:
@@ -504,7 +504,7 @@ public class ItemDAO implements InterItemDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " update test_tbl_item set fk_category_no = ? "
+			String sql = " update tbl_item set fk_category_no = ? "
 					+ "  , item_name = ? , item_price = ? , morning_availability = ? , is_burger = ? , item_info = ? ";
 				
 			if(!"".equals(ivo.getItem_image())) {
@@ -538,7 +538,7 @@ public class ItemDAO implements InterItemDAO {
 			
 			n1 = pstmt.executeUpdate();
 			
-			sql =	 " update test_tbl_item_detail set item_name = ?, weight_g = to_number(?), weight_ml = to_number(?) "
+			sql =	 " update tbl_item_detail set item_name = ?, weight_g = to_number(?), weight_ml = to_number(?) "
 					+ "                      ,calories = to_number(?) , carbo = to_number(?) , protein = to_number(?) , fat = to_number(?) "
 					+ "                      , sodium = to_number(?) , caffeine = to_number(?) , allergens = ? , coa = ? "
 					+ " where pk_fk_item_no = ? ";
@@ -588,7 +588,7 @@ public class ItemDAO implements InterItemDAO {
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " insert into test_tbl_item values( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+			String sql = " insert into tbl_item values( ?, ?, ?, ?, ?, ?, ?, ? ) ";
 				
 
 
@@ -606,7 +606,7 @@ public class ItemDAO implements InterItemDAO {
 			n3 = pstmt.executeUpdate();
 			
 			
-			sql = " insert into test_tbl_item_detail values( ? , ?, to_number(?), to_number(?), to_number(?), to_number(?) "
+			sql = " insert into tbl_item_detail values( ? , ?, to_number(?), to_number(?), to_number(?), to_number(?) "
 				+ ", to_number(?), to_number(?), to_number(?), to_number(?), ?, ? )";
 		
 			pstmt = conn.prepareStatement(sql);

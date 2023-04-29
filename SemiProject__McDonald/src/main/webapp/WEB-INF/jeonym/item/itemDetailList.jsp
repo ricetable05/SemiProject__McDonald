@@ -79,7 +79,7 @@
 <body>
 	
 	<div class="container-fluid col-md-10 col-lg-9 px-0">
-				<img id="top_img" src="<%=request.getContextPath()%>/images/top_image/품질이야기상단이미지.jpg" style="margin:0"/>
+				<img id="top_img" src="<%=request.getContextPath()%>/images/품질이야기상단이미지.jpg" style="margin:0"/>
 				<table id="itemTbl" class="table" style="width: 90%; padding-top:1px;">
 			        <thead>
 			        </thead>
@@ -94,24 +94,7 @@
 			          			  </tr>
 			          			  <tr>
 			          			  	   <td>제품사진</td>	
-			    				  	   <c:choose>
-			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 1}">
-			    				  	   			<c:set var="category" value="burger"></c:set>
-			    				  	   		</c:when>
-			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 2}">
-			    				  	   			<c:set var="category" value="mc_morning"></c:set>
-			    				  	   		</c:when>
-			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 3}">
-			    				  	   			<c:set var="category" value="side_menu"></c:set>
-			    				  	   		</c:when>
-			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 4}">
-			    				  	   			<c:set var="category" value="dessert"></c:set>
-			    				  	   		</c:when>
-			    				  	   		<c:when test="${requestScope.idvo.ivo.fk_category_no eq 5}">
-			    				  	   			<c:set var="category" value="drink"></c:set>
-			    				  	   		</c:when>
-			    				  	   </c:choose>
-			    				  	   <td style="text-align:center;background: none;"><img src="<%=request.getContextPath()%>/images/${category}/${category}_bg/${requestScope.idvo.ivo.item_image}" width="250" height="200"/></td>
+			    				  	   <td style="text-align:center;background: none;"><img src="<%=request.getContextPath()%>/images/${requestScope.idvo.ivo.item_image}" width="250" height="200"/></td>
 			    				  </tr>
 			          			  
 			    			      <tr>
