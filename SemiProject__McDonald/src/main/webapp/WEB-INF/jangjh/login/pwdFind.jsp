@@ -117,6 +117,17 @@
 		
 	});//end of $(document).ready(function() --------------------------------------
 	
+	// 아이디 찾기 모달창에 입력한 input 태그 value 값 초기화 시키기
+	function func_form_reset_empty_pwd(){
+		
+		document.querySelector("form[name='pwdFindFrm']").reset();
+		
+		$("div#div_findResult > p.text-center").empty();
+		
+	}//end of function func_form_reset_empty() ------------------------------------
+	 		
+			
+			
 			
 </script>
 

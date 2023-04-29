@@ -118,6 +118,16 @@
 		
 	});//end of $(document).ready(function() --------------------------------------
 	
+	function func_form_reset_is_dormant(){
+		
+		document.querySelector("form[name='is_dormantFindFrm']").reset();
+		
+		$("div#div_findResult > p.text-center").empty();
+		
+	}//end of function func_form_reset_empty() ------------------------------------
+			
+			
+			
 			
 </script>
 
