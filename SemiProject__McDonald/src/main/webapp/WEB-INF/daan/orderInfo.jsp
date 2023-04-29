@@ -286,6 +286,23 @@
 	$(document).ready(function(){
 		
 		
+		// 각 제품 카드는 배경화면이 제거된 이미지 사진을 사용합니다.
+		// 그러나 DB 상 입력된 값은 14_빅맥.png으로, 이 값의 사진은 배경화면이 있는 사진입니다.
+		// 따라서 14_빅맥_nbg.png 을 만드는 작업을 아래와 같이 진행합니다.
+		let customCardsImgsArr = document.querySelectorAll('div.customCardsArr > img');
+		customCardsImgsArr = Array.from(customCardsImgsArr);
+		
+		let img_src;
+		
+		customCardsImgsArr.forEach((elt) => {
+			img_src = elt.getAttribute('data-temp');
+			img_src = '/images/'+img_src.substr(0,(img_src.length-4))+'_nbg.png';
+			img_src = '<%=request.getContextPath()%>'+img_src;
+			elt.setAttribute('src', img_src);
+			// prop, get 둘 다 안됨.
+		});
+		
+		
 
 		// ------------------------------------------------------
 		
@@ -808,8 +825,9 @@
             <div class="row flex-content-container-item2" style="background-color: #f3f3f3;">
             <c:if test="${not empty requestScope.item_list}">
 	            <c:forEach items="${requestScope.item_list}" var="item">
-	            	<div class="col-sm-12 col-md-4 col-lg-3 col-xl-2" style="height: 383.75px;">
-	            	<c:choose>
+	            	<div class="customCardsArr col-sm-12 col-md-4 col-lg-3 col-xl-2" style="height: 383.75px;">
+	            		<img src="" data-temp="${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
+	            	<%-- <c:choose>
 	            		<c:when test="${item.fk_category_no eq 1}">
 	            			<img src="<%=request.getContextPath()%>/images/burger/burger_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
 	            		</c:when>
@@ -825,7 +843,7 @@
 	            		<c:when test="${item.fk_category_no eq 5}">
 	            			<img src="<%=request.getContextPath()%>/images/drink/drink_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
 	            		</c:when>
-	            	</c:choose>
+	            	</c:choose> --%>
                     <div class="card-body mb-1">
                         <span class="card-title">${item.item_name}</span>
                         <p class="card-text">${item.item_info}
