@@ -39,17 +39,66 @@ public class ItemUpdateAction extends AbstractController {
 		String method = request.getMethod();
 		
 		
-
-		// pk_fk_item_no에 부적한 타입의 데이터가 들어오는지 검사해야할 것
-		// pk_fk_item_no 가 존재하는지 검사해야할 것
-		
-		
-		
-		
 		if(!"POST".equalsIgnoreCase(method)) { // get 방식인 경우 ==> 제품목록 페이지에서 제품등록을 누르거나
 											   // 제품상세보기 페이지에서 수정버튼을 누른 경우
 
 			String pk_fk_item_no = request.getParameter("pk_fk_item_no"); // detailList 부터 넘어온 pk_fk_item_no
+			
+			// pk_fk_item_no에 부적한 타입의 데이터가 들어오는지 검사해야할 것
+			try {
+				
+				// pk_fk_item_no 가 공백이거나 음수인지.
+				if( pk_fk_item_no.trim().isEmpty() || Integer.parseInt(pk_fk_item_no) < 0) { 
+					
+					 message = "제품번호는 공백이거나 음수일 수 없습니다.";
+					 loc = "javascript:history.back()";
+					 
+					request.setAttribute("message", message);
+					request.setAttribute("loc", loc);
+				
+					super.setRedirect(false);
+					super.setViewPage("/WEB-INF/jeonym/msg.jsp");
+					
+					return;
+				}
+				
+			
+			
+			}
+			catch(NumberFormatException e) {
+			
+				 message = "제품번호는 숫자가 아닌 다른 값이 올 수 없습니다.";
+				 loc = "javascript:history.back()";
+				 
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+			
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/jeonym/msg.jsp");
+		
+				return;
+
+			}
+				
+			// pk_fk_item_no 가 존재하는지 검사해야할 것
+			paraMap.put("item_no", pk_fk_item_no);
+			
+			if(!idao.is_Exist_item_no(paraMap)) {
+
+				message = "존재하지 않는 제품 번호입니다.";
+				 loc = "javascript:history.back()";
+				 
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+			
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/jeonym/msg.jsp");
+		
+				return;
+		
+			}
+			
+
 			super.getCategoryList(request); // 제품등록창에서 select 안에 값을 넣어주기 위함
 				
 			ItemVO ivo = idao.selectOneItem_total_info(pk_fk_item_no);
@@ -67,10 +116,6 @@ public class ItemUpdateAction extends AbstractController {
 			MultipartRequest mtrequest = null;
 			
 			ServletContext svlCtx = session.getServletContext();
-			
-				// 아래의 부분을 내가 조절을해서 등록하는 카테고리에 해당하는 폴더에 넣어야 한다.
-				
-				
 			String uploadFileDir = svlCtx.getRealPath("/images"); // 실제 images 폴더의 경로가 나온다.
 				
 				// System.out.println("===== 첨부되어지는 이미지 파일이 올라가는 절대경로 uploadFileDir ==> " + uploadFileDir);
@@ -91,7 +136,7 @@ public class ItemUpdateAction extends AbstractController {
 				}
 				
 
-			String pk_fk_item_no = mtrequest.getParameter("pk_fk_item_no"); 
+			String pk_fk_item_no = mtrequest.getParameter("pk_fk_item_no"); // 제품번호
 			
 			String allergens = mtrequest.getParameter("allergens"); // 알레르기
 			String item_name = mtrequest.getParameter("item_name"); // 제품명
@@ -132,8 +177,7 @@ public class ItemUpdateAction extends AbstractController {
 			
 			ItemDetailVO idvo = new ItemDetailVO();
 			
-			
-			
+	
 			idvo.setWeight_g(Integer.parseInt(JeonymUtil.null_to_zero(weight_g)));
 			idvo.setWeight_ml(Integer.parseInt(JeonymUtil.null_to_zero(weight_ml)));
 			idvo.setCalories(Integer.parseInt(JeonymUtil.null_to_zero(calories)));
@@ -146,20 +190,43 @@ public class ItemUpdateAction extends AbstractController {
 			idvo.setCoa(JeonymUtil.null_to_zero(coa));
 			
 			// null_to_empty -> null 이나 공백을 "0" 으로 만듦
-			
-			
+	
 			ivo.setItemDetailVO(idvo);
 
-			
 			try {
 				
 				isSuccess = idao.updateItemInfo(pk_fk_item_no, ivo);
 				
 				if(isSuccess > 0) {
 					
+					// === 추가이미지파일이 있다라면 tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기 ===
+		            
+		            String str_attachCount = mtrequest.getParameter("attachCount"); 
+		               // str_attachCount 이 추가이미지 파일의 개수이다. "" "0" ~ "10" 이 들어온다.
+					
+		            int attachCount = 0;
+		            
+		            
+					if(!"".equalsIgnoreCase(str_attachCount)) {
+						attachCount = Integer.parseInt(str_attachCount);
+					}
+					
+					
+					// 첨부파일의 파일명(파일서버에 업로드 되어진 실제파일명) 얻어오기
+					for(int i=0;i<attachCount;i++) { // 넘어온 값이 "" 이거나 "0" 인경우에는 for문은 수행되지 않는다.
+						
+						String attach_fileName = mtrequest.getFilesystemName("attach"+ i);
+						
+						// tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기
+						idao.product_Imagefile_Insert(pk_fk_item_no, attach_fileName);
+				
+						
+					}// end of for ------------------------------------------------------
+
+					
 					message = "성공적으로 수정되었습니다.";
 					loc = request.getContextPath() + "/item/itemList.run";
-							
+			
 				}
 				else {
 
@@ -172,7 +239,7 @@ public class ItemUpdateAction extends AbstractController {
 			}catch(SQLException e) {
 				message = "수정이 실패하였습니다 ㅜㅜ";
 				loc = request.getContextPath() + "/item/itemList.run";
-										
+									
 			}
 			
 			request.setAttribute("message", message);

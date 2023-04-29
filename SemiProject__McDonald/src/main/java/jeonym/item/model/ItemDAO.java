@@ -184,7 +184,7 @@ public class ItemDAO implements InterItemDAO {
 					   + "            ( "
 					   + "                select item_no, fk_category_no, item_name, item_price, morning_availability, item_info "
 					   + "                from tbl_item "
-					   + "                order by 1 desc "
+					   + "                order by 2 asc, 1 desc "
 					   + "            ) I  "
 					   + "            JOIN "
 					   + "            ( "
@@ -637,6 +637,32 @@ public class ItemDAO implements InterItemDAO {
 		
 		
 		return isSuccess;
+	}
+
+	@Override
+	public int product_Imagefile_Insert(String item_no , String attach_fileName) throws SQLException {
+
+		int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " insert into tbl_image_add "+ 
+	                    " values(seqImgfileno.nextval, ?, ?) ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, Integer.parseInt(item_no));
+	         pstmt.setString(2, attach_fileName);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
+		
 	}
 
 

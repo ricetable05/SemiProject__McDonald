@@ -35,5 +35,8 @@ public interface InterItemDAO {
 	
 	// 제품정보 등록 메소드
 	int registItem(ItemVO ivo, Map<String, String> paraMap) throws SQLException;
+
+	// 추가 이미지 삽입 메소드
+	int product_Imagefile_Insert(String item_no, String attach_fileName) throws SQLException;
 	
 }

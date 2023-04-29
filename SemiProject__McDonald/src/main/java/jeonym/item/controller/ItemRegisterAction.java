@@ -40,10 +40,8 @@ public class ItemRegisterAction extends AbstractController {
 		String method = request.getMethod(); 
 						
 		if(!"POST".equalsIgnoreCase(method)) { // get 방식인 경우 ==> 제품목록 페이지에서 제품등록을 누르거나
-											  
 
 			super.getCategoryList(request); // 제품등록창에서 카테고리 목록 select 안에 값을 넣어주기 위함
-
 			setRedirect(false);
 			setViewPage("/WEB-INF/jeonym/item/itemUpdate.jsp");
 
@@ -139,7 +137,30 @@ public class ItemRegisterAction extends AbstractController {
 				isSuccess = idao.registItem(ivo, paraMap);
 				
 				if(isSuccess > 0) {
-					// 수정이 된다면 해당 제품의 이미지를 다른 폴더에 집어 넣어야 한다.
+					
+		            String str_attachCount = mtrequest.getParameter("attachCount"); 
+		               // str_attachCount 이 추가이미지 파일의 개수이다. "" "0" ~ "10" 이 들어온다.
+					
+		            int attachCount = 0;
+		            
+		            
+					if(!"".equalsIgnoreCase(str_attachCount)) {
+						attachCount = Integer.parseInt(str_attachCount);
+					}
+					
+					
+					// 첨부파일의 파일명(파일서버에 업로드 되어진 실제파일명) 얻어오기
+					for(int i=0;i<attachCount;i++) { // 넘어온 값이 "" 이거나 "0" 인경우에는 for문은 수행되지 않는다.
+						
+						String attach_fileName = mtrequest.getFilesystemName("attach"+ i);
+						
+						// tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기
+						idao.product_Imagefile_Insert(paraMap.get("item_no"), attach_fileName);
+
+						
+						
+					}// end of for ------------------------------------------------------
+
 					message = "성공적으로 등록되었습니다.";
 					loc = request.getContextPath() + "/item/itemList.run";
 							
