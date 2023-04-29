@@ -31,17 +31,17 @@ public class FrontController extends HttpServlet {
 	Map<String, Object> cmdMap = new HashMap<>() ; 
 	
 	public void init(ServletConfig config) throws ServletException {
-	// 웹브라우저 주소창에서 *.up 을 하면 FrontController 서블릿이 응대를 해오는데 
+	// 웹브라우저 주소창에서 *.run을 하면 FrontController 서블릿이 응대를 해오는데 
 	// 맨 처음에 자동적으로 실행되어지는 메소드가 init(ServletConfig config) 이다.
-	// 여기서 중요한 것은  init(ServletConfig config) 메소드는 WAS(톰캣)가 구동되어진후
-	// 딱 1번만  init(ServletConfig config) 메소드가 실행되어지고, 그 이후에는 실행이 되지 않는다.
-	// 그러므로,  init(ServletConfig config) 메소드에는 FrontController 서블릿이 동작해야할 환경설정을 잡아주는데 사용된다.
+	// 여기서 중요한 것은 init(ServletConfig config) 메소드는 WAS(톰캣)가 구동되어진후
+	// 딱 1번만 init(ServletConfig config) 메소드가 실행되어지고, 그 이후에는 실행이 되지 않는다.
+	// 그러므로, init(ServletConfig config) 메소드에는 FrontController 서블릿이 동작해야할 환경설정을 잡아주는데 사용된다.
 		
 	// *** 확인용 *** //
 	// System.out.println("~~~ 확인용 => 서블릿 FrontController 의  init(ServletConfig config) 메소드가 실행됨.");
 	// ~~~ 확인용 => 서블릿 FrontController 의  init(ServletConfig config) 메소드가 실행됨.
 	// 웹페이지에 http://localhost:9090/MyMVC/ASDSADASDSA.up 다음과 같이 입력한 경우. 
-	// 모든 .up URL 에는 똑같이 찍힐 것이다. 
+	// 모든 .run URL 에는 똑같이 찍힐 것이다. 
 		
 		FileInputStream fis = null ; // 특정 파일에 있는 내용을 읽어오기 위한 용도로 쓰이는 객체 
 		
@@ -144,7 +144,7 @@ public class FrontController extends HttpServlet {
 		
 		AbstractController action = (AbstractController)cmdMap.get(key);
 														// return 타입은 object 타입
-														// cmdMap 에 들어있는 객체는 모두 AbstractController 를 상속 받는 객체이다
+														// cmdMap에 들어있는 객체는 모두 AbstractController 를 상속 받는 객체이다
 														
 		if ( action == null ) { // Map 에 key 에 매핑된 value(클래스) 가 없다는 의미이다.
 			System.out.println(">>> "+key+" 은 URI 패턴에 매핑된 클래스가 없습니다. <<<");

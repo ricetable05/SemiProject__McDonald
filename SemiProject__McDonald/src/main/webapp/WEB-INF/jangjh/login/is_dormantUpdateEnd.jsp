@@ -98,7 +98,7 @@
 
 	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
 		<div id="div_updateResult" align="center" style="font-family:SpeedeeK; font-weight:500;">
-	           ID: ${requestScope.userid}<br>휴면 계정이 풀렸습니다.
+	        ID: ${requestScope.userid}<br>휴면 계정이 풀렸습니다.
 	    </div> 
 	</c:if>
 

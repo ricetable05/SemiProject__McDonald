@@ -475,8 +475,6 @@
 	    }
 	} // end of function goRegister() ------------------------------------------------------------------------
 
-	
-	
 </script>
 
   <div class="col-md-12" align="center" >

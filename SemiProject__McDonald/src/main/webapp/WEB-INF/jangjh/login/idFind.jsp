@@ -79,29 +79,27 @@
 <form name="idFindFrm" style="font-family:SpeedeeK; font-weight:600;">
 
 	<ul style="list-style-type: none">
-	
-    
-         <li style="margin: 25px 0">
-            <label for="member_name" style="display: inline-block; width: 90px">성명</label>
-            <input type="text" name="member_name" id="member_name" size="25" placeholder="홍길동" autocomplete="off" required />
-         </li>
-         
-         <li style="margin: 25px 0; font-family:SpeedeeK; font-weight: 600; ">  
-            <label for="email" style="display: inline-block; width: 90px">이메일</label>
-            <input type="text" name="email" id="email" size="25" placeholder="McDonald@gmail.com" autocomplete="off" required />
-         </li>
-   </ul>
+      <li style="margin: 25px 0">
+         <label for="member_name" style="display: inline-block; width: 90px">성명</label>
+         <input type="text" name="member_name" id="member_name" size="25" placeholder="홍길동" autocomplete="off" required />
+      </li>
+      
+      <li style="margin: 25px 0; font-family:SpeedeeK; font-weight: 600; ">  
+         <label for="email" style="display: inline-block; width: 90px">이메일</label>
+         <input type="text" name="email" id="email" size="25" placeholder="McDonald@gmail.com" autocomplete="off" required />
+      </li>
+    </ul>
    
    <div class="my-3">
-	    <p class="text-center">
-	       <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
-	    </p> 
+     <p class="text-center">
+        <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
+     </p> 
    </div>
 
 </form>
 
 	<div class="my-3" id="div_findResult" style="font-family:SpeedeeK; font-weight:600;">
-        <p class="text-center" style="font-family:SpeedeeK; font-weight: 600;">
+       <p class="text-center" style="font-family:SpeedeeK; font-weight: 600;">
           ID :&nbsp;&nbsp; <span style="color: #db0007;">${requestScope.userid}</span> 
-        </p>
-   </div>
+       </p>
+    </div>

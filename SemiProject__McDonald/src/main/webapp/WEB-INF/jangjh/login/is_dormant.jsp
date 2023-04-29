@@ -20,7 +20,7 @@
     	display: flex;
 		border: solid 0px purple;
 		width: 80%;
-		margin: 20px auto; /* 상 하는 20px 우 좌는 남은 20%에서 좌우로 균등하게 주겠다. 즉, 화면의 가운데로 위치하겠다는 말이다.*/
+		margin: 20px auto; 
 		margin-top: 150px;
 	}
 
@@ -29,7 +29,6 @@
     }
 
 </style>
-	
 	
 <script type="text/javascript">
 	
@@ -43,12 +42,9 @@
 			
 			iframe_window_is_dormant.func_form_reset_is_dormant(); 
 			
-		}); // end of $("button.idFindClose").click(function(){} ----------------- 
+		}); // end of $("button.btn_is_dormantClose").click(function(){} ----------------- 
 		
-		
-		
-		
-	});
+	});//end of $(document).ready(function() ----------------------------------------------
 
  			
 </script>
@@ -64,7 +60,6 @@
               <th colspan="2" id="th">휴먼계정을 일반계정으로 전환하시겠습니까?</th>
            </tr>
         </thead>
-        
         <tbody>
            <%-- === 휴먼계정 풀기 === --%> 
            <tr>  
@@ -72,7 +67,6 @@
                  <button type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 570px; " data-toggle="modal" data-target="#is_dormantFind" data-dismiss="modal" data-backdrop="static">휴면 계정 풀기</button>
               </td>
            </tr>
-           
         </tbody>
       </table>
    </form>
@@ -104,8 +98,5 @@
     </div>
   </div>
 </div>	
-	
-	
-	
 	   
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>

@@ -15,8 +15,8 @@ import parksj.menu.model.MenuDAO;
 
 public abstract class AbstractController implements InterCommand{
 
-	// interface 의 Override 를 implements 한 클래스가 아니라
-	// 해당 클래스를 상속받는 자식 클래스가 override 하도록 하기 위해 abstract 를 사용한다.
+	// interface의 Override를 implements한 클래스가 아니라
+	// 해당 클래스를 상속받는 자식 클래스가 override 하도록 하기 위해 abstract를 사용한다.
 	
 	
 	// === 다음의 나오는 것은 우리끼리한 약속이다. === 
@@ -61,12 +61,11 @@ public abstract class AbstractController implements InterCommand{
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	// 로그인 유무를 검사해서 로그인을 했으면 true 를 리턴해주고 로그인 안했으면 false 리턴해줌
-	
 	public boolean checkLogin(HttpServletRequest request) {
 	
-	HttpSession session = request.getSession();
-	MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
-	
+		HttpSession session = request.getSession();
+		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+		
 		if(loginuser != null) {
 		// 로그인 한 경우
 		return true;
@@ -76,18 +75,17 @@ public abstract class AbstractController implements InterCommand{
 		// 로그인 안한 경우
 		return false;
 		}
-	
+
 	}
 	
-	//////////////////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////
     // 카테고리 리스트를 가져오는 메소드
     public void getCategoryList(HttpServletRequest request) throws SQLException {
       
-       InterItemDAO idao = new ItemDAO();
-      
-       List<Map<String, String>> categoryList = idao.getCategoryList(); // VO가 아닌 Map 을 사용한다.
-      
+	   InterItemDAO idao = new ItemDAO();
+	  
+	   List<Map<String, String>> categoryList = idao.getCategoryList(); // VO가 아닌 Map 을 사용한다.
+	      
        if(categoryList.size() > 0) {
           request.setAttribute("categoryList", categoryList);
        }
@@ -101,11 +99,11 @@ public abstract class AbstractController implements InterCommand{
 	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
     public void getMenuCategoryList(HttpServletRequest request) throws SQLException {
         
-    	InterMenuDAO pdao = new MenuDAO();
-    	List<Map<String, String>> menucategoryList= pdao.getMenuCategoryList();
-    	      
-    	request.setAttribute("menucategoryList", menucategoryList);
-    	      
-    	}//end of public void getMenuCategoryList(HttpServletRequest request)
+		InterMenuDAO pdao = new MenuDAO();
+		List<Map<String, String>> menucategoryList= pdao.getMenuCategoryList();
+		      
+		request.setAttribute("menucategoryList", menucategoryList);
+	      
+	}//end of public void getMenuCategoryList(HttpServletRequest request)
 	
 }

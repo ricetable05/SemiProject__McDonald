@@ -114,7 +114,6 @@
 			
 		});
 		
-		
 	});//end of $(document).ready(function() --------------------------------------
 	
 	// 아이디 찾기 모달창에 입력한 input 태그 value 값 초기화 시키기
@@ -125,40 +124,36 @@
 		$("div#div_findResult > p.text-center").empty();
 		
 	}//end of function func_form_reset_empty() ------------------------------------
-	 		
-			
-			
-			
+
 </script>
 
 <form name="pwdFindFrm" style="font-family:SpeedeeK; font-weight:600;">
 
 	<ul style="list-style-type: none">
-         <li style="margin: 25px 0">
-            <label for="userid" style="display: inline-block; width: 90px; ">아이디</label>
-            <input type="text" name="userid" id="userid" size="25" placeholder="ID" autocomplete="off" required />
-         </li>
-         <li style="margin: 25px 0">
-            <label for="email" style="display: inline-block; width: 90px">이메일</label>
-            <input type="text" name="email" id="email" size="25" placeholder="abc@def.com" autocomplete="off" required />
-         </li>
-   </ul>
+       <li style="margin: 25px 0">
+          <label for="userid" style="display: inline-block; width: 90px; ">아이디</label>
+          <input type="text" name="userid" id="userid" size="25" placeholder="ID" autocomplete="off" required />
+       </li>
+       <li style="margin: 25px 0">
+          <label for="email" style="display: inline-block; width: 90px">이메일</label>
+          <input type="text" name="email" id="email" size="25" placeholder="abc@def.com" autocomplete="off" required />
+       </li>
+    </ul>
    
    <div class="my-3" id="div_btnFind">
-    <p class="text-center">
-       <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
-    </p>
+      <p class="text-center">
+         <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
+      </p>
+      
     <%-- CSS 로딩화면 구현한것--%>
     <div id="circle" style="display: flex">
         <div class="loader" style="margin: auto"></div>
     </div>
-   </div>
-   
+  </div>
 </form>
 
 	<div class="my-3" id="div_findResult" style="font-family:SpeedeeK; font-weight:600;" >
         <p class="text-center">
-        	
         	<c:if test="${requestScope.isUserExist == false}">
         		<span style="color: red;">사용자 정보가 없습니다.</span>
         	</c:if>
@@ -174,7 +169,6 @@
         	<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
         		<span style="color: red;">메일발송이 실패했습니다.</span><br>
         	</c:if>
-        	
         </p>
    </div>
    

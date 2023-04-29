@@ -82,14 +82,15 @@
 	<form name="memberFrm" style="text-align: center ">
 		<select id="searchType" name="searchType">
 			<option value="">선택하세요</option>
-			<option value="member_name">회원명</option>	<%-- dao 에 보내야 하기 때문에 value 를 DB의 컬럼 name 과 일치 시켜야함 --%>		
+			<option value="member_name">회원명</option>	
 			<option value="userid">아이디</option>
 			<option value="email">이메일</option>
 		</select>
+		
 		<input type="text" id="searchWord" name="searchWord" />
 		 
-		 <input type="text" style="display:none;"/>
-		 <%-- <input type="hidden" /> 은 통하지 않으니 display로 처리하도록 하자 --%>
+		<input type="text" style="display:none;"/>
+		
 		<button type="button" class="btn btn-secondary" style="margin-left:10px; margin-right:30px; font-weight:600;" onclick="goSearch();">검색</button> <%-- type="button" 은 꼭 넣도록 하자 --%>
 		
 		<span style="color: red; font-weight: bold; font-size: 12pt;">페이지당 회원명수:&nbsp;</span>
@@ -112,19 +113,19 @@
         <tbody>
 
     		<c:if test="${not empty requestScope.memberList}">
-    				<c:forEach var="mvo" items="${requestScope.memberList}" > <%-- items 에는 배열이나 list 가 온다. --%>
-   					  <tr class="memberInfo"  style="font-size: 12pt;">
-			              <td class="userid">${mvo.userid}</td>
-			              <td>${mvo.member_name}</td>
-			              <td style=" ">${mvo.email}</td>
-          			  </tr>
-    				</c:forEach>
+    			<c:forEach var="mvo" items="${requestScope.memberList}" > <%-- items 에는 배열이나 list 가 온다. --%>
+   					<tr class="memberInfo"  style="font-size: 12pt;">
+			           <td class="userid">${mvo.userid}</td>
+			           <td>${mvo.member_name}</td>
+			           <td style=" ">${mvo.email}</td>
+          			</tr>
+    			</c:forEach>
     		</c:if>
         
         	<c:if test="${empty requestScope.memberList}">
-	    			<tr>
- 	    			  <td colspan="3">가입된 회원이 없습니다.</td>
-	    			</tr>    	
+    			<tr>
+	    		   <td colspan="3">가입된 회원이 없습니다.</td>
+    			</tr>    	
     		</c:if>
 
         </tbody>

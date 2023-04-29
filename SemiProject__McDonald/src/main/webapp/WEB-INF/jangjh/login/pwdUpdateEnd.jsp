@@ -111,7 +111,7 @@
    </div>
    
    <div id="div_pwd2" align="center">
-        <span>새암호확인</span><br/>
+      <span>새암호확인</span><br/>
       <input type="password" id="pwd2" size="25" placeholder="PASSWORD" required />
    </div>
 
@@ -119,7 +119,7 @@
 	
 	<c:if test="${requestScope.method == 'GET'}">
 		<div id="div_btnUpdate" align="center" style="margin-top: 20px;">
-	           <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>
+	       <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>
 	    </div> 
 	</c:if>
 
@@ -127,7 +127,7 @@
 
 	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
 		<div id="div_updateResult" align="center" >
-	           사용자 ID ${requestScope.userid}님의 암호가 새롭게 변경되었습니다.
+	        사용자 ID ${requestScope.userid}님의 암호가 새롭게 변경되었습니다.
 	    </div> 
 	</c:if>
 

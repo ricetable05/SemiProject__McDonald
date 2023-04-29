@@ -133,49 +133,46 @@
 
 <form name="is_dormantFindFrm" style="font-family:SpeedeeK; font-weight:600;">
 
-	<ul style="list-style-type: none">
-         <li style="margin: 25px 0">
-            <label for="userid" style="display: inline-block; width: 90px; ">아이디</label>
-            <input type="text" name="userid" id="userid" size="25" placeholder="ID" autocomplete="off" required />
-         </li>
-         <li style="margin: 25px 0">
-            <label for="email" style="display: inline-block; width: 90px">이메일</label>
-            <input type="text" name="email" id="email" size="25" placeholder="abc@def.com" autocomplete="off" required />
-         </li>
+   <ul style="list-style-type: none">
+      <li style="margin: 25px 0">
+         <label for="userid" style="display: inline-block; width: 90px; ">아이디</label>
+         <input type="text" name="userid" id="userid" size="25" placeholder="ID" autocomplete="off" required />
+      </li>
+      <li style="margin: 25px 0">
+         <label for="email" style="display: inline-block; width: 90px">이메일</label>
+         <input type="text" name="email" id="email" size="25" placeholder="abc@def.com" autocomplete="off" required />
+      </li>
    </ul>
    
    <div class="my-3" id="div_btnFind">
-    <p class="text-center">
-       <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
-    </p>
-        <%-- CSS 로딩화면 구현한것--%>
+	 <p class="text-center">
+	   <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
+	 </p>
+    <%-- CSS 로딩화면 구현한것--%>
     <div id="circle" style="display: flex">
         <div class="loader" style="margin: auto"></div>
     </div>
    </div>
-   
 </form>
 
 	<div class="my-3" id="div_findResult" style="font-family:SpeedeeK; font-weight:600;" >
-        <p class="text-center">
-        	
-        	<c:if test="${requestScope.isUserExist == false}">
-        		<span style="color: red;">사용자 정보가 없습니다.</span>
-        	</c:if>
-        	
-        	<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == true}">
-	        	<span style="font-size: 10pt;">인증코드가 ${requestScope.email}메일로 발송되었습니다.</span><br>
-	        	<span style="font-size: 10pt;">인증코드를 입력해주세요.</span><br>
-	            <input type="text" name="input_confirmCode" id="input_confirmCode" required />
-	            <br><br>
-	            <button type="button" class="btn btn-dark" id="btnConfirmCode">인증하기</button>
-        	</c:if>
-        	
-        	<c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
-        		<span style="color: red;">메일발송이 실패했습니다.</span><br>
-        	</c:if>
-        	
-        </p>
+       <p class="text-center">
+       	  <c:if test="${requestScope.isUserExist == false}">
+       		<span style="color: red;">사용자 정보가 없습니다.</span>
+       	  </c:if>
+       	
+       	  <c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == true}">
+        	<span style="font-size: 10pt;">인증코드가 ${requestScope.email}메일로 발송되었습니다.</span><br>
+        	<span style="font-size: 10pt;">인증코드를 입력해주세요.</span><br>
+            <input type="text" name="input_confirmCode" id="input_confirmCode" required />
+            <br><br>
+            <button type="button" class="btn btn-dark" id="btnConfirmCode">인증하기</button>
+       	  </c:if>
+       	
+       	  <c:if test="${requestScope.isUserExist == true && requestScope.sendMailSuccess == false}">
+       		<span style="color: red;">메일발송이 실패했습니다.</span><br>
+       	  </c:if>
+       </p>
    </div>
    
 <%-- 인증하기 form --%>

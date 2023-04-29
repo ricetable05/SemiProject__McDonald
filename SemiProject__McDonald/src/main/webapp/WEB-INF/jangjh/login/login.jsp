@@ -253,11 +253,6 @@
 		</div>
 	</div>
 	<%-- === 내용 끝 === --%>
-	
-	
 </div>	
-	
-	
-	
 	   
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>
