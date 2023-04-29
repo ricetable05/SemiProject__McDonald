@@ -120,7 +120,7 @@ background:url(<%= request.getContextPath() %>/images/사이드상단이미지.j
 	<div class="container" style="padding: 20px 15px; ">
 	
 		<div class="menu_tab_change text-center" style="margin-bottom: 30px; ">
-			<button type="button" class="danpum active">디저트</button>
+			<button type="button" class="danpum active">사이드</button>
 		</div>
 	    <!-- 중앙 컨텐츠 시작 -->
 		<div class="row" id="displaySide">
