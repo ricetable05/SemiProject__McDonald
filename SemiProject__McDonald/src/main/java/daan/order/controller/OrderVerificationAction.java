@@ -18,6 +18,7 @@ public class OrderVerificationAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String str_cart_arr = request.getParameter("str_cart_arr");
+		String str_quantity_arr = request.getParameter("str_quantity_arr");
 
 		JSONArray cart_arr = new JSONArray(str_cart_arr);
 		// System.out.println("\n2. cart_arr => \n"+cart_arr);
@@ -28,30 +29,47 @@ public class OrderVerificationAction extends AbstractController {
 		//		{"item_price":2400,"item_name":"코카-콜라","item_no":523}
 		// 	]
 		// ]
-
-		int set_count_discount = 0;
+		JSONArray quantity_arr = new JSONArray(str_quantity_arr);
+		int[] i_arr = new int[quantity_arr.length()];
+		int quantity_i = 0;
+		for(Object obj_quantity:quantity_arr) {
+			int quantity_value = (Integer) obj_quantity;
+			i_arr[quantity_i] = quantity_value;
+			quantity_i++;
+		}
 		
-		List<Integer> arr_item_no = new ArrayList<>();
+		int priceSum = 0;
+		int set_count = 0;
+		int i=0;
+		List<Integer> arr_item_no = null;
 		
 		for(Object obj_singleOrder: cart_arr) {
+			
+			arr_item_no = new ArrayList<>();
 			
 			// singleOrder instanceof JSONArray ➡️ true
 			JSONArray singleOrder = (JSONArray) obj_singleOrder;
 			
 			if(singleOrder.length() > 1) {
-				set_count_discount += 1000;
+				set_count += 1;
 			}
+			
 			for(Object obj_item:singleOrder) {
 				JSONObject item = (JSONObject) obj_item;
 				arr_item_no.add((Integer) item.get("item_no"));
 			}
+			ItemDAO ido = new ItemDAO();
+			priceSum += i_arr[i]*ido.getPriceSum(arr_item_no);
+			System.out.println(i+" i_arr[i] = " + i_arr[i]);
+			System.out.println(i+" ido.getPriceSum(arr_item_no) = " + ido.getPriceSum(arr_item_no));
+			i++;
 		}
 		
-		ItemDAO ido = new ItemDAO();
-		int priceSum = ido.getPriceSum(arr_item_no);
+		int set_count_discount = set_count * 1000;
 		
 		int priceSum_w_discount = priceSum-set_count_discount;
 		
+		// 배달비 - 15000원이 넘지 않으면 배달비용을 추가한다.
 		if(priceSum_w_discount < 15000) {
 			priceSum_w_discount += 3000;
 		}

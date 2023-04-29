@@ -1,20 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../header_footer/header.jsp"/>
 
 <title>McDonald's. - 주문</title>
 
 <style type="text/css">
    
-   /* Bootstrap Override */	
-	@media (min-width: 768px) {
-	  .flex-content-container-item2>div {
-	   	flex: 0 0 25%;
-	   	max-width: 25%;
-	   	border-radius: 1rem;
-	   }
+   .flex-content-container-item2>div {
+   		
+   		border-radius: 1rem;
+		height: 372px;
+		@media (min-width: 1276px) {
+		    flex: 0 0 33.333333%;
+		    max-width: 33.333333%;
+		}
+		@media (min-width: 1502px) {
+		    flex: 0 0 25%;
+		    max-width: 25%;
+		}
+	   	@media (min-width: 1920px) {
+		   	min-width: 233.11px;
+		   	flex: 0 0 20%;
+		}
+	   	@media (min-width: 2112px) {
+		   	min-width: 16.66666%;
+		   	flex: 0 0 16.66666%;
+		   	height: 380px;
+	   	}
    }
    
 	body {
@@ -54,6 +68,7 @@
          display: flex;
          align-items: flex-start;
          margin: 0 auto;
+         /* flex-wrap: wrap; */
      }
 
      #menu>ul.nav {
@@ -103,8 +118,6 @@
          border-radius: 0;
      }
 
-
-<%--  여기부터 적용 확인 완료--%>
     .flex-content-container-item2 {
 		margin: 0 1vw;
 		align-content:;
@@ -112,10 +125,8 @@
 
     div.flex-content-container-item2 > div {
          box-shadow: 0 5px 3px #a6a6a6;
-         /* min-width: 250px; */
          padding: 5px;
          margin: 0.5vh 0;
-         border-right: solid 5px #dddddd;
          background-color: white;
     }
 	
@@ -272,16 +283,46 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script type="text/javascript">
 
-	// sessionStorage.setItem('cart_arr', JSON.stringify([{"item_no":3,"is_set":'Yes'}]));
-	// let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-	// arr.push(3);
 	let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
 	if(arr == null) {
 		sessionStorage.setItem('cart_arr', JSON.stringify([]));
 	}
-	/* 
-	$(document).on('click', 'button[data-target="#editOption"]', function(e){})
-	 */
+	
+	arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+	if(arr == null) {
+		sessionStorage.setItem('quantity_arr', JSON.stringify([]));
+	}
+
+	
+	$(document).on('change', 'input.input-number', function(e){
+	
+		let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+		let index = $('input.input-number').index($(e.target));
+		
+		quantity_arr[index] = Number($(e.target).val());
+		sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
+	
+		const cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+		const singleOrder = cart_arr[index];
+		let price = 0;
+		$.each(singleOrder, function(i, elt) {
+			
+			price += elt.item_price;
+			if(singleOrder.length > 1) {
+				price -= 1000;
+			}
+		});
+		
+		const preSubtotal_arr = document.getElementsByClassName('preSubtotal');
+		preSubtotal_arr[index].innerText = '￦'+(price*quantity_arr[index]);
+		updateMyOrderSection();
+	});
+
+	// sessionStorage.setItem('cart_arr', JSON.stringify([{"item_no":3,"is_set":'Yes'}]));
+	// let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+	// arr.push(3);
+	
+	
 	
 	$(document).ready(function(){
 		
@@ -299,11 +340,8 @@
 			img_src = '/images/'+img_src.substr(0,(img_src.length-4))+'_nbg.png';
 			img_src = '<%=request.getContextPath()%>'+img_src;
 			elt.setAttribute('src', img_src);
-			// prop, get 둘 다 안됨.
 		});
 		
-		
-
 		// ------------------------------------------------------
 		
 		// 시간에 따라 메뉴 다르게 보여주기
@@ -325,7 +363,7 @@
 		    
 		    fieldName = $(this).attr('data-field');
 		    type      = $(this).attr('data-type');
-		    var input = $("input[name='"+fieldName+"']");
+		    var input = $(this).closest('.input-group').find("input[name='"+fieldName+"']");
 		    var currentVal = parseInt(input.val());
 		    if (!isNaN(currentVal)) {
 		        if(type == 'minus') {
@@ -354,26 +392,7 @@
 		$('.input-number').focusin(function(){
 		   $(this).data('oldValue', $(this).val());
 		});
-		$('.input-number').change(function() {
-		    
-		    minValue =  parseInt($(this).attr('min'));
-		    maxValue =  parseInt($(this).attr('max'));
-		    valueCurrent = parseInt($(this).val());
-		    
-		    name = $(this).attr('name');
-		    if(valueCurrent >= minValue) {
-		        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
-		    } else {
-		        alert('Sorry, the minimum value was reached');
-		        $(this).val($(this).data('oldValue'));
-		    }
-		    if(valueCurrent <= maxValue) {
-		        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
-		    } else {
-		        alert('Sorry, the maximum value was reached');
-		        $(this).val($(this).data('oldValue'));
-		    }
-		});
+		
 
 		$(".input-number").keydown(function (e) {
 		    // Allow: backspace, delete, tab, escape, enter and .
@@ -455,6 +474,10 @@
 		cart_arr.splice(index,1);
 		sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
 
+		let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+		quantity_arr.splice(index,1);
+		sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
+		
 		toCart();
 		updateMyOrderSection();
 		progressStatus();
@@ -465,18 +488,18 @@
 	function updateMyOrderSection() {
 		
 		const cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+		const quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
 		
 		let subtotal = 0;
 		if(cart_arr.length != 0) {
 			let delivery_fee = 3000;
 			$.each(cart_arr, function(i, singleOrder){
-				
+				let quantity = quantity_arr[i];
 				singleOrder.forEach(function(elt, index) {
-					// console.log(elt.item_price);
-					subtotal += Number(elt.item_price);
+					subtotal += Number(elt.item_price)*Number(quantity);
 				});
 				if(singleOrder.length > 1) {
-					subtotal -= 1000;
+					subtotal -= (1000*Number(quantity));
 				}
 			});
 			if(subtotal > 15000) {
@@ -539,9 +562,9 @@
 		$.ajax({
 			url: '<%= request.getContextPath()%>/daan/modal_editOption.run',
 			//data:{"session_index", index},
-			type: 'POST',
-			dataType: 'json',
-			async:true,
+			type: 'GET',
+			dataType: 'JSON',
+			//async:true,
 			success: function(json){
 				
 				$.each(json, function(i, elt) {
@@ -551,8 +574,8 @@
 						html = `<ul>`;
 						elt.forEach(function(item) {
 							
-							html += `<li>
-									 <img src="<%=request.getContextPath()%>/images/side_menu/side_menu_nbg/\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
+							html += `<li class="editOption_li">
+									 <img src="" data-temp="\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
 									 <div id="editOption_side_name">\${item.name}</div>
 									 <div id="editOption_side_price">\${item.price}</div>
 									 <div id="editOption_side_item_no"><input type="radio" name="side" value="\${item.item_no}"/></div>
@@ -565,8 +588,8 @@
 						html = `<ul>`;
 						elt.forEach(function(item) {
 							
-							html += `<li>
-									 <img src="<%=request.getContextPath()%>/images/drink/drink_nbg/\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
+							html += `<li class="editOption_li">
+									 <img src="" data-temp="\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
 									 <div id="editOption_drink_name">\${item.name}</div>
 									 <div id="editOption_drink_price">\${item.price}</div>
 									 <div id="editOption_drink_item_no"><input type="radio" name="drink" value="\${item.item_no}"/></div>
@@ -575,6 +598,19 @@
 						html += `</ul>`;
 						$('div.modal_drinks').html(html);
 					}
+					
+					let modalOptionLisArr = document.querySelectorAll('li.editOption_li > img');
+					modalOptionLisArr = Array.from(modalOptionLisArr);
+					
+					let img_src;
+					
+					modalOptionLisArr.forEach((elt) => {
+						img_src = elt.getAttribute('data-temp');
+						img_src = '/images/'+img_src.substr(0,(img_src.length-4))+'_nbg.png';
+						img_src = '<%=request.getContextPath()%>'+img_src;
+						elt.setAttribute('src', img_src);
+					});
+					
 				});
 				
 				let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
@@ -593,11 +629,13 @@
 		
 		$('div#orderDetail').empty();
 		let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-
+		let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+		
 		$.each(arr, function(session_index, singleOrder) {
 
 			let html =``;
 			let price = 0;
+			let quantity = quantity_arr[session_index];
 			$.each(singleOrder, function(i, elt) {
 				if(i == 0) {
 					html += `<div align="left" data-session_index="\${session_index}">
@@ -614,7 +652,7 @@
 	                	html += `<button type="button" class="edit" data-toggle="modal" data-target="#editOption" onClick="editMenu()">변경</button><form name="editMenuForm"><input type="hidden" name="session_index" value="\${session_index}"/></form>`;
 	                }
 				}else if(i == 1) {
-					html += `<div style="font-size:0.9rem">
+					html += `<div style="font-size:0.9rem; padding-top: 5%;">
 							 &ensp;<span data-item_no="\${elt.item_no}">- \${elt.item_name}</span>`;
 				} else {
 					html += `<br>
@@ -627,20 +665,20 @@
 				}
 			});
 	
-			html += `<div class="py-2 input-group" style="text-align: right; font-size: 0.9rem; border-radius: 0.25rem;">
+			html += `<div class="py-3 input-group" style="text-align: right; border-radius: 0.25rem; justify-content: flex-end;">
 					 <span class="input-group-prepend">
-						 <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-						 	<span class="fa fa-minus"></span>
+						 <button type="button" class="btn btn-outline-secondary btn-number" style="padding: 0 0.4rem;display: flex;justify-content: space-between;align-content: center;flex-wrap: wrap;border-radius: .7rem;border-top-right-radius: 0;border-bottom-right-radius: 0;border-color: #cccccc; opacity: 1;" data-type="minus" data-field="quant[1]">
+						 	<span class="fa fa-minus" style="font-size: 0.7rem;"></span>
 						 </button>
 					 </span>
-					 <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="99">
+					 <input type="text" name="quant[1]" class="form-control input-number" style="flex:none; width:12%; padding: .375rem 0; height:1.5rem; text-align: center; font-size: 0.8rem; border: solid 1px #cccccc;border-right: none; border-left:none; z-index: 3;"value="\${quantity}" min="1" max="99">
 					 <span class="input-group-append">
-						 <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus" data-field="quant[1]">
-						 	<span class="fa fa-plus"></span>
+						 <button type="button" class="btn btn-outline-secondary btn-number" style="padding: 0 0.4rem;display: flex;justify-content: space-between;align-content: center;flex-wrap: wrap;border-radius: .7rem;border-top-left-radius: 0;border-bottom-left-radius: 0;border-color: #cccccc;" data-type="plus" data-field="quant[1]">
+						 	<span class="fa fa-plus" style="font-size: 0.7rem;"></span>
 						 </button>
 					 </span>
 				 </div>
-	             <a class="removeFromCart-button" style="color:red; font-size:0.9rem" onClick="removeFromCart(this)">삭제</a><span style="float:right;">￦\${price}</span>
+	             <a class="removeFromCart-button" style="color:red; font-size:0.9rem" onClick="removeFromCart(this)">삭제</a><span class="preSubtotal" style="float:right;">￦\${price*quantity}</span>
 	             <hr>
 				 </div>`;
 			
@@ -668,14 +706,20 @@
 				async:true,
 				success: function(json){
 					
-					let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-					if(arr == null) {
+					let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+				<%--
+					if(cart_arr == null) {
 						sessionStorage.setItem('cart_arr', []);
 					}
+				--%>
+					let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
 					
-					arr.push(json);
 					
-					sessionStorage.setItem('cart_arr', JSON.stringify(arr));
+					cart_arr.push(json);
+					sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
+
+					quantity_arr.push(1);
+					sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
 
 					toCart();
 					updateMyOrderSection();
@@ -746,7 +790,7 @@
 		
 		// sessionStorage 상 저장된 장바구니 객체를 가져온다.
 		let str_cart_arr = sessionStorage.getItem('cart_arr');
-		console.log(str_cart_arr);
+		let str_quantity_arr = sessionStorage.getItem('quantity_arr');
 		
 		// <form> 내 <input type="hidden">의 value 값 불러온다.
 		const total = $('form[name="placeOrderForm"] > fieldset > input').val();
@@ -754,25 +798,24 @@
 		$.ajax({
 			url:'<%=request.getContextPath()%>/daan/orderVerification.run',
 			data:{"str_cart_arr":str_cart_arr,
+				  "str_quantity_arr":str_quantity_arr,
 				  "total":total},
 			type:'POST',
 			dataType: "JSON",
 			async:false,
 			success: function(json){
 					alert(json.message);
+					const frm = document.placeOrderForm;
 					
+					frm.action = '<%=request.getContextPath()%>/daan/placeOrder.run';
+					frm.method = 'PUT';
+					frm.totalFinal.value = $('span#total').text();
+					frm.submit();
 				},
 				error: function(request, status, error){
 		               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 		        }
-		})
-		
-	<%-- 	
-		const frm = document.placeOrderForm;
-		frm.action = '<%=request.getContextPath()%>/';
-		frm.method = 'PUT';
-		frm.submit();
-	 --%>		
+		});
 	}
 	
 </script>
@@ -825,25 +868,8 @@
             <div class="row flex-content-container-item2" style="background-color: #f3f3f3;">
             <c:if test="${not empty requestScope.item_list}">
 	            <c:forEach items="${requestScope.item_list}" var="item">
-	            	<div class="customCardsArr col-sm-12 col-md-4 col-lg-3 col-xl-2" style="height: 383.75px;">
+	            	<div class="customCardsArr col-sm-12" style="">
 	            		<img src="" data-temp="${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            	<%-- <c:choose>
-	            		<c:when test="${item.fk_category_no eq 1}">
-	            			<img src="<%=request.getContextPath()%>/images/burger/burger_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            		</c:when>
-	            		<c:when test="${item.fk_category_no eq 2}">
-	            			<img src="<%=request.getContextPath()%>/images/mc_moring/mc_morning_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            		</c:when>
-	            		<c:when test="${item.fk_category_no eq 3}">
-	            			<img src="<%=request.getContextPath()%>/images/side_menu/side_menu_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            		</c:when>
-	            		<c:when test="${item.fk_category_no eq 4}">
-	            			<img src="<%=request.getContextPath()%>/images/dessert/dessert_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            		</c:when>
-	            		<c:when test="${item.fk_category_no eq 5}">
-	            			<img src="<%=request.getContextPath()%>/images/drink/drink_nbg/${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
-	            		</c:when>
-	            	</c:choose> --%>
                     <div class="card-body mb-1">
                         <span class="card-title">${item.item_name}</span>
                         <p class="card-text">${item.item_info}
@@ -922,7 +948,7 @@
                     <form name="placeOrderForm">
                         <fieldset>
                             <button type="button" class="btn" onClick="placeOrder()">결제</button>
-                            <input type="hidden"/>
+                            <input type="hidden" name="totalFinal"/>
                         </fieldset>
                     </form>
                 </div>
