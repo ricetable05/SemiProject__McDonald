@@ -10,7 +10,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/음료상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg) 50% 50% no-repeat;
 }
 
 </style>
@@ -66,8 +66,8 @@ background:url(<%= request.getContextPath() %>/images/top_image/음료상단이�
 					
 					$.each(json, function(index, item){						
 						    html += "<div class='col-sm-6 col-lg-4 mb-3' style='width: 18rem'>"
-								 	+ "<div class='card card-1'>"
-								 		+ "<img src='/SemiProject__McDonald/images/drink/drink_bg/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
+								 	+ "<div id='bgcard' class='card card-1'>"
+								 		+ "<img src='/SemiProject__McDonald/images/"+item.item_image+"' class='card-img-top' style='width: 100%' />"
 								 		+ "<div class='card-bodys'>"
 								 			+ "<h5 class='card-title'>"+item.item_name+"</h5>"
 								 			+ "<a href='/SemiProject__McDonald/detail/drinkView.run?item_no="+item.item_no+"' class='stretched-link'></a>"
@@ -102,7 +102,6 @@ background:url(<%= request.getContextPath() %>/images/top_image/음료상단이�
 
 <div class="MC_content">
 	<div class="user-warp">
-		<div class="user-image"></div>
 		<div class="user-text">
 			<h1 class="titDep1">맥카페 & 음료</h1>
 			<p style="margin-top: 15px;"> 진한 커피향이 풍기는 맥카페와 상큼한 과일칠러까지! </p>
@@ -128,7 +127,7 @@ background:url(<%= request.getContextPath() %>/images/top_image/음료상단이�
 		
 		<div class="text-center">
 			<button class="extendbtn text-center" id="btnDrink" style="border: solid 0px green; background-color:#FFFFFF;">
-				<img src="<%= request.getContextPath() %>/images/main_image/btn_more.png">
+				<img src="<%= request.getContextPath() %>/images/btn_more.png">
 			</button>
 			<span id="totalCount">${requestScope.totalCount}</span>
 	        <span id="countItem">0</span>

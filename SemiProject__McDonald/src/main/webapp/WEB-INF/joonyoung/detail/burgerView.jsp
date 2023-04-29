@@ -16,7 +16,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/버거상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;
 }
 
 
@@ -258,58 +258,57 @@ $(document).ready(function() {
 					
 					<div id="visual" >	
 					
-							
-								
-							<c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
+					
+					   <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
 						
-								<script>
-								
-									$(document).ready(function(){
+									<script>
+									
+										$(document).ready(function(){
+											
+											$(".prev").prop("disabled",true);
+											$(".prev").css("opacity", 0);
+											$(".prev").css("cursor", "auto");
+										});
 										
-										$(".prev").prop("disabled",true);
-										$(".prev").css("opacity", 0);
-										$(".prev").css("cursor", "auto");
-									});
-								
-								</script>
+
+										
+									
+									</script>
 						
 							</c:if>
-								
-							    <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/burgerView.run?item_no=${requestScope.ivo_prev.item_no}'">
-									   <img class="prev" src="<%=request.getContextPath()%>/images/joonyoung_img/prevIcon.png">
-								   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/burger/burger_small/${requestScope.ivo_prev.item_image}">
-								   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
-								   	  
-								</button> 
-							
-						    
-	
-	
-						    
-							
-							
 					
+							
+
+												  <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/burgerView.run?item_no=${requestScope.ivo_prev.item_no}'">
+													   <img class="prev" src="<%=request.getContextPath()%>/images/joonyoung_img/prevIcon.png">
+												   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/burger/burger_small/${requestScope.ivo_prev.item_image}">
+												   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
+												   	  
+												</button> 		
+
+
 						 
 						<img id="burger" src="<%=request.getContextPath()%>/images/burger/burger_nbg/${requestScope.ivo.item_image}">
 						
 						
 						
 						
+						   <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
 						
-						   <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
-						
-									<script>
-									
-										$(document).ready(function(){
-											
-											$(".next").prop("disabled",true);
-											$(".next").css("opacity", 0);
-											$(".next").css("cursor", "auto");
-										});
-									
-									</script>
+								<script>
+								
+									$(document).ready(function(){
+										
+										$(".next").prop("disabled",true);
+										$(".next").css("opacity", 0);
+										$(".next").css("cursor", "auto");
+									});
+								
+								</script>
 						
 							</c:if>
+						
+						
 						
 						
 						
