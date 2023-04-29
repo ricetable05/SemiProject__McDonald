@@ -2,6 +2,7 @@ package common.controller;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
+import java.sql.SQLException;
 import java.util.* ;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import joonyoung.detail.controller.BurgerViewAction;
+import joonyoung.detail.model.DetailDAO;
+import joonyoung.detail.model.DetailVO;
+import joonyoung.detail.model.InterDetailDAO;
 
 /**
  * Servlet implementation class FrontController
@@ -145,7 +151,12 @@ public class FrontController extends HttpServlet {
 		AbstractController action = (AbstractController)cmdMap.get(key);
 														// return 타입은 object 타입
 														// cmdMap에 들어있는 객체는 모두 AbstractController 를 상속 받는 객체이다
-														
+	
+		
+	
+		
+		
+		
 		if ( action == null ) { // Map 에 key 에 매핑된 value(클래스) 가 없다는 의미이다.
 			System.out.println(">>> "+key+" 은 URI 패턴에 매핑된 클래스가 없습니다. <<<");
 			// >>> /member/idDuplicateCheck.up 은 URI 패턴에 매핑된 클래스가 없습니다. <<<

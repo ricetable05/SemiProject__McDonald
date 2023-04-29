@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
     
 <!DOCTYPE html>
@@ -276,19 +278,22 @@ $(document).ready(function() {
 									</script>
 						
 							</c:if>
-					
+							
 							
 
 												  <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/burgerView.run?item_no=${requestScope.ivo_prev.item_no}'">
-													   <img class="prev" src="<%=request.getContextPath()%>/images/joonyoung_img/prevIcon.png">
-												   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/burger/burger_small/${requestScope.ivo_prev.item_image}">
+													  
+													   <img class="prev" src="<%=request.getContextPath()%>/images/prevIcon.png">
+													   
+												   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_prev.item_image,'.png','_small.png')}">
+												   		 
 												   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
 												   	  
 												</button> 		
 
 
 						 
-						<img id="burger" src="<%=request.getContextPath()%>/images/burger/burger_nbg/${requestScope.ivo.item_image}">
+						<img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
 						
 						
 						
@@ -318,8 +323,10 @@ $(document).ready(function() {
 											
 									 		
 														
-								     <img class="next" src="<%=request.getContextPath()%>/images/joonyoung_img/nextIcon.png">
-								     <img class="next_hover" src="<%=request.getContextPath()%>/images/burger/burger_small/${requestScope.ivo_next.item_image}">
+								     <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">
+								     
+								     <img class="next_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_next.item_image,'.png','_small.png')}">
+								     
 								     <p class="next">${requestScope.ivo_next.item_name}</p>
 								     
 								
