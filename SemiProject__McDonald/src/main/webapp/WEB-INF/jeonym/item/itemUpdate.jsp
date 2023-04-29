@@ -78,7 +78,7 @@
 			
 		} 
 		
-		if(${not empty requestScope.ivo}){ 			 
+		if(${not empty requestScope.ivo}){ // 제품 수정인 경우			 
 		
 			$("input[name='pk_fk_item_no']").val('${requestScope.pk_fk_item_no}'); // 제품번호 초기설정
 			$("select[name='fk_category_no']").val('${requestScope.ivo.fk_category_no}'); // 카테고리 초기설정
@@ -93,8 +93,24 @@
 			$("input:text[name='item_price']").val('${requestScope.ivo.item_price}'); // 제품판매가 초기설정
 			$("textarea[name='item_info']").val('${requestScope.ivo.item_info}'); // 제품판매가 초기설정
 	
-			$("input:file[name='item_image']").removeClass("infoData"); // 수정의 경우 이미지파일은 필수가 아니게 된다. 
 			
+			
+			const allerList = '${requestScope.ivo.itemDetailVO.allergens}'.split(','); // 알레르기 정보 초기설정
+			
+			document.querySelectorAll("input.item_aller").forEach(function(item) {
+				
+				allerList.forEach(function(elt) {
+					
+					if(item.value == elt){
+						item.checked = true; // javaScript check
+					}
+					return false; // 체크한 뒤에는 그 뒤의 elt 를 볼 필요가 없으므로 break
+					
+				});
+			});
+
+			$("input:text[name='coa']").val('${requestScope.ivo.itemDetailVO.coa}'); // 원산지정보 초기설정			
+			$("input:file[name='item_image']").removeClass("infoData"); // 수정의 경우 이미지파일은 필수가 아니게 된다. 
 			
 		}
 		
@@ -102,20 +118,6 @@
 		
 		
 		
-		const allerList = '${requestScope.ivo.itemDetailVO.allergens}'.split(','); // 알레르기 정보 초기설정
-		document.querySelectorAll("input.item_aller").forEach(function(item) {
-			
-			allerList.forEach(function(elt) {
-				
-				if(item.value == elt){
-					item.checked = true; // javaScript check
-				}
-				return false; // break
-				
-			});
-		});
-
-		$("input:text[name='coa']").val('${requestScope.ivo.itemDetailVO.coa}'); // 원산지정보 초기설정
 		
 	   
         $(document).on("change", "input.img_file", function(e){ // 이미지 추가할 때 이미지 미리보기 기능
@@ -196,7 +198,7 @@
        	   
        	   if(is_radioChecked_length == 0){ // 만약 라디오가 check 되지 않았다면
        		   $("input:radio[name='is_burger']").parent().find("span.error").show();
-       		   flag = true;
+       		   flag = true; // flag 가 true 가 되면 submit 이 되지 않는다.
        	   }
     	   
     	   if(!flag && regExpCheck()){ // regExpCheck() 정규표현식 check
@@ -204,8 +206,7 @@
     		   
     		   
     		   const frm = document.prodInputFrm;
-
-    		    
+	    
 				let arr_allergens = [];
 				document.querySelectorAll("input.item_aller").forEach(function(item) {
 					
@@ -217,16 +218,14 @@
 				// alert(arr_allergens.join(','));
 				$("input[name='allergens']").val(arr_allergens.join(',')); // 알러지 정보 실어서 보냄
 				
-				if(${not empty requestScope.ivo}){
-				   // 회원정보 수정의 경우에만 ajax						
+				if(${not empty requestScope.ivo}){ // 비어있지 않으면 수정으로 보내고						 
 			    	frm.action="<%= request.getContextPath()%>/item/itemUpdate.run";
-		    	
 				}
-				else{
+				else{ // 비어있으면 register 로 보낸다.
 					frm.action="<%= request.getContextPath()%>/item/itemRegister.run";
 				}
 				
-				frm.submit();  
+				frm.submit();  // post 방식으로 submit()
 
     	   }
     	   else{
@@ -246,7 +245,7 @@
 	}); // end of $(document).ready(function(){})===============================
 		
 		
-	function regExpCheck(){
+	function regExpCheck(){ // 정규표현식 check 함수
 		
 		let bool = true;
 		// val() 이 비어있지 않는 것만 검사
@@ -255,26 +254,26 @@
 		
 		// 		/^(\d{1,3})([.]\d{0,1}?)?$/g; 소수점 정규표현식
 		
-		let regExp = /^\d{4,5}$/g;
+		let regExp = /^\d{4,5}$/g; // 숫자 4 ~ 5 글자
 		
 		if(!regExp.test($("input:text[name='item_price']").val())){ // 제품가격의 val() 이 공백이 비어있지 않고 정규표현식에 만족하면
 			alert('제품가격이 정규표현식에 맞지 않습니다.');
-			bool = false;
+			bool = false; // bool 이 false 가 되면 submit 이 되지 않는다.
 		}
 		
 		
-		regExp = /^(\d{1,3})([.]\d{0,1}?)?$/g;
+		regExp = /^(\d{1,3})([.]\d{0,1}?)?$/g; // 정수부는 1~3 글자 소수부는 없거나 1개
 		
-		if($("input.ft").val().trim() != '' && !regExp.test($("input.ft").val())){ // 포화지방의 val() 이 공백이 비어있지 않고 정규표현식에 만족하면
+		if($("input.ft").val().trim() != '' && !regExp.test($("input.ft").val())){ // 포화지방의 val() 이 공백이지 않고 정규표현식에 만족하면
 			alert('포화지방이 정규표현식에 맞지 않습니다.');
 			bool = false;
 		}
 		
-		regExp = /^[0-9]+$/; // 최소 1자리의 정수만 허용하겠다.
+		regExp = /^[0-9]+$/; // 최소 1자리의 정수를 사용해야한다.
 
-		$("input.dec").each(function(i, elt) {
+		$("input.dec").each(function(i, elt) { // dec 클래스를 가진 elt 검사
 				
-			if(elt.value != '' && !regExp.test(Number(elt.value))){
+			if(elt.value != '' && !regExp.test(Number(elt.value))){ // value 가 공백이 아니면서 정규표현식에 위배되는지 검사
 				alert(elt.name + '이 정규표현식에 맞지 않습니다.');
 				bool = false;
 			}	
@@ -407,7 +406,7 @@
 					</c:if>
 					
 					<c:if test="${empty requestScope.ivo}">
-						<td width="10%"><input type="text" id="weight_g" class="item_nut dec" name="weight_g" maxlength="6" value=""/></td>
+						<td width="10%"><input type="text" id="weight_g" class="item_nut dec" name="weight_g" maxlength="6" value=""/></td> <!--  초기치 모두 공백 -->
 				 		<td width="10%"><input type="text" id="weight_ml" class="item_nut dec" name="weight_ml" maxlength="6" value=""/></td>
 				 		<td width="10%"><input type="text" id="calories" class="item_nut dec" name="calories" maxlength="6" value=""/></td>
 				 		<td width="10%"><input type="text" id="carbo" class="item_nut dec" name="carbo" maxlength="6" value=""/></td>

@@ -63,17 +63,17 @@
 			   <div class="carousel-inner mycarousel mt-4">
 			    
 				    <div class="carousel-item active">
-				      <img src="<%= request.getContextPath() %>/images/jeonym_img/banner_1.jpg" class="d-block w-100" alt="..."> 
+				      <img src="<%= request.getContextPath() %>/images/banner_1.jpg" class="d-block w-100" alt="..."> 
 				      <div class="carousel-caption d-none d-md-block">  
 				      </div>
 				    </div>
 				    <div class="carousel-item">
-				      <img src="<%= request.getContextPath() %>/images/jeonym_img/banner_2.jpg" class="d-block w-100" alt="...">
+				      <img src="<%= request.getContextPath() %>/images/banner_2.jpg" class="d-block w-100" alt="...">
 				      <div class="carousel-caption d-none d-md-block">
 					  </div>		      
 				    </div>
 				    <div class="carousel-item">
-				      <img src="<%= request.getContextPath() %>/images/jeonym_img/banner_3.jpg" class="d-block w-100" alt="...">
+				      <img src="<%= request.getContextPath() %>/images/banner_3.jpg" class="d-block w-100" alt="...">
 				      <div class="carousel-caption d-none d-md-block">
 					  </div>		      
 				    </div>
@@ -101,7 +101,7 @@
 				  <c:if test="${cnt < 6}">
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
-					    	<img src="<%= request.getContextPath() %>/images/burger/burger_nbg/${ivo.item_image}" class="card-img-top" alt="...">
+					    	<img src="<%= request.getContextPath() %>/images/${ivo.item_image}" class="card-img-top" alt="...">
 					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>
@@ -128,7 +128,7 @@
 				  <c:if test="${cnt >= 6}">
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
-					    	<img src="<%= request.getContextPath() %>/images/burger/burger_nbg/${ivo.item_image}" class="card-img-top" alt="...">
+					    	<img src="<%= request.getContextPath() %>/images/${ivo.item_image}" class="card-img-top" alt="...">
 					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>
@@ -155,7 +155,7 @@
 		
 		<h4 class="ml-2">맥딜리버리 이용 방법!</h4>
 		<a href="#">
-			<img src="<%= request.getContextPath() %>/images/jeonym_img/how_mcdelivery_works_ko.png" alt="이미지가 없습니다." width="100%"/>
+			<img src="<%= request.getContextPath() %>/images/how_mcdelivery_works_ko.png" alt="이미지가 없습니다." width="100%"/>
 		</a>
 		
 	</div>
