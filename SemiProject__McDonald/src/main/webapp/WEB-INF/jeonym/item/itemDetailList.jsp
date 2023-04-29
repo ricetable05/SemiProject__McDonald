@@ -63,14 +63,28 @@
 		
 		
 		
-		$("p#itemUpdateBtn").click(function(){
+		$("button#itemUpdateBtn").click(function(){
 			
 			const pk_fk_item_no = '${requestScope.idvo.pk_fk_item_no}';
 			
-			window.opener.goItemUpdate(pk_fk_item_no);
 			self.close();
+			window.opener.goItemUpdate(pk_fk_item_no);
 			//alert('클릭됨');
 		});
+		
+		$("button#itemDeleteBtn").click(function(){
+			
+			if(confirm('정말로 삭제하시겠습니까?')){
+
+				const pk_fk_item_no = '${requestScope.idvo.pk_fk_item_no}';
+				
+				self.close();
+				window.opener.goItemDelete(pk_fk_item_no);
+				//alert('클릭됨');
+			}
+			
+		});
+
 		
 	});
 
@@ -184,7 +198,11 @@
 			
 			        </tbody>
 			    </table>
-			    <div class="pl-4 pt-1"><p id="itemUpdateBtn" class="btn btn-info">제품정보 수정</p></div>
+			    <div class="pl-4 pt-1">
+			    	<button type="button" id="itemUpdateBtn" class="ml-2 btn btn-info">제품정보 수정</button>
+			    	<button type="button" id="itemDeleteBtn" class="ml-2 btn btn-danger">제품정보 삭제</button>
+			    </div>
+			    
 			     	
 	</div>
 </body>

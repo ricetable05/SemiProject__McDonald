@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 
@@ -101,7 +101,9 @@
 				  <c:if test="${cnt < 6}">
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
-					    	<img src="<%= request.getContextPath() %>/images/${ivo.item_image}" class="card-img-top" alt="...">
+					    
+					    	<c:set var="item_img" value="${fn:replace(ivo.item_image,'.png','_nbg.png')}"/>
+					    	<img src="<%= request.getContextPath() %>/images/${item_img}" class="card-img-top" alt="...">
 					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>
@@ -128,7 +130,8 @@
 				  <c:if test="${cnt >= 6}">
 					  <div class="card">
 					    <div class="card-body px-0 text-center">
-					    	<img src="<%= request.getContextPath() %>/images/${ivo.item_image}" class="card-img-top" alt="...">
+					    	<c:set var="item_img" value="${fn:replace(ivo.item_image,'.png','_nbg.png')}"/>
+					    	<img src="<%= request.getContextPath() %>/images/${item_img}" class="card-img-top" alt="...">
 					     	<h5 class="">${ivo.item_name}</h5>
 					    </div>
 					    <hr/>

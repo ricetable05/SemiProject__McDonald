@@ -38,5 +38,8 @@ public interface InterItemDAO {
 
 	// 추가 이미지 삽입 메소드
 	int product_Imagefile_Insert(String item_no, String attach_fileName) throws SQLException;
+
+	// 제품 삭제 메소드
+	int deleteItem(String pk_fk_item_no) throws SQLException;
 	
 }
