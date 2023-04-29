@@ -18,6 +18,11 @@ background:url(<%= request.getContextPath() %>/images/프로모션상단이미�
 background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 }
 
+.main > iframe {
+	margin-top: 1043px;
+	margin-left: 165px;
+}
+
 </style>
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"/>
@@ -47,8 +52,8 @@ background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 		
 		<div class="test" style="display: block;">
 			<div class="main" style="margin-top: 50px; position: relative;">
-			 <img src="<%= request.getContextPath()%>/images/promotion_3.jpg" style="width:100%;">
-			 <iframe width="780" height="448" src="https://www.youtube.com/embed/g7EzMPH8Ir0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe>
+			 <img src="<%= request.getContextPath()%>/images/promotion_4.jpg" style="width:100%;">
+			 <iframe width="782" height="438" src="https://www.youtube.com/embed/6mvZ0hWVEYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe>
 			</div>
 		</div>	
 		
