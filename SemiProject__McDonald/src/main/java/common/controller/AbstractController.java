@@ -1,7 +1,17 @@
 package common.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import jangjh.member.model.MemberVO;
+import jeonym.item.model.InterItemDAO;
+import jeonym.item.model.ItemDAO;
+import parksj.menu.model.InterMenuDAO;
+import parksj.menu.model.MenuDAO;
 
 public abstract class AbstractController implements InterCommand{
 
@@ -49,6 +59,53 @@ public abstract class AbstractController implements InterCommand{
 	}
 	
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	// 로그인 유무를 검사해서 로그인을 했으면 true 를 리턴해주고 로그인 안했으면 false 리턴해줌
 	
+	public boolean checkLogin(HttpServletRequest request) {
+	
+	HttpSession session = request.getSession();
+	MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+	
+		if(loginuser != null) {
+		// 로그인 한 경우
+		return true;
+		
+		}
+		else {
+		// 로그인 안한 경우
+		return false;
+		}
+	
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	
+    // 카테고리 리스트를 가져오는 메소드
+    public void getCategoryList(HttpServletRequest request) throws SQLException {
+      
+       InterItemDAO idao = new ItemDAO();
+      
+       List<Map<String, String>> categoryList = idao.getCategoryList(); // VO가 아닌 Map 을 사용한다.
+      
+       if(categoryList.size() > 0) {
+          request.setAttribute("categoryList", categoryList);
+       }
+       else {
+          System.out.println("카테고리가 존재하지 않습니다.");
+       }
+      
+    }
+	
+	 
+	//***** 제품목록(Category)을 보여줄 메소드 생성하기 ***** //
+    public void getMenuCategoryList(HttpServletRequest request) throws SQLException {
+        
+    	InterMenuDAO pdao = new MenuDAO();
+    	List<Map<String, String>> menucategoryList= pdao.getMenuCategoryList();
+    	      
+    	request.setAttribute("menucategoryList", menucategoryList);
+    	      
+    	}//end of public void getMenuCategoryList(HttpServletRequest request)
 	
 }
