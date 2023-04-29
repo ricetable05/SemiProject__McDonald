@@ -16,7 +16,7 @@ public class DrinkMainAction extends AbstractController {
 		InterMenuDAO mdao = new MenuDAO();
 		
 		// === Ajax(JSON)를 사용하여 버거 상품목록을 "더보기"방식으로 페이징 처리해서 보여주겠다. === //
-		int totalCount = mdao.totalctidCount("1");
+		int totalCount = mdao.totalctidCount("5");
 		
 		request.setAttribute("totalCount", totalCount);
 		
