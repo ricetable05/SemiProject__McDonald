@@ -16,7 +16,7 @@
 <style type="text/css">
 
 .user-warp{
-background:url(<%= request.getContextPath() %>/images/top_image/음료상단이미지.jpg) 50% 50% no-repeat;
+background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg) 50% 50% no-repeat;
 }
 
 
@@ -260,18 +260,21 @@ $(document).ready(function() {
 					
 							
 								
-							<c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
+						<c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
 						
-								<script>
-								
-									$(document).ready(function(){
+									<script>
 										
-										$(".prev").prop("disabled",true);
-										$(".prev").css("opacity", 0);
-										$(".prev").css("cursor", "auto");
-									});
-								
-								</script>
+										
+										
+										$(document).ready(function(){
+											
+											$(".prev").prop("disabled",true);
+											$(".prev").css("opacity", 0);
+											$(".prev").css("cursor", "auto");
+										});
+										
+										
+									</script>
 						
 							</c:if>
 								
@@ -296,18 +299,18 @@ $(document).ready(function() {
 						
 						
 						
-						   <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
+						    <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
 						
-									<script>
-									
-										$(document).ready(function(){
-											
-											$(".next").prop("disabled",true);
-											$(".next").css("opacity", 0);
-											$(".next").css("cursor", "auto");
-										});
-									
-									</script>
+								<script>
+								
+									$(document).ready(function(){
+										
+										$(".next").prop("disabled",true);
+										$(".next").css("opacity", 0);
+										$(".next").css("cursor", "auto");
+									});
+								
+								</script>
 						
 							</c:if>
 						

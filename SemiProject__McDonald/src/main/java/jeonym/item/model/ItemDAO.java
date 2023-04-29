@@ -184,7 +184,7 @@ public class ItemDAO implements InterItemDAO {
 					   + "            ( "
 					   + "                select item_no, fk_category_no, item_name, item_price, morning_availability, item_info "
 					   + "                from tbl_item "
-					   + "                order by 1 desc "
+					   + "                order by 2 asc, 1 desc "
 					   + "            ) I  "
 					   + "            JOIN "
 					   + "            ( "
@@ -430,24 +430,24 @@ public class ItemDAO implements InterItemDAO {
 				switch (fk_category_no) {
 
 					case "1":
-						seq_name = "ITEM_BURGER_SEQ";
-						detail_seq_name = "ITEM_BURGER_DETAIL_SEQ";
+						seq_name = "TEST_ITEM_BURGER_SEQ";
+						detail_seq_name = "TEST_ITEM_BURGER_DETAIL_SEQ";
 						break;
 					case "2":
-						seq_name = "ITEM_MC_MORNING_SEQ";
-						detail_seq_name = "ITEM_MC_MORNING_DETAIL_SEQ";						
+						seq_name = "TEST_ITEM_MC_MORNING_SEQ";
+						detail_seq_name = "TEST_ITEM_MC_MORNING_DETAIL_SEQ";						
 						break;
 					case "3":
-						seq_name = "ITEM_SIDE_SEQ";
-						detail_seq_name = "ITEM_SIDE_DETAIL_SEQ";
+						seq_name = "TEST_ITEM_SIDE_SEQ";
+						detail_seq_name = "TEST_ITEM_SIDE_DETAIL_SEQ";
 						break;
 					case "4":
-						seq_name = "ITEM_DESSERT_SEQ";
-						detail_seq_name = "ITEM_DESSERT_DETAIL_SEQ";
+						seq_name = "TEST_ITEM_DESSERT_SEQ";
+						detail_seq_name = "TEST_ITEM_DESSERT_DETAIL_SEQ";
 						break;
 					case "5":
-						seq_name = "ITEM_DRINK_SEQ";
-						detail_seq_name = "ITEM_DRINK_DETAIL_SEQ";
+						seq_name = "TEST_ITEM_DRINK_SEQ";
+						detail_seq_name = "TEST_ITEM_DRINK_DETAIL_SEQ";
 						break;
 					
 				default:
@@ -573,6 +573,95 @@ public class ItemDAO implements InterItemDAO {
 		
 		
 		return isSuccess;
+		
+	}
+
+	
+	// 제품 등록 메소드
+	@Override
+	public int registItem(ItemVO ivo, Map<String, String> paraMap) throws SQLException {
+
+		int isSuccess = 0;
+		int n3 = 0, n4 = 0;
+
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " insert into test_tbl_item values( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+				
+
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(paraMap.get("item_no")));
+			pstmt.setInt(2, ivo.getFk_category_no());
+			pstmt.setString(3, ivo.getItem_name());
+			pstmt.setString(4, ivo.getItem_image());
+			pstmt.setInt(5, ivo.getItem_price());		
+			pstmt.setInt(6, ivo.getMorning_availability());
+			pstmt.setInt(7, ivo.getIs_burger());
+			pstmt.setString(8, ivo.getItem_info());
+			
+			n3 = pstmt.executeUpdate();
+			
+			
+			sql = " insert into test_tbl_item_detail values( ? , ?, to_number(?), to_number(?), to_number(?), to_number(?) "
+				+ ", to_number(?), to_number(?), to_number(?), to_number(?), ?, ? )";
+		
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(paraMap.get("pk_fk_item_no")));
+			pstmt.setString(2, ivo.getItem_name());
+			pstmt.setString(3, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getWeight_g()));
+			pstmt.setString(4, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getWeight_ml()));
+			pstmt.setString(5, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getCalories()));
+			pstmt.setString(6, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getCarbo()));
+			pstmt.setString(7, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getProtein()));
+			pstmt.setString(8, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getFat()));
+			pstmt.setString(9, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getSodium()));
+			pstmt.setString(10, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getCaffeine()));
+			pstmt.setString(11, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getAllergens()));
+			pstmt.setString(12, JeonymUtil.zero_to_empty(ivo.getItemDetailVO().getCoa()));
+			
+			
+			n4 = pstmt.executeUpdate();
+			
+			isSuccess = n3 * n4;
+			
+			
+		}
+		finally {
+			close();
+		}
+		
+		
+		return isSuccess;
+	}
+
+	@Override
+	public int product_Imagefile_Insert(String item_no , String attach_fileName) throws SQLException {
+
+		int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " insert into tbl_image_add "+ 
+	                    " values(seqImgfileno.nextval, ?, ?) ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, Integer.parseInt(item_no));
+	         pstmt.setString(2, attach_fileName);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
 		
 	}
 

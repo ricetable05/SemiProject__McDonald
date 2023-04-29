@@ -18,6 +18,7 @@ import jeonym.item.model.InterItemDAO;
 import jeonym.item.model.ItemDAO;
 import jeonym.item.model.ItemDetailVO;
 import jeonym.item.model.ItemVO;
+import jeonym.util.JeonymUtil;
 
 public class ItemRegisterAction extends AbstractController {
 
@@ -37,18 +38,10 @@ public class ItemRegisterAction extends AbstractController {
 
 	
 		String method = request.getMethod(); 
-		
-		String pk_fk_item_no = request.getParameter("pk_fk_item_no");
-		
-		if(pk_fk_item_no == null) {
-			pk_fk_item_no = ""; // null 처리를 해준다.
-		}
-				
+						
 		if(!"POST".equalsIgnoreCase(method)) { // get 방식인 경우 ==> 제품목록 페이지에서 제품등록을 누르거나
-											  
-			
-			super.getCategoryList(request); // 제품등록창에서 카테고리 목록 select 안에 값을 넣어주기 위함
 
+			super.getCategoryList(request); // 제품등록창에서 카테고리 목록 select 안에 값을 넣어주기 위함
 			setRedirect(false);
 			setViewPage("/WEB-INF/jeonym/item/itemUpdate.jsp");
 
@@ -120,18 +113,17 @@ public class ItemRegisterAction extends AbstractController {
 			
 			ItemDetailVO idvo = new ItemDetailVO();
 			
-			idvo.setWeight_g(Integer.parseInt(weight_g));
-			idvo.setWeight_ml(Integer.parseInt(weight_ml));
-			idvo.setCalories(Integer.parseInt(calories));
-			idvo.setCarbo(Integer.parseInt(carbo));
-			idvo.setProtein(Integer.parseInt(protein));
-			idvo.setFat(Float.parseFloat(fat));
-			idvo.setSodium(Integer.parseInt(sodium));
-			idvo.setCaffeine(Integer.parseInt(caffeine));
-			idvo.setAllergens(allergens);
-			idvo.setCoa(coa);
-			
-					
+			idvo.setWeight_g(Integer.parseInt(JeonymUtil.null_to_zero(weight_g)));
+			idvo.setWeight_ml(Integer.parseInt(JeonymUtil.null_to_zero(weight_ml)));
+			idvo.setCalories(Integer.parseInt(JeonymUtil.null_to_zero(calories)));
+			idvo.setCarbo(Integer.parseInt(JeonymUtil.null_to_zero(carbo)));
+			idvo.setProtein(Integer.parseInt(JeonymUtil.null_to_zero(protein)));
+			idvo.setFat(Float.parseFloat(JeonymUtil.null_to_zero(fat)));
+			idvo.setSodium(Integer.parseInt(JeonymUtil.null_to_zero(sodium)));
+			idvo.setCaffeine(Integer.parseInt(JeonymUtil.null_to_zero(caffeine)));
+			idvo.setAllergens(JeonymUtil.null_to_zero(allergens));
+			idvo.setCoa(JeonymUtil.null_to_zero(coa));
+	
 			// 카테고리 번호에 따른 item seq 과 item detail seq 채번 
 			paraMap = idao.getItem_no_by_category(fk_category_no);
 			
@@ -139,6 +131,61 @@ public class ItemRegisterAction extends AbstractController {
 			idvo.setPk_fk_item_no(Integer.parseInt(paraMap.get("pk_fk_item_no")));
 			ivo.setItemDetailVO(idvo);
 			
+			
+			try {
+				
+				isSuccess = idao.registItem(ivo, paraMap);
+				
+				if(isSuccess > 0) {
+					
+		            String str_attachCount = mtrequest.getParameter("attachCount"); 
+		               // str_attachCount 이 추가이미지 파일의 개수이다. "" "0" ~ "10" 이 들어온다.
+					
+		            int attachCount = 0;
+		            
+		            
+					if(!"".equalsIgnoreCase(str_attachCount)) {
+						attachCount = Integer.parseInt(str_attachCount);
+					}
+					
+					
+					// 첨부파일의 파일명(파일서버에 업로드 되어진 실제파일명) 얻어오기
+					for(int i=0;i<attachCount;i++) { // 넘어온 값이 "" 이거나 "0" 인경우에는 for문은 수행되지 않는다.
+						
+						String attach_fileName = mtrequest.getFilesystemName("attach"+ i);
+						
+						// tbl_product_imagefile 테이블에 제품의 추가이미지 파일명 insert 해주기
+						idao.product_Imagefile_Insert(paraMap.get("item_no"), attach_fileName);
+
+						
+						
+					}// end of for ------------------------------------------------------
+
+					message = "성공적으로 등록되었습니다.";
+					loc = request.getContextPath() + "/item/itemList.run";
+							
+				}
+				else {
+
+					message = "등록이 실패하였습니다 ..";
+					loc = request.getContextPath() + "/item/itemList.run";
+
+				}
+
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+				message = "등록이 실패하였습니다 ㅜㅜ";
+				loc = request.getContextPath() + "/item/itemList.run";
+										
+			}
+			
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+		
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/jeonym/msg.jsp");
+
 
 			
 		}// end of else{} -----------------------------------------------------------------------------------

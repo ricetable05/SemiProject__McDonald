@@ -189,7 +189,15 @@
     				flag = true; // flag 가 true 가 되면 submit 이 되지 않는다.
     				return false; // break와 같은 기능
     			}
-       	   });// end of $(".infoData").each(function(i, elmt){}) ------------------ 
+    			
+       	   });// end of $(".infoData").each(function(i, elmt){}) ------------------
+       	   
+       	   const is_radioChecked_length = $("input:radio[name='is_burger']:checked").length;
+       	   
+       	   if(is_radioChecked_length == 0){ // 만약 라디오가 check 되지 않았다면
+       		   $("input:radio[name='is_burger']").parent().find("span.error").show();
+       		   flag = true;
+       	   }
     	   
     	   if(!flag && regExpCheck()){ // regExpCheck() 정규표현식 check
 				
