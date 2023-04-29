@@ -27,10 +27,28 @@
     #th{ 
     	font-size: 25pt;  text-align: center; padding-left:320px;
     }
-    
-</style>
 
+</style>
+	
+	
 <script type="text/javascript">
+	
+	$(document).ready(function(){
+	
+    	$("button.btn_is_dormantClose").click(function(){
+			
+			const iframe_is_dormantFind = document.getElementById("iframe_is_dormantFind");
+			
+			const iframe_window_is_dormant = iframe_is_dormantFind.contentWindow; 
+			
+			iframe_window_is_dormant.func_form_reset_is_dormant(); 
+			
+		}); // end of $("button.idFindClose").click(function(){} ----------------- 
+		
+		
+		
+		
+	});
 
  			
 </script>
@@ -67,7 +85,7 @@
         <!-- Modal header -->
         <div class="modal-header">
           <h4 class="modal-title" style="font-family:SpeedeeK; font-weight:600;">휴면 계정 풀기</h4>
-          <button type="button" class="close btn_is_dormantFind" data-dismiss="modal">&times;</button>
+          <button type="button" class="close btn_is_dormantClose" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
@@ -80,7 +98,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-dark btn_is_dormantFind" data-dismiss="modal" style="font-family:SpeedeeK; font-weight: 500;">Close</button>
+          <button type="button" class="btn btn-dark btn_is_dormantClose" data-dismiss="modal" style="font-family:SpeedeeK; font-weight: 500;">Close</button>
         </div>
       </div>
     </div>

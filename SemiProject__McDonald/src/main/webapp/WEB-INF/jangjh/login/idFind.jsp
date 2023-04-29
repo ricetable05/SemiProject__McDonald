@@ -72,7 +72,7 @@
 		$("div#div_findResult > p.text-center").empty();
 		
 	}//end of function func_form_reset_empty() ------------------------------------
-	
+	 
 	
 </script>
 

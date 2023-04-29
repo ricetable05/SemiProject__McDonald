@@ -74,18 +74,20 @@
 			const iframe_idFind = document.getElementById("iframe_idFind");
 			// 대상 아이프레임을 선택한다.
 			
-			const iframe_windows = iframe_idFind.contentWindow;
-			// iframe 요소에 접근하는 contentWindow 와 contentDocument 의 차이점은 아래와 같다.
-            // contentWindow 와 contentDocument 둘 모두 iframe 하위 요소에 접근 할 수 있는 방법이다.
-            // contentWindow 는 iframe의 window(전체)을 의미하는 것이다.
-            // 참고로, contentWindow.document 은 contentDocument 와 같은 것이다.
-            // contentWindow 가 contentDocument 의 상위 요소이다.
+			const iframe_window = iframe_idFind.contentWindow; 	
+															   		
+			iframe_window.func_form_reset_empty(); 
 			
+		}); // end of $("button.idFindClose").click(function(){} ----------------- 
+				
+		$("button.passwdFindClose").click(function(){
 			
-			iframe_windows.func_form_reset_empty();
-			// func_form_reset_empty() 함수는 idFind.jsp에 정의해 두었다.
+			const iframe_pwdFind = document.getElementById("iframe_pwdFind");
 			
-		});
+			const iframe_window_pwd = iframe_pwdFind.contentWindow; 
+			iframe_window_pwd.func_form_reset_empty_pwd(); 
+			
+		}); // end of $("button.idFindClose").click(function(){} ----------------- 
 		
 		
 		
@@ -228,7 +230,7 @@
 	        <!-- Modal body -->
 	        <div class="modal-body">
 	          <div id="idFind">
-	             <iframe id="iframe_idFind" style="border: none; width: 100%; height: 280px;" src="<%= request.getContextPath()%>/login/pwdFind.run">
+	             <iframe id="iframe_pwdFind" style="border: none; width: 100%; height: 280px;" src="<%= request.getContextPath()%>/login/pwdFind.run">
 	             </iframe>
 	          </div>
 	        </div>
