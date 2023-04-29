@@ -5,7 +5,6 @@
 
 <%
     String ctxPath = request.getContextPath();
-    //    /MyMVC
 %>
 
 <!-- Required meta tags -->
@@ -41,19 +40,18 @@
    }
    
    #div_updateResult {
-      width: 90%;
       height: 15%;
       margin-bottom: 5%;
-      margin-left: 10%;      
+      margin-left: 5%;      
       position: relative;
+      font-size: 25pt;
    }
    
    #div_btnUpdate {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 10%;
-      position: relative;
+   		margin-right: 50px;
+   		font-size: 23;
+   		font-family:SpeedeeK; 
+   		font-weight:600;
    }
 
 </style>
@@ -71,25 +69,36 @@
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
+		if(${requestScope.method == 'POST' && requestScope.n == 1}){
+			
+			opener.parent.location.href="<%= ctxPath%>/";
+			window.self.close();
+
+			<%--
+			$("button#maingo").click(function(){
+			});
+			--%>
+		};		
 	});//end of $(document).ready(function() --------------------------------------
 	
 			
 </script>
 
-<form name="is_dormantUpdateEndFrm" style="font-family:SpeedeeK; font-weight:600;">
+<form name="is_dormantUpdateEndFrm">
 
    <input type="hidden" name="userid" value="${requestScope.userid}"/>
 	
 	<c:if test="${requestScope.method == 'GET'}">
-		<div id="div_btnUpdate" align="center" style="margin-top: 20px;">
-	       <button type="button" class="btn btn-dark" id="btnUpdate">휴면 계정 풀기</button>
+		<div id="div_btnUpdate" align="center" style="font-family:SpeedeeK; font-weight:600;">
+		   <div style="margin-left: 55px; margin-top: 50px;">정말로 휴면 계정을 푸시겠습니까?</div>
+	       <button type="button" style="margin-left: 55px; margin-top: 50px;" class="btn btn-dark" id="btnUpdate">휴면 계정 풀기</button>
 	    </div> 
 	</c:if>
-</form>
+</form> 
 
 	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
-		<div id="div_updateResult" align="center" >
-	           사용자 ID ${requestScope.userid}님의 휴면 계정이 풀렸습니다.
+		<div id="div_updateResult" align="center" style="font-family:SpeedeeK; font-weight:500;">
+	           ID: ${requestScope.userid}<br>휴면 계정이 풀렸습니다.
 	    </div> 
 	</c:if>
 

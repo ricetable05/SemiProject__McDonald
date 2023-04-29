@@ -44,7 +44,8 @@ public interface InterMemberDAO {
 	MemberVO memberOneDetail(String userid) throws SQLException;
 	
 	// 휴면 계정 풀기를 위해서 login_date 업데이트하기
-	int login_date_Update(String userid) throws SQLException;
+	int login_date_insert(String userid, String access_ip) throws SQLException;
+
 
 	
 	

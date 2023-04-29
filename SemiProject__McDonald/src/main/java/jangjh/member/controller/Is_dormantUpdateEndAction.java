@@ -15,13 +15,14 @@ public class Is_dormantUpdateEndAction extends AbstractController {
 		String method = request.getMethod(); //"GET" 또는 "POST"
 		
 		String userid = request.getParameter("userid");
+		String access_ip = request.getRemoteAddr();
 		
 		if("POST".equalsIgnoreCase(method)) {
 			//암호변경하기 버튼을 클릭한 경우
 			
 			InterMemberDAO mdao = new MemberDAO();
 			
-			int n = mdao.login_date_Update(userid);
+			int n = mdao.login_date_insert(userid,access_ip);
 			
 			request.setAttribute("n",n);
 			

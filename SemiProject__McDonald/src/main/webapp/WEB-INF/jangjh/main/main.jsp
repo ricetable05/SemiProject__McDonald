@@ -59,37 +59,50 @@
 		  
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="<%= request.getContextPath() %>/images/carousel1.jpg" class="d-block w-100" alt="..."> <!-- d-block 은 display: block; 이고  w-100 은 width 의 크기는 <div class="carousel-item active">의 width 100% 로 잡으라는 것이다. -->
-		      <div class="carousel-caption d-none d-md-block"> <!-- d-none 은 display : none; 이므로 화면에 보이지 않다가, d-md-block 이므로 d-md-block 은 width 가 768px이상인 것에서만 display: block; 으로 보여라는 말이다.  --> 
+		      <a href="<%= request.getContextPath() %>/promotion/drinkProm.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel1.jpg" class="d-block w-100" >
+		      </a> 
+		      <div class="carousel-caption d-none d-md-block"> 
+			  	
 			  </div>
 		    </div>
 		    
 		    <div class="carousel-item">
-		      <img src="<%= request.getContextPath() %>/images/carousel2.jpg" class="d-block w-100" alt="...">
+		      <a href="<%= request.getContextPath() %>/promotion/burgerProm.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel2.jpg" class="d-block w-100">
+		      </a>
 		      <div class="carousel-caption d-none d-md-block">
 			  </div>		      
 		    </div>
 		    
 		    <div class="carousel-item">
-		      <img src="<%= request.getContextPath() %>/images/carousel3.jpg" class="d-block w-100" alt="...">
+		      <a href="<%= request.getContextPath() %>/promotion/sideProm.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel3.jpg" class="d-block w-100">
+		      </a>
 		      <div class="carousel-caption d-none d-md-block">
 			  </div>		      
 		    </div>
 		    
 		    <div class="carousel-item">
-		      <img src="<%= request.getContextPath() %>/images/carousel4.jpg" class="d-block w-100" alt="...">
+		      <a href="<%= request.getContextPath() %>/menu/mcMorningMain.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel4.jpg" class="d-block w-100">
+		      </a>
 		      <div class="carousel-caption d-none d-md-block">
 			  </div>		      
 		    </div>
 		    
 		    <div class="carousel-item">
-		      <img src="<%= request.getContextPath() %>/images/carousel5.png" class="d-block w-100" alt="...">
+		      <a href="<%= request.getContextPath() %>/menu/dessertMain.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel5.png" class="d-block w-100">
+		      </a>
 		      <div class="carousel-caption d-none d-md-block">
 			  </div>		      
 		    </div>
 		    
 		    <div class="carousel-item">
-		      <img src="<%= request.getContextPath() %>/images/carousel6.jpg" class="d-block w-100" alt="...">
+		      <a href="<%= request.getContextPath() %>/promotion/mcMorningProm.run">
+		      	<img src="<%= request.getContextPath() %>/images/carousel6.jpg" class="d-block w-100">
+		      </a>
 		      <div class="carousel-caption d-none d-md-block">
 			  </div>		      
 		    </div>

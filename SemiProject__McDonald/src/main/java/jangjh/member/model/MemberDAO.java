@@ -622,19 +622,20 @@ public class MemberDAO implements InterMemberDAO {
 
 		// 휴면 계정 풀기를 위해서 login_date 업데이트하기
 		@Override
-		public int login_date_Update(String userid) throws SQLException {
+		public int login_date_insert(String userid, String access_ip) throws SQLException {
 			int result = 0;	
 			
 			try {
 				
 				conn = ds.getConnection();  
 				
-				String sql = " update tbl_login_history set login_date = sysdate "
-						   + " where fk_userid = ? ";
+				String sql = " INSERT INTO tbl_login_history (login_history_no, fk_userid, login_date,access_ip) "
+						   + " VALUES (login_history_no_seq.nextval,?,sysdate, ?) ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
 				pstmt.setString(1, userid);
+				pstmt.setString(2, access_ip);
 				
 				result = pstmt.executeUpdate();
 				

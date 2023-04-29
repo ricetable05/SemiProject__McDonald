@@ -22,9 +22,34 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
+<style type="text/css">
+
+/* -- CSS 로딩화면 구현 시작(bootstrap 에서 가져옴) -- */    
+   div.loader {
+	  border: 16px solid white;
+	  border-radius: 50%;
+	  border: 7px dotted #db0007;
+	  width: 50px;
+	  height: 50px;
+	  animation: spin 2s linear infinite; 
+	}
+   
+   @-webkit-keyframes spin {
+     0% { -webkit-transform: rotate(0deg); }
+     100% { -webkit-transform: rotate(360deg); }
+   }
+   
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+
+</style>
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		
+		$("div#circle").hide();
 		
 		//찾기
 		$("button#btnFind").click(function(){
@@ -45,6 +70,10 @@
 			if(!bool) {
 				alert("올바른 이메일을 입력하세요.")
 				return;
+			}
+			
+			if(useridVal != "" && bool) {
+				$("div#circle").show();
 			}
 			
 		 	const frm = document.pwdFindFrm;
@@ -108,6 +137,10 @@
     <p class="text-center">
        <button type="button" class="btn btn-dark" id="btnFind" style="font-weight: bold;">찾기</button>
     </p>
+    <%-- CSS 로딩화면 구현한것--%>
+    <div id="circle" style="display: flex">
+        <div class="loader" style="margin: auto"></div>
+    </div>
    </div>
    
 </form>

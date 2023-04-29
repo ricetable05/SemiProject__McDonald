@@ -43,7 +43,7 @@ public class LoginAction extends AbstractController{
 			
 			if(loginuser.getIs_dormant() == 1) {
 				
-				String message = "로그인을 한지 1년이 지나서 휴면상태로 되었습니다. 관리자에게 문의 바랍니다.";
+				String message = "로그인을 한지 1년이 지나서 휴면상태가 되었습니다.";
 				String loc = request.getContextPath() + "/login/is_dormant.run";
 				
 				request.setAttribute("message", message);

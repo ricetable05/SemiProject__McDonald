@@ -24,8 +24,8 @@
 		margin-top: 150px;
 	}
 
-    #th{
-    	font-size: 25pt;  text-align: center; padding-left:50px;
+    #th{ 
+    	font-size: 25pt;  text-align: center; padding-left:320px;
     }
     
 </style>
@@ -39,19 +39,19 @@
 <body>
 	
 <div id="container">
-   <form name="is_dormantFindFrm">
+   <form name="is_dormantFindFrm" style="font-family:SpeedeeK; font-weight:600;">
       <table id="is_dormantTbl" style="margin-top: 22px;">
         <thead>
-           <tr>
-              <th colspan="2" id="th">휴먼</th>
+           <tr>  
+              <th colspan="2" id="th">휴먼계정을 일반계정으로 전환하시겠습니까?</th>
            </tr>
         </thead>
         
         <tbody>
-           <%-- === 휴먼계정 풀기 === --%>
-           <tr> 
+           <%-- === 휴먼계정 풀기 === --%> 
+           <tr>  
               <td colspan="2" style="padding-top: 30px;">
-                 <a style="cursor: pointer;" data-toggle="modal" data-target="#is_dormantFind" data-dismiss="modal" data-backdrop="static">휴먼</a>
+                 <button type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 570px; " data-toggle="modal" data-target="#is_dormantFind" data-dismiss="modal" data-backdrop="static">휴면 계정 풀기</button>
               </td>
            </tr>
            
@@ -66,7 +66,7 @@
       
         <!-- Modal header -->
         <div class="modal-header">
-          <h4 class="modal-title">휴먼</h4>
+          <h4 class="modal-title" style="font-family:SpeedeeK; font-weight:600;">휴면 계정 풀기</h4>
           <button type="button" class="close btn_is_dormantFind" data-dismiss="modal">&times;</button>
         </div>
         

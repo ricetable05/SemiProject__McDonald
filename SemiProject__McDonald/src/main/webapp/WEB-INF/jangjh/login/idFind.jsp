@@ -20,6 +20,7 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -79,6 +80,7 @@
 
 	<ul style="list-style-type: none">
 	
+    
          <li style="margin: 25px 0">
             <label for="member_name" style="display: inline-block; width: 90px">성명</label>
             <input type="text" name="member_name" id="member_name" size="25" placeholder="홍길동" autocomplete="off" required />
