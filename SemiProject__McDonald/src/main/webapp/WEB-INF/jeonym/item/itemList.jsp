@@ -187,6 +187,14 @@
 		
 	}
 	
+	//
+	function goItemDelete(pk_fk_item_no){
+		
+			location.href='<%= request.getContextPath() %>/item/itemDelete.run?pk_fk_item_no='+ pk_fk_item_no;					
+		
+	}
+
+	
 	
 </script>
 

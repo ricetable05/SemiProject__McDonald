@@ -665,6 +665,46 @@ public class ItemDAO implements InterItemDAO {
 		
 	}
 
+	// 제품 삭제 메소드
+	@Override
+	public int deleteItem(String pk_fk_item_no) throws SQLException {
+		int result = 0;
+		int n1 = 0, n2 = 0;
+		
+	      try {
+		         conn = ds.getConnection();
+		         
+		         String sql = " delete from tbl_item_detail "
+		         			+ " where pk_fk_item_no = ? ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         
+		         pstmt.setInt(1, Integer.parseInt(pk_fk_item_no));
+		         
+		         n1 = pstmt.executeUpdate();
+		         
+		         ///////////////////////////////////////////////////////////////////
+		         
+		         sql = " delete from tbl_item "
+		         	 + " where item_no = ? ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         
+		         pstmt.setInt(1, Integer.parseInt(pk_fk_item_no));
+		         
+		         n2 = pstmt.executeUpdate();
+
+		         result = n1 * n2;
+		         
+		         
+		      } finally {
+		         close();
+		      }
+		      
+		
+		return result;
+	}// end of public int deleteItem(String pk_fk_item_no) throws SQLException {} ------------------------------
+
 
 	
 }
