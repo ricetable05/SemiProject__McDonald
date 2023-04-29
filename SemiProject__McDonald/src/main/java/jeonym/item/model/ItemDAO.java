@@ -564,7 +564,7 @@ public class ItemDAO implements InterItemDAO {
 			
 			isSuccess = n1 * n2;
 			
-			System.out.println("n1 * n2 : " + n1 * n2);
+			/* System.out.println("n1 * n2 : " + n1 * n2); */
 			
 		}
 		finally {
