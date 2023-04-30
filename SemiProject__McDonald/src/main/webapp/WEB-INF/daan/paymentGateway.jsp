@@ -56,9 +56,19 @@ $(document).ready(function() {
 			2. jQuery를 이용한 방법
 			$(opener.location).attr("href", "javascript:부모창스크립트 함수명();");
 		*/
-
-			location.href="<%=request.getContextPath()%>/main.run";
-        	alert("결제 성공하였습니다.");			
+			
+			let str_cart_arr = sessionStorage.getItem('cart_arr');
+			// let cart_arr = JSON.parse(str_cart_arr);
+			
+			let str_quantity_arr = sessionStorage.getItem('quantity_arr');
+		
+			const frm = document.recordDBForm;
+			frm.action = "<%=request.getContextPath()%>/daan/orderSuccess.run";
+			frm.method = 'POST';
+			frm.cartFinal.value = str_cart_arr;
+			frm.quantityFinal.value = str_quantity_arr;
+			frm.submit();
+        	// alert("결제 성공하였습니다.");
         } else {
             location.href="<%=request.getContextPath()%>/main.run";
             alert("결제에 실패하였습니다.");
@@ -70,7 +80,14 @@ $(document).ready(function() {
 
 </script>
 </head>	
-
 <body>
+<form name="recordDBForm">
+	<fieldset>
+        <input type="hidden" name="totalFinal" value="${requestScope.totalFinal}"/>
+        <input type="hidden" name="deliveryFee" value="${requestScope.deliveryFee}"/>
+		<input type="hidden" name="cartFinal"/>
+        <input type="hidden" name="quantityFinal"/>
+    </fieldset>
+</form>
 </body>
 </html>

@@ -38,6 +38,7 @@ public class OrderVerificationAction extends AbstractController {
 			quantity_i++;
 		}
 		
+		
 		int priceSum = 0;
 		int set_count = 0;
 		int i=0;
@@ -51,7 +52,7 @@ public class OrderVerificationAction extends AbstractController {
 			JSONArray singleOrder = (JSONArray) obj_singleOrder;
 			
 			if(singleOrder.length() > 1) {
-				set_count += 1;
+				set_count += (1*i_arr[i]);
 			}
 			
 			for(Object obj_item:singleOrder) {
@@ -60,11 +61,8 @@ public class OrderVerificationAction extends AbstractController {
 			}
 			ItemDAO ido = new ItemDAO();
 			priceSum += i_arr[i]*ido.getPriceSum(arr_item_no);
-			System.out.println(i+" i_arr[i] = " + i_arr[i]);
-			System.out.println(i+" ido.getPriceSum(arr_item_no) = " + ido.getPriceSum(arr_item_no));
 			i++;
 		}
-		
 		int set_count_discount = set_count * 1000;
 		
 		int priceSum_w_discount = priceSum-set_count_discount;
@@ -84,13 +82,16 @@ public class OrderVerificationAction extends AbstractController {
 			
 			if(priceSum_w_discount == total) {
 				
-				message = "가격이 일치합니다. 결제를 진행합니다.";
+				message = "success";
 			} else {
-				message = "가격이 일치하지 않음";
+				message = "fail";
 			}
 			JSONObject jsonObj = new JSONObject();
+																				// # IMPORTANT 주문테이블에 총결제금액을 담는다면 아래의 총결제 금액을 담아야 합니다.			
+																				// jsonObj.put("priceSum_w_discount", priceSum_w_discount);
 			
 			jsonObj.put("message", message);
+			
 			String json = jsonObj.toString();
 			
 			request.setAttribute("json", json);

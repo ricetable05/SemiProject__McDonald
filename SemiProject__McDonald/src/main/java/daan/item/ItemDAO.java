@@ -12,6 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.json.JSONObject;
+
+import jangjh.member.model.MemberVO;
+
 public class ItemDAO {
 
 	
@@ -57,7 +61,8 @@ public class ItemDAO {
 			String sql = "select item_no, fk_category_no, item_name, item_image, item_price, "
 					   + " morning_availability, is_burger, item_info "
 					   + " from tbl_item "
-					   + " where fk_category_no = ?";
+					   + " where fk_category_no = ?"
+					   + " order by item_no asc ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, fk_category_no);
@@ -92,19 +97,27 @@ public class ItemDAO {
 		
 		try {
 			
+			int int_item_no = Integer.parseInt(item_no);
+			
 			conn = ds.getConnection();
-				
+			
 			String sql = "select item_no, item_name, item_price "
 					   + " from tbl_item "
-					   + " where item_no = ?";
+					   + " where item_no = ? ";
 			
 			if("1".equals(is_set)) {
-				sql += "or  item_no = 304 or item_no = 523";
-			
+				
+				if(int_item_no < 200) {
+					sql += "or  item_no = 303 or item_no = 504";
+				} else {
+					sql += "or  item_no = 300 or item_no = 519";
+				}
 			}
 			
+			sql += " order by item_no asc ";
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(item_no));
+			pstmt.setInt(1, int_item_no);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -153,6 +166,94 @@ public class ItemDAO {
 		return priceSum;
 		
 	} // end of getPriceSum() -----------------------------
+
+
+	public int recordTblOrder(int is_delivery_price, MemberVO loginuser) throws SQLException {
+		
+		int fk_odr_no = 0;
+		conn = ds.getConnection();
+		conn.setAutoCommit(false);
+		
+		try {
+				String sql	= " INSERT INTO tbl_order(odr_no, fk_userid, fk_store_id, is_delivery, delivery_time, odr_date, is_delivery_price) "
+							+ " VALUES(tbl_order_seq.nextval, ?, '001', 0, sysdate, sysdate, ?) ";
+				
+				pstmt = conn.prepareStatement(sql);
+
+				String userid = "";
+				try {
+					userid = loginuser.getUserid();
+				} catch (NullPointerException e) {
+					userid = "iyou1";
+				}
+				
+				pstmt.setString(1, userid);
+				pstmt.setInt(2, is_delivery_price);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				
+				sql	= " select odr_no "
+					+ " from "
+					+ " ( "
+					+ " select rownum AS rn, odr_no "
+					+ " from tbl_order "
+					+ " order by rownum desc "
+					+ " ) "
+					+ " where rownum = 1 ";
+			
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				
+				fk_odr_no = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			conn.setAutoCommit(true);
+			close();
+		}
+		return fk_odr_no;
+	}
+
+
+	
+	public void recordTblOrderList(JSONObject item, int is_set, int quantity, int fk_odr_no) throws SQLException {
+		
+		conn = ds.getConnection();
+		conn.setAutoCommit(false);
+		
+		try {
+				String sql	= " INSERT INTO tbl_order_list(odr_product_no, fk_odr_no, fk_item_no, item_name, quantity, item_price, is_set) "
+							+ " VALUES(tbl_order_list_seq.nextval, ?, ?, ?, ?, ?, ? )";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, fk_odr_no);
+				pstmt.setInt(2, (Integer) item.get("item_no"));
+				pstmt.setString(3, (String) item.get("item_name"));
+				pstmt.setInt(4, quantity);
+				pstmt.setInt(5, (Integer) item.get("item_price"));
+				pstmt.setInt(6, is_set);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+			
+				
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			conn.setAutoCommit(true);
+			close();
+		}
+		
+	}
+
+	
 	
 	
 }

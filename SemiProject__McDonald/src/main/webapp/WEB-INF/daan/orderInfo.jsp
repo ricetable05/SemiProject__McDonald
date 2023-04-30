@@ -7,35 +7,17 @@
 <title>McDonald's. - 주문</title>
 
 <style type="text/css">
-   
-   .flex-content-container-item2>div {
-   		
-   		border-radius: 1rem;
-		height: 372px;
-		@media (min-width: 1276px) {
-		    flex: 0 0 33.333333%;
-		    max-width: 33.333333%;
-		}
-		@media (min-width: 1502px) {
-		    flex: 0 0 25%;
-		    max-width: 25%;
-		}
-	   	@media (min-width: 1920px) {
-		   	min-width: 233.11px;
-		   	flex: 0 0 20%;
-		}
-	   	@media (min-width: 2112px) {
-		   	min-width: 16.66666%;
-		   	flex: 0 0 16.66666%;
-		   	height: 380px;
-	   	}
-   }
-   
-	body {
+	
+	div#div_flex1,
+    div#div_flex2,
+    div#div_flex3 {
+    	display: none;
+    }
+
+   body {
 		background-color: #f3f3f3;
-	}
-   	
-   	/* Bootstrap Override */	
+	}  
+   /* Bootstrap Override */	
 	@media (min-width: 576px) {
 	  .container, .container-sm {
 	    max-width: 540px;
@@ -57,35 +39,49 @@
     position: relative;
     top: 140px;
     margin-top: 40px;
-    }	
-    div#div_flex1,
-    div#div_flex2,
-    div#div_flex3 {
-    	display: none;
     }
- 
-     .content-container {
-         display: flex;
-         align-items: flex-start;
-         margin: 0 auto;
-         /* flex-wrap: wrap; */
-     }
+   .flex-content-container-item2>div {
+   		border-radius: 1rem;
+		height: 372px;
+		@media (min-width: 1276px) {
+		    flex: 0 0 33.333333%;
+		    max-width: 33.333333%;
+		}
+		@media (min-width: 1502px) {
+		    flex: 0 0 25%;
+		    max-width: 25%;
+		}
+	   	@media (min-width: 1920px) {
+		   	min-width: 233.11px;
+		   	flex: 0 0 20%;
+		}
+	   	@media (min-width: 2112px) {
+		   	min-width: 16.66666%;
+		   	flex: 0 0 16.66666%;
+		   	height: 380px;
+	   	}
+   }
+	
+	.content-container {
+		display: flex;
+        align-items: flex-start;
+        margin: 0 auto;
+    }
 
-     #menu>ul.nav {
+    #menu>ul.nav {
          display: flex;
          flex-wrap: nowrap;
          word-break: keep-all;
-     }
+    }
 
-     div.tab-content {
+    div.tab-content {
          border: none;
-     }
+    }
 
      /* 왼쪽 탭 하위 요소 */
-     div.tab-pane {
+    div.tab-pane {
          padding: 0;
-     }
-
+	}
 
 	li.nav-item-daan.custom >a.nav-link.custom {
 		width: auto;
@@ -96,27 +92,26 @@
         box-shadow: 0px -1px 3px #cecece;
         padding-bottom: 0;
         padding: .5rem 0.7rem;
-         
-     }
+    }
 
-     li.nav-item-daan.custom >a.nav-link.custom.active {
+	li.nav-item-daan.custom >a.nav-link.custom.active {
          background-color: #ffc423;
          border: none;
          box-shadow: 0 -1px 2px #a6a6a6;
          color: white;
-     }
+    }
 
-     .list-group-item {
+    .list-group-item {
          background-color: #ffc423;
          font-size: 0.9rem;
          color: white;
          padding: .5rem 0.5rem;
          cursor: pointer;
-     }
+    }
 
-     li.list-group-item:first-child {
+    li.list-group-item:first-child {
          border-radius: 0;
-     }
+    }
 
     .flex-content-container-item2 {
 		margin: 0 1vw;
@@ -144,32 +139,30 @@
 	.card-bottom-daan {
 		position: absolute;
 		bottom: 2px;
-		width: 98%;
-		justify-content: center;
+		width: 95%;
+		flex-wrap: nowrap;
+		justify-content: space-evenly;
 	}
-	.card-bottom-daan>*{
+	.card-bottom-daan > *:has(label.option-label) {
 		flex: 1;
+		max-width: 35%;
 	}
-
     p {
          font-size: 0.8rem;
          color: gray;
     }
     
 
-<%--  여기까지 적용 확인 --%>
      button.addToCart-button,
      div#placeOrder button {
-         background-color: #ff0000 !important;
-         color: white !important;
-         font-size: 10pt !important;
-         font-weight: bold !important;
+         background-color: #ff0000;
+         color: white;
+         font-size: 10pt;
+         font-weight: bold;
      }
 
-     a.edit,
      button.edit {
          float: right;
-
      }
 
      #order_wrap {
@@ -182,7 +175,7 @@
 
 	
 	#placeOrder {
-		padding: 1vh 0;
+		padding: 3vh 0;
 	}
 	#placeOrder button {
 		width: 70%;
@@ -202,14 +195,16 @@
      div.mt-2 {
      	background-color: white;
      	border-radius: 3%;
+     	box-shadow: 2px 3px 3px 2px #a6a6a6;
+     	padding: 1vh;
      }
      
      #my_order_info>*{
      	margin: 2vh 0;
      }
+     #my_order_info > div:nth-child(3) > span,
      #my_order_info > div:nth-child(4) > span,
-     #my_order_info > div:nth-child(5) > span,
-     #my_order_info > div:nth-child(6) > span {
+     #my_order_info > div:nth-child(5) > span {
      	float: right;
      }
      
@@ -220,11 +215,6 @@
      strong {
      	padding: 0 0.35rem;
      }
-     /* 
-     .card-bottom-daan>* {
-     	margin-left: 5%;
-     }
-      */
      
      /* 배달주소 입력되는 항목들 */
      div.data>input {
@@ -245,7 +235,7 @@
 		width: 100%;
 		height: 15px;
 		background-color: #a6a8ab;
-	  	line-height: 30px; /* To center it vertically */
+	  	line-height: 30px;
 		color: white;
 		border-radius: 0.3rem;
 	}
@@ -259,13 +249,14 @@
 		width: 0;
 	}
 
-	
-	}
 	label.option-label {
-		border-radius: 0.4rem;
-		border: solid 2px gray;
 		display: inline-block;
 		width: 100%;
+    	background-color: #f3f3f3;
+    	border-radius: 0.4rem;
+		border: solid 2px #f3f3f3;
+    	color: #a6a6a6;
+    	font-weight: 500;
 	}
 	
 	label.option-label:has(> input.btn:checked) {
@@ -279,10 +270,15 @@
 		color: white;
 	}
 	
+	div#placeOrder button:disabled {
+    	background-color: gray;
+	}
+	
  </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script type="text/javascript">
 
+	
 	let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
 	if(arr == null) {
 		sessionStorage.setItem('cart_arr', JSON.stringify([]));
@@ -296,6 +292,10 @@
 	
 	$(document).on('change', 'input.input-number', function(e){
 	
+		if($(e.target).val() > 99 | $(e.target).val() < 1) {
+			$(e.target).val(1);
+		}
+		
 		let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
 		let index = $('input.input-number').index($(e.target));
 		
@@ -314,17 +314,54 @@
 		});
 		
 		const preSubtotal_arr = document.getElementsByClassName('preSubtotal');
-		preSubtotal_arr[index].innerText = '￦'+(price*quantity_arr[index]);
+		preSubtotal_arr[index].innerText = '￦ '+(price*quantity_arr[index]);
 		updateMyOrderSection();
 	});
+	
+	$(document).on('click', 'button.btn-number', function(e){
+		
+		// 주문상세 갯수 input from https://www.codeply.com/p/GiARflvHDW
+		    e.preventDefault();
+		    
+		    fieldName = $(this).attr('data-field');
+		    type      = $(this).attr('data-type');
+		    var input = $(this).closest('.input-group').find("input[name='"+fieldName+"']");
+		    var currentVal = parseInt(input.val());
+		    if (!isNaN(currentVal)) {
+		        if(type == 'minus') {
+		            
+		            if(currentVal > input.attr('min')) {
+		                input.val(currentVal - 1).change();
+		            }
+<%--		            
+		            if(parseInt(input.val()) == input.attr('min')) {
+		                $(this).attr('disabled', true);
+		            }
+--%>
+		        } else if(type == 'plus') {
 
-	// sessionStorage.setItem('cart_arr', JSON.stringify([{"item_no":3,"is_set":'Yes'}]));
-	// let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-	// arr.push(3);
-	
-	
+		            if(currentVal < input.attr('max')) {
+		                input.val(currentVal + 1).change();
+		            }
+<%--
+		            if(parseInt(input.val()) == input.attr('max')) {
+		                $(this).attr('disabled', true);
+		            }
+--%>
+		        }
+		    } else {
+		        input.val(0);
+		    }
+	});
 	
 	$(document).ready(function(){
+		
+		$('div.mt-2').css('display', '');
+
+		if(arr.length == 0) {
+			$('div.mt-2').css('display', 'none');
+		}
+
 		
 		
 		// 각 제품 카드는 배경화면이 제거된 이미지 사진을 사용합니다.
@@ -347,73 +384,48 @@
 		// 시간에 따라 메뉴 다르게 보여주기
 		const today = new Date();
 		const hours = today.getHours();
-		
-		if(hours > 10) {
-				
+		const menuBar_arr = Array.from($('a.nav-link.custom'));
+		if(4 < hours && hours <10 ) {
+			$(menuBar_arr).removeClass('active');
+			$(menuBar_arr[0]).addClass('active');
+			$('div.tab-pane.container').removeClass('active');
+			$('div.tab-pane.container#morning').addClass('active');
+		} else {
+			$(menuBar_arr).removeClass('active');
+			$(menuBar_arr[1]).addClass('active');
+			$('div.tab-pane.container').removeClass('active');
+			$('div.tab-pane.container#after').addClass('active');
 		}
 		
+		let addToCartButton_arr = document.querySelectorAll('button.addToCart-button');
+		addToCartButton_arr = Array.from(addToCartButton_arr);
+		
+		if(4 < hours && hours <10 ) {
+			addToCartButton_arr.forEach(function(elt, i) {
+				if($(elt).attr('data-category_no') == 1) {
+					$(elt).prop('disabled', true);
+					$(elt).css('background-color', 'gray');
+				}
+			});
+			
+		} else {
+			addToCartButton_arr.forEach(function(elt, i) {
+				if($(elt).attr('data-category_no') == 2) {
+					$(elt).prop('disabled', true);
+					$(elt).css('background-color', 'gray');
+				}
+			});
+			
+		}
 		// ------------------------------------------------------
 		
 		toCart();
 		updateMyOrderSection();
 		
-		// 주문상세 갯수 input from https://www.codeply.com/p/GiARflvHDW
-		$('.btn-number').click(function(e){
-		    e.preventDefault();
-		    
-		    fieldName = $(this).attr('data-field');
-		    type      = $(this).attr('data-type');
-		    var input = $(this).closest('.input-group').find("input[name='"+fieldName+"']");
-		    var currentVal = parseInt(input.val());
-		    if (!isNaN(currentVal)) {
-		        if(type == 'minus') {
-		            
-		            if(currentVal > input.attr('min')) {
-		                input.val(currentVal - 1).change();
-		            } 
-		            if(parseInt(input.val()) == input.attr('min')) {
-		                $(this).attr('disabled', true);
-		            }
-
-		        } else if(type == 'plus') {
-
-		            if(currentVal < input.attr('max')) {
-		                input.val(currentVal + 1).change();
-		            }
-		            if(parseInt(input.val()) == input.attr('max')) {
-		                $(this).attr('disabled', true);
-		            }
-
-		        }
-		    } else {
-		        input.val(0);
-		    }
-		});
-		$('.input-number').focusin(function(){
-		   $(this).data('oldValue', $(this).val());
-		});
-		
-
-		$(".input-number").keydown(function (e) {
-		    // Allow: backspace, delete, tab, escape, enter and .
-		    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-		         // Allow: Ctrl+A
-		        (e.keyCode == 65 && e.ctrlKey === true) || 
-		         // Allow: home, end, left, right
-		        (e.keyCode >= 35 && e.keyCode <= 39)) {
-		             // let it happen, don't do anything
-		             return;
-		    }
-		    // Ensure that it is a number and stop the keypress
-		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		        e.preventDefault();
-		    }
-		});
 		
 		const list_select = Array.from(document.getElementsByClassName('list-group-item-select'));
 		list_select.forEach((event)=> {
 			event.addEventListener('click', function(e) {
-				console.log(e.target.parentNode.parentNode.value);
 				
 				const frm = document.tabSelectForm;
 				frm.fk_category_no.value = e.target.parentNode.parentNode.value;
@@ -480,9 +492,71 @@
 		
 		toCart();
 		updateMyOrderSection();
-		progressStatus();
+		// progressStatus();
 
 	}
+	
+	
+	
+	
+	function checkDuplicate(item_no, is_set) {
+		let isSingleOrderDuplicated = -1;
+		const cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+		
+		if(cart_arr.length != 0) {
+			if(item_no < 300) {
+			
+				$.each(cart_arr, function(i, singleOrder){
+					
+					if(singleOrder.length > 1 && is_set == 1) {
+							
+							if(item_no < 200) {
+								if(singleOrder[0].item_no == item_no && singleOrder[1].item_no == 303 && singleOrder[2].item_no == 504) {
+									console.log('1 ➡️ 버거 세트 구성 중복인데?');
+									isSingleOrderDuplicated = i;
+									return isSingleOrderDuplicated;
+								} else {
+									console.log('2 ➡️ 버거 세트 구성 중복 아닙니다.');
+								}
+								
+							} else {
+								if(singleOrder[0].item_no == item_no && singleOrder[1].item_no == 300 && singleOrder[2].item_no == 519) {
+									console.log('3 ➡️ 맥모닝 세트 구성 중복인데?');
+									isSingleOrderDuplicated = i;
+									return isSingleOrderDuplicated;
+								} else {
+									console.log('4 ➡️ 맥모닝 세트 구성 아닙니다.');
+								}
+							}
+					} else if(singleOrder.length == 1 && is_set == 0) {
+						if (singleOrder[0].item_no == item_no) {
+							console.log('5 ➡️ 버거 단품 중복인데?');
+							isSingleOrderDuplicated = i;
+							return isSingleOrderDuplicated;
+						} else {
+							console.log('6 ➡️ 서로 다른 버거 입니다.');
+						}
+					} else {
+						console.log('7 ➡️ ');
+					}
+					
+				});
+			
+			} else {
+				$.each(cart_arr, function(i, singleOrder){
+					if (singleOrder[0].item_no == item_no) {
+						console.log(singleOrder[0].item_no + '중복인데?');
+						isSingleOrderDuplicated = i;
+						return isSingleOrderDuplicated;
+					} else {
+						console.log(singleOrder[0].item_no + '중복 아닙니다.');
+					}
+				});
+			}
+		}
+		return isSingleOrderDuplicated;
+	}
+	
 	
 	// 담긴 주문 정보를 바탕으로 '내 주문정보' 내용 변경
 	function updateMyOrderSection() {
@@ -491,7 +565,8 @@
 		const quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
 		
 		let subtotal = 0;
-		if(cart_arr.length != 0) {
+		if(cart_arr.length > 0) {
+			$("button.btn-placeOrder").attr('disabled', false);
 			let delivery_fee = 3000;
 			$.each(cart_arr, function(i, singleOrder){
 				let quantity = quantity_arr[i];
@@ -509,9 +584,10 @@
 			$('span#delivery_fee').text('￦ '+delivery_fee);
 			$('span#total').text('￦ '+(subtotal+delivery_fee));
 			$('span#total').css({'color':'#04aa6d', 'font-weight':'bold', 'font-size':'1.25rem'});
-			progressStatus();
+			// progressStatus();
 			$('form[name="placeOrderForm"] > fieldset > input').val(subtotal+delivery_fee);
 		} else {
+			$("button.btn-placeOrder").attr('disabled', true);
 			$('span#subtotal').text('￦ '+subtotal);
 			$('span#delivery_fee').text('￦ '+0);
 			$('span#total').text('￦ '+(subtotal));
@@ -523,16 +599,16 @@
 	function completeEditOption() {
 		
 		const side_checked = $('input:radio[name="side"]:checked');
-		const side_name = side_checked.parent().parent().find('div#editOption_side_name').text();
-		const side_price = Number(side_checked.parent().parent().find('div#editOption_side_price').text());
+		const side_name = side_checked.parent().parent().find('div.editOption_side_name').text();
+		const side_price = Number(side_checked.parent().parent().find('div.editOption_side_price').text());
 		const side_item_no = Number(side_checked.val());
 		
 		const side_arr = {"item_price":side_price,"item_name":side_name,"item_no":side_item_no};
 		
 		const drink_checked = $('input:radio[name="drink"]:checked');
-		const drink_name = drink_checked.parent().parent().find('div#editOption_drink_name').text();
-		const drink_price = Number(drink_checked.parent().parent().find('div#editOption_drink_price').text());
-		const drink_item_no = drink_checked.val();
+		const drink_name = drink_checked.parent().parent().find('div.editOption_drink_name').text();
+		const drink_price = Number(drink_checked.parent().parent().find('div.editOption_drink_price').text());
+		const drink_item_no = Number(drink_checked.val());
 		
 		const drink_arr = {"item_price":drink_price,"item_name":drink_name,"item_no":drink_item_no};
 		
@@ -540,29 +616,54 @@
 		
 		// sessionStorage cart 배열 불러온다.
 		let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-		// let cart_arr_edit = JSON.parse(sessionStorage.getItem('cart_arr'));
-		let cart_arr_edit = cart_arr;
-		// 수정하려는 index의 singleOrder 배열을 불러온다.
-		arr_singleorder = cart_arr_edit[index];
-		// console.log(JSON.stringify(arr_singleorder[1]));
-		arr_singleorder[1] = side_arr;
-		arr_singleorder[2] = drink_arr;
-		cart_arr = cart_arr_edit;
-		sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
+		const mainMenu_item_no = Number(cart_arr[index][0].item_no);
+		const is_set = 1;
+		let is_duplicated = false;
+		// 여기에 duplicateset 체크한다.
+		$.each(cart_arr, function(index,singleOrder) {
+			if(singleOrder.length > 1) {
+				let cnt_duplicated = 0;
+				singleOrder.forEach(function(item, i) {
+					if(Number(item.item_no) == mainMenu_item_no || Number(item.item_no) == side_item_no || Number(item.item_no) == drink_item_no) {
+						cnt_duplicated++;
+					}
+					
+					if(cnt_duplicated == 3) {
+						is_duplicated = true;
+						return false;
+					}	
+				});
+			}
+		})
 		
-		toCart();
-		updateMyOrderSection();
-		progressStatus();
+		if(is_duplicated) {
+			alert('주문상세에 이미 존재하는 구성입니다.');
+			return false;
+		} else {
+			let cart_arr_edit = cart_arr;
+			// 수정하려는 index의 singleOrder 배열을 불러온다.
+			arr_singleorder = cart_arr_edit[index];
+			// console.log(JSON.stringify(arr_singleorder[1]));
+			arr_singleorder[1] = side_arr;
+			arr_singleorder[2] = drink_arr;
+			cart_arr = cart_arr_edit;
+			sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
+			toCart();
+			updateMyOrderSection();
+			// progressStatus();
+		}
+		
 	}
 	
 	function editMenu() {
 		
 		const index = $(event.target).parent().attr('data-session_index');
-		
+		let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+		let singleOrder = cart_arr[index];
 		$.ajax({
 			url: '<%= request.getContextPath()%>/daan/modal_editOption.run',
 			//data:{"session_index", index},
-			type: 'GET',
+			type: 'POST',
 			dataType: 'JSON',
 			//async:true,
 			success: function(json){
@@ -574,11 +675,11 @@
 						html = `<ul>`;
 						elt.forEach(function(item) {
 							
-							html += `<li class="editOption_li">
+							html += `<li class="editOption_li sides">
 									 <img src="" data-temp="\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
-									 <div id="editOption_side_name">\${item.name}</div>
-									 <div id="editOption_side_price">\${item.price}</div>
-									 <div id="editOption_side_item_no"><input type="radio" name="side" value="\${item.item_no}"/></div>
+									 <div class="editOption_side_name">\${item.name}</div>
+									 <div class="editOption_side_price">\${item.price}</div>
+									 <div class="editOption_side_item_no"><input type="radio" class="editOption_input" name="side" value="\${item.item_no}"/></div>
 									 </li>`;
 						});
 						html += `</ul>`;
@@ -588,16 +689,17 @@
 						html = `<ul>`;
 						elt.forEach(function(item) {
 							
-							html += `<li class="editOption_li">
+							html += `<li class="editOption_li drinks">
 									 <img src="" data-temp="\${item.image}" class="card-img-top" alt="burger" style="height: 13vh" />
-									 <div id="editOption_drink_name">\${item.name}</div>
-									 <div id="editOption_drink_price">\${item.price}</div>
-									 <div id="editOption_drink_item_no"><input type="radio" name="drink" value="\${item.item_no}"/></div>
+									 <div class="editOption_drink_name">\${item.name}</div>
+									 <div class="editOption_drink_price">\${item.price}</div>
+									 <div class="editOption_drink_item_no"><input type="radio" class="editOption_input" name="drink" value="\${item.item_no}"/></div>
 									 </li>`;
 						});
 						html += `</ul>`;
 						$('div.modal_drinks').html(html);
 					}
+					
 					
 					let modalOptionLisArr = document.querySelectorAll('li.editOption_li > img');
 					modalOptionLisArr = Array.from(modalOptionLisArr);
@@ -611,6 +713,24 @@
 						elt.setAttribute('src', img_src);
 					});
 					
+				});
+				const sidesArr = Array.from($('.editOption_side_item_no'));
+				sidesArr.forEach(function(elt, i) {
+					if(singleOrder[1].item_no == Number($(elt).find('input').val())) {
+						$(elt).find('input').prop('checked', true);
+						elt.parentNode.style.backgroundColor = '#ffbc0d';
+						elt.parentNode.style.color = 'white';
+						return false;
+					}
+				});
+				const drinksArr = Array.from($('.editOption_drink_item_no'));
+				drinksArr.forEach(function(elt, i) {
+					if(singleOrder[2].item_no == Number($(elt).find('input').val())) {
+						$(elt).find('input').prop('checked', true);
+						elt.parentNode.style.backgroundColor = '#ffbc0d';
+						elt.parentNode.style.color = 'white';
+						return false;
+					}
 				});
 				
 				let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
@@ -649,7 +769,7 @@
 	                
 	                // 단품일 경우 변경 버튼은 없어야 한다.
 	                if(singleOrder.length > 1) {
-	                	html += `<button type="button" class="edit" data-toggle="modal" data-target="#editOption" onClick="editMenu()">변경</button><form name="editMenuForm"><input type="hidden" name="session_index" value="\${session_index}"/></form>`;
+	                	html += `<button type="button" class="edit" data-toggle="modal" data-target="#editOption" onClick="editMenu()" style="border-radius: 0.25rem;border: none;background-color: transparent;color: blue;">변경</button><form name="editMenuForm"><input type="hidden" name="session_index" value="\${session_index}"/></form>`;
 	                }
 				}else if(i == 1) {
 					html += `<div style="font-size:0.9rem; padding-top: 5%;">
@@ -678,7 +798,7 @@
 						 </button>
 					 </span>
 				 </div>
-	             <a class="removeFromCart-button" style="color:red; font-size:0.9rem" onClick="removeFromCart(this)">삭제</a><span class="preSubtotal" style="float:right;">￦\${price*quantity}</span>
+	             <a class="removeFromCart-button" style="color:red; font-size:0.9rem" onClick="removeFromCart(this)">삭제</a><span class="preSubtotal" style="float:right;">￦ \${price*quantity}</span>
 	             <hr>
 				 </div>`;
 			
@@ -691,7 +811,6 @@
 	function addToCart(item_no){
 		// 단품을 선택했는지, 세트를 선택했는지 값을 가져옵니다.
 		const is_set = $('input:radio[name="'+item_no+'_is_set"]:checked').val();
-		
 		if(is_set == null) {
 			alert('종류를 선택하세요');
 			return false;
@@ -706,24 +825,34 @@
 				async:true,
 				success: function(json){
 					
+					$('div.mt-2').css('display', '');
+					
 					let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-				<%--
-					if(cart_arr == null) {
-						sessionStorage.setItem('cart_arr', []);
-					}
-				--%>
+					<%--
+						if(cart_arr == null) {
+							sessionStorage.setItem('cart_arr', []);
+						}
+					--%>
 					let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
 					
+					let isSingleOrderDuplicated = checkDuplicate(Number(item_no), Number(is_set));
+					// console.log(isSingleOrderDuplicated);
 					
-					cart_arr.push(json);
-					sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
+					if(isSingleOrderDuplicated != -1) {
+						const session_index = isSingleOrderDuplicated;
+						quantity_arr[session_index] += 1;
+					} else {
+						cart_arr.push(json);
+						sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
 
-					quantity_arr.push(1);
+						quantity_arr.push(1);
+					}
+
 					sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
-
+					
 					toCart();
 					updateMyOrderSection();
-					progressStatus();
+					// progressStatus();
 				},
 				error: function(request, status, error){
 		               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -790,6 +919,13 @@
 		
 		// sessionStorage 상 저장된 장바구니 객체를 가져온다.
 		let str_cart_arr = sessionStorage.getItem('cart_arr');
+		let cart_arr = JSON.parse(str_cart_arr);
+		
+		if(cart_arr.length < 1) {
+			alert('장바구니가 비었습니다.');
+			return;
+		}
+		
 		let str_quantity_arr = sessionStorage.getItem('quantity_arr');
 		
 		// <form> 내 <input type="hidden">의 value 값 불러온다.
@@ -804,13 +940,25 @@
 			dataType: "JSON",
 			async:false,
 			success: function(json){
-					alert(json.message);
-					const frm = document.placeOrderForm;
+					// alert(json.message);
 					
-					frm.action = '<%=request.getContextPath()%>/daan/placeOrder.run';
-					frm.method = 'PUT';
-					frm.totalFinal.value = $('span#total').text();
-					frm.submit();
+					const result = json.message;
+					if('fail' == result) {
+						alert('DB상 금액과 View 단에서의 금액이 맞지 않음');
+						return false;
+						
+					} else {
+						alert('결제 진행');
+						
+						const frm = document.placeOrderForm;
+						frm.action = '<%=request.getContextPath()%>/daan/placeOrder.run';
+						frm.method = 'POST';
+						frm.totalFinal.value = Number($('span#total').text().substr(2));
+						frm.deliveryFee.value = Number($('span#delivery_fee').text().substr(2));
+						// console.log('delivery_fee value => '+Number($('span#delivery_fee').text().substr(2)));
+						frm.submit();
+					}
+					
 				},
 				error: function(request, status, error){
 		               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -828,7 +976,7 @@
                 <div id="menu" class="rounded">
                     <ul class="nav nav-tabs">
                         <li class=" nav-item-daan custom">
-                            <a class="nav-link custom active" data-toggle="tab" href="#morning">아침메뉴</a>
+                            <a class="nav-link custom" data-toggle="tab" href="#morning">아침메뉴</a>
                         </li>
                         <li class="nav-item-daan custom">
                             <a class="nav-link custom" data-toggle="tab" href="#after">일반메뉴</a>
@@ -836,7 +984,7 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div class="tab-pane container active" id="morning">
+                        <div class="tab-pane container" id="morning">
                             <ul class="list-group custom">
                           <%-- <li class="list-group-item"><a class="list-group-item-select"><span>추천 메뉴</span></a></li> --%>
                                 <li class="list-group-item" value="2"><a class="list-group-item-select"><span>맥모닝 & 세트</span></a></li>
@@ -848,12 +996,10 @@
                         </div>
                         <div class="tab-pane container" id="after">
                             <ul class="list-group custom">
-                          <%--  <li class="list-group-item"><a class="list-group-item-select"><span>추천 메뉴</span></a></li> --%>
                                 <li class="list-group-item" value="1"><a class="list-group-item-select"><span>버거 & 세트</span></a></li>
                                 <li class="list-group-item" value="3"><a class="list-group-item-select"><span>스낵 & 사이드</span></a></li>
                                 <li class="list-group-item" value="5"><a class="list-group-item-select"><span>음료</span></a></li>
                                 <li class="list-group-item" value="4"><a class="list-group-item-select"><span>디저트</span></a></li>
-                          <%--	<li class="list-group-item"><a class="list-group-item-select"><span>해피밀®</span></a></li> --%>
                             </ul>
                         </div>
                     </div>
@@ -868,7 +1014,7 @@
             <div class="row flex-content-container-item2" style="background-color: #f3f3f3;">
             <c:if test="${not empty requestScope.item_list}">
 	            <c:forEach items="${requestScope.item_list}" var="item">
-	            	<div class="customCardsArr col-sm-12" style="">
+	            	<div class="customCardsArr col-sm-12">
 	            		<img src="" data-temp="${item.item_image}" class="card-img-top" alt="burger" style="width: 90%" />
                     <div class="card-body mb-1">
                         <span class="card-title">${item.item_name}</span>
@@ -876,13 +1022,18 @@
                         </p>
                     </div>
                     <div class="card-bottom-daan" style="display: flex;">
-                    <div style="display: inline-block; width:auto; font-weight:;"><label class="option-label"><input type="radio" class="btn" name="${item.item_no}_is_set" value="0">&ensp;단품<br><span>￦ ${item.item_price}</span></label></div>
+                    <div style="min-width:30%; width:auto;"><label class="option-label"><input type="radio" class="btn" name="${item.item_no}_is_set" value="0">&ensp;단품<br><span>￦ ${item.item_price}</span></label></div>
+                    
                     <c:choose>
-	            		<c:when test="${item.fk_category_no eq 1 || item.fk_category_no eq 2}">
-	            			<div style="display: inline-block; width:39%; font-weight:;"><label class="option-label"><input type="radio" class="btn" name="${item.item_no}_is_set" value="1"/>&ensp;세트<br><span>￦ ${item.item_price+2800+2400-1000}</span></label></div>
+	            		<c:when test="${item.fk_category_no eq 1}">
+	            			<div style="min-width:30%;"><label class="option-label"><input type="radio" class="btn" name="${item.item_no}_is_set" value="1"/>&ensp;세트<br><span>￦ ${item.item_price+2800+2400-1000}</span></label></div>
+	            		</c:when>
+	            		<c:when test="${item.fk_category_no eq 2}">
+	            			<div><label class="option-label"><input type="radio" class="btn" name="${item.item_no}_is_set" value="1"/>&ensp;세트<br><span>￦ ${item.item_price+1100+3300-1000}</span></label></div>
 	            		</c:when>
                     </c:choose>
-                    <div style="width:;"><button type="button" class="btn addToCart-button" style="padding: 13px; height: 86%;" onclick="addToCart('${item.item_no}')">추가</button></div>
+                    
+                    <div><button type="button" class="btn addToCart-button" style="padding: 1.1em;margin-bottom: .5rem;" data-category_no="${item.fk_category_no}" onclick="addToCart('${item.item_no}')">추가</button></div>
                     </div>
                 </div>
 	            </c:forEach>
@@ -905,10 +1056,10 @@
 						픽업/포장
 					</label>
 				</div>
-                <div id="my_order_info"  class="mt-4" align="left">
+                <div id="my_order_info"  class="mt-4" align="left" style="">
                 	<h5 style="width: 100%; text-align:center;">내 주문정보</h5>
                 	<div>
-	                	<strong>배달 주소</strong>&nbsp;&nbsp;<button class="btn-primary" type="button" style="cursor: pointer; float: right; border: solid 1px #ff0000; border-radius: 0.25rem; background-color: #ff0000;" onclick="openDaumPOST();">검색</button>
+	                	<strong>배달 주소</strong>&nbsp;&nbsp;<button class="edit btn-primary" type="button" style="cursor: pointer; border: solid 1px #ff0000; border-radius: 0.25rem; background-color: #ff0000;" onclick="openDaumPOST();">검색</button>
 	                	<div class="data pt-2">
 	                		(<input type="text" id="postcode" size="5" placeholder="우편번호" />)
 	                		<input type="text" id="address" size="65" placeholder="주소" /><br/>
@@ -917,12 +1068,6 @@
          				</div>
 	                	<hr>
                 	</div>
-                	<div>
-                		<strong>예상 배달시간</strong><a class="edit" href="#">변경</a>
-                        <div>{60분이내 도착 예정입니다.}</div>
-                        <hr>
-                	</div>
-                	
                 	<div>
                 		<strong>주문금액</strong>
                         <span id="subtotal">￦{Values}</span>
@@ -939,16 +1084,17 @@
                         <hr>
                 	</div>
 				</div>
-				
+<!-- 				
                 <div id="myProgress" class="py-3">
                 	<div id="myBar"></div>
                 </div>
-                
+ -->                
                 <div id="placeOrder">
                     <form name="placeOrderForm">
                         <fieldset>
-                            <button type="button" class="btn" onClick="placeOrder()">결제</button>
+                            <button type="button" class="btn btn-placeOrder" onClick="placeOrder()" style="font-size: 1.5rem; box-shadow: 0px 0px 0px 2px;">주문하기</button>
                             <input type="hidden" name="totalFinal"/>
+                            <input type="hidden" name="deliveryFee"/>
                         </fieldset>
                     </form>
                 </div>
@@ -956,8 +1102,7 @@
 
                 <div class="mt-2">
                 	<h5 style="width: 100%; text-align:center;">주문상세</h5>
-                	<div id="orderDetail">
-	                </div>
+                	<div id="orderDetail"></div>
                 </div>
                 
             </div>

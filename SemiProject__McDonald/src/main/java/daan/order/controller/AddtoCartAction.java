@@ -30,7 +30,6 @@ public class AddtoCartAction extends AbstractController {
 		if(singleOrder.size() > 0 ) {
 			
 			for(ItemVO option : singleOrder) {
-				//System.out.println(option.getItem_no()+" 이름 : "+option.getItem_name()+" 가격: ￦"+option.getItem_price());
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("item_no", option.getItem_no());
 				jsonObj.put("item_name", option.getItem_name());

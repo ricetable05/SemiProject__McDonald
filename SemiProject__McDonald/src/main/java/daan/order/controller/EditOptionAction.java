@@ -22,9 +22,6 @@ public class EditOptionAction extends AbstractController {
 		JSONArray parentJsonArr = new JSONArray();
 		
 		JSONArray childJsonArr = new JSONArray();
-		// JSONObject jsonObj = new org.json.JSONObject();
-		// 여기에 할 경우 결과물
-		// [{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"},{"image":"8_해쉬브라운.png","price":1100,"name":"해쉬 브라운"}]
 		
 		// 사이드 전제품 가져오기
 		List<ItemVO> sidesList = idao.getItemsbyCategory(3);
@@ -38,7 +35,6 @@ public class EditOptionAction extends AbstractController {
 		}
 		parentJsonArr.put(childJsonArr);
 		
-
 		// 음료 전제품 가져오기
 		childJsonArr = new JSONArray();
 		List<ItemVO> drinksList = idao.getItemsbyCategory(5);

@@ -34,19 +34,16 @@ public class OrderInfoAction extends AbstractController {
 				// 문자가 들어온 경우
 				fk_category_no  = 1;
 			}
+			
 		} else {
-			// 처음 방문시 
-			if(int_hourNow > 10) {
-				fk_category_no  = 1;
-			} else {
+// 처음 방문
+			if(int_hourNow >= 4 && int_hourNow <= 10) {
 				fk_category_no  = 2;
+			} else {
+				fk_category_no  = 1	;
 			}
 		}
 		
-		// 구현해야함
-		// 날짜 확인
-		// if 날짜가 맥모닝 시간이면 fk_category_no to 2
-				
 		item_list = idao.getItemsbyCategory(fk_category_no);
 		
 		if(item_list.size() < 0) {
