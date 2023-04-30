@@ -5,13 +5,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class ChangepwdAction extends AbstractController {
+public class Pwd3mAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		String userid = request.getParameter("userid");
+		
+		System.out.println(userid);
+		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/jangjh/login/is_dormant.jsp");
+		super.setViewPage("/WEB-INF/jangjh/login/pwd3m.jsp");
 		
 	}
 
