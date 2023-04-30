@@ -16,7 +16,7 @@
 
 <style type="text/css">
 
-.user-warp{
+.topimage{
 background:url(<%= request.getContextPath() %>/images/맥모닝상단이미지.jpg) 50% 50% no-repeat;
 }
 
@@ -226,20 +226,19 @@ $(document).ready(function() {
 					
 				
 					
-					<div class="user-warp">
-						<div class="user-image"></div>
-						<div class="user-text">
-							<h1 class="titDep1">맥모닝</h1>
-							<p style="margin-top: 15px;">새벽 4시부터 오전 10시 30분까지 </p>
-							<p>  갓 구워내 신선한 맥모닝으로 따뜻한 아침 식사를 챙겨 드세요!</p>
+						<div class="topimage">
+							<div class="toptext">
+								<h1 class="titDep1">맥모닝</h1>
+								<p style="margin-top: 15px;">새벽 4시부터 오전 10시 30분까지 </p>
+								<p>  갓 구워내 신선한 맥모닝으로 따뜻한 아침 식사를 챙겨 드세요!</p>
+							</div>
+							<div class="toptext2">
+								<ul>
+									<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
+									<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+								</ul>
+							</div>
 						</div>
-						<div class="user-text2">
-							<ul>
-								<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-								<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
-							</ul>
-						</div>
-					</div>
 							
 				
 					

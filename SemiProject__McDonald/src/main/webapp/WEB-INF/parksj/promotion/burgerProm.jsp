@@ -9,7 +9,9 @@
 
 <style type="text/css">
 
-.user-warp{
+
+
+.topimage{
 background:url(<%= request.getContextPath() %>/images/프로모션상단이미지.jpg) 50% 50% no-repeat;
 }
 
@@ -26,14 +28,12 @@ background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"/>
 <!-- 메인 컨테이너 시작-->
-<div class="MC_content">
-	<!-- 상단이미지 시작-->
-	<div class="user-warp">
-		<div class="user-image"></div>
-		<div class="user-text">
+<div class="MCcontent">
+	<div class="topimage">
+		<div class="toptext" style="padding-top: 50px;">
 			<h1 class="titDep1">맥도날드 프로모션</h1>
 		</div>
-		<div class="user-text2">
+		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 				<li class="listsecond"><a href="<%= request.getContextPath()%>/promotion/promotionMain.run">맥도날드 프로모션</a></li>
@@ -72,6 +72,5 @@ background:url(<%= request.getContextPath()%>/images/btn_bbs_prev.png);
 
 <!-- 메인 컨테이너 끝-->
 
-
-
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>
+

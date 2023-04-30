@@ -87,9 +87,7 @@
 			const iframe_window_pwd = iframe_pwdFind.contentWindow; 
 			iframe_window_pwd.func_form_reset_empty_pwd(); 
 			
-		}); // end of $("button.idFindClose").click(function(){} ----------------- 
-		
-		
+		}); // end of $("button.passwdFindClose").click(function(){} ----------------- 
 		
 		
 	});//end of $(document).ready(function() --------------------------------------

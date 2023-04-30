@@ -64,7 +64,7 @@ public class LoginAction extends AbstractController{
 			
 			if(loginuser.isRequirePwdChange()) {
 				String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경해주세요. !!";
-				String loc = request.getContextPath()+"/main.run";
+				String loc = request.getContextPath()+"/login/pwd3m.run";
 				
 				request.setAttribute("message", message);
 				request.setAttribute("loc", loc);

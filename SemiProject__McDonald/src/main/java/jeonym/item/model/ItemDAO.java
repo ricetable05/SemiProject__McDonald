@@ -142,15 +142,41 @@ public class ItemDAO implements InterItemDAO {
 		try {
 	            conn = ds.getConnection();
 	            
-	            String sql = " select ceil(count(*)/10) " // sizePerPage 일단 10으로 고정
+	            String sql = " select ceil(count(*)/?) " // sizePerPage 일단 10으로 고정
 	            		   + " from tbl_item ";
 	            	                        
+	            String colname = paraMap.get("searchType");
+	            String searchWord = paraMap.get("searchWord");
+	            
+	            
 	            if(!"".equals(paraMap.get("category_id"))) {
 	            	columnName = paraMap.get("category_id");    
 	            	sql += " where fk_category_no = " + columnName; // tbl_item 에는 fk_category_no 라는 이름으로 존재함
 	            }
-	             
+	            
+	            if( !"".equals(colname) && searchWord != null && !searchWord.trim().isEmpty() ) {
+		             
+	            	if(!"".equals(paraMap.get("category_id"))) {
+	            		
+	            		sql += " and " + colname + " like '%'|| ? ||'%' " ;
+			               // 컬럼명과 테이블명은 위치홀더(?)로 사용하면 안된다.
+			               // 위치홀더(?)로 들어오는 것은 컬럼명과 테이블명이 아닌 오로지 데이터값만 들어온다.
+	            	}
+	            	else {
+	            		sql += " where " + colname + " like '%'|| ? ||'%' " ;
+	            	}
+	            	
+	            	   
+		        }
+
 	            pstmt = conn.prepareStatement(sql); 
+
+	            pstmt.setString(1, paraMap.get("sizePerPage"));
+	            
+	            if( !"".equals(colname) && searchWord != null && !searchWord.trim().isEmpty() ) {
+	               pstmt.setString(2, searchWord);
+	            }
+         
 	                        
 	            rs = pstmt.executeQuery();
 	            
@@ -173,9 +199,19 @@ public class ItemDAO implements InterItemDAO {
 		
 		List<ItemVO> ItemList = new ArrayList<>();
 		
+		
+		
 		try {
 			
-			conn = ds.getConnection();			
+			
+			
+			conn = ds.getConnection();
+			
+			int currentShowPageNo = Integer.parseInt(paraMap.get("currentShowPageNo"));
+			String colname = paraMap.get("searchType");
+			String searchWord = paraMap.get("searchWord");
+			int sizePerPage =  Integer.parseInt(paraMap.get("sizePerPage"));
+			
 			String sql = " select item_no, category_name, item_name, item_price, morning_availability, item_info "
 					   + " from "
 					   + " ( "
@@ -183,8 +219,18 @@ public class ItemDAO implements InterItemDAO {
 					   + "    from( "
 					   + "            ( "
 					   + "                select item_no, fk_category_no, item_name, item_price, morning_availability, item_info "
-					   + "                from tbl_item "
-					   + "                order by 2 asc, 1 desc "
+					   + "                from tbl_item ";
+		
+					   if( !"".equals(colname) && searchWord != null && !searchWord.trim().isEmpty()) {
+							
+							sql += " where " + colname + " like '%' || ? || '%' "; // 이메일은 암호화 처리되기 때문에 전체 이메일을 검색창에 입력해야한다.
+							
+							// 컬럼명과 테이블 명은 위치홀더(?) 로 사용하면 안된다.
+							// 위치홀더로(?) 로 들어오는 것은 오로지 컬럼명과 테이블명이 아닌 오로지 데이터값만 들어온다. 
+							
+						}
+					   
+				   sql += "                order by 2 asc, 1 desc "
 					   + "            ) I  "
 					   + "            JOIN "
 					   + "            ( "
@@ -204,19 +250,40 @@ public class ItemDAO implements InterItemDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			int currentShowPageNo = Integer.parseInt(paraMap.get("currentShowPageNo"));
-			int sizePerPage = 10; // 한 페이지당 화면상에 보여줄 제품의 갯수는 10 으로 한다.
 			
-			if(paraMap.get("category_id") != null && !paraMap.get("category_id").trim().isEmpty()) {
-						
-				pstmt.setInt(1, Integer.parseInt(paraMap.get("category_id")));
-				pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
-				pstmt.setInt(3,(currentShowPageNo * sizePerPage));
+			if(!"".equals(colname) && searchWord != null && !searchWord.trim().isEmpty()) { // 검색어가 있는 경우
+				
+				if(paraMap.get("category_id") != null && !paraMap.get("category_id").trim().isEmpty()) { // 카테고리 있는 경우
+					pstmt.setString(1, searchWord);
+					pstmt.setInt(2, Integer.parseInt(paraMap.get("category_id")));
+					pstmt.setInt(3,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+					pstmt.setInt(4,(currentShowPageNo * sizePerPage));
+
+				}
+				else {
+					pstmt.setString(1, searchWord); // 카테고리 없는 경우
+					pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+					pstmt.setInt(3,(currentShowPageNo * sizePerPage));
+
+
+				}
+				
 			}
-			else {
-				pstmt.setInt(1,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
-				pstmt.setInt(2,(currentShowPageNo * sizePerPage));
+			else { //  검색어 없는경우
+
+				if(paraMap.get("category_id") != null && !paraMap.get("category_id").trim().isEmpty()) {
+					pstmt.setInt(1, Integer.parseInt(paraMap.get("category_id")));
+					pstmt.setInt(2,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+					pstmt.setInt(3,(currentShowPageNo * sizePerPage));
+
+				}
+				else {
+					pstmt.setInt(1,(currentShowPageNo * sizePerPage) - (sizePerPage - 1));
+					pstmt.setInt(2,(currentShowPageNo * sizePerPage));		
+				}
+	
 			}
+
 			
 			rs = pstmt.executeQuery();
 			
