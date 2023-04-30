@@ -271,7 +271,7 @@
 		
 		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
 			
-			 <form name="itemFrm" style="padding-left:30px;">
+			 <form name="itemFrm" style="padding-left:47px;">
 				<select id="searchType" name="searchType" style="height:28px;">
 					<option value="">선택하세요</option>
 					<option value="item_no">제품번호</option>	<%-- dao 에 보내야 하기 때문에 value 를 DB의 컬럼 name 과 일치 시켜야함 --%>		
