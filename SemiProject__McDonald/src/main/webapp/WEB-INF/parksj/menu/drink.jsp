@@ -9,7 +9,7 @@
 
 <style type="text/css">
 
-.user-warp{
+.topimage{
 background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg) 50% 50% no-repeat;
 }
 
@@ -100,14 +100,14 @@ background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg)
 	}
 </script>
 
-<div class="MC_content">
-	<div class="user-warp">
-		<div class="user-text">
+<div class="MCcontent">
+	<div class="topimage">
+		<div class="toptext">
 			<h1 class="titDep1">맥카페 & 음료</h1>
 			<p style="margin-top: 15px;"> 진한 커피향이 풍기는 맥카페와 상큼한 과일칠러까지! </p>
 			<p>언제나 즐겁게, 맥카페와 다양한 음료를 부담없이 즐기세요!</p>
 		</div>
-		<div class="user-text2">
+		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
@@ -143,5 +143,4 @@ background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg)
 	    
 
 </div>
-
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>

@@ -9,7 +9,7 @@
 
 <style type="text/css">
 
-.user-warp{
+.topimage{
 background:url(<%= request.getContextPath() %>/images/사이드상단이미지.jpg) 50% 50% no-repeat;
 }
 
@@ -102,14 +102,14 @@ background:url(<%= request.getContextPath() %>/images/사이드상단이미지.j
 	}
 </script>
 
-<div class="MC_content">
-	<div class="user-warp">
-		<div class="user-text">
+<div class="MCcontent">
+	<div class="topimage">
+		<div class="toptext">
 			<h1 class="titDep1">사이드</h1>
 			<p style="margin-top: 15px;">가볍게 즐겨도, 버거와 함께 푸짐하게 즐겨도, </p>
 			<p>언제나 맛있는 사이드메뉴!</p>
 		</div>
-		<div class="user-text2">
+		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
@@ -145,5 +145,4 @@ background:url(<%= request.getContextPath() %>/images/사이드상단이미지.j
 	    
 
 </div>
-
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>
