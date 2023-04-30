@@ -113,6 +113,30 @@
 	$("document").ready(function(){
 		
 		
+		 if("${requestScope.searchType}" != "" && "${requestScope.searchWord}" != ""){ // searchType 이나 searchWord에 문제가 없는 경우에만 값을 넣어주겠다.	
+				
+			    $("select#searchType").val("${requestScope.searchType}");
+				$("input#searchWord").val("${requestScope.searchWord}");
+				
+			}
+			
+			$("select#sizePerPage").val("${requestScope.sizePerPage}");
+			
+			
+			$("input#searchWord").keyup(function(e){
+				
+				if( e.keyCode == '13'){ // e.keyCode 인걸 잘 기억하자!
+					goSearch();
+				}
+				
+			});
+			
+			// select 태그에 대한 이벤트는 click 이 아니라 change 이다.
+			$("select#sizePerPage").bind("change", function(){
+				goSearch();
+			});
+
+		
 		$("tr.itemInfo").hover(
 		
 		function(e){
@@ -194,6 +218,31 @@
 		
 	}
 
+	function goSearch(){
+		
+		const frm = document.itemFrm;
+	
+		/*
+		if(frm.searchWord.value.trim() == ""){
+			alert('검색어를 올바르게 입력하세요!!');
+			$("input#searchWord").val("");
+			return; // 함수종료
+		} 
+		*/
+		
+		if(${empty requestScope.category_id}){
+			frm.action = "itemList.run"; // 끝부분만 바뀌므로 마지막 부분만 바꿔주면 된다. -> 본인에게 action	
+		}
+		else{
+			frm.action = "itemList.run?category_id=${requestScope.category_id}"; // 끝부분만 바뀌므로 마지막 부분만 바꿔주면 된다. -> 본인에게 action
+		}
+		
+		
+		frm.method = "get";
+		frm.submit();
+	}// end of  
+
+	
 	
 	
 </script>
@@ -217,6 +266,35 @@
 		</div>
 		
 		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
+			
+			 <form name="itemFrm">
+				<select id="searchType" name="searchType">
+					<option value="">선택하세요</option>
+					<option value="item_no">제품번호</option>	<%-- dao 에 보내야 하기 때문에 value 를 DB의 컬럼 name 과 일치 시켜야함 --%>		
+					<option value="item_name">제품명</option>
+				</select>
+				<input type="text" id="searchWord" name="searchWord" />
+				<%--
+					form 태그 내에서 데이터를 전송해야 할 input 태그가 1개밖에 없을 경우에는 
+					input 태그에 값을 넣고나서 그냥 엔터를 해버리면 submit 되어버린다.
+					그래서 유효성 검사를 거친후 submit 을 하고 싶어도 input 태그가 1개 밖에 없을 경우라면 유효성 검사를 거치지 않고
+					바로 submit 되어진다. 이것을 막으려면 input 태그가 2개 이상 존재하면 된다. 근데 실제 화면에 보여질 input 태그는 1개 이어야 한다.
+					이럴 경우 아래와 같이 해주면 된다. 
+				 --%>
+				 
+				 <input type="text" style="display:none;"/>
+				 <%-- <input type="hidden" /> 은 통하지 않으니 display로 처리하도록 하자 --%>
+				<button type="button" class="btn btn-secondary" style="margin-left:10px; margin-right:30px;" onclick="goSearch();">검색</button> <%-- type="button" 은 꼭 넣도록 하자 --%>
+				
+				<span style="color: red; font-weight: bold; font-size: 12pt;">페이지당 제품개수-</span>
+		      	<select id="sizePerPage" name="sizePerPage">
+			         <option value="15">15개</option>
+			         <option value="10">10개</option>
+			         <option value="5">5개</option>
+		      	</select>		
+			</form>		
+		
+		
 			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px; border:none;">
 		        <thead>
 		           <tr>
