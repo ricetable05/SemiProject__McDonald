@@ -71,13 +71,10 @@
 		
 		if(${requestScope.method == 'POST' && requestScope.n == 1}){
 			
-			opener.parent.location.href="<%= ctxPath%>/";
-			window.self.close();
-
-			<%--
-			$("button#maingo").click(function(){
-			});
-			--%>
+			parent.location.href="<%= ctxPath%>/";
+			self.close();
+			
+			alert("ID: ${requestScope.userid} 휴면 계정이 풀렸습니다.");
 		};		
 	});//end of $(document).ready(function() --------------------------------------
 	
@@ -96,10 +93,5 @@
 	</c:if>
 </form> 
 
-	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
-		<div id="div_updateResult" align="center" style="font-family:SpeedeeK; font-weight:500;">
-	        ID: ${requestScope.userid}<br>휴면 계정이 풀렸습니다.
-	    </div> 
-	</c:if>
 
    

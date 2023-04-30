@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 
 <style type="text/css">
 
-.user-warp{
+.topimage{
 background:url(<%= request.getContextPath() %>/images/음료상단이미지.jpg) 50% 50% no-repeat;
 }
 
@@ -225,14 +226,13 @@ $(document).ready(function() {
 					
 				
 					
-					<div class="user-warp">
-						<div class="user-image"></div>
-						<div class="user-text">
+					<div class="topimage">
+						<div class="toptext">
 							<h1 class="titDep1">맥카페 & 음료</h1>
 							<p style="margin-top: 15px;"> 진한 커피향이 풍기는 맥카페와 상큼한 과일칠러까지! </p>
 							<p>언제나 즐겁게, 맥카페와 다양한 음료를 부담없이 즐기세요!</p>
 						</div>
-						<div class="user-text2">
+						<div class="toptext2">
 							<ul>
 								<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 								<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
@@ -279,8 +279,11 @@ $(document).ready(function() {
 							</c:if>
 								
 							    <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/drinkView.run?item_no=${requestScope.ivo_prev.item_no}'">
-									   <img class="prev" src="<%=request.getContextPath()%>/images/joonyoung_img/prevIcon.png">
-								   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/drink/drink_small/${requestScope.ivo_prev.item_image}">
+									   
+									   <img class="prev" src="<%=request.getContextPath()%>/images/prevIcon.png">
+								   	   
+									   <img class="prev_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_prev.item_image,'.png','_small.png')}">
+								   		  
 								   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
 								   	  
 								</button> 
@@ -293,7 +296,7 @@ $(document).ready(function() {
 							
 					
 						 
-						<img id="burger" src="<%=request.getContextPath()%>/images/drink/drink_nbg/${requestScope.ivo.item_image}">
+						<img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
 						
 						
 						
@@ -322,8 +325,10 @@ $(document).ready(function() {
 											
 									 		
 														
-								     <img class="next" src="<%=request.getContextPath()%>/images/joonyoung_img/nextIcon.png">
-								     <img class="next_hover" src="<%=request.getContextPath()%>/images/drink/drink_small/${requestScope.ivo_next.item_image}">
+								     <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">
+								     
+								     <img class="next_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_next.item_image,'.png','_small.png')}">
+								    
 								     <p class="next">${requestScope.ivo_next.item_name}</p>
 								     
 								

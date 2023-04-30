@@ -9,7 +9,7 @@
 
 <style type="text/css">
 
-.user-warp{
+.topimage{
 background:url(<%= request.getContextPath() %>/images/디저트상단이미지.png) 50% 50% no-repeat;
 }
 
@@ -100,14 +100,14 @@ background:url(<%= request.getContextPath() %>/images/디저트상단이미지.p
 	}
 </script>
 
-<div class="MC_content">
-	<div class="user-warp">
-		<div class="user-text">
+<div class="MCcontent">
+	<div class="topimage">
+		<div class="toptext">
 			<h1 class="titDep1">디저트</h1>
 			<p style="margin-top: 15px;">버거를 푸짐하게 즐기고 난 후!</p>
 			<p>가볍게 즐기는 디저트메뉴!</p>
 		</div>
-		<div class="user-text2">
+		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
@@ -118,7 +118,7 @@ background:url(<%= request.getContextPath() %>/images/디저트상단이미지.p
 	<div class="container" style="padding: 20px 15px; ">
 	
 		<div class="menu_tab_change text-center" style="margin-bottom: 30px; ">
-			<button type="button" class="danpum active">단품메뉴</button>
+			<button type="button" class="danpum active">디저트</button>
 		</div>
 	    <!-- 중앙 컨텐츠 시작 -->
 		<div class="row" id="displayDessert">
@@ -143,5 +143,4 @@ background:url(<%= request.getContextPath() %>/images/디저트상단이미지.p
 	    
 
 </div>
-
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>

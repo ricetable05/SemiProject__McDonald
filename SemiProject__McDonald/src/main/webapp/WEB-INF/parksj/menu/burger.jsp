@@ -9,9 +9,13 @@
 
 <style type="text/css">
 
-.user-warp{
-background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;
-}
+	.topimage{
+		background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;
+	}
+	
+	
+	
+	
 
 </style>
 
@@ -100,20 +104,20 @@ background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg)
 	}
 </script>
 
-<div class="MC_content">
-	<div class="user-warp">
-		<div class="user-text">
+<div class="MCcontent">
+	<div class="topimage">
+		<div class="toptext">
 			<h1 class="titDep1">버거</h1>
 			<p style="margin-top: 15px;">빅맥<sub>®</sub>에서 맥스파이시<sub>®</sub> 상하이버거까지, </p>
 			<p>주문 즉시 바로 조리해 더욱 맛있는, 맥도날드의 다양한 버거를 소개합니다.</p>
 		</div>
-		<div class="user-text2">
+		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
 				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
 			</ul>
 		</div>
-	</div>
+	</div>	
 	
 	<div class="container" style="padding: 20px 15px; ">
 	
@@ -141,7 +145,7 @@ background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg)
 	</div>	
 	<!-- div class="container" 끝 -->
 	    
-
+		
 </div>
-
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>
+
