@@ -226,19 +226,19 @@ $(document).ready(function() {
 					
 				
 					
-					<div class="topimage">
-				      <div class="toptext">
-				         <h1 class="titDep1">버거</h1>
-				         <p style="margin-top: 15px;">빅맥<sub>®</sub>에서 맥스파이시<sub>®</sub> 상하이버거까지, </p>
-				         <p>주문 즉시 바로 조리해 더욱 맛있는, 맥도날드의 다양한 버거를 소개합니다.</p>
-				      </div>
-				      <div class="toptext2">
-				         <ul>
-				            <li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-				            <li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
-				         </ul>
-				      </div>
-				   </div>
+						<div class="topimage">
+							<div class="toptext">
+								<h1 class="titDep1">맥모닝</h1>
+								<p style="margin-top: 15px;">새벽 4시부터 오전 10시 30분까지 </p>
+								<p>  갓 구워내 신선한 맥모닝으로 따뜻한 아침 식사를 챙겨 드세요!</p>
+							</div>
+							<div class="toptext2">
+								<ul>
+									<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
+									<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+								</ul>
+							</div>
+						</div>
 							
 				
 					
