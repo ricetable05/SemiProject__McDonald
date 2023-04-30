@@ -157,7 +157,7 @@
 	<div class="container-fluid px-0">
 		
 		<h4 class="ml-2">맥딜리버리 이용 방법!</h4>
-		<a href="#">
+		<a href="<%=request.getContextPath()%>/daan/orderInfo.run">
 			<img src="<%= request.getContextPath() %>/images/how_mcdelivery_works_ko.png" alt="이미지가 없습니다." width="100%"/>
 		</a>
 		

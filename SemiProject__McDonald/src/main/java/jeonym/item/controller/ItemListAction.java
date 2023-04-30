@@ -164,7 +164,7 @@ public class ItemListAction extends AbstractController {
 																// 페이지바를 만들어주는 것
 				
 				if(pageNo == Integer.parseInt(currentShowPageNo)) {	
-					pageBar += "<li class='page-item active'><a class='page-link' href='#'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.
+					pageBar += "<li class='page-item active selected_page'><a class='page-link' href='#'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.
 				}
 				else {	
 					pageBar += "<li class='page-item'><a class='page-link' href='itemList.run?searchType="+searchType+"&searchWord="+searchWord+"&sizePerPage="+sizePerPage+"&currentShowPageNo="+pageNo+"&category_id="+category_id+"'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.

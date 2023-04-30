@@ -91,6 +91,10 @@
 	    border-color: #ddd;
 	}
 	
+	li.page-item.active.selected_page > a {
+	    background-color: black;
+	}
+	
    p {
      border: 1em violet;
      padding: 55px;
@@ -267,8 +271,8 @@
 		
 		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
 			
-			 <form name="itemFrm">
-				<select id="searchType" name="searchType">
+			 <form name="itemFrm" style="padding-left:30px;">
+				<select id="searchType" name="searchType" style="height:28px;">
 					<option value="">선택하세요</option>
 					<option value="item_no">제품번호</option>	<%-- dao 에 보내야 하기 때문에 value 를 DB의 컬럼 name 과 일치 시켜야함 --%>		
 					<option value="item_name">제품명</option>
@@ -287,13 +291,14 @@
 				<button type="button" class="btn btn-secondary" style="margin-left:10px; margin-right:30px;" onclick="goSearch();">검색</button> <%-- type="button" 은 꼭 넣도록 하자 --%>
 				
 				<span style="color: red; font-weight: bold; font-size: 12pt;">페이지당 제품개수-</span>
-		      	<select id="sizePerPage" name="sizePerPage">
+		      	<select id="sizePerPage" name="sizePerPage" style="height:28px;">
 			         <option value="15">15개</option>
 			         <option value="10">10개</option>
 			         <option value="5">5개</option>
-		      	</select>		
+		      	</select>
+		      	<button class="px-4 py-1 btn btn-lg btn-success" style="margin-left:150px;" type="button" onclick="goItemUpdate('')">제품등록</button>		
 			</form>		
-		
+			
 		
 			<table id="itemTbl" class="table table-bordered" style="width: 90%; margin-top: 20px; border:none;">
 		        <thead>
@@ -360,7 +365,6 @@
 		       </div>
 		    </nav>
 		    
-		    <button class="btn btn-success" type="button" onclick="goItemUpdate('')">제품등록하기</button>
 		    
 		</div>
 	
