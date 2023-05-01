@@ -68,6 +68,7 @@
                  <button id="madal" type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 550px; " data-toggle="modal" data-target="#Pwd3m" data-dismiss="modal" data-backdrop="static">비밀번호 변경</button>
               </td>
            </tr>
+           
         </tbody>
       </table>
    </form>

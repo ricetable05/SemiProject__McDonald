@@ -65,8 +65,6 @@ public class LoginAction extends AbstractController{
 			if(loginuser.isRequirePwdChange()) {
 				// 비밀번호를 변경한지 3개월 이상인 경우
 				
-				request.setAttribute("userid", userid);
-				
 				super.setRedirect(true);
 				super.setViewPage(request.getContextPath()+"/login/pwd3m.run");
 				return; //매소드 종료

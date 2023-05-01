@@ -101,6 +101,14 @@
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
+		if(${requestScope.method == 'POST' && requestScope.n == 1}){
+			
+			parent.location.href="<%= ctxPath%>/";
+			self.close();
+			
+			alert("ID: ${sessionScope.loginuser.userid} 비밀번호가 변경되었습니다.");
+		};			
+				
 	});//end of $(document).ready(function() --------------------------------------
 	
 			
@@ -118,7 +126,7 @@
       <input type="password" id="pwd2" size="25" placeholder="PASSWORD" required />
    </div>
 
-   <input type="text" name="userid" value="${requestScope.userid}"/>
+   <input type="hidden" name="userid" value="${sessionScope.loginuser.userid}"/>
 	
 		<div id="div_btnUpdate" align="center">
 	       <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>

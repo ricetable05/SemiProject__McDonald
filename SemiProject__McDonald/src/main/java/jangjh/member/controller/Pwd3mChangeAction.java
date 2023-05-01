@@ -18,7 +18,6 @@ public class Pwd3mChangeAction extends AbstractController {
 		String method = request.getMethod(); //"GET" 또는 "POST"
 		
 		String userid = request.getParameter("userid");
-		System.out.println(userid);
 		
 		if("POST".equalsIgnoreCase(method)) {
 			//암호변경하기 버튼을 클릭한 경우
