@@ -21,11 +21,9 @@ background:url(<%= request.getContextPath() %>/images/품질이야기상단이�
 
  <script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js" type="text/javascript"></script>
 
-<%-- Bootstrap CSS --%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" type="text/css">
 
-<%-- Optional JavaScript --%>
-<script src="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script> 
+
+
 
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
@@ -98,19 +96,20 @@ function myFunction3(){
 function myFunction4(){
 	
 	$('.subChange').click(function() {
+		
 		  var clickedId = $(this).attr('id');
+	  
+		  $('.box_text p.'+ clickedId ).css('display','block');
 		  
-
 		  
-		  $('.subChange').not('#' + clickedId).each(function() {
+		  
+		  $('.box_text p').not('.' + clickedId).each(function() {
 			  
-			  
-		    var nonClickedId = $(this).attr('id');
-		    console.log(nonClickedId); // 클릭한 버튼 이외의 버튼들의 아이디 출력
+			 var nonclickedId = $(this).attr('class');
+			 $('.box_text p.'+nonclickedId).css('display','none');
 
 		  });
 		  
-		  $(".box_text").find("p[id=" + clickedId + "]").css("color","blue");
 
 		  
 		  
@@ -168,7 +167,7 @@ function myFunction4(){
 			<div class="content">		   
 				
 				
-				<div class = "BigArea" data-background="food_1">	<!-- 버튼 누르면 해당하는 빵 음식 과일로 바뀌는 부분. 전체 백그라운드 -->   
+				<div class = "BigArea" >	
 					   
 								 <div class="inner">  
 								   
@@ -197,7 +196,7 @@ function myFunction4(){
 											<div class="topArea">
 																									
 														<a  class="originBT" disabled>
-															원재료준비와 가공	
+															원재료 준비와 가공	
 														</a>
 						
 											</div>
@@ -284,15 +283,15 @@ function myFunction4(){
 															
 																<div class="box_text">
 																	
-																	<p class="A1"> 호주 청정 지역에서 키운 무방부제 &nbsp; 무첨가제 100% 순 쇠고기 패티   </p>
+																	<p class="A1" id="A_1"> 호주 청정 지역에서 키운 무방부제 &nbsp; 무첨가제 <br> 100% 순 쇠고기 패티   </p>
 																	
-																	<p class="A1"> 맥도날드 쇠고기 패티는 청정한 호주 대자연에서 깨끗함을 먹고 자란 100% 순 쇠고기로만 제조되며, 어떠한 첨가물이나 방부제도 사용되지 않았습니다.   </p>	
+																	<p class="A1"> 맥도날드 쇠고기 패티는 청정한 호주 대자연에서 깨끗함을 먹고 자란 100% 순 <br> 쇠고기로만 제조되며, 어떠한 첨가물이나 방부제도 사용되지 않았습니다.   </p>	
 																													
-																	<p class="A1"> * 쇠고기 이력번호’를 통해 생산부터 유통과정까지 철저하게 확인하고 있으며, 식품 안전 기준에 맞는 쇠고기만을 사용하기 위하여 만전을 기하고 있습니다.   </p>
+																	<p class="A1"> '쇠고기 이력번호’를 통해 생산부터 유통과정까지 철저하게 확인하고 있으며,<br> 식품 안전 기준에 맞는 쇠고기만을 사용하기 위하여 만전을 기하고 있습니다.   </p>
 																	
-																	<p class="A1"> 쇠고기 이력번호 : 수입쇠고기유통이력관리시스템 사이트에서 조회 시 쇠고기의 세부 정보 (수출국 도축장, 가공장, 수출업체 및 도축, 수입일자 등)를 확인할 수 있는 번호   </p>	
+																	<p class="A1" id="A_bt">* 쇠고기 이력번호 : 수입쇠고기유통이력관리시스템 사이트에서 조회 시 쇠고기의 세부 정보 (수출국 도축장, 가공장, 수출업체 및 도축, 수입일자 등)를 확인할 수 있는 번호   </p>	
 															
-																	<p class="A2"> 신선하고 안전한 재료로 엄선하여 만든 치킨 패티 </p> 
+																	<p class="A2" id="A_2"> 신선하고 안전한 재료로<br> 엄선하여 만든 치킨 패티 </p> 
 																	
 																	<p class="A2"> 맥도날드 치킨 패티는 세계보건기구(WHO)에서 공표한 ‘주요항생제리스트<br>(HPCIA)’ 에 포함된 항생제 및 방부제를 사용하지 않으며, 식약처 등 정부<br>에서 인증한 안전한 재료를 사용합니다.</p>
 																	
@@ -300,45 +299,45 @@ function myFunction4(){
 																	
 																	<p class="A2">맥스파이시 상하이 버거에는 국내산 통 닭가슴살을 사용합니다.</p>
 																	
-																	<p class="A2">* HPCIA(High Priority Critically Important Antimicrobials) : 사람에게 처방되는 항생제로<br> 동물에게 사용될 경우, 이를 취식하는 사람에게도 영향을 줄 수 있는 항생제</p>
+																	<p class="A2" id="A_bt">* HPCIA(High Priority Critically Important Antimicrobials) : 사람에게 처방되는 항생제로<br> 동물에게 사용될 경우, 이를 취식하는 사람에게도 영향을 줄 수 있는 항생제</p>
 																	
-																	<p class="A3">매일 구워 배송 받는 햄버거 빵</p>
+																	<p class="A3" id="A_3">매일 구워 배송 받는 햄버거 빵</p>
 																	
 																	<p class="A3">맥도날드에서 사용하는 햄버거 빵은 국제식품안전협회(GFSI*)의<br> 식품안전시스템 규격 인증을 받은 공장에서, 60년 이상의 햄버거 빵 제조 기술<br>을 바탕으로 생산된 우수한 품질의 제품입니다.</p>
 																	
 																	<p class="A3">신선한 햄버거 빵을 고객들께 제공하게 위해, 하루 수요량에 맞춰 국내에서 직접<br> 구운 햄버거 빵을 사용합니다. 레스토랑으로 배송을 받을 때는 외부 오염<br>을 차단한 전용 탑차를 이용하여 신선도를 유지합니다.</p>
 																	
-																	<p class="A3">* GFSI (Global Food Safety Initiative) : 소비자에게 안전한 식품의 공급을 보장하기 위해, 식품 안전 관리 시스템의 지속적인 개선을 목표로 설립된 국제식품안전협회</p>
+																	<p class="A3" id="A_bt">* GFSI (Global Food Safety Initiative) : 소비자에게 안전한 식품의 공급을 보장하기 위해, 식품 안전 관리<br> 시스템의 지속적인 개선을 목표로 설립된 국제식품안전협회</p>
 																	
-																	<p class="A3">* 맥도날드에서 사용하는 햄버거 빵은 GFSI가 공인하는 식품안전경영시스템 (FSSC-22000)을 인증 받은 공장에서 생산되고 있습니다.</p>
+																	<p class="A3" id="A_bt_red">* 맥도날드에서 사용하는 햄버거 빵은 GFSI가 공인하는  식품안전경영시스템 (FSSC-22000)을<br> 인증 받은 공장에서 생산되고 있습니다.</p>
 																	
-																	<p class="A4">국제적인 우수 농산물 품질 관리 인증 제조사에서 공급하는<br> 신선한 양상추</p>
+																	<p class="A4" id="A_4">국제적인 우수 농산물 품질 관리 인증 제조사에서 공급하는<br> 신선한 양상추</p>
 																	
 																	<p class="A4">농지의 물은 깨끗한지, 토양의 영양분은 풍부한지 농지 주위에 오염 요소는<br> 없는지, 양상추가 자라는 농장부터 꼼꼼히 확인합니다.</p>
 																	
 																	<p class="A4">수확된 양상추는 3번 이상 꼼꼼하게 세척하며, 신선함을 유지하기 위해<br> 진공으로 포장하여, 가공한 지 2일 이내 배송센터로 배송됩니다.</p>
 																	
-																	<p class="A4">국제적인 우수 농산물 품질 관리 시스템 인증 : 농산물의 생산단계부터 수확 후 포장단계까지<br> 물과 토양관리에서부터 농약,비료,중금속,미생물 등 신선농산물의 위해요소를 일정 허용수준<br> 이하로 관리하는 제도이며, 농산물의 안전성 확보를 위한 기준</p>
+																	<p class="A4" id="A_bt">* 국제적인 우수 농산물 품질 관리 시스템 인증 : 농산물의 생산단계부터 수확 후 포장단계까지<br> 물과 토양관리에서부터 농약,비료,중금속,미생물 등 신선농산물의 위해요소를 일정 허용수준<br> 이하로 관리하는 제도이며, 농산물의 안전성 확보를 위한 기준</p>
 																	
-																	<p class="A4">자연 재해 등 불가피한 경우가 발생될 경우, 수급 업체가 변동될 수 있습니다.</p>
+																	<p class="A4" id="A_bt_red">* 자연 재해 등 불가피한 경우가 발생될 경우, 수급 업체가 변동될 수 있습니다.</p>
 																	
-																	<p class="A5">우리 땅에서 건강하게 키운 100% 국내산 토마토</p>
+																	<p class="A5" id="A_5">우리 땅에서 건강하게 키운 100% 국내산 토마토</p>
 																	
 																	<p class="A5">맥도날드에서는 우리 땅, 좋은 흙에서 정성껏 재배하여 수확한 100% 국내산<br> 토마토만을 사용합니다.</p>
 																	
 																	<p class="A5">모든 토마토는 수확 후 식품 안전을 위해 2회 이상을 거쳐 꼼꼼하게 세척되며,<br> 이후 살균 공정 과정까지 거쳐 신선하게 공급됩니다.</p>
 																	
-																	<p class="A6">우수한 품질의 국내산 1+ 등급 계란</p>
+																	<p class="A6" id="A_6">우수한 품질의 국내산 1+ 등급 계란</p>
 																	
 																	<p class="A6">표면 세척과 UV 살균 등 꼼꼼한 위생 처리를 거친 뒤, 레스토랑에서 조리될<br> 때까지 7°C 이하로 냉장 보관되어 최상의 신선함을 자랑합니다.</p>
 																	
-																	<p class="A6">* 자연 재해 등 불가피한 경우가 발생될 경우, 수급 업체가 변동될 수 있습니다.</p>
+																	<p class="A6" id="A_bt_red">* 자연 재해 등 불가피한 경우가 발생될 경우, 수급 업체가 변동될 수 있습니다.</p>
 																	
-																	<p class="A7">치즈 본연의 풍미가 가득한 뉴질랜드 방목 치즈</p>
+																	<p class="A7" id="A_7">치즈 본연의 풍미가 가득한 뉴질랜드 방목 치즈</p>
 																	
-																	<p class="A7">청정 뉴질랜드의 목초지에서 자연 방목으로 풀을 먹인 젖소의 원류로 제조하여 치즈 본연의 풍미가 가득하며,고소하고 풍부한 맛을 자랑합니다.</p>
+																	<p class="A7">청정 뉴질랜드의 목초지에서 자연 방목으로 풀을 먹인 젖소의 원류로 제조하여<br> 치즈 본연의 풍미가 가득하며,고소하고 풍부한 맛을 자랑합니다.</p>
 																	
-																	<p class="A8">HACCP 인증 완료한 시설에서 공급하는 신선한 양파</p>
+																	<p class="A8" id="A_8">HACCP 인증 완료한 시설에서 공급하는 신선한 양파</p>
 																	
 																	<p class="A8">맥도날드에서 사용되는 모든 양파는 최고의 위생 시설과 관리 하에 꼼꼼한<br> 살균과 세척 과정을 거친 후, 진공포장을 통해 더욱 더 안전하고 신선하게<br> 공급됩니다.</p>
 															
