@@ -45,12 +45,6 @@
 		    }); // end of $("button.btn_is_dormantClose").click(function(){} ----------------- 
 			
 		    		
-			$("#madal").click(function(){
-				
-				$("#modalsubmit").submit();
-			});		
-		
-		    		
 	});//end of $(document).ready(function() ----------------------------------------------
 
  			
@@ -58,11 +52,10 @@
 
 </head>
 <body>
-	
-	
+
 <div id="container">
    <form name="Pwd3mFrm" style="font-family:SpeedeeK; font-weight:600;">
-      <table id="Pwd3mTbl" style="margin-top: 22px;">
+	  <table id="Pwd3mTbl" style="margin-top: 22px;">
         <thead>
            <tr>  
               <th colspan="2" id="th">3개월 동안 비밀번호가 바뀌지 않았습니다. <br> 비밀번호를 변경해주세요!</th>
@@ -79,16 +72,14 @@
       </table>
    </form>
 	   
-   <form id="modalsubmit" action="<%= request.getContextPath()%>/login/pwd3m.run" method="post">	   
-   		<input type="text" name="userid" value="${requestScope.userid}"/>	   
-   </form> 	   
-  <%-- ****** 휴먼계정 풀기 Modal ****** --%>
+  <%-- ****** 비밀번호 변경 Modal ****** --%>
   <div class="modal fade" id="Pwd3m"> 
     <div class="modal-dialog">
       <div class="modal-content">
       
-        <!-- Modal header -->
+        <!-- Modal header --> 
         <div class="modal-header">
+        
           <h4 class="modal-title" style="font-family:SpeedeeK; font-weight:600;">비밀번호 변경</h4>
           <button type="button" class="close Pwd3mClose" data-dismiss="modal">&times;</button>
         </div>
@@ -96,7 +87,7 @@
         <!-- Modal body -->
         <div class="modal-body">
           <div id="idFind">
-             <iframe id="iframe_Pwd3mChange" style="border: none; width: 90%; height: 230px;" src="<%= request.getContextPath()%>/login/pwd3m.run">
+             <iframe id="iframe_Pwd3mChange" style="border: none; width: 90%; height: 230px;" src="<%= request.getContextPath()%>/login/pwd3mChange.run">
              </iframe>
           </div>
         </div>
@@ -108,6 +99,9 @@
       </div>
     </div>
   </div>
+  
+   
+  
 </div>	
 	   
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>

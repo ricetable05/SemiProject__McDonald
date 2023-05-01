@@ -67,8 +67,8 @@ public class LoginAction extends AbstractController{
 				
 				request.setAttribute("userid", userid);
 				
-				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/jangjh/login/pwd3m.jsp");
+				super.setRedirect(true);
+				super.setViewPage(request.getContextPath()+"/login/pwd3m.run");
 				return; //매소드 종료
 			}
 			else {
