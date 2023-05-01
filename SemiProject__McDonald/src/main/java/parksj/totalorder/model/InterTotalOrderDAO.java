@@ -14,7 +14,7 @@ public interface InterTotalOrderDAO {
 	List<TotalOrderVO> selectPagingOrder(Map<String, String> paraMap) throws SQLException;
 	
 	// order_no 값을 입력받아서 주문번호 1건에 대한 상세정보를 알아오기
-	List<OrderDetailVO> orderDetailList(int odr_no) throws SQLException;
+	List<TotalOrderVO> orderDetailList(int odr_no) throws SQLException;
 
 
 }

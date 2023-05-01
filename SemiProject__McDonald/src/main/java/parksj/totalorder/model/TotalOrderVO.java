@@ -1,5 +1,7 @@
 package parksj.totalorder.model;
 
+import java.util.List;
+
 public class TotalOrderVO {
 	
 	private int odr_no; // 주문번호
@@ -9,11 +11,14 @@ public class TotalOrderVO {
 	private String delivery_time;//배달완료시간
 	private String odr_date;//주문일자
 	private int is_delivery_price;//배달비여부
-	
+	private String delivery_loc;
+	private int total;
+	private List<OrderDetailVO> orderDetailList; // 주문 상세 정보 리스트
 	
 	TotalOrderVO(){}
 	
-	TotalOrderVO(int odr_no, String fk_userid, String fk_store_id, int is_delivery, String delivery_time, String odr_date, int is_delivery_price){
+	TotalOrderVO(int odr_no, String fk_userid, String fk_store_id, int is_delivery, String delivery_time, 
+			String odr_date, int is_delivery_price, String delivery_loc, int total){
 		this.odr_no = odr_no;
 		this.fk_userid = fk_userid;
 		this.fk_store_id = fk_store_id;
@@ -21,6 +26,8 @@ public class TotalOrderVO {
 		this.delivery_time = delivery_time;
 		this.odr_date = odr_date;
 		this.is_delivery_price = is_delivery_price;
+		this.delivery_loc = delivery_loc;
+		this.total = total;
 		
 	}
 
@@ -78,6 +85,31 @@ public class TotalOrderVO {
 
 	public void setIs_delivery_price(int is_delivery_price) {
 		this.is_delivery_price = is_delivery_price;
+	}
+
+	public String getDelivery_loc() {
+		return delivery_loc;
+	}
+
+	public void setDelivery_loc(String delivery_loc) {
+		this.delivery_loc = delivery_loc;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+		
+	public List<OrderDetailVO> getOrderDetailList() {
+	    return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<OrderDetailVO> orderDetailList) {
+	    this.orderDetailList = orderDetailList;
 	}
 	
 	
