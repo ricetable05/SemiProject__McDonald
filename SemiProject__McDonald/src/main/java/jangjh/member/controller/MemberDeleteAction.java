@@ -1,8 +1,5 @@
 package jangjh.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,8 +21,8 @@ public class MemberDeleteAction extends AbstractController {
 		
 		String message = "";
 		String loc = "";
-		
-		if(loginuser != null && "kingkingadmin".equals(loginuser.getUserid())) {
+		 
+		if(loginuser != null) {
 
 			String userid = request.getParameter("userid");
 		
@@ -33,14 +30,20 @@ public class MemberDeleteAction extends AbstractController {
 				
 				int result = mvo.deleteMember(userid);
 				
-				if(result == 1) {
+				if(result == 1 && "kingkingadmin".equals(loginuser.getUserid())) {
 					
 					message = "성공적으로 삭제되었습니다.";
 					loc = request.getContextPath() + "/member/memberList.run";
 		
 				}
-				else {
+				else if (result == 1) {
 					
+					session.invalidate();
+					message = "성공적으로 삭제되었습니다.";
+					loc = request.getContextPath() + "/";
+				}
+
+				else {
 					message = "삭제에 실패했습니다.";
 					loc = "javascript:history.back()";
 					
@@ -48,13 +51,6 @@ public class MemberDeleteAction extends AbstractController {
 				
 			}
 				
-			
-		}
-		else {
-			
-			// 로그인을 안한 경우 또는 일반사용자로 로그인 한 경우
-			message = "관리자만 접근이 가능합니다.";
-			loc = request.getContextPath() + "/main.run";
 			
 		}
 

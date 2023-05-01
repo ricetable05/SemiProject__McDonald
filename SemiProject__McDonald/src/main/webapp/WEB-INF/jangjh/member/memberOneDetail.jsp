@@ -31,7 +31,6 @@
 </style>
 
 <script type="text/javascript">
-
 	$(document).ready(function(){
 		
 		
@@ -93,10 +92,9 @@
 		}); // end of  $("button#btnSend").click() -----------------------------------
 		
 		 
-		$("button#memberDeleteBtn").click(function(){
+		$("button#memberDel").click(function(){
 			
 			if(confirm('정말로 삭제하시겠습니까?')){
-
 				const userid = '${requestScope.mvo.userid}';
 				 
 				goMemberDelete(userid);
