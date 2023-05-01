@@ -113,7 +113,7 @@
         <tbody>
 
     		<c:if test="${not empty requestScope.memberList}">
-    			<c:forEach var="mvo" items="${requestScope.memberList}" > <%-- items 에는 배열이나 list 가 온다. --%>
+    			<c:forEach var="mvo" items="${requestScope.memberList}" > 
    					<tr class="memberInfo"  style="font-size: 12pt;">
 			           <td class="userid">${mvo.userid}</td>
 			           <td>${mvo.member_name}</td>

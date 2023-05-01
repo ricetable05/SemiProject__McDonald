@@ -647,10 +647,30 @@ public class MemberDAO implements InterMemberDAO {
 			return result;
 		}//end of public int login_date_Update(String userid) throws SQLException ---------------
 
-
-		
-
-		
+		@Override
+		public int deleteMember(String userid) throws SQLException {
+			
+			int result = 0;
+			
+		      try {
+			         conn = ds.getConnection();
+			         
+			         String sql = " delete from tbl_member "
+			         			+ " where userid = ? ";
+			         
+			         pstmt = conn.prepareStatement(sql);
+			         
+			         pstmt.setString(1, userid);
+			         
+			         result = pstmt.executeUpdate();
+			         
+			         
+			      } finally {
+			         close();
+			      }
+			
+			return result;
+		}//end of public int deleteMember(String userid) throws SQLException  -------
 
 
 }
