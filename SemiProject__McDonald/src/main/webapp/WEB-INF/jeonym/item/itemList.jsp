@@ -234,14 +234,11 @@
 		} 
 		*/
 		
-		if(${empty requestScope.category_id}){
-			frm.action = "itemList.run"; // 끝부분만 바뀌므로 마지막 부분만 바꿔주면 된다. -> 본인에게 action	
-		}
-		else{
-			frm.action = "itemList.run?category_id=${requestScope.category_id}"; // 끝부분만 바뀌므로 마지막 부분만 바꿔주면 된다. -> 본인에게 action
+		if(${not empty requestScope.category_id}){
+			$("input[name='category_id']").val(${requestScope.category_id})				
 		}
 		
-		
+		frm.action = "itemList.run"; // 끝부분만 바뀌므로 마지막 부분만 바꿔주면 된다. -> 본인에게 action
 		frm.method = "get";
 		frm.submit();
 	}// end of  
@@ -296,6 +293,7 @@
 			         <option value="10">10개</option>
 			         <option value="5">5개</option>
 		      	</select>
+		      	<input type="hidden" name="category_id" value=""/>
 		      	<button class="px-4 py-1 btn btn-lg btn-success" style="margin-left:150px;" type="button" onclick="goItemUpdate('')">제품등록</button>		
 			</form>		
 			
