@@ -258,7 +258,7 @@ public class ItemUpdateAction extends AbstractController {
 			
 			// 로그인을 안한 경우 또는 일반사용자로 로그인 한 경우
 			String message = "관리자만 접근이 가능합니다.";
-			String loc = "javascript:history.back()";
+			String loc = request.getContextPath() + "/main.run";
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);

@@ -77,7 +77,7 @@ public class ItemDeleteAction extends AbstractController {
 			
 			// 로그인을 안한 경우 또는 일반사용자로 로그인 한 경우
 			message = "관리자만 접근이 가능합니다.";
-			loc = "javascript:history.back()";
+			loc = request.getContextPath() + "/main.run";
 			
 		}
 
