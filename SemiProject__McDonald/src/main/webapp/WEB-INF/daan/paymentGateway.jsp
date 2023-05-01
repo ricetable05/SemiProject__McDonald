@@ -25,50 +25,29 @@ $(document).ready(function() {
        amount : 100,// 100,	  // '${coinmoney}'  결제 금액 number 타입. 필수항목. 
        buyer_email : '',  // 구매자 email
        buyer_name : '${requestScope.name}',	  // 구매자 이름 
-       buyer_tel : '${requestScope.mobile}',    // 구매자 전화번호 (필수항목)
-       buyer_addr : '',  
-       buyer_postcode : '',
-       m_redirect_url : ''  // 휴대폰 사용시 결제 완료 후 action : 컨트롤러로 보내서 자체 db에 입력시킬것!
+       buyer_tel : '${requestScope.mobile}'    // 구매자 전화번호 (필수항목)
+       // buyer_addr : '',  
+       // buyer_postcode : '',
+       // m_redirect_url : ''  // 휴대폰 사용시 결제 완료 후 action : 컨트롤러로 보내서 자체 db에 입력시킬것!
    }, function(rsp) {
-       /*
-		   if ( rsp.success ) {
-			   var msg = '결제가 완료되었습니다.';
-			   msg += '고유ID : ' + rsp.imp_uid;
-			   msg += '상점 거래ID : ' + rsp.merchant_uid;
-			   msg += '결제 금액 : ' + rsp.paid_amount;
-			   msg += '카드 승인번호 : ' + rsp.apply_num;
-		   } else {
-			   var msg = '결제에 실패하였습니다.';
-			   msg += '에러내용 : ' + rsp.error_msg;
-		   }
-		   alert(msg);
-	   */
-
 		if ( rsp.success ) { // PC 데스크탑용
-		/* === 팝업창에서 부모창 함수 호출 방법 3가지 ===
-		    1-1. 일반적인 방법
-			opener.location.href = "javascript:부모창스크립트 함수명();";
-			opener.location.href = "http://www.aaa.com";
-			
-			1-2. 일반적인 방법
-			window.opener.부모창스크립트 함수명();
-
-			2. jQuery를 이용한 방법
-			$(opener.location).attr("href", "javascript:부모창스크립트 함수명();");
-		*/
+		
+			alert("결제 성공하였습니다.");
 			
 			let str_cart_arr = sessionStorage.getItem('cart_arr');
-			// let cart_arr = JSON.parse(str_cart_arr);
-			
 			let str_quantity_arr = sessionStorage.getItem('quantity_arr');
-		
+			
 			const frm = document.recordDBForm;
-			frm.action = "<%=request.getContextPath()%>/daan/orderSuccess.run";
+			frm.action = '<%=request.getContextPath()%>/daan/orderSuccess.run';
 			frm.method = 'POST';
 			frm.cartFinal.value = str_cart_arr;
 			frm.quantityFinal.value = str_quantity_arr;
+	
+			sessionStorage.setItem('cart_arr', JSON.stringify([]));
+			sessionStorage.setItem('quantity_arr', JSON.stringify([]));
+			
 			frm.submit();
-        	// alert("결제 성공하였습니다.");
+				
         } else {
             location.href="<%=request.getContextPath()%>/main.run";
             alert("결제에 실패하였습니다.");
@@ -83,10 +62,11 @@ $(document).ready(function() {
 <body>
 <form name="recordDBForm">
 	<fieldset>
-        <input type="hidden" name="totalFinal" value="${requestScope.totalFinal}"/>
-        <input type="hidden" name="deliveryFee" value="${requestScope.deliveryFee}"/>
 		<input type="hidden" name="cartFinal"/>
         <input type="hidden" name="quantityFinal"/>
+        <input type="hidden" name="totalFinal" value="${requestScope.totalFinal}"/>
+        <input type="hidden" name="deliveryFee" value="${requestScope.deliveryFee}"/>
+        <input type="hidden" name="delivery_loc" value="${requestScope.delivery_loc}"/>
     </fieldset>
 </form>
 </body>
