@@ -3,7 +3,7 @@ package parksj.totalorder.model;
 public class OrderDetailVO {
 
 	private int odr_product_no;
-	private int fk_odrno;
+	private int fk_odr_no;
 	private int fk_item_no;
 	private String item_name;
 	private int item_price;
@@ -17,10 +17,10 @@ public class OrderDetailVO {
 
 	OrderDetailVO(){}
 	
-	OrderDetailVO(int odr_product_no, int fk_odrno, int fk_item_no, String item_name, int item_price, int quantity, int is_set){
+	OrderDetailVO(int odr_product_no, int fk_odr_no, int fk_item_no, String item_name, int item_price, int quantity, int is_set){
 		
 		this.odr_product_no = odr_product_no;
-		this.fk_odrno = fk_odrno;
+		this.fk_odr_no = fk_odr_no;
 		this.fk_item_no = fk_item_no;
 		this.item_name = item_name;
 		this.item_price = item_price;
@@ -35,13 +35,14 @@ public class OrderDetailVO {
 	public void setOdr_product_no(int odr_product_no) {
 		this.odr_product_no = odr_product_no;
 	}
+	
 
-	public int getFk_odrno() {
-		return fk_odrno;
+	public int getFk_odr_no() {
+		return fk_odr_no;
 	}
 
-	public void setFk_odrno(int fk_odrno) {
-		this.fk_odrno = fk_odrno;
+	public void setFk_odr_no(int fk_odr_no) {
+		this.fk_odr_no = fk_odr_no;
 	}
 
 	public int getFk_item_no() {

@@ -175,21 +175,19 @@ public class TotalOrderDAO implements InterTotalOrderDAO {
 	// order_no 값을 입력받아서 주문번호 1건에 대한 상세정보를 알아오기
 	
 	@Override
-	public List<OrderDetailVO> orderDetailList(int odr_no) throws SQLException {
+	public List<TotalOrderVO> orderDetailList(int odr_no) throws SQLException {
 
-			List<OrderDetailVO> orderDetailList = new ArrayList<>();
+			List<TotalOrderVO> orderDetailList = new ArrayList<>();
 			
 			try {
 				conn = ds.getConnection();
 				
-				String sql = " select odr_product_no, fk_item_no, item_name, item_price, quantity, is_set, odr_no, fk_userid, is_delivery, odr_date "
-	                       + " from ( "
-	                       + "    select * "
-	                       + "    from tbl_order_list L "
-	                       + "    JOIN tbl_order O "
-	                       + "    ON L.fk_odr_no = O.odr_no "
-	                       + " ) V"
-	                       + " where odr_no = ? ";
+				String sql = "select O.odr_no, O.fk_userid, O.is_delivery, O.odr_date, O.delivery_time, O.is_delivery_price, O.delivery_loc, O.total, "
+						   + "        L.odr_product_no, L.fk_item_no, L.item_name, L.item_price, L.quantity, L.is_set "
+						   + "from tbl_order O "
+						   + "JOIN tbl_order_list L "
+						   + "ON O.odr_no = L.fk_odr_no "
+						   + "where O.odr_no = ? ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -197,32 +195,40 @@ public class TotalOrderDAO implements InterTotalOrderDAO {
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
-					OrderDetailVO dvo = new OrderDetailVO();
-					dvo.setOdr_product_no(rs.getInt(1));
-					dvo.setFk_item_no(rs.getInt(2));
-					dvo.setItem_name(rs.getString(3));
-					dvo.setItem_price(rs.getInt(4));
-					dvo.setQuantity(rs.getInt(5));
-					dvo.setIs_set(rs.getInt(6));
-					
-					TotalOrderVO tvo = new TotalOrderVO();
-					tvo.setOdr_no(rs.getInt(7));
-					tvo.setFk_userid(rs.getString(8));
-					tvo.setIs_delivery(rs.getInt(9));
-					tvo.setOdr_date(rs.getString(10));
-					dvo.setTotalOrderVO(tvo);
-					
-					orderDetailList.add(dvo);
-					
-				}
+				TotalOrderVO tvo = null;
 				
-			}finally {
-				close();
+				while(rs.next()) {
+						    if (tvo == null) {
+						        tvo = new TotalOrderVO();
+						        tvo.setOdr_no(rs.getInt(1));
+						        tvo.setFk_userid(rs.getString(2));
+						        tvo.setIs_delivery(rs.getInt(3));
+						        tvo.setOdr_date(rs.getString(4));
+						        tvo.setDelivery_time(rs.getString(5));
+						        tvo.setIs_delivery_price(rs.getInt(6));
+						        tvo.setDelivery_loc(rs.getString(7));
+						        tvo.setTotal(rs.getInt(8));
+						        tvo.setOrderDetailList(new ArrayList<OrderDetailVO>());
+						        orderDetailList.add(tvo);
+						    }
+		
+						    OrderDetailVO dvo = new OrderDetailVO();
+						    dvo.setOdr_product_no(rs.getInt(9));
+						    dvo.setFk_item_no(rs.getInt(10));
+						    dvo.setItem_name(rs.getString(11));
+						    dvo.setItem_price(rs.getInt(12));
+						    dvo.setQuantity(rs.getInt(13));
+						    dvo.setIs_set(rs.getInt(14));
+		
+						    tvo.getOrderDetailList().add(dvo);
+						}
+						
+				}finally {
+					close();
+				}
+			
+				return orderDetailList;
+						
 			}
 			
-			return orderDetailList;
-			
-	}
-
 }

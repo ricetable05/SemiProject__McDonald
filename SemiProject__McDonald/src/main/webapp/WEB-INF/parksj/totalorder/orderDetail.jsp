@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
@@ -58,6 +59,7 @@
 		border: solid 3px black;
 		position: relative;
 		width:100%;
+		height: 100%
 	}
 	
 	#orderTable{
@@ -67,6 +69,10 @@
 	    left: 50%;
 	    transform: translate(-50%, -50%);
 		
+	}
+	
+	th{
+		border: solid 2px red;
 	}
 
 </style>
@@ -90,48 +96,81 @@
 		</div>
 	</div>
 	<div id="dvoInfo">
-		<table id="orderTable">
-			<thead>
-				<tr>
-					<th>주문내역일련번호</th>
-					<th>제품코드</th>
-					<th>제품명</th>
-					<th>주문수량</th>
-					<th>세트여부</th>
-					<th>가격</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="item" items="${requestScope.oderDetail}">
-					<tr>
-						<td>${item.odr_product_no}</td>
-						<td>${item.fk_item_no}</td>
-						<td>${item.item_name}</td>
-						<td>${item.quantity}</td>
-						<td>
-							<c:if test="${item.is_set eq 0}">X</c:if>
-							<c:if test="${item.is_set eq 1}">O</c:if>
-						</td>
-						<td>${item.item_price}</td>
-					</tr>
-				</c:forEach>
-				<tr>
-		            <td colspan="6">
-		                <ul>
-		                    <li><span class="myli">배달상태 : </span>
-		                        <c:choose>
-		                            <c:when test="${requestScope.oderDetail[0].is_delivery eq 0}"> 배송전 </c:when>
-		                            <c:when test="${requestScope.oderDetail[0].is_delivery eq 1}"> 배송완료 </c:when>
-		                        </c:choose>
-		                    </li>
-		                    <li><span class="myli">주문일자 : </span>${requestScope.oderDetail[0].odr_date}</li>
-		                    <li><span class="myli">제품 총가격 : </span>${requestScope.oderDetailTotalPrice}</li>
-		                </ul>
-		            </td>
-		        </tr>
-			</tbody>
-		</table>
-	</div>
+		
+    <table>
+      <thead>
+        <tr>
+          <th>주문번호</th>
+          <th>주문자</th>
+          <th>주문시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${requestScope.oderDetail[0].odr_no}</td>
+          <td>${requestScope.oderDetail[0].fk_userid}</td>
+          <td>${requestScope.oderDetail[0].odr_date}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>주문내역일련번호</th>
+          <th>제품코드</th>
+          <th>제품명</th>
+          <th>제품가격</th>
+          <th>주문수량</th>
+          <th>세트유무</th>
+        </tr>
+      </thead>
+     <%--  <tbody>
+                <c:forEach var="orderDetail" items="${requestScope.oderDetail}">
+                    <tr>
+                        <td>${orderDetail.odr_product_no}</td>
+                        <td>${orderDetail.fk_item_no}</td>
+                        <td>${orderDetail.item_name}</td>
+                        <td>${orderDetail.item_price}</td>
+                        <td>${orderDetail.quantity}</td>
+                        <td>${orderDetail.is_set == 1 ? 'O' : 'X'}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+    </table> --%>
+
+    <table>
+      <thead>
+        <tr>
+          <th>제품 총가격</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${requestScope.oderDetail[0].total}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>배달상태</th>
+          <th>배달비</th>
+          <th>배달완료시간</th>
+          <th>배달주소</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>${requestScope.oderDetail[0].is_delivery == 1 ? '배송완료' : '배송전'}</td>
+          <td>${requestScope.oderDetail[0].is_delivery_price == 1 ? '3000' : '0'}</td>
+          <td>${requestScope.oderDetail[0].delivery_time}</td>
+          <td>${requestScope.oderDetail[0].delivery_loc}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 	
 	
 </c:if>

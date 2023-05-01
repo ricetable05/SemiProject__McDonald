@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractController;
 import jangjh.member.model.MemberVO;
 import parksj.totalorder.model.InterTotalOrderDAO;
-import parksj.totalorder.model.OrderDetailVO;
 import parksj.totalorder.model.TotalOrderDAO;
+import parksj.totalorder.model.TotalOrderVO;
 
 public class TotalOrderDetailAction extends AbstractController {
 
@@ -27,7 +27,7 @@ public class TotalOrderDetailAction extends AbstractController {
 			InterTotalOrderDAO tdao = new TotalOrderDAO();
 			
 						
-			List<OrderDetailVO> oderDetail = tdao.orderDetailList(odr_no);
+			List<TotalOrderVO> oderDetail = tdao.orderDetailList(odr_no);
 			
 			request.setAttribute("oderDetail", oderDetail);
 			
