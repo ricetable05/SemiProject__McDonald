@@ -338,6 +338,36 @@ public class ItemDAO implements InterItemDAO {
 		return is_Exist_item_no;
 		
 	} // end of public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException {} -------------
+	
+	// 카테고리번호가 DB 상 존재여부 알아보는 메소드
+	@Override
+	public boolean isExist_category_id(String category_id) throws SQLException {
+		
+		
+		boolean is_Exist_category_id = false;
+		try {
+			
+			conn = ds.getConnection();			
+			String sql  = " select * "
+						+ " from tbl_category "
+						+ " where category_id = ? ";
+					   
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(category_id));
+			
+			rs = pstmt.executeQuery();
+
+			is_Exist_category_id = rs.next(); // 존재하면 true 존재하지 않으면 false
+	
+		} finally {
+			close() ;
+		}
+		
+		return is_Exist_category_id;
+		
+
+	}// end of public boolean isExist_category_id(String category_id) throws SQLException {} ---------------------
 
 	
 	// 제품의 상세정보페이지를 위해 제품하나를 select 하는 메소드
@@ -771,6 +801,9 @@ public class ItemDAO implements InterItemDAO {
 		
 		return result;
 	}// end of public int deleteItem(String pk_fk_item_no) throws SQLException {} ------------------------------
+
+	
+
 
 
 	

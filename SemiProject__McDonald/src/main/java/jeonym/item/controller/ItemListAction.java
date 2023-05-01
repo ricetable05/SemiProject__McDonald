@@ -105,6 +105,23 @@ public class ItemListAction extends AbstractController {
 			}
 			
 			// TODO.. 존재하지 않는 category_id 가 넘어왔는지 check
+			
+			if(!"".equals(category_id) && !idao.isExist_category_id(category_id)) { // 공백이 아닌경우에만 검사
+				
+				
+				String message = "존재하지 않는 카테고리 번호입니다.";
+				String loc = "javascript:history.back()";
+				
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+				
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/jeonym/msg.jsp");
+				
+				return;
+				
+			}
+			
 	
 	
 			Map<String, String> paraMap = new HashMap<>();
@@ -206,7 +223,7 @@ public class ItemListAction extends AbstractController {
 			
 			// 로그인을 안한 경우 또는 일반사용자로 로그인 한 경우
 			String message = "관리자만 접근이 가능합니다.";
-			String loc = "javascript:history.back()";
+			String loc = request.getContextPath() + "/main.run";
 			
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);

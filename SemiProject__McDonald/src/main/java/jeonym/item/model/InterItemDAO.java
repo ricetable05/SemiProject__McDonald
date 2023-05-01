@@ -41,5 +41,8 @@ public interface InterItemDAO {
 
 	// 제품 삭제 메소드
 	int deleteItem(String pk_fk_item_no) throws SQLException;
+
+	// 카테고리번호가 DB 상 존재여부 알아보는 메소드
+	boolean isExist_category_id(String category_id) throws SQLException;
 	
 }
