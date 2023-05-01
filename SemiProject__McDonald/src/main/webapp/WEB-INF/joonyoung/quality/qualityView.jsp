@@ -21,6 +21,12 @@ background:url(<%= request.getContextPath() %>/images/품질이야기상단이�
 
  <script src="<%=request.getContextPath()%>/js/jquery-3.6.4.min.js" type="text/javascript"></script>
 
+<%-- Bootstrap CSS --%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" type="text/css">
+
+<%-- Optional JavaScript --%>
+<script src="<%=request.getContextPath()%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" type="text/javascript"></script> 
+
 
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
 
@@ -32,12 +38,15 @@ background:url(<%= request.getContextPath() %>/images/품질이야기상단이�
 
 $(document).ready(function() {
   // 첫 번째 버튼에 대한 click 이벤트 핸들러 호출
-  
-  myFunction(); // 클릭하게 된다면 발생하는 함수호출.
-  $('.subChange:first-child').trigger('click'); // 로드되자마자 트리거로 첫번쨰 버튼을 클릭하게끔 한다.
 
+    myFunction();
+    myFunction2();
+    myFunction3();
+  $('.subChange:first-child').trigger('click'); // 로드되자마자 트리거로 첫번쨰 버튼을 클릭하게끔 한다.
   
 });
+
+
 
 
 
@@ -45,14 +54,46 @@ $(document).ready(function() {
 function myFunction(){
 	
 	$('.subChange').click(function() {
- 		$(this).removeClass('subactive'); // 현재 클릭한 버튼에 active 클래스를 추가 혹은 제거
- 	    $('.subChange').not(this).addClass('subactive'); // 현재 클릭한 버튼이 아닌 다른 버튼의 active 클래스를 제거
- 		
+		$(this).removeClass('subactive'); // 현재 클릭한 버튼에 subactive 클래스를  제거
+ 	    $('.subChange').not(this).addClass('subactive'); // 현재 클릭한 버튼이 아닌 다른 버튼의 subactive 클래스를 추가
+ 	   // 변경할 문자열
+ 	  
+
  	    
 	
 	});
 	
 }
+
+function myFunction2(){
+	
+	$('.subChange').click(function(){
+		
+		
+		var img_src = $(this).attr("src");
+		img_src = img_src.replace("온.png", "배경.jpg");
+	    $("#container").css("background-image", "url('" + img_src + "')");
+	});
+	
+	
+	
+}
+
+
+function myFunction3(){
+	
+	$('.subChange').click(function(){
+		
+		
+		var box_img_src = $(this).attr("src").replace("온.png", "상세.png");
+	    $("img.box_img").attr("src", box_img_src);
+	    
+	});
+	
+	
+	
+}
+
 
 
 
@@ -64,6 +105,10 @@ function myFunction(){
 // 	    $('.subChange').not(this).addClass('subactive'); // 현재 클릭한 버튼이 아닌 다른 버튼의 active 클래스를 제거
 // 	  });
 // 	});
+
+
+
+
 
 
 
@@ -92,8 +137,8 @@ function myFunction(){
 				      </div>
 			   </div>	
 		
-		
 		<div id="container">
+				
 				
 			<div class="content">		   
 				
@@ -150,74 +195,84 @@ function myFunction(){
 															<div class="subtabArea">
 																
 																	
-																	<button type="button" class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_패티온.png" alt="쇠고기 패티">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_패티온.png" alt="쇠고기 패티">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_치킨온.png"  alt="치킨패티">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_치킨온.png"  alt="치킨패티">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_빵온.png"  alt="빵">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_빵온.png"  alt="빵">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_양상추온.png"  alt="양상추">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_양상추온.png"  alt="양상추">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_토마토온.png"  alt="토마토">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_토마토온.png"  alt="토마토">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_달걀온.png"  alt="달걀">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_달걀온.png"  alt="달걀">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button"  class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_치즈온.png"  alt="치즈">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_치즈온.png"  alt="치즈">
 																	
-																	</button>
 																	
 																
 																	
-																	<button type="button" class="subChange">
 																		
-  																		<img src="<%= ctxPath%>/images/품질이야기_양파온.png" 	 alt="양파">
+  																		<img class="subChange" src="<%= ctxPath%>/images/품질이야기_양파온.png" 	 alt="양파">
 																	
-																	</button>
 																	
 															
 															
 															</div>
 													
 													
-												
+															<div class="box_change">
+															
+															
+																<div class="box_img">
+															
+  																		<img class="box_img" src="" alt="상세" >
+															
+															
+																</div>
+															
+															
+																<div class="box_text">
+																	
+																	<p> 호주 청정 지역에서 키운 무방부제 & 무첨가제 100% 순 쇠고기 패티   </p>
+																	
+																	<p> 맥도날드 쇠고기 패티는 청정한 호주 대자연에서 깨끗함을 먹고 자란 100% 순 쇠고기로만 제조되며, 어떠한 첨가물이나 방부제도 사용되지 않았습니다.   </p>	
+																													
+																	<p> 쇠고기 이력번호’를 통해 생산부터 유통과정까지 철저하게 확인하고 있으며, 식품 안전 기준에 맞는 쇠고기만을 사용하기 위하여 만전을 기하고 있습니다.   </p>
+																	
+																	<p> 쇠고기 이력번호 : 수입쇠고기유통이력관리시스템 사이트에서 조회 시 쇠고기의 세부 정보 (수출국 도축장, 가공장, 수출업체 및 도축, 수입일자 등)를 확인할 수 있는 번호   </p>	
+															
+															
+																</div>
+															
+															
+															
+															</div>
 													
 													
 											
@@ -233,11 +288,12 @@ function myFunction(){
 		           </div>
 		       
 		       </div>
+		       
 		
 		</div>
 		       
+<jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>
 		       
 		       
 
-<jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>
 
