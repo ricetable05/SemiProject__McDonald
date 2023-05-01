@@ -168,15 +168,15 @@ public class ItemDAO {
 	} // end of getPriceSum() -----------------------------
 
 
-	public int recordTblOrder(int is_delivery_price, MemberVO loginuser) throws SQLException {
+	public int recordTblOrder(int is_delivery_price, MemberVO loginuser, int total, String delivery_loc) throws SQLException {
 		
 		int fk_odr_no = 0;
 		conn = ds.getConnection();
 		conn.setAutoCommit(false);
 		
 		try {
-				String sql	= " INSERT INTO tbl_order(odr_no, fk_userid, fk_store_id, is_delivery, delivery_time, odr_date, is_delivery_price) "
-							+ " VALUES(tbl_order_seq.nextval, ?, '001', 0, sysdate, sysdate, ?) ";
+				String sql	= " INSERT INTO tbl_order(odr_no, fk_userid, fk_store_id, is_delivery, delivery_time, odr_date, is_delivery_price, delivery_loc, total) "
+							+ " VALUES(tbl_order_seq.nextval, ?, '001', 0, sysdate, sysdate, ?, ?, ?) ";
 				
 				pstmt = conn.prepareStatement(sql);
 
@@ -184,11 +184,13 @@ public class ItemDAO {
 				try {
 					userid = loginuser.getUserid();
 				} catch (NullPointerException e) {
-					userid = "iyou1";
+					userid = "eomjh";
 				}
 				
 				pstmt.setString(1, userid);
 				pstmt.setInt(2, is_delivery_price);
+				pstmt.setString(3, delivery_loc);
+				pstmt.setInt(4, total);
 				
 				rs = pstmt.executeQuery();
 				rs.next();
@@ -253,7 +255,42 @@ public class ItemDAO {
 		
 	}
 
+	public int checkOrderCompleted(String[] arr_odr_no) throws SQLException {
+		
+		int cnt_check = 0;
+		
+		conn = ds.getConnection();
+		conn.setAutoCommit(false);
+		
+		try {	
+			
+			String sql = "";
+			
+			for(String odr_no : arr_odr_no) {
 	
+				sql	= " update tbl_order set is_delivery = 1, delivery_time = sysdate "
+					+ " where odr_no ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(odr_no));
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				
+				cnt_check++;
+			
+			}
+			
+		} catch (SQLException e) {
+				e.printStackTrace();
+				conn.rollback();
+		} finally {
+			conn.setAutoCommit(true);
+			close();
+		}
+		
+		return cnt_check;
+	}
 	
 	
 }

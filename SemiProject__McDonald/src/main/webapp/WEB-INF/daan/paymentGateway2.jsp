@@ -34,10 +34,11 @@ $(document).ready(function() {
 <body>
 <form name="recordDBForm">
 	<fieldset>
-        <input type="hidden" name="totalFinal" value="${requestScope.totalFinal}"/>
-        <input type="hidden" name="deliveryFee" value="${requestScope.deliveryFee}"/>
 		<input type="hidden" name="cartFinal"/>
         <input type="hidden" name="quantityFinal"/>
+        <input type="hidden" name="totalFinal" value="${requestScope.totalFinal}"/>
+        <input type="hidden" name="deliveryFee" value="${requestScope.deliveryFee}"/>
+        <input type="hidden" name="delivery_loc" value="${requestScope.delivery_loc}"/>
     </fieldset>
 </form>
 </body>

@@ -33,6 +33,9 @@ public class PlaceOrderAction extends AbstractController {
 		String str_deliveryFee = request.getParameter("deliveryFee");
 		int deliveryFee = Integer.parseInt(str_deliveryFee);
 		
+
+		String delivery_loc = request.getParameter("delivery_loc");
+		
 		request.setAttribute("productName", "SIST_맥도날드_Test");
 	 	request.setAttribute("productPrice", totalFinal);
 	 	request.setAttribute("name", name);
@@ -42,6 +45,7 @@ public class PlaceOrderAction extends AbstractController {
 	 	
 		request.setAttribute("totalFinal", totalFinal);
 		request.setAttribute("deliveryFee", deliveryFee);
+		request.setAttribute("delivery_loc", delivery_loc);
 	 	
 	 	super.setRedirect(false);
 		// super.setViewPage("/WEB-INF/daan/paymentGateway.jsp");
