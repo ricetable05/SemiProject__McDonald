@@ -28,7 +28,7 @@
       width: 70%;
       height: 15%;
       margin-bottom: 5%;
-      margin-left: 10%;
+      margin-left: 17%;
       position: relative;
    }
    
@@ -36,24 +36,27 @@
       width: 70%;
       height: 15%;
       margin-bottom: 5%;
-      margin-left: 10%;
+      margin-left: 17%;
       position: relative;
+      margin-top: 35px
    }
    
    #div_updateResult {
       width: 90%;
       height: 15%;
       margin-bottom: 5%;
-      margin-left: 10%;      
+      margin-left: 17%;      
       position: relative;
+      
    }
    
    #div_btnUpdate {
       width: 70%;
       height: 15%;
       margin-bottom: 5%;
-      margin-left: 10%;
+      margin-left: 17%;
       position: relative;
+      margin-top: 45px
    }
 
 </style>
@@ -103,7 +106,7 @@
 			
 </script>
 
-<form name="pwd3mchangeEndFrm" style="font-family:SpeedeeK; font-weight:600;">
+<form name="pwd3mchangeEndFrm" style="font-family:SpeedeeK; font-weight:600; m">
 
    <div id="div_pwd" align="center">
       <span>새암호</span><br/> 
@@ -117,11 +120,9 @@
 
    <input type="text" name="userid" value="${requestScope.userid}"/>
 	
-	<c:if test="${requestScope.method == 'GET'}">
-		<div id="div_btnUpdate" align="center" style="margin-top: 20px;">
+		<div id="div_btnUpdate" align="center">
 	       <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>
 	    </div> 
-	</c:if>
 
 </form>
 

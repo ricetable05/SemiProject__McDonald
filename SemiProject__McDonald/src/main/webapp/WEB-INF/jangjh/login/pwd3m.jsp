@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>3개월</title>
+    <title>비밀번호 변경</title>
     
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
     
@@ -34,43 +34,54 @@
 	
 	$(document).ready(function(){
 	
-    	$("button.Pwd3mClose").click(function(){
+			$("button.Pwd3mClose").click(function(){
 			
-			const iframe_Pwd3mChange = document.getElementById("iframe_Pwd3mChange");
+			const iframe_Pwd3m = document.getElementById("iframe_Pwd3mChange");
 			
-			const iframe_window_Pwd3mChange = iframe_Pwd3mChange.contentWindow; 
+			const iframe_window_Pwd3m = iframe_Pwd3m.contentWindow; 
 			
-			iframe_window_Pwd3mChange.func_form_reset_Pwd3mChange(); 
+			iframe_window_Pwd3m.func_form_reset_Pwd3m(); 
 			
-		}); // end of $("button.btn_is_dormantClose").click(function(){} ----------------- 
+		    }); // end of $("button.btn_is_dormantClose").click(function(){} ----------------- 
+			
+		    		
+			$("#madal").click(function(){
+				
+				$("#modalsubmit").submit();
+			});		
 		
+		    		
 	});//end of $(document).ready(function() ----------------------------------------------
 
  			
-</script>
+</script> 
 
 </head>
 <body>
+	
 	
 <div id="container">
    <form name="Pwd3mFrm" style="font-family:SpeedeeK; font-weight:600;">
       <table id="Pwd3mTbl" style="margin-top: 22px;">
         <thead>
            <tr>  
-              <th colspan="2" id="th">3개월 비번?</th>
+              <th colspan="2" id="th">3개월 동안 비밀번호가 바뀌지 않았습니다. <br> 비밀번호를 변경해주세요!</th>
            </tr>
         </thead>
         <tbody>
            <%-- === 휴먼계정 풀기 === --%> 
            <tr>  
               <td colspan="2" style="padding-top: 30px;">
-                 <button type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 570px; " data-toggle="modal" data-target="#Pwd3m" data-dismiss="modal" data-backdrop="static">3개월 비번</button>
+                 <button id="madal" type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 550px; " data-toggle="modal" data-target="#Pwd3m" data-dismiss="modal" data-backdrop="static">비밀번호 변경</button>
               </td>
            </tr>
         </tbody>
       </table>
    </form>
 	   
+   <form id="modalsubmit" action="<%= request.getContextPath()%>/login/pwd3m.run" method="post">	   
+   		<input type="text" name="userid" value="${requestScope.userid}"/>	   
+   </form> 	   
   <%-- ****** 휴먼계정 풀기 Modal ****** --%>
   <div class="modal fade" id="Pwd3m"> 
     <div class="modal-dialog">
@@ -78,14 +89,14 @@
       
         <!-- Modal header -->
         <div class="modal-header">
-          <h4 class="modal-title" style="font-family:SpeedeeK; font-weight:600;">휴면 계정 풀기</h4>
+          <h4 class="modal-title" style="font-family:SpeedeeK; font-weight:600;">비밀번호 변경</h4>
           <button type="button" class="close Pwd3mClose" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
           <div id="idFind">
-             <iframe id="iframe_Pwd3mChange" style="border: none; width: 100%; height: 280px;" src="<%= request.getContextPath()%>/login/pwd3mChange.run">
+             <iframe id="iframe_Pwd3mChange" style="border: none; width: 90%; height: 230px;" src="<%= request.getContextPath()%>/login/pwd3m.run">
              </iframe>
           </div>
         </div>
