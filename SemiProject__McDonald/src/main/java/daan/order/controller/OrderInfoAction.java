@@ -7,15 +7,31 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import daan.item.ItemDAO;
 import daan.item.ItemVO;
+import jangjh.member.model.MemberVO;
 
 public class OrderInfoAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		boolean isLogined = super.checkLogin(request);		
+		
+		if(isLogined) {
+			
+			HttpSession session = request.getSession();
+			MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+			
+			request.setAttribute("user_postcode", loginuser.getPostcode());
+			request.setAttribute("user_address", loginuser.getAddress());
+			request.setAttribute("user_detail_address", loginuser.getDetail_address());
+			request.setAttribute("user_ref_address", loginuser.getRef_address());
+			
+		}
 		
 		List<ItemVO> item_list = new ArrayList<>();
 		

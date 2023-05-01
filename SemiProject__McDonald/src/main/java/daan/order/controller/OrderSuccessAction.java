@@ -19,11 +19,18 @@ public class OrderSuccessAction extends AbstractController {
 		String str_cart_arr = request.getParameter("cartFinal");
 		String str_quantity_arr = request.getParameter("quantityFinal");
 		
-		JSONArray cart_arr = new JSONArray(str_cart_arr);
-		JSONArray quantity_arr = new JSONArray(str_quantity_arr);
+		String str_totalFinal = request.getParameter("totalFinal");
+		int totalFinal = Integer.parseInt(str_totalFinal);
 		
 		String str_deliveryFee = request.getParameter("deliveryFee");
 		int deliveryFee = Integer.parseInt(str_deliveryFee);
+		
+		String delivery_loc = request.getParameter("delivery_loc");
+		
+		
+		JSONArray cart_arr = new JSONArray(str_cart_arr);
+		JSONArray quantity_arr = new JSONArray(str_quantity_arr);
+		
 		
 		int is_delivery_price = 0;
 		
@@ -31,12 +38,13 @@ public class OrderSuccessAction extends AbstractController {
 			is_delivery_price = 1;
 		}
 
-		ItemDAO idao = new ItemDAO();
 		
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		int fk_odr_no = idao.recordTblOrder(is_delivery_price, loginuser);
+		ItemDAO idao = new ItemDAO();
+		
+		int fk_odr_no = idao.recordTblOrder(is_delivery_price, loginuser, totalFinal, delivery_loc);
 		
 		int[] q_arr = new int[quantity_arr.length()];
 		int quantity_i = 0;

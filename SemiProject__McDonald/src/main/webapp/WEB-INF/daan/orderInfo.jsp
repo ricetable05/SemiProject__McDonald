@@ -279,17 +279,6 @@
 <script type="text/javascript">
 
 	
-	let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-	if(arr == null) {
-		sessionStorage.setItem('cart_arr', JSON.stringify([]));
-	}
-	
-	arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
-	if(arr == null) {
-		sessionStorage.setItem('quantity_arr', JSON.stringify([]));
-	}
-
-	
 	$(document).on('change', 'input.input-number', function(e){
 	
 		if($(e.target).val() > 99 | $(e.target).val() < 1) {
@@ -356,13 +345,32 @@
 	
 	$(document).ready(function(){
 		
+		let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+		if(arr == null) {
+			sessionStorage.setItem('cart_arr', JSON.stringify([]));
+		}
+		
+		arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+		if(arr == null) {
+			sessionStorage.setItem('quantity_arr', JSON.stringify([]));
+		}
+		
 		$('div.mt-2').css('display', '');
 
 		if(arr.length == 0) {
 			$('div.mt-2').css('display', 'none');
 		}
 
-		
+		const user_postcode = '${requestScope.user_postcode}';
+		if(user_postcode.length != 0) {
+			const user_address = '${requestScope.user_address}';
+			const user_detail_address = '${requestScope.user_detail_address}';
+			const user_ref_address = '${requestScope.user_ref_address}';
+			$('input#postcode').val(user_postcode);
+			$('input#address').val(user_address);
+			$('input#detailAddress').val(user_detail_address);
+			$('input#extraAddress').val(user_ref_address);
+		}
 		
 		// 각 제품 카드는 배경화면이 제거된 이미지 사진을 사용합니다.
 		// 그러나 DB 상 입력된 값은 14_빅맥.png으로, 이 값의 사진은 배경화면이 있는 사진입니다.
@@ -577,7 +585,7 @@
 					subtotal -= (1000*Number(quantity));
 				}
 			});
-			if(subtotal > 15000) {
+			if(subtotal >= 15000) {
 				delivery_fee = 0;
 			}
 			$('span#subtotal').text('￦ '+subtotal);
@@ -917,19 +925,21 @@
 
 	function placeOrder(){
 		
+		// <form> 내 <input type="hidden">의 value 값 불러온다.
+		const total = $('form[name="placeOrderForm"] > fieldset > input').val();
+		const delivery_loc = '('+$('input#postcode').val()+') '+$('input#address').val()+' '+$('input#detailAddress').val()+' '+$('input#extraAddress').val();
+		
 		// sessionStorage 상 저장된 장바구니 객체를 가져온다.
 		let str_cart_arr = sessionStorage.getItem('cart_arr');
 		let cart_arr = JSON.parse(str_cart_arr);
 		
 		if(cart_arr.length < 1) {
 			alert('장바구니가 비었습니다.');
-			return;
+			return false;
 		}
 		
 		let str_quantity_arr = sessionStorage.getItem('quantity_arr');
 		
-		// <form> 내 <input type="hidden">의 value 값 불러온다.
-		const total = $('form[name="placeOrderForm"] > fieldset > input').val();
 		
 		$.ajax({
 			url:'<%=request.getContextPath()%>/daan/orderVerification.run',
@@ -940,11 +950,12 @@
 			dataType: "JSON",
 			async:false,
 			success: function(json){
-					// alert(json.message);
 					
 					const result = json.message;
 					if('fail' == result) {
 						alert('DB상 금액과 View 단에서의 금액이 맞지 않음');
+						console.log(Number($('span#total').text().substr(2)));
+						console.log(Number($('span#delivery_fee').text().substr(2)));
 						return false;
 						
 					} else {
@@ -955,7 +966,7 @@
 						frm.method = 'POST';
 						frm.totalFinal.value = Number($('span#total').text().substr(2));
 						frm.deliveryFee.value = Number($('span#delivery_fee').text().substr(2));
-						// console.log('delivery_fee value => '+Number($('span#delivery_fee').text().substr(2)));
+						frm.delivery_loc.value = delivery_loc;
 						frm.submit();
 					}
 					
@@ -1095,6 +1106,7 @@
                             <button type="button" class="btn btn-placeOrder" onClick="placeOrder()" style="font-size: 1.5rem; box-shadow: 0px 0px 0px 2px;">주문하기</button>
                             <input type="hidden" name="totalFinal"/>
                             <input type="hidden" name="deliveryFee"/>
+                            <input type="hidden" name="delivery_loc"/>
                         </fieldset>
                     </form>
                 </div>

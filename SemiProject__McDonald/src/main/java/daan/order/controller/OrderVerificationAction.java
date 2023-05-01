@@ -39,7 +39,7 @@ public class OrderVerificationAction extends AbstractController {
 		}
 		
 		
-		int priceSum = 0;
+		int priceSum_before_set_discount = 0;
 		int set_count = 0;
 		int i=0;
 		List<Integer> arr_item_no = null;
@@ -60,18 +60,18 @@ public class OrderVerificationAction extends AbstractController {
 				arr_item_no.add((Integer) item.get("item_no"));
 			}
 			ItemDAO ido = new ItemDAO();
-			priceSum += i_arr[i]*ido.getPriceSum(arr_item_no);
+			priceSum_before_set_discount += i_arr[i]*ido.getPriceSum(arr_item_no);
 			i++;
 		}
-		int set_count_discount = set_count * 1000;
+		int set_discount = set_count * 1000;
 		
-		int priceSum_w_discount = priceSum-set_count_discount;
+		int priceSum_after_set_discount = priceSum_before_set_discount-set_discount;
 		
 		// 배달비 - 15000원이 넘지 않으면 배달비용을 추가한다.
-		if(priceSum_w_discount < 15000) {
-			priceSum_w_discount += 3000;
+		if(priceSum_after_set_discount < 15000) {
+			priceSum_after_set_discount += 3000;
 		}
-		
+		System.out.println("DB 상 결제 금액 확인 => "+priceSum_after_set_discount);
 		String str_total = request.getParameter("total");
 		
 		try {
@@ -80,7 +80,7 @@ public class OrderVerificationAction extends AbstractController {
 		
 			String message = "";
 			
-			if(priceSum_w_discount == total) {
+			if(priceSum_after_set_discount == total) {
 				
 				message = "success";
 			} else {
