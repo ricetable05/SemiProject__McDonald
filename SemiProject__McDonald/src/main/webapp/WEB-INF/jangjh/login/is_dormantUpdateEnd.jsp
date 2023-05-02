@@ -21,40 +21,7 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
-<style type="text/css">
-
-   #div_pwd {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 10%;
-      position: relative;
-   }
-   
-   #div_pwd2 {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 10%;
-      position: relative;
-   }
-   
-   #div_updateResult {
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 5%;      
-      position: relative;
-      font-size: 25pt;
-   }
-   
-   #div_btnUpdate {
-   		margin-right: 50px;
-   		font-size: 23;
-   		font-family:SpeedeeK; 
-   		font-weight:600;
-   }
-
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/login/is_dormantUpdateEnd.css" type="text/css"/>
 
 <script type="text/javascript">
 

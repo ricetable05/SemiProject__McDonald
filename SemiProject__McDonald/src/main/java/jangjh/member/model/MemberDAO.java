@@ -164,20 +164,21 @@ public class MemberDAO implements InterMemberDAO {
 			try {
 				conn = ds.getConnection();
 				
-				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,         \n"+
-							" substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd, registerday, pwdchangegap,        \n"+
-							" NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap   \n"+
-							" from   \n"+
-							" (select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address       \n"+
-							" ,  to_char(birthday,'yyyymmdd') as birthday , registerday        \n"+
-							" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap   \n"+
-							" from tbl_member   \n"+
-							" where is_deactivate = '1' and userid = ? and pwd= ?\n"+
-							" ) M   \n"+
-							" CROSS JOIN   \n"+
-							" (   select trunc(months_between(sysdate, max(login_date))) AS lastlogingap   \n"+
-							" from tbl_login_history where fk_userid = ? \n"+
-							" ) H ";
+				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,          \n"+
+						     " substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd, registerday, pwdchangegap,         \n"+
+						     " NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap,  is_deactivate  \n"+
+						     " from    \n"+
+						     " (\n"+
+						     " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address        \n"+
+						     " ,  to_char(birthday,'yyyymmdd') as birthday , registerday         \n"+
+						     " , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap, is_deactivate  \n"+
+						     " from tbl_member    where userid = ? and pwd= ?\n"+
+						     " ) M   \n"+
+						     " CROSS JOIN    \n"+
+						     " (  \n"+
+						     " select trunc(months_between(sysdate, max(login_date))) AS lastlogingap    \n"+
+						     " from tbl_login_history where fk_userid = ?\n"+
+						     " ) H ";
 				
 				pstmt = conn.prepareStatement(sql);
 				
@@ -223,6 +224,8 @@ public class MemberDAO implements InterMemberDAO {
 						
 						pstmt.executeUpdate();
 					}
+					
+					member.setIs_deactivate(rs.getInt(15));
 					
 					// == tbl_lastlogingap(로그인 기록) 테이블에 insert 하기 == //
 					if(member.getIs_dormant()!= 1) {
@@ -439,7 +442,7 @@ public class MemberDAO implements InterMemberDAO {
 		            
 		            String sql = " select ceil(count(*)/?) "
 		                       + " from tbl_member "
-		                       + " where userid != 'admin' ";
+		                       + " where userid != 'kingkingadmin' ";
 		            
 		            String colname = paraMap.get("searchType");
 		            String searchWord = paraMap.get("searchWord");
@@ -497,10 +500,10 @@ public class MemberDAO implements InterMemberDAO {
 				             "      ( "+
 				             "      select userid, member_name, email "+
 				             "      from tbl_member "+
-				             "      where userid != 'admin' ";
+				             "      where userid != 'kingkingadmin' and is_deactivate = '0' ";
 				
 				String colname = paraMap.get("searchType");
-				String searchWord = paraMap.get("searchWord");
+				String searchWord = paraMap.get("searchWord"); 
 				
 				int currentShowPageNo = Integer.parseInt(paraMap.get("currentShowPageNo"));  
 				int sizePerPage =  Integer.parseInt(paraMap.get("sizePerPage"));
@@ -647,10 +650,30 @@ public class MemberDAO implements InterMemberDAO {
 			return result;
 		}//end of public int login_date_Update(String userid) throws SQLException ---------------
 
-
-		
-
-		
+		@Override
+		public int deleteMember(String userid) throws SQLException {
+			
+			int result = 0;
+			
+		      try {
+			         conn = ds.getConnection();
+			         
+			         String sql = " update tbl_member set is_deactivate = 1 "
+			         			+ " where userid = ? and is_deactivate = 0 ";
+			         
+			         pstmt = conn.prepareStatement(sql);
+			         
+			         pstmt.setString(1, userid);
+			         
+			         result = pstmt.executeUpdate();
+			         
+			         
+			      } finally {
+			         close();
+			      }
+			
+			return result;
+		}//end of public int deleteMember(String userid) throws SQLException  -------
 
 
 }

@@ -22,44 +22,8 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
-<style type="text/css">
-
-   #div_pwd {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 17%;
-      position: relative;
-   }
-   
-   #div_pwd2 {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 17%;
-      position: relative;
-      margin-top: 35px
-   }
-   
-   #div_updateResult {
-      width: 90%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 17%;      
-      position: relative;
-      
-   }
-   
-   #div_btnUpdate {
-      width: 70%;
-      height: 15%;
-      margin-bottom: 5%;
-      margin-left: 17%;
-      position: relative;
-      margin-top: 45px
-   }
-
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/login/pwd3mChange.css" type="text/css"/>
+    
 
 <script type="text/javascript">
 

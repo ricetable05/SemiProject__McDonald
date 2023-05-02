@@ -95,9 +95,9 @@
 	
 			
 			
-			const allerList = '${requestScope.ivo.itemDetailVO.allergens}'.split(','); // 알레르기 정보 초기설정
+			const allerList = '${requestScope.ivo.itemDetailVO.allergens}'.split(','); 
 			
-			document.querySelectorAll("input.item_aller").forEach(function(item) {
+			document.querySelectorAll("input.item_aller").forEach(function(item) { // 알레르기 정보 초기설정
 				
 				allerList.forEach(function(elt) {
 					
@@ -114,12 +114,7 @@
 			
 		}
 		
-		
-		
-		
-		
-		
-	   
+		 
         $(document).on("change", "input.img_file", function(e){ // 이미지 추가할 때 이미지 미리보기 기능
         
         	const input_file = $(e.target).get(0);

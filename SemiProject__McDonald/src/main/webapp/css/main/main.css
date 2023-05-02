@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+    #name {
+    	font-size: 40pt;
+    	text-align: center; 
+    }
+    
+    #indexdetail {
+    	margin-left: 70px;
+    	
+    }
+    
+    #carouselExampleIndicators {
+    	margin-top: 138px;
+    }
+    
+    .divshadow {
+	box-shadow: 3px 5px 3px #4950576e;
+	height: 100%;
+	border-radius: 3%;
+	}
+	
+	#sepc{
+	    padding-top: 35px;
+	}
+	
+	#indexdetail{
+		border-bo-radius: 3%;
+		border: solid 0px;
+	}

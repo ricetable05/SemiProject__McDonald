@@ -13,18 +13,8 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/member/memberList.css" type="text/css"/>
 
-
-<style type="text/css">
-
-	.bg1 {
-	  background-image: url(<%= ctxPath%>/images/품질이야기상단이미지.jpg);  
-	  background-clip: border-box;
-	} 	
-		 
-		
-</style>
-
 <script type="text/javascript">
+
 	$(document).ready(function(){
 	 			
 	 if("${requestScope.searchType}" != "" && "${requestScope.searchWord}" != ""){ // searchType 이나 searchWord에 문제가 없는 경우에만 값을 넣어주겠다.	
@@ -50,7 +40,6 @@
 			goSearch();
 		});
 		
-		
 		// 특정 회원을 클릭하면 그 회원의 상세정보를 보여주도록 한다.
 		$("tr.memberInfo").click( (e) => {
 			//alert($(e.target).parent().find(".userid").text());
@@ -71,15 +60,16 @@
 		frm.submit();
 	}// end of function goSearch()---------------------------------------------- 
 	
-	
 </script>
 
-	<div>
-	  <p class="bg1" style="text-align: center; font-weight:600;">회원전체 목록</p>
-	</div>
-	
-	
-	<form name="memberFrm" style="text-align: center ">
+	<div class="MCcontent">
+      <div class="topimage">
+         <div class="toptext" style="padding-top: 40px;">
+            <h1 class="titDep1">회원목록</h1>
+         </div>
+      </div>
+   </div>
+	<form name="memberFrm" style="text-align: center">
 		<select id="searchType" name="searchType">
 			<option value="">선택하세요</option>
 			<option value="member_name">회원명</option>	
@@ -113,7 +103,7 @@
         <tbody>
 
     		<c:if test="${not empty requestScope.memberList}">
-    			<c:forEach var="mvo" items="${requestScope.memberList}" > <%-- items 에는 배열이나 list 가 온다. --%>
+    			<c:forEach var="mvo" items="${requestScope.memberList}" > 
    					<tr class="memberInfo"  style="font-size: 12pt;">
 			           <td class="userid">${mvo.userid}</td>
 			           <td>${mvo.member_name}</td>
@@ -139,5 +129,5 @@
        </div>
     </nav>
 
-
+</body>
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>

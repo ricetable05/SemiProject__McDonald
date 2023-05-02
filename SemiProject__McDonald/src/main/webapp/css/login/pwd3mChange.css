@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+   #div_pwd {
+      width: 70%;
+      height: 15%;
+      margin-bottom: 5%;
+      margin-left: 17%;
+      position: relative;
+   }
+   
+   #div_pwd2 {
+      width: 70%;
+      height: 15%;
+      margin-bottom: 5%;
+      margin-left: 17%;
+      position: relative;
+      margin-top: 35px
+   }
+   
+   #div_updateResult {
+      width: 90%;
+      height: 15%;
+      margin-bottom: 5%;
+      margin-left: 17%;      
+      position: relative;
+      
+   }
+   
+   #div_btnUpdate {
+      width: 70%;
+      height: 15%;
+      margin-bottom: 5%;
+      margin-left: 17%;
+      position: relative;
+      margin-top: 45px
+   }

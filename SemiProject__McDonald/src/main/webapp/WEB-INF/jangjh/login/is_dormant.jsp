@@ -6,29 +6,15 @@
 %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>휴먼</title>
     
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
-    
-<style type="text/css">
-    
-    div#container{
-    	display: flex;
-		border: solid 0px purple;
-		width: 80%;
-		margin: 20px auto; 
-		margin-top: 150px;
-	}
 
-    #th{ 
-    	font-size: 25pt;  text-align: center; padding-left:320px;
-    }
-
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/login/is_dormant.css" type="text/css"/>
 	
 <script type="text/javascript">
 	

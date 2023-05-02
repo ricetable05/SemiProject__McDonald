@@ -13,8 +13,15 @@ public interface InterTotalOrderDAO {
 	// 페이징 처리한 모든 주문내역 또는 검색한 회원의 주문내역 보여주기
 	List<TotalOrderVO> selectPagingOrder(Map<String, String> paraMap) throws SQLException;
 	
-	// order_no 값을 입력받아서 주문번호 1건에 대한 상세정보를 알아오기
-	List<OrderDetailVO> orderDetailList(int odr_no) throws SQLException;
-
+	/*
+	 * // order_no 값을 입력받아서 주문번호 1건에 대한 상세정보를 알아오기 List<TotalOrderVO>
+	 * orderDetailList(int odr_no) throws SQLException;
+	 */
+	
+	// order_no 값을 입력받아서 주문번호 한건에 대한 정보 불러오기
+	TotalOrderVO oneOrder(int odr_no) throws SQLException;
+	
+	// 주문번호 order_no 의 상세 주문내역
+	List<OrderDetailVO> orderDetail(int odr_no) throws SQLException;
 
 }

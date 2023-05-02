@@ -12,164 +12,7 @@
 <meta charset="UTF-8">
 <title>${requestScope.ivo.item_name}</title>
 
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail/detailView.css" type="text/css"/>
-
-<style type="text/css">
-
-.topimage{
-background:url(<%= request.getContextPath() %>/images/사이드상단이미지.jpg) 50% 50% no-repeat;
-}
-
-
-	button.prev {
-	
-		border: none;
-		cursor: pointer;
-		
-		width: 100px; 
-		height: 100px; 
-		
-		background-color: orange;
-		border-radius: 50%;
-		
-	}
-	
-		
-	button.next {
-	
-	
-		border: none;
-		cursor: pointer;
-		
-		width: 100px; 
-		height: 100px; 
-		
-		background-color: orange;
-		border-radius: 50%;
-		
-	
-	}
-	
-	p.prev {
-	
-		
-		
-		opacity: 0;
-		
-	}
-	
-	p.next {
-	
-		
-		
-		opacity: 0;
-		
-	}
-	
-	button.prev > img.prev {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		margin-top: 30px;
-		
-	}
-	
-	button.next > img.next {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		margin-top: 30px;
-		
-	}
-	
-	button.prev > img.prev_hover {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-		
-		
-
-	}
-	
-	button.next > img.next_hover {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-
-	}
-	
-		
-	button.prev:hover  img.prev {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-
-		
-	}
-	
-	
-	button.next:hover  img.next {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		 
-		display: none;		
-	
-	}
-	
-	button.prev:hover  img.prev_hover {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		display: block;
-		
-		margin: 5px auto;
-		
-	}
-	
-	
-	button.next:hover  img.next_hover {
-		
-		max-width: 100%; 
-		height: auto; 
-		 
-		display: block;
-		
-		margin: 5px auto;
-		
-	}
-	
-	
-	button.prev:hover  p.prev {
-		
-		opacity: 1;
-		
-		font-weight:bold;
-		
-	}
-	
-	button.next:hover  p.next {
-	
-		opacity: 1;
-		
-		font-weight:bold;
-		
-	}
-	
-	
-
-
-</style>
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail/sideView.css" type="text/css"/>
 
 
 
@@ -260,20 +103,20 @@ $(document).ready(function() {
 					
 							
 								
-						 <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
-						
-									<script>
-									
-										$(document).ready(function(){
-											
-											$(".prev").prop("disabled",true);
-											$(".prev").css("opacity", 0);
-											$(".prev").css("cursor", "auto");
-										});
-									
-									</script>
-						
-							</c:if>
+							 <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
+							
+										<script>
+										
+											$(document).ready(function(){
+												
+												$(".prev").prop("disabled",true);
+												$(".prev").css("opacity", 0);
+												$(".prev").css("cursor", "auto");
+											});
+										
+										</script>
+							
+								</c:if>
 							
 							
 								
@@ -295,124 +138,124 @@ $(document).ready(function() {
 							
 					
 						 
-						<img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
+						        <img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
 						
 						
 						
 						
 						
-						    <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
-						
-								<script>
-								
-									$(document).ready(function(){
-										
-										$(".next").prop("disabled",true);
-										$(".next").css("opacity", 0);
-										$(".next").css("cursor", "auto");
-									});
-								
-								</script>
-						
-							</c:if>
+									    <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
+									
+											<script>
+											
+												$(document).ready(function(){
+													
+													$(".next").prop("disabled",true);
+													$(".next").css("opacity", 0);
+													$(".next").css("cursor", "auto");
+												});
+											
+											</script>
+									
+										</c:if>
 						
 						
 						
 					
 						
-							<button class="next" type="button" onclick="location.href='/SemiProject__McDonald/detail/sideView.run?item_no=${requestScope.ivo_next.item_no}'">
-											
-									 		
-														
-								     <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">
-								     
-								     <img class="next_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_next.item_image,'.png','_small.png')}">
-								     
-								     <p class="next">${requestScope.ivo_next.item_name}</p>
-								     
-								
-							</button> 
+									<button class="next" type="button" onclick="location.href='/SemiProject__McDonald/detail/sideView.run?item_no=${requestScope.ivo_next.item_no}'">
+													
+											 		
+																
+										     <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">
+										     
+										     <img class="next_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_next.item_image,'.png','_small.png')}">
+										     
+										     <p class="next">${requestScope.ivo_next.item_name}</p>
+										     
+										
+									</button> 
 						            
 						            
 						            
 						          
 						 
-					</div>
+							</div>
 					
 					
 					
-					<div id="contents_2" >
-						 
-						
-						            <p>${requestScope.ivo.item_info}</p>
+							<div id="contents_2" >
+								 
+								
+								            <p>${requestScope.ivo.item_info}</p>
+							
+							
+							
+							</div>
 					
 					
 					
-					</div>
-					
-					
-					
-					<div class="accordion_wrap" >
-						<div class="accordion1">                        	
-							<section id="nutrients">
-								<p id="nutrients"><a href="#nutrients">영양정보</a></p>
-								<div>
-
-										<table class="nutrients" >
-											<th>영양소</th>
-											<th>중량(g)</th>
-											<th>중량(ml)</th>
-											<th>열량</th>
-											<th>당</th>
-											<th>단백질</th>
-											<th>포화지방</th>
-											<th>나트륨</th>
-											<th>카페인</th>
-											
-											
-											<tr><!-- 첫번째 줄 시작 -->
-											    <td>함량</td>
-											    <td>${requestScope.ivo_detail.weight_g}</td>
-											    <td>${requestScope.ivo_detail.weight_ml}</td>
-											    <td>${requestScope.ivo_detail.calories}</td>
-											    <td>${requestScope.ivo_detail.carbo}</td>
-											    <td>${requestScope.ivo_detail.protein}</td>
-											    <td>${requestScope.ivo_detail.fat}</td>
-											    <td>${requestScope.ivo_detail.sodium}</td>
-											    <td>${requestScope.ivo_detail.caffeine}</td>
-											</tr><!-- 첫번째 줄 끝 -->
-									    </table>
-
-
+							<div class="accordion_wrap" >
+								<div class="accordion1">                        	
+									<section id="nutrients">
+										<p id="nutrients"><a href="#nutrients">영양정보</a></p>
+										<div>
+		
+												<table class="nutrients" >
+													<th>영양소</th>
+													<th>중량(g)</th>
+													<th>중량(ml)</th>
+													<th>열량</th>
+													<th>당</th>
+													<th>단백질</th>
+													<th>포화지방</th>
+													<th>나트륨</th>
+													<th>카페인</th>
+													
+													
+													<tr><!-- 첫번째 줄 시작 -->
+													    <td>함량</td>
+													    <td>${requestScope.ivo_detail.weight_g}</td>
+													    <td>${requestScope.ivo_detail.weight_ml}</td>
+													    <td>${requestScope.ivo_detail.calories}</td>
+													    <td>${requestScope.ivo_detail.carbo}</td>
+													    <td>${requestScope.ivo_detail.protein}</td>
+													    <td>${requestScope.ivo_detail.fat}</td>
+													    <td>${requestScope.ivo_detail.sodium}</td>
+													    <td>${requestScope.ivo_detail.caffeine}</td>
+													</tr><!-- 첫번째 줄 끝 -->
+											    </table>
+		
+		
+										</div>
+									</section>			
+									<section id="allergy">
+										<p id="allergy"><a href="#allergy">알레르기 정보</a></p>
+										<div>
+											<p>알레르기 유발 가능 식재료</p> <h3>${requestScope.ivo_detail.allergens}</h3><br>
+											<p>* 일부 튀김류 제품은 새우 패티와 같은 조리기구를 사용하고 있습니다.</p>
+										</div>
+									</section>
+							
+									<section id="origin">
+										<p id="origin"><a href="#origin">원산지 정보</a></p>
+										<div>
+											<p>${requestScope.ivo_detail.coa}</p>
+										</div>
+									</section>                          
 								</div>
-							</section>			
-							<section id="allergy">
-								<p id="allergy"><a href="#allergy">알레르기 정보</a></p>
-								<div>
-									<p>알레르기 유발 가능 식재료</p> <h3>${requestScope.ivo_detail.allergens}</h3><br>
-									<p>* 일부 튀김류 제품은 새우 패티와 같은 조리기구를 사용하고 있습니다.</p>
-								</div>
-							</section>
-					
-							<section id="origin">
-								<p id="origin"><a href="#origin">원산지 정보</a></p>
-								<div>
-									<p>${requestScope.ivo_detail.coa}</p>
-								</div>
-							</section>                          
-						</div>
-					</div>
-					
+							</div>
+							
 			
 	
 		
 	
 			
-		</div>
+					</div>
+								
+			
 					
-
-		
-	</div>
+				</div>
 	
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>
     

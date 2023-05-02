@@ -32,14 +32,6 @@
 
     <title>회원 정보 수정</title>
     
-<style type="text/css">
-
-	.bg1 { 
-	  background-image: url(<%= ctxPath%>/images/브랜드소개상단이미지.jpg);  
-	  background-clip: border-box;  
-	} 
-</style>
-    
 </head> 
 <body>
 <script type="text/javascript">

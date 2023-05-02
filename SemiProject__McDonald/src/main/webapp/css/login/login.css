@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+    div#container{
+    	display: flex;
+		border: solid 0px purple;
+		width: 80%;
+		margin: 20px auto; /* 상 하는 20px 우 좌는 남은 20%에서 좌우로 균등하게 주겠다. 즉, 화면의 가운데로 위치하겠다는 말이다.*/
+		margin-top: 150px;
+	}
+
+	div#side{
+		border: solid 0px blue;
+		width: 29%;
+	}	
+	
+	div#contents{
+		border: solid 0px yellow;
+		width: 69.22%;
+		background-color: #eee;
+	}	
+	
+    #th{
+    	font-size: 25pt;  text-align: center; padding-left:50px;
+    }

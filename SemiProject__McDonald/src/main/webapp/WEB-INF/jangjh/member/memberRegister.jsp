@@ -12,18 +12,9 @@
     
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/member/memberRegister.css" type="text/css"/>
     
-<style type="text/css">
-	.bg1 {
-	  background-image: url(<%= ctxPath%>/images/브랜드소개상단이미지.jpg);  
-	  background-clip: border-box;
-	}
-</style>
-    
 </head>
 <body>
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
-
-
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">

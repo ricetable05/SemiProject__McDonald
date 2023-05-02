@@ -2,6 +2,7 @@ package jeonym.item.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class ItemUpdateAction extends AbstractController {
 			
 			if(!"POST".equalsIgnoreCase(method)) { // get 방식인 경우 ==> 제품목록 페이지에서 제품등록을 누르거나
 												   // 제품상세보기 페이지에서 수정버튼을 누른 경우
-	
+	 
 				String pk_fk_item_no = request.getParameter("pk_fk_item_no"); // detailList 부터 넘어온 pk_fk_item_no
 				
 				// pk_fk_item_no에 부적한 타입의 데이터가 들어오는지 검사해야할 것
@@ -160,7 +161,7 @@ public class ItemUpdateAction extends AbstractController {
 				item_info = item_info.replaceAll(">", "&gt;");
 				item_info = item_info.replaceAll("\r\n", "<br>");
 				
-				String item_image =  mtrequest.getFilesystemName("item_image"); // 제품 이미지 파일명(파일서버에 업로드 되어진 실제파일명)
+				String item_image =  mtrequest.getOriginalFileName("item_image"); 	// 웹클라이언트의 웹브라우저에서 파일을 업로드 할때 올리는 파일명
 				
 				if( item_image == null) { item_image = ""; }// 만약 item_image 가 null 이 되는 경우에는 공백으로 처리
 							
@@ -237,7 +238,14 @@ public class ItemUpdateAction extends AbstractController {
 					}
 	
 					
-				}catch(SQLException e) {
+				}
+				catch(SQLIntegrityConstraintViolationException e) {
+					// 제약조건에 위배된 경우 (이미 DB에 존재하는 제품명으로 수정시도시 발생)
+					message = "제품명이나 이미지명에 중복은 허용되지 않습니다.";
+					loc = "javascript:history.back()";
+					
+				}
+				catch(SQLException e) {
 					message = "수정이 실패하였습니다 ㅜㅜ";
 					loc = request.getContextPath() + "/item/itemList.run";
 										
