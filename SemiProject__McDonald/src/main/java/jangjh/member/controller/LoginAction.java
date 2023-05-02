@@ -40,8 +40,8 @@ public class LoginAction extends AbstractController{
 		MemberVO loginuser = mdao.selectOneMember(paraMap);
 		
 		if(loginuser != null) {
-			
-			if(loginuser.getIs_deactivate() == 0) {
+
+			if(loginuser.getIs_deactivate() == 1) {
 				
 				String message = "회원탈퇴한 계정입니다.";
 				String loc = request.getContextPath() + "/main.run";
