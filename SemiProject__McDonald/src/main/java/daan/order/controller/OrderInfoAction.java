@@ -69,6 +69,13 @@ public class OrderInfoAction extends AbstractController {
 		
 		request.setAttribute("item_list", item_list);
 		
+		int[] setMenusPrices = idao.getSetMenusPrices();
+		request.setAttribute("setMenusPrices", setMenusPrices);
+		
+		
+		String str_item_no = request.getParameter("item_no");
+		request.setAttribute("quick_order_item_no", str_item_no);
+		
 		setRedirect(false);
 		setViewPage("/WEB-INF/daan/orderInfo.jsp");
 		

@@ -240,9 +240,7 @@ public class ItemDAO {
 				pstmt.setInt(5, (Integer) item.get("item_price"));
 				pstmt.setInt(6, is_set);
 				
-				rs = pstmt.executeQuery();
-				rs.next();
-			
+				pstmt.executeUpdate();
 				
 				
 		} catch (SQLException e) {
@@ -274,7 +272,7 @@ public class ItemDAO {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, Integer.parseInt(odr_no));
 				
-				rs = pstmt.executeQuery();
+				pstmt.executeUpdate();
 				rs.next();
 				
 				cnt_check++;
@@ -290,6 +288,36 @@ public class ItemDAO {
 		}
 		
 		return cnt_check;
+	}
+
+	public int[] getSetMenusPrices() throws SQLException {
+		
+		int[] SetMenusPrices = new int[4];
+		
+		conn = ds.getConnection();
+		
+		try {	
+			
+			String sql 	= " select item_price "
+						+ " from tbl_item "
+						+ " where item_no IN(300,303,504,519) "
+						+ " order by item_no ";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				int n =0;
+				
+				while(rs.next()) {
+					SetMenusPrices[n] = rs.getInt(1);
+					n++;
+				}
+			
+		} finally {
+			close();
+		}
+
+		return SetMenusPrices;
 	}
 	
 	

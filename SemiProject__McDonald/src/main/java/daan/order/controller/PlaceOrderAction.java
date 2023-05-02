@@ -29,8 +29,9 @@ public class PlaceOrderAction extends AbstractController {
 
 		String str_totalFinal = request.getParameter("totalFinal");
 		int totalFinal = Integer.parseInt(str_totalFinal);
-		
+		System.out.println(totalFinal);
 		String str_deliveryFee = request.getParameter("deliveryFee");
+		System.out.println(str_deliveryFee);
 		int deliveryFee = Integer.parseInt(str_deliveryFee);
 		
 
