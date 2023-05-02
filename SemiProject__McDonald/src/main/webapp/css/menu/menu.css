@@ -1,0 +1,123 @@
+	
+	.topimage {
+		position: relative;
+		border: solid 0px green;
+		width:100%;
+		height: 226px;
+		margin-top: 136px;
+		
+	}
+	
+	.topimage:before {
+		content:"";
+		width:100%;
+		height:100%;
+		position:absolute;
+		background-color:rgba(0,0,0,.45); 
+	}
+	
+	
+	.toptext{
+		border: solid 0px red;
+	    width: 1146px;
+	    height: 150px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -54%);
+	    font-size:14pt;
+	    color: #fff;
+		font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:500;
+	}
+	
+	.toptext2{
+		border: solid 0px blue;
+	    width: 1146px;
+	    height: 30px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, 235%);
+	    padding: none;
+	}
+	
+	.titDep1{display:block;
+		 font-size: 55px; 
+		 line-height:1;
+		 font-family:SpeedeeK;
+  		 font-style:normal;
+	}
+	
+	.toptext2 > ul{
+		padding: 0;
+	}
+	
+	.toptext2 > ul > li{
+		display:inline;
+	}
+	
+	.toptext2 >ul >li.listsecond{
+		margin-left: 40px;
+	}
+	
+	.toptext2 li > a{
+		color: white;
+		text-decoration: none;
+		font-family:SpeedeeK;
+		font-weight:500;
+	}
+
+div.menu_tab_change > button {
+	font-family:SpeedeeK;
+    font-weight:600;
+    font-style:normal;
+	color:#db0007;
+    outline:none;
+    background-color: #ffffff; 
+    font-size: 20pt;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid 1px #db0007;
+}
+
+div.menu_tab_change > button:hover{
+	color: db0007;
+    outline:none;
+    border-bottom: solid 1px #db0007;
+}
+div.menu_tab_change > button:focus{ 	
+    border-bottom: solid 1px #db0007;
+    outline:none;
+    color: #db0007;
+}
+
+.card{
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#bgcard{	
+	background-color: #f8f8f8;
+	border: none;
+	border-radius: 3%;
+}
+
+#bgcard:hover{
+	outline: solid 1.7px orange;
+	background-color: #fff;
+}
+	
+.card-bodys{
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	min-height: 1px;
+	padding: 2rem 1.25rem 1.25rem 1.25rem;
+	text-align: center;
+	font-family:SpeedeeK;
+    font-weight:600;
+    font-style:normal;
+}

@@ -97,9 +97,7 @@ replay_pid*
 
  ##### commit 제외파일 ##### 
 
-/SemiProject__McDonald/src/main/webapp/images
 /SemiProject__McDonald/src/main/webapp/WEB-INF/Command.properties
 /SemiProject__McDonald/src/main/webapp/WEB-INF/web.xml
 /SemiProject__McDonald/src/main/webapp/WEB-INF/sql
-/SemiProject__McDonald/src/main/webapp/css
 /SemiProject__McDonald/src/main/webapp/WEB-INF/header_footer/header.jsp

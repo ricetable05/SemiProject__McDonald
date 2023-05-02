@@ -1,0 +1,124 @@
+#collapsibleNavbar{
+		text-align: center;
+	}
+	
+	ul.depth2 {
+		list-style-type: none;
+		padding: 0;
+		line-height: 50px;
+	}
+	
+	ul.depth2 > li > a{
+	 	color: #737373;
+		font-size:12pt;	
+	}
+	
+	a.nav-link{
+		color: #000;
+		text-decoration: none;
+		font-size:14pt;
+		display: inline-block;
+		padding-bottom: 45px;
+    	width: 130px;		
+	}
+	
+	ul.nav-item > li > a:visited{
+		color: #aaa;
+	}
+	
+	ul.nav-item > li {
+		text-align: center;
+	}
+	
+	.menuhover {
+		border-bottom :solid 3px gold;
+		padding-bottom: 45px;
+	}	
+	 	
+	header > nav:first-child > * {
+	 	margin: auto 0;
+	 }
+	 
+	a.navbar-brand {
+	 	display:inline-block; 
+	}
+	
+	a.btn-white {
+	 	font-size:12pt;
+	 	width:100px;
+	 	height:30px; 
+	 	position: relative; 
+	 	top:4px;
+	 	font-weight: bold;
+	}
+	
+	div#footer ul {
+		list-style-type: none;
+	}
+	
+	div.sns_link li{
+		display:inline-block;
+		margin-right: 1em;
+	}
+	
+	ul.fUtil > li > a {
+		text-decoration: none;
+	}
+	
+ 	div#div_flex1 {
+      display: flex; 
+   
+         position: fixed;
+         top: 45%; 
+         left: 90.5%; 
+         
+      border-radius: 50%; /* 절반씩 깍음 */ 
+         
+    }
+    
+    div#div_flex2 {
+      display: flex; 
+   
+         position: fixed;
+         top: 65%;
+         left: 90%; 
+         
+      border-radius: 50%; /* 절반씩 깍음 */ 
+         
+    }
+    
+    div#div_flex3 {
+      display: flex; 
+   
+         position: fixed;
+         top: 85%;
+         left: 92%; 
+         
+      border-radius: 50%; /* 절반씩 깍음 */ 
+         
+    }
+    
+    div#div_flex1 a,
+    div#div_flex2 a,
+    div#div_flex3 a {
+       text-decoration: none;
+       margin: auto;
+    }
+    
+   div#div_flex1 a:link,
+   div#div_flex1 a:visited,
+   div#div_flex1 a:active,
+   div#div_flex2 a:link,
+   div#div_flex2 a:visited,
+   div#div_flex2 a:active,
+   div#div_flex3 a:link,
+   div#div_flex3 a:visited,
+   div#div_flex3 a:active {
+      color: white; 
+   }
+   
+   a.btn-fast-order {
+   	   color:white;
+
+   	   background: linear-gradient(Red 90%, white);
+   }

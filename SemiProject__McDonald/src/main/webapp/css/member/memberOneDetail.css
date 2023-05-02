@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+div#mvoInfo {
+      width: 60%; 
+      text-align: left;
+      border: solid 0px red;
+      margin-top: 30px; 
+      font-size: 13pt;
+      line-height: 200%;
+   }
+   
+   span.myli {
+      display: inline-block;
+      width: 90px;
+      border: solid 0px blue;
+   }
+   
+/* ============================================= */
+   div#sms {
+      margin: 0 auto; 
+      /* border: solid 1px red; */ 
+      overflow: hidden; 
+      width: 50%;
+      padding: 10px 0 10px 80px;
+   }
+   
+   span#smsTitle {
+      display: block;
+      font-size: 13pt;
+      font-weight: bold;
+      margin-bottom: 10px;
+   }
+   
+   textarea#smsContent {
+      float: left;
+      height: 100px;
+   }
+   
+   button#btnSend {
+      float: left;
+      border: none;
+      width: 50px;
+      height: 100px;
+      background-color: black;
+      color: white;
+   }
+   
+   div#smsResult {
+      clear: both;
+      color: red;
+      padding: 20px;
+   }   
+   
+   body {
+   	margin-top: 137px;
+  	font-family:SpeedeeK; 
+	font-weight:600;
+   }
+   
+   p {
+	  border: 1em violet;
+	  padding: 55px;
+	  font-size: 35pt; 
+	  color: white;
+	  
+	}
+	
+   .bg1 {
+	  background-image: url(/SemiProject__McDonald/images/품질이야기상단이미지.jpg);  
+	  background-clip: border-box;
+   } 	
+	
+	
+   #memberDel { 
+   position: relative;
+   right: 380px; 
+   top: 155px;
+   }
+	
