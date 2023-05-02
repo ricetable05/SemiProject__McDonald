@@ -2,6 +2,7 @@ package jeonym.item.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -177,7 +178,15 @@ public class ItemRegisterAction extends AbstractController {
 					}
 	
 					
-				}catch(SQLException e) {
+				}
+				catch(SQLIntegrityConstraintViolationException e) {
+					// 제약조건에 위배된 경우 (DB 상에 이미 존재하는 제품명으로 등록을 시도할 시 발생)
+					message = "제품명이나 이미지명에 중복은 허용되지 않습니다.";
+					loc = "javascript:history.back()";
+					
+				}
+
+				catch(SQLException e) {
 					e.printStackTrace();
 					message = "등록이 실패하였습니다 ㅜㅜ";
 					loc = request.getContextPath() + "/item/itemList.run";

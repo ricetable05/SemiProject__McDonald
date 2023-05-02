@@ -36,7 +36,7 @@ public class ItemDeleteAction extends AbstractController {
 		
 			paraMap.put("item_no", pk_fk_item_no);
 			
-			boolean isExist = idao.is_Exist_item_no(paraMap);
+			boolean isExist = idao.is_Exist_item_no(paraMap); // item_no 가 DB 상에 존재하는지 검사
 					
 			
 			try {
