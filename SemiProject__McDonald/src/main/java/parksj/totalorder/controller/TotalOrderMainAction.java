@@ -40,7 +40,7 @@ public class TotalOrderMainAction extends AbstractController {
 			/////////////////////////////////////////////////////////////////////////////////////////
 			
 			if(searchType == null || 
-			   (!"order_num".equals(searchType) && !"userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
+			   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
 				searchType = "";
 			}
 			
@@ -140,10 +140,10 @@ public class TotalOrderMainAction extends AbstractController {
 			// **** [맨처음][이전] 만들기 **** //
 			String pageBar = "";
 			
-			pageBar += "<li class='page-item'><a class='page-link' href='memberList.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+1+"&sizePerPage="+sizePerPage+"'>[맨처음]</a></li>"; // bootstrap 에 있는 pageBar 이다.
+			pageBar += "<li class='page-item'><a class='page-link' href='totalOrderMain.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+1+"&sizePerPage="+sizePerPage+"'>[맨처음]</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			
 			if(pageNo != 1) {
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+(pageNo - 1)+"&sizePerPage="+sizePerPage+"'>[이전]</a></li>"; // bootstrap 에 있는 pageBar 이다.
+				pageBar += "<li class='page-item'><a class='page-link' href='totalOrderMain.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+(pageNo - 1)+"&sizePerPage="+sizePerPage+"'>[이전]</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			}
 			// 맨처음 페이지를 제외한 나머지 페이지에는 이전 버튼이 있다.
 			
@@ -155,7 +155,7 @@ public class TotalOrderMainAction extends AbstractController {
 				pageBar += "<li class='page-item active'><a class='page-link' href='#'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			}
 			else {	
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.
+				pageBar += "<li class='page-item'><a class='page-link' href='totalOrderMain.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"'>" + pageNo + "</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			}
 																								 
 				
@@ -172,10 +172,10 @@ public class TotalOrderMainAction extends AbstractController {
 			// **** [다음][마지막] 만들기 **** //
 
 			if(pageNo <= totalPage) {
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"'>[다음]</a></li>"; // bootstrap 에 있는 pageBar 이다.
+				pageBar += "<li class='page-item'><a class='page-link' href='totalOrderMain.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+pageNo+"&sizePerPage="+sizePerPage+"'>[다음]</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			}
 			
-			pageBar += "<li class='page-item'><a class='page-link' href='memberList.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+totalPage+"&sizePerPage="+sizePerPage+"'>[마지막]</a></li>"; // bootstrap 에 있는 pageBar 이다.
+			pageBar += "<li class='page-item'><a class='page-link' href='totalOrderMain.run?searchType="+searchType+"&searchWord="+searchWord+"&currentShowPageNo="+totalPage+"&sizePerPage="+sizePerPage+"'>[마지막]</a></li>"; // bootstrap 에 있는 pageBar 이다.
 			
 			request.setAttribute("pageBar", pageBar);
 
