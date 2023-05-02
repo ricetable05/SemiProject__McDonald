@@ -62,10 +62,13 @@
 	
 </script>
 
-	<div>
-	  <p class="bg1" style="text-align: center; font-weight:600;">회원전체 목록</p>
-	</div>
-	
+	<div class="MCcontent">
+      <div class="topimage">
+         <div class="toptext" style="padding-top: 40px;">
+            <h1 class="titDep1">회원목록</h1>
+         </div>
+      </div>
+   </div>
 	<form name="memberFrm" style="text-align: center">
 		<select id="searchType" name="searchType">
 			<option value="">선택하세요</option>
