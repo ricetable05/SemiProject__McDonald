@@ -112,7 +112,7 @@
 					    		<i class="fa-solid fa-circle-info fa-2xs pr-2" style="color: #04ecdd;"></i>${ivo.itemDetailVO.calories}kcal
 					    	</div>
 					    	<div class="col-6 px-0">
-					    		<a class="btn h6 btn-fast-order" href="<%= request.getContextPath() %>/#.run?item_no=${ivo.item_no}">빠른주문</a> <%-- get 방식이므로 item_no 에 잘못된 값이 들어가는 것 처리 필요 --%>
+					    		<a class="btn h6 btn-fast-order" href="<%= request.getContextPath() %>/daan/orderInfo.run?item_no=${ivo.item_no}">빠른주문</a> <%-- get 방식이므로 item_no 에 잘못된 값이 들어가는 것 처리 필요 --%>
 					    	</div>
 					    </div>
 					  </div>
@@ -140,7 +140,7 @@
 					    		<i class="fa-solid fa-circle-info fa-2xs pr-2" style="color: #04ecdd;"></i>${ivo.itemDetailVO.calories}kcal
 					    	</div>
 					    	<div class="col-6 px-0">
-					    		<a class="btn h6 btn-fast-order" href="<%= request.getContextPath() %>/#.run?item_no=${ivo.item_no}">빠른주문</a> <%-- get 방식이므로 item_no 에 잘못된 값이 들어가는 것 처리 필요 --%>
+					    		<a class="btn h6 btn-fast-order" href="<%= request.getContextPath() %>/daan/orderInfo.run?item_no=${ivo.item_no}">빠른주문</a> <%-- get 방식이므로 item_no 에 잘못된 값이 들어가는 것 처리 필요 --%>
 					    	</div>
 					    </div>
 					  </div>
