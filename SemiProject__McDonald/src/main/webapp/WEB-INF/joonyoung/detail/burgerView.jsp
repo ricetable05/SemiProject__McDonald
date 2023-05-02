@@ -13,164 +13,9 @@
 <meta charset="UTF-8">
 <title>${requestScope.ivo.item_name}</title>
 
- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail/detailView.css" type="text/css"/>
-
-<style type="text/css">
-
-.topimage{
-background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;
-}
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/css/detail/burgerView.css" type="text/css"/>
 
 
-	button.prev {
-	
-		border: none;
-		cursor: pointer;
-		
-		width: 100px; 
-		height: 100px; 
-		
-		background-color: orange;
-		border-radius: 50%;
-		
-	}
-	
-		
-	button.next {
-	
-	
-		border: none;
-		cursor: pointer;
-		
-		width: 100px; 
-		height: 100px; 
-		
-		background-color: orange;
-		border-radius: 50%;
-		
-	
-	}
-	
-	p.prev {
-	
-		
-		
-		opacity: 0;
-		
-	}
-	
-	p.next {
-	
-		
-		
-		opacity: 0;
-		
-	}
-	
-	button.prev > img.prev {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		margin-top: 30px;
-		
-	}
-	
-	button.next > img.next {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		margin-top: 30px;
-		
-	}
-	
-	button.prev > img.prev_hover {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-		
-		
-
-	}
-	
-	button.next > img.next_hover {
-	
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-
-	}
-	
-		
-	button.prev:hover  img.prev {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		display: none;
-
-		
-	}
-	
-	
-	button.next:hover  img.next {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		 
-		display: none;		
-	
-	}
-	
-	button.prev:hover  img.prev_hover {
-		
-		max-width: 100%; 
-		height: auto; 
-
-		display: block;
-		
-		margin: 5px auto;
-		
-	}
-	
-	
-	button.next:hover  img.next_hover {
-		
-		max-width: 100%; 
-		height: auto; 
-		 
-		display: block;
-		
-		margin: 5px auto;
-		
-	}
-	
-	
-	button.prev:hover  p.prev {
-		
-		opacity: 1;
-		
-		font-weight:bold;
-		
-	}
-	
-	button.next:hover  p.next {
-	
-		opacity: 1;
-		
-		font-weight:bold;
-		
-	}
-
-	
-
-
-</style>
 
 
 
@@ -260,7 +105,7 @@ $(document).ready(function() {
 					<div id="visual" >	
 					
 					
-					   <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
+					       <c:if test="${requestScope.ivo.item_no eq ((requestScope.ivo.fk_category_no*100) + requestScope.ivo_GetCategoryLength.ctLength-1)}">
 						
 									<script>
 									
@@ -280,37 +125,37 @@ $(document).ready(function() {
 							
 							
 
-												  <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/burgerView.run?item_no=${requestScope.ivo_prev.item_no}'">
-													  
-													   <img class="prev" src="<%=request.getContextPath()%>/images/prevIcon.png">
-													   
-												   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_prev.item_image,'.png','_small.png')}">
-												   		 
-												   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
-												   	  
-												</button> 		
+						 <button class="prev" type="button" onclick="location.href='/SemiProject__McDonald/detail/burgerView.run?item_no=${requestScope.ivo_prev.item_no}'">
+							  
+							   <img class="prev" src="<%=request.getContextPath()%>/images/prevIcon.png">
+							   
+						   	   <img class="prev_hover" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo_prev.item_image,'.png','_small.png')}">
+						   		 
+						   		  <p class="prev" >${requestScope.ivo_prev.item_name}</p>
+						   	  
+						 </button> 		
 
 
 						 
-						<img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
+						 <img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
 						
 						
 						
 						
-						   <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
-						
-								<script>
-								
-									$(document).ready(function(){
-										
-										$(".next").prop("disabled",true);
-										$(".next").css("opacity", 0);
-										$(".next").css("cursor", "auto");
-									});
-								
-								</script>
-						
-							</c:if>
+							   <c:if test="${requestScope.ivo.item_no eq (requestScope.ivo.fk_category_no*100)}">
+							
+									<script>
+									
+										$(document).ready(function(){
+											
+											$(".next").prop("disabled",true);
+											$(".next").css("opacity", 0);
+											$(".next").css("cursor", "auto");
+										});
+									
+									</script>
+							
+								</c:if>
 						
 						
 						
