@@ -11,24 +11,9 @@
 <html>
 <head>
     <title>비밀번호 변경</title>
-    
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/login/pwd3m.css" type="text/css"/>
+     
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
-    
-<style type="text/css">
-    
-    div#container{
-    	display: flex;
-		border: solid 0px purple;
-		width: 80%;
-		margin: 20px auto; 
-		margin-top: 150px;
-	}
-
-    #th{ 
-    	font-size: 25pt;  text-align: center; padding-left:320px;
-    }
-
-</style>
 	
 <script type="text/javascript">
 	

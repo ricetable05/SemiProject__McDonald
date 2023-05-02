@@ -41,6 +41,21 @@ public class LoginAction extends AbstractController{
 		
 		if(loginuser != null) {
 			
+			if(loginuser.getIs_deactivate() == 0) {
+				
+				String message = "회원탈퇴한 계정입니다.";
+				String loc = request.getContextPath() + "/main.run";
+				
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+				
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/jangjh/msg.jsp");
+				
+				return; //매소드 종료
+				
+			}
+			
 			if(loginuser.getIs_dormant() == 1) {
 				
 				String message = "로그인을 한지 1년이 지나서 휴면상태가 되었습니다.";

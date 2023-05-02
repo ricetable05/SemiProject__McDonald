@@ -14,22 +14,6 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/member/memberOneDetail.css" type="text/css"/>
 
-
-<style type="text/css">
-   
-	.bg1 {
-	  background-image: url(<%= ctxPath%>/images/품질이야기상단이미지.jpg);  
-	  background-clip: border-box;
-	} 
-	 
-   #memberDel {
-   position: relative;
-   right: 380px; 
-   top: 155px;
-   }
-   
-</style>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -113,10 +97,11 @@
 	}
 	
 </script>
-<body>
-<c:if test="${empty requestScope.mvo}">
-   존재하지 않는 회원입니다.<br>
-</c:if>
+
+	<c:if test="${empty requestScope.mvo}">
+	   존재하지 않는 회원입니다.<br>
+	</c:if>
+	
 	<c:if test="${not empty requestScope.mvo}">
 	   <c:set var="member_tel" value="${requestScope.mvo.member_tel}" />
 	   <c:set var="birthday" value="${requestScope.mvo.birthday}" />
@@ -151,7 +136,6 @@
 	        <button type="button" id="memberDel" class="ml-2 btn btn-dark">회원탈퇴</button>
 	   </div>
 	</c:if>
-	
 	
 </body>
 

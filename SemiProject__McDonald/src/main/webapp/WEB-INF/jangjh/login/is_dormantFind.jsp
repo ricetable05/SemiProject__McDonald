@@ -22,28 +22,7 @@
 <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
-<style type="text/css">
-
-/* -- CSS 로딩화면 구현 시작(bootstrap 에서 가져옴) -- */    
-   div.loader {
-	  border: 16px solid white;
-	  border-radius: 50%;
-	  border: 7px dotted #db0007;
-	  width: 50px;
-	  height: 50px;
-	  animation: spin 2s linear infinite; 
-	}
-   
-   @-webkit-keyframes spin {
-     0% { -webkit-transform: rotate(0deg); }
-     100% { -webkit-transform: rotate(360deg); }
-   }
-   
-   @keyframes spin {
-     0% { transform: rotate(0deg); }
-     100% { transform: rotate(360deg); }
-
-</style>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/login/is_dormantFind.css" type="text/css"/>
 
 <script type="text/javascript">
 

@@ -172,7 +172,7 @@ public class MemberDAO implements InterMemberDAO {
 							" ,  to_char(birthday,'yyyymmdd') as birthday , registerday        \n"+
 							" , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap   \n"+
 							" from tbl_member   \n"+
-							" where is_deactivate = '1' and userid = ? and pwd= ?\n"+
+							" where userid = ? and pwd= ?\n"+
 							" ) M   \n"+
 							" CROSS JOIN   \n"+
 							" (   select trunc(months_between(sysdate, max(login_date))) AS lastlogingap   \n"+
@@ -655,8 +655,8 @@ public class MemberDAO implements InterMemberDAO {
 		      try {
 			         conn = ds.getConnection();
 			         
-			         String sql = " delete from tbl_member "
-			         			+ " where userid = ? ";
+			         String sql = " update tbl_member set is_deactivate = 1 "
+			         			+ " where userid = ? and is_deactivate = 0 ";
 			         
 			         pstmt = conn.prepareStatement(sql);
 			         
