@@ -99,7 +99,7 @@ public class ItemRegisterAction extends AbstractController {
 				item_info = item_info.replaceAll(">", "&gt;");
 				item_info = item_info.replaceAll("\r\n", "<br>");
 				
-				String item_image =  mtrequest.getFilesystemName("item_image"); // 제품 이미지 파일명(파일서버에 업로드 되어진 실제파일명)
+				String item_image =  mtrequest.getOriginalFileName("item_image"); // 제품 이미지 파일명(파일서버에 업로드 되어진 실제파일명)
 				
 				if( item_image == null) { item_image = ""; }// 만약 item_image 가 null 이 되는 경우에는 공백으로 처리
 							
@@ -177,7 +177,7 @@ public class ItemRegisterAction extends AbstractController {
 	
 					}
 	
-					
+					 
 				}
 				catch(SQLIntegrityConstraintViolationException e) {
 					// 제약조건에 위배된 경우 (DB 상에 이미 존재하는 제품명으로 등록을 시도할 시 발생)
