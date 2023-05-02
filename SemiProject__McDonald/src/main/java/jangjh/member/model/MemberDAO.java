@@ -68,8 +68,8 @@ public class MemberDAO implements InterMemberDAO {
 			
 		   conn = ds.getConnection();
 		   
-		   String sql = " insert into tbl_member(userid, pwd, member_name, email, member_tel, postcode, address, detail_address, ref_address, birthday) "
-		   			  + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		   String sql = " insert into tbl_member(userid, pwd, member_name, email, member_tel, postcode, address, detail_address, ref_address, birthday, is_deactivate) "
+		   			  + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,0) ";
 		   
 		   pstmt = conn.prepareStatement(sql);
 		   
@@ -164,20 +164,20 @@ public class MemberDAO implements InterMemberDAO {
 			try {
 				conn = ds.getConnection();
 				
-				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address,          \n"+
-						     " substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd, registerday, pwdchangegap,         \n"+
-						     " NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap,  is_deactivate  \n"+
-						     " from    \n"+
-						     " (\n"+
-						     " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address        \n"+
-						     " ,  to_char(birthday,'yyyymmdd') as birthday , registerday         \n"+
-						     " , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap, is_deactivate  \n"+
-						     " from tbl_member    where userid = ? and pwd= ?\n"+
-						     " ) M   \n"+
-						     " CROSS JOIN    \n"+
-						     " (  \n"+
-						     " select trunc(months_between(sysdate, max(login_date))) AS lastlogingap    \n"+
-						     " from tbl_login_history where fk_userid = ?\n"+
+				String sql = " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address, "+
+						     " substr(birthday,1,4) AS birthyyyy, substr(birthday,5,2) As birthmm, substr(birthday,7) AS birthdd, registerday, pwdchangegap, "+
+						     " NVL(lastlogingap,trunc( months_between(sysdate, registerday) )) AS lastlogingap,  is_deactivate "+
+						     " from "+
+						     " ( "+
+						     " select userid, member_name, email, member_tel, postcode, address, detail_address, ref_address "+
+						     " ,  to_char(birthday,'yyyymmdd') as birthday , registerday "+
+						     " , trunc(months_between(sysdate, last_pwd_change_date),0) AS pwdchangegap, is_deactivate "+
+						     " from tbl_member    where userid = ? and pwd= ? "+
+						     " ) M "+
+						     " CROSS JOIN "+
+						     " ( "+
+						     " select trunc(months_between(sysdate, max(login_date))) AS lastlogingap "+
+						     " from tbl_login_history where fk_userid = ? "+
 						     " ) H ";
 				
 				pstmt = conn.prepareStatement(sql);
@@ -263,7 +263,7 @@ public class MemberDAO implements InterMemberDAO {
 				
 				 String sql = " select userid "+
 						 	  " from tbl_member "+
-							  " where is_deactivate = 1 and member_name = ? and email = ? ";
+							  " where is_deactivate = 0 and member_name = ? and email = ? ";
 						 				 
 				 pstmt = conn.prepareStatement(sql);
 				 
@@ -297,7 +297,7 @@ public class MemberDAO implements InterMemberDAO {
 				
 				 String sql = " select userid "
 						    + " from tbl_member "
-						    + " where is_deactivate = 1 and userid = ? and email = ? ";
+						    + " where is_deactivate = 0 and userid = ? and email = ? ";
 				 
 				 pstmt = conn.prepareStatement(sql);
 				 
@@ -493,14 +493,14 @@ public class MemberDAO implements InterMemberDAO {
 				conn = ds.getConnection();
 				
 				String sql = " select userid, member_name, email "+
-				             "      from "+
-				             "      ( "+
-				             "      select rownum as RNO, userid, member_name, email "+
-				             "      from "+
-				             "      ( "+
-				             "      select userid, member_name, email "+
-				             "      from tbl_member "+
-				             "      where userid != 'kingkingadmin' and is_deactivate = '0' ";
+				             " from "+
+				             " ( "+
+				             " select rownum as RNO, userid, member_name, email "+
+				             " from "+
+				             " ( "+
+				             " select userid, member_name, email "+
+				             " from tbl_member "+
+				             " where userid != 'kingkingadmin' and is_deactivate = '0' ";
 				
 				String colname = paraMap.get("searchType");
 				String searchWord = paraMap.get("searchWord"); 
