@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractController;
 import jangjh.member.model.MemberVO;
 import parksj.totalorder.model.InterTotalOrderDAO;
+import parksj.totalorder.model.OrderDetailVO;
 import parksj.totalorder.model.TotalOrderDAO;
 import parksj.totalorder.model.TotalOrderVO;
 
@@ -26,10 +27,23 @@ public class TotalOrderDetailAction extends AbstractController {
 			
 			InterTotalOrderDAO tdao = new TotalOrderDAO();
 			
-						
-			List<TotalOrderVO> oderDetail = tdao.orderDetailList(odr_no);
+			TotalOrderVO oneOrder = tdao.oneOrder(odr_no);
 			
-			request.setAttribute("oderDetail", oderDetail);
+			List<OrderDetailVO> orderDetail = tdao.orderDetail(odr_no);
+			
+						
+			/* List<TotalOrderVO> oneoderDetail = tdao.orderDetailList(odr_no); */
+			
+			/* request.setAttribute("oneoderDetail", oneoderDetail); */
+			
+			//System.out.println("oneOrder 이제대로나오나?? =>" + oneOrder);
+			
+			//System.out.println("orderDetail 이제대로나오나?? =>" + orderDetail);
+			
+			request.setAttribute("oneOrder", oneOrder);
+			request.setAttribute("orderDetail", orderDetail);
+
+			request.setAttribute("odr_no", odr_no);
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/parksj/totalorder/orderDetail.jsp");

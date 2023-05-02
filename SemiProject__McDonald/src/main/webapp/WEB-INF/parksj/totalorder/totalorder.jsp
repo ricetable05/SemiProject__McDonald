@@ -76,6 +76,8 @@
 	}
 	
 	table {
+		font-family:SpeedeeK; 
+		font-weight:600;
 	}
 	
 	
@@ -162,8 +164,8 @@
 	<form name="totalOrderFrm" style="text-align: center; margin-left:10%; ">
 		<select id="searchType" name="searchType">
 			<option value="">선택하세요</option>
-			<option value="order_num">주문번호</option>	
-			<option value="userid">아이디</option>
+			<option value="odr_no">주문번호</option>	
+			<option value="fk_userid">아이디</option>
 		</select>
 		
 		<input type="text" id="searchWord" name="searchWord" />
