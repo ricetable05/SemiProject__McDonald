@@ -10,6 +10,8 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.json.JSONObject;
@@ -176,7 +178,7 @@ public class ItemDAO {
 		
 		try {
 				String sql	= " INSERT INTO tbl_order(odr_no, fk_userid, fk_store_id, is_delivery, delivery_time, odr_date, is_delivery_price, delivery_loc, total) "
-							+ " VALUES(tbl_order_seq.nextval, ?, '001', 0, sysdate, sysdate, ?, ?, ?) ";
+							+ " VALUES(tbl_order_seq.nextval, ?, '001', 0, null, sysdate, ?, ?, ?) ";
 				
 				pstmt = conn.prepareStatement(sql);
 
@@ -223,7 +225,9 @@ public class ItemDAO {
 
 
 	
-	public void recordTblOrderList(JSONObject item, int is_set, int quantity, int fk_odr_no) throws SQLException {
+	public int recordTblOrderList(JSONObject item, int is_set, int quantity, int fk_odr_no) throws SQLException {
+		
+		int result = 0;
 		
 		conn = ds.getConnection();
 		conn.setAutoCommit(false);
@@ -240,7 +244,7 @@ public class ItemDAO {
 				pstmt.setInt(5, (Integer) item.get("item_price"));
 				pstmt.setInt(6, is_set);
 				
-				pstmt.executeUpdate();
+				result = pstmt.executeUpdate();
 				
 				
 		} catch (SQLException e) {
@@ -250,6 +254,8 @@ public class ItemDAO {
 			conn.setAutoCommit(true);
 			close();
 		}
+		
+		return result;
 		
 	}
 
@@ -312,5 +318,73 @@ public class ItemDAO {
 		return SetMenusPrices;
 	}
 	
+	
+	// 회원의 가장 최근 주문번호 가져오기 & 주문 취소
+	public int cancelOrder(MemberVO loginuser) throws SQLException {
+		
+		int odr_no = 0, result = 0;
+		conn = ds.getConnection();
+		
+		try {
+			
+			conn.setAutoCommit(false);
+			
+			String sql	= " select odr_no "
+						+ " from tbl_order "
+						+ " where fk_userid = ? "
+						+ " order by 1 desc ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			String userid = "";
+			
+			try {
+				userid = loginuser.getUserid();
+			} catch (NullPointerException e) {
+				// 비회원 주문
+				userid = "eomjh";
+			}
+			
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			
+			boolean flag = rs.next();
+			
+			if(flag) {
+				
+				odr_no = rs.getInt(1);
+				sql	= " delete from tbl_order_list where fk_odr_no = ? ";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, odr_no);
+				
+				result = pstmt.executeUpdate();
+
+			}
+
+			  if(result != 0) {
+			  
+			  sql = " delete from tbl_order where odr_no = ? ";
+			  
+			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setInt(1, odr_no);
+			  
+			  result = pstmt.executeUpdate();
+
+			  }
+
+		} catch(SQLException e) {
+			conn.rollback();
+		} finally {
+			conn.commit();
+			conn.setAutoCommit(true);
+			close();
+		}
+
+		
+		return result;
+		
+	}
 	
 }
