@@ -84,18 +84,15 @@ public class MemberEditEndAction extends AbstractController {
 			// *** POST 방식으로 넘어온 것이 아니라면 ***
 			message = "비정상적인 경로를 통해 들어왔습니다. ";
 		
-		}// end of else 	
-		
-		loc = "javascript:history.back()"; // 자바스크립트를 이용한 이전페이지로 이동한다.
-		
-		request.setAttribute("message", message) ;
-		request.setAttribute("loc", loc) ;
-		
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/jangjh/msg.jsp");
-
-
-		
+			}// end of else 	
+			
+			loc = "javascript:history.back()"; // 자바스크립트를 이용한 이전페이지로 이동한다.
+			
+			request.setAttribute("message", message) ;
+			request.setAttribute("loc", loc) ;
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/jangjh/msg.jsp");
 	}
 
 }

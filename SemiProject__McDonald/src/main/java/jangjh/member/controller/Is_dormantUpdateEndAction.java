@@ -22,9 +22,9 @@ public class Is_dormantUpdateEndAction extends AbstractController {
 			
 			InterMemberDAO mdao = new MemberDAO();
 			
-			int n = mdao.login_date_insert(userid,access_ip);
+			boolean isExists = mdao.login_date_insert(userid,access_ip);
 			
-			request.setAttribute("n",n);
+			request.setAttribute("isExists",isExists);
 			
 		}
 		
