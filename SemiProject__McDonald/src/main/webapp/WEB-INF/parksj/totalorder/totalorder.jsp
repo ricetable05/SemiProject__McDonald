@@ -19,6 +19,7 @@
 		width:100%;
 		height: 226px;
 		margin-top: 136px;
+		margin-bottom: 30px;
 	}
 	
 	.topimage:before {
@@ -48,9 +49,10 @@
 	
 	
 	.titDep1{display:block;
-		 font-size: 55pt; 
+		 font-size: 50pt; 
 		 line-height:1;
 		 font-family:SpeedeeK;
+		 font-weight: 600;
   		 font-style:normal;
 	}
 	

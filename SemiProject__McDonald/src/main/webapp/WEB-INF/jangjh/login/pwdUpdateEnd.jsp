@@ -64,6 +64,15 @@
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
+		if(${requestScope.method == 'POST' && requestScope.n == 1}){
+			
+			alert("ID: ${requestScope.userid} 비밀번호가 변경되었습니다.");
+			
+			parent.location.href="<%= ctxPath%>/login/login.run";
+			self.close();
+			
+		};			
+				
 	});//end of $(document).ready(function() --------------------------------------
 	
 			
@@ -90,11 +99,3 @@
 	</c:if>
 
 </form>
-
-	<c:if test="${requestScope.method == 'POST' && requestScope.n == 1}">
-		<div id="div_updateResult" align="center" >
-	        사용자 ID ${requestScope.userid}님의 암호가 새롭게 변경되었습니다.
-	    </div> 
-	</c:if>
-
-   
