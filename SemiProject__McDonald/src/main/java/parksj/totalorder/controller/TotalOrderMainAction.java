@@ -15,7 +15,7 @@ import parksj.totalorder.model.TotalOrderDAO;
 import parksj.totalorder.model.TotalOrderVO;
 
 public class TotalOrderMainAction extends AbstractController {
-
+ 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
