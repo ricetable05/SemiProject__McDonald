@@ -27,6 +27,10 @@
 		text-align: center;
 	}
 	
+	table#itemTbl tr{
+		cursor:pointer;
+	}
+	
 	table#itemTbl th{
 		color: #000;
 		font-size: 13pt;
@@ -51,6 +55,7 @@
 		padding: 25px 0 25px 0;
 		border-bottom: 1px solid black;
 		text-align: center;
+
 		<%--border:1px solid #ffbc0d; --%>
 	}
 	
@@ -69,12 +74,7 @@
 		color:#000;
 	}
 	
-	
-	tr.itemInfo:hover {
-		background-color: #000;
-		cursor: pointer;
-	}
-	
+
 	.itemListPage > li > a
 	{
 	    background-color: #fff;
