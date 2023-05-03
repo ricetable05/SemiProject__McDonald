@@ -50,7 +50,7 @@
 		    flex: 0 0 33.333333%;
 		    max-width: 33.333333%;
 		}
-		@media (min-width: 1502px) {
+		@media (min-width: 1510px) {
 		    flex: 0 0 25%;
 		    max-width: 25%;
 		}
@@ -70,7 +70,7 @@
         align-items: flex-start;
         margin: 0 auto;
     }
-
+	
     #menu>ul.nav {
          display: flex;
          flex-wrap: nowrap;
@@ -274,6 +274,10 @@
 	a.removeFromCart-button {
 		cursor: pointer;
 	}
+	
+	.option-label {
+		white-space: nowrap;
+    }
  </style>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script type="text/javascript">
