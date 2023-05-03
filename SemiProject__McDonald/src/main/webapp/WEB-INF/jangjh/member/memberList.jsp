@@ -122,8 +122,8 @@
     </table>	
     
 	<nav class="my-5">
-        <div style='display:flex; width:80%; c'>
-          <ul class="pagination" style='margin-left: 450px; '>
+        <div id='pageBar' style='display:flex; width:80%;'>
+          <ul class="itemListPage pagination" style='margin:auto;'>
           	${requestScope.pageBar}
           </ul>
        </div>

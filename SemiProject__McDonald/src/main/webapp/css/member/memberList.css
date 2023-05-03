@@ -15,7 +15,6 @@
 		margin-left: 100px;
 	}
 	
-	
 		
    .topimage {
       position: relative;
@@ -25,7 +24,25 @@
       margin-bottom: 30px;
    }
    
-   
+	.page-link {
+	  color: #000; 
+	  background-color: #fff;
+	  border: 1px solid #ccc; 
+	}
+	
+	.page-item.active .page-link {
+	 z-index: 1;
+	 font-weight:bold;
+	 background-color: black;
+	 
+	}
+	
+	.page-link:focus, .page-link:hover {
+	  color: #000;
+	  background-color: #ccc; 
+	  border-color: #ccc;
+	}
+	   
    
    .toptext{
         border: solid 0px red;
