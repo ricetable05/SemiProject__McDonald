@@ -190,7 +190,7 @@
          padding: 1vh 1vh;
      }
 
-     #my_order_info,
+     #orderInfo,
      div.mt-2 {
      	background-color: white;
      	border-radius: 3%;
@@ -198,12 +198,12 @@
      	padding: 1vh;
      }
      
-     #my_order_info>*{
+     #orderInfo>*{
      	margin: 2vh 0;
      }
-     #my_order_info > div:nth-child(3) > span,
-     #my_order_info > div:nth-child(4) > span,
-     #my_order_info > div:nth-child(5) > span {
+     #orderInfo > div:nth-child(3) > span,
+     #orderInfo > div:nth-child(4) > span,
+     #orderInfo > div:nth-child(5) > span {
      	float: right;
      }
      
@@ -348,8 +348,9 @@
 		let toast_index = 0;
 		
 	    let quick_order_item_no = '${requestScope.quick_order_item_no}';
+	    
 		if(quick_order_item_no.length != 0) {
-			quickOrder(item_no);
+			quickOrder(Number(quick_order_item_no));
 		}
 		
 		let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
@@ -434,7 +435,7 @@
 		}
 		// ------------------------------------------------------
 		
-		toCart();
+		updateOrderDetail();
 		updateMyOrderSection();
 		
 		
@@ -507,7 +508,7 @@
 		quantity_arr.splice(index,1);
 		sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
 		
-		toCart();
+		updateOrderDetail();
 		updateMyOrderSection();
 		// progressStatus();
 		showToast(-1);
@@ -668,7 +669,7 @@
 			arr_singleorder[2] = drink_arr;
 			cart_arr = cart_arr_edit;
 			sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
-			toCart();
+			updateOrderDetail();
 			updateMyOrderSection();
 			// progressStatus();
 		}
@@ -775,7 +776,7 @@
 		}); // end of $.ajax
 	}
 	
-	function toCart() {
+	function updateOrderDetail() {
 		
 		$('div#orderDetail').empty();
 		let arr = JSON.parse(sessionStorage.getItem('cart_arr'));
@@ -882,7 +883,7 @@
 
 					sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
 					
-					toCart();
+					updateOrderDetail();
 					updateMyOrderSection();
 					// progressStatus();
 					showToast(1);
@@ -901,44 +902,42 @@
 	
 	function quickOrder(item_no){
 		const is_set = 0;
-		
 		$.ajax({
-				url: "<%=request.getContextPath()%>/daan/addtoCart.run",
-				data:{"item_no":item_no,
-					  "is_set":is_set},
-				type: "POST",
-				dataType: "json",
-				async:true,
-				success: function(json){
-					
-					$('div.mt-2').css('display', '');
-					
-					let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
-					let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
-					
-					let isSingleOrderDuplicated = checkDuplicate(Number(item_no), Number(is_set));
-					
-					if(isSingleOrderDuplicated != -1) {
-						const session_index = isSingleOrderDuplicated;
-						quantity_arr[session_index] += 1;
-					} else {
-						cart_arr.push(json);
-						sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
+			url: "<%=request.getContextPath()%>/daan/addtoCart.run",
+			data:{"item_no":item_no,
+				  "is_set":is_set},
+			type: "POST",
+			dataType: "json",
+			async:true,
+			success: function(json){
+				
+				$('div.mt-2').css('display', '');
+				
+				let cart_arr = JSON.parse(sessionStorage.getItem('cart_arr'));
+				let quantity_arr = JSON.parse(sessionStorage.getItem('quantity_arr'));
+				
+				let isSingleOrderDuplicated = checkDuplicate(Number(item_no), Number(is_set));
+				
+				if(isSingleOrderDuplicated != -1) {
+					const session_index = isSingleOrderDuplicated;
+					quantity_arr[session_index] += 1;
+				} else {
+					cart_arr.push(json);
+					sessionStorage.setItem('cart_arr', JSON.stringify(cart_arr));
 
-						quantity_arr.push(1);
-					}
+					quantity_arr.push(1);
+				}
 
-					sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
-					
-					toCart();
-					updateMyOrderSection();
-					// progressStatus();
-					showToast(1);
-				},
-				error: function(request, status, error){
-		               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-		        }
-			});
+				sessionStorage.setItem('quantity_arr', JSON.stringify(quantity_arr));
+				updateOrderDetail();
+				updateMyOrderSection();
+				// progressStatus();
+				location.href = '<%=request.getContextPath()%>/daan/orderInfo.run';
+			},
+			error: function(request, status, error){
+	               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	        }
+		});
 	
 	} // end of function quickOrder(item_no) -------------------------------------------------------
 	
@@ -995,7 +994,6 @@
 
 	function placeOrder(){
 		
-		// <form> 내 <input type="hidden">의 value 값 불러온다.
 		const total = $('form[name="placeOrderForm"] > fieldset > input').val();
 		const deliveryFee = Number( $('span#delivery_fee').text().substr(2,1)+$('span#delivery_fee').text().substr(4) );
 		const delivery_loc = '('+$('input#postcode').val()+') '+$('input#address').val()+' '+$('input#detailAddress').val()+' '+$('input#extraAddress').val();
@@ -1005,7 +1003,6 @@
 			return false;
 		}
 		
-		// sessionStorage 상 저장된 장바구니 객체를 가져온다.
 		let str_cart_arr = sessionStorage.getItem('cart_arr');
 		let cart_arr = JSON.parse(str_cart_arr);
 		
@@ -1030,8 +1027,6 @@
 					const result = json.message;
 					if('fail' == result) {
 						alert('DB상 금액과 View 단에서의 금액이 맞지 않음');
-						// console.log(Number($('span#total').text().substr(2)));
-						// console.log(Number($('span#delivery_fee').text().substr(2)));
 						return false;
 						
 					} else {
@@ -1073,12 +1068,10 @@
                     <div class="tab-content">
                         <div class="tab-pane container" id="morning">
                             <ul class="list-group custom">
-                          <%-- <li class="list-group-item"><a class="list-group-item-select"><span>추천 메뉴</span></a></li> --%>
                                 <li class="list-group-item" value="2"><a class="list-group-item-select"><span>맥모닝 & 세트</span></a></li>
                                 <li class="list-group-item" value="3"><a class="list-group-item-select"><span>스낵 & 사이드</span></a></li>
                                 <li class="list-group-item" value="5"><a class="list-group-item-select"><span>음료</span></a></li>
                                 <li class="list-group-item" value="4"><a class="list-group-item-select"><span>디저트</span></a></li>
-                          <%--  <li class="list-group-item"><a class="list-group-item-select"><span>해피밀®</span></a></li> --%>
                             </ul>
                         </div>
                         <div class="tab-pane container" id="after">
@@ -1143,7 +1136,7 @@
 						픽업/포장
 					</label>
 				</div>
-                <div id="my_order_info"  class="mt-4" align="left" style="">
+                <div id="orderInfo"  class="mt-4" align="left" style="">
                 	<h5 style="width: 100%; text-align:center;">내 주문정보</h5>
                 	<div>
 	                	<strong>배달 주소</strong>&nbsp;&nbsp;<button class="edit btn-primary" type="button" style="cursor: pointer; border: solid 1px #ff0000; border-radius: 0.25rem; background-color: #ff0000;" onclick="openDaumPOST();">검색</button>
@@ -1215,59 +1208,36 @@ function getToastIndex() {
 function showToast(type) {
 
 	let toast_index = getToastIndex();
-	
-	let html = ``;
+	let color = '';
+	let text = '';
 	
 	if(type == 1) {
-		
-		html = `<div class="toast" data-toast_index="\${toast_index}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000" style="flex: 0;">
-			    <div class="toast-body" style="position: relative; background-color: #1c8217; height: 47px;font-size: 1.1rem; color: white; width: 19vw;">
-			    제품 추가완료
-			    </div>
-		      	</div>`;
+		text = '제품추가 완료';
+		color = '#1c8217';
 		
 	} else if(type == -1) {
-		
-		html = `<div class="toast" data-toast_index="\${toast_index}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000"  style="flex: 0;">
-				<div class="toast-body" style="position: relative; background-color: #ff0000; height: 47px;font-size: 1.1rem; color: white; width: 19vw;">
-    		  	제품 삭제완료
-    		  	</div>
-		  		</div>`;
+		text = '제품삭제 완료';
+		color = '#ff0000';
 		
 	} else {
-		html = `<div class="toast" data-toast_index="\${toast_index}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000"  style="flex: 0;">
-			<div class="toast-body" style="position: relative; background-color: #ffc423; height: 47px;font-size: 1.1rem; color: white; width: 19vw;">
-		  	제품 구성 변경 완료
-		  	</div>
-	  		</div>`;
+		text = '구성변경 완료';
+		color = '#3b81f6';
 	}
-	$('div[aria-live="polite"] > div').append(html);
 	
+	const html = `<div class="toast" data-toast_index="\${toast_index}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000" style="flex: 0;">
+			      	<div class="toast-body" style="position: relative; background-color: \${color}; height: 47px;font-size: 1.1rem; color: white; width: 320px;">
+				    	\${text}
+				    </div>
+			      </div>`;
+	
+	$('div[aria-live="polite"] > div').append(html);
 	$('.toast[data-toast_index="'+toast_index+'"]').toast('show');
 
 }
 </script>
 
-<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 85%; right: 3vw; z-index: 4;">
-  <!-- Position it -->
-  <div style="display: flex;flex-direction: column;">
-
-<%-- 
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded mr-2" alt="...">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Heads up, toasts will stack automatically
-      </div>
-    </div>
-    --%>
-  </div>
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 85%; right: 5%; z-index: 4;">
+	<div style="display: flex;flex-direction: column;"></div>
 </div>
 
 <jsp:include page="/WEB-INF/daan/modal_editOption.jsp"/>

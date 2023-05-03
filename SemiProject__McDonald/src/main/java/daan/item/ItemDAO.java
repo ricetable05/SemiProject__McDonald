@@ -253,9 +253,9 @@ public class ItemDAO {
 		
 	}
 
-	public int checkOrderCompleted(String[] arr_odr_no) throws SQLException {
+	public int checkOrderCompleted(String odr_no) throws SQLException {
 		
-		int cnt_check = 0;
+		int complete_check = 0;
 		
 		conn = ds.getConnection();
 		conn.setAutoCommit(false);
@@ -264,30 +264,22 @@ public class ItemDAO {
 			
 			String sql = "";
 			
-			for(String odr_no : arr_odr_no) {
-	
-				sql	= " update tbl_order set is_delivery = 1, delivery_time = sysdate "
-					+ " where odr_no ? ";
-				
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, Integer.parseInt(odr_no));
-				
-				pstmt.executeUpdate();
-				rs.next();
-				
-				cnt_check++;
+			sql	= " update tbl_order set is_delivery = 1, delivery_time = sysdate "
+				+ " where odr_no = ? ";
 			
-			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(odr_no));
+			
+			complete_check = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-				e.printStackTrace();
 				conn.rollback();
 		} finally {
 			conn.setAutoCommit(true);
 			close();
 		}
 		
-		return cnt_check;
+		return complete_check;
 	}
 
 	public int[] getSetMenusPrices() throws SQLException {
