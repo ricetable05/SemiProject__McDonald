@@ -317,7 +317,7 @@
         $.ajax({
         	
         	url:"<%= ctxPath %>/member/idDuplicateCheck.run",  
-        	data:{"userid":$("input#userid").val()},  // data는 /MyMVC/member/idDuplicateCheck.up"로 전송
+        	data:{"userid":$("input#userid").val()}, 
         	type:"post",                              
         	dataType:"json",                       
         	async:true,    
@@ -534,7 +534,7 @@
 	      <tr>
 	         <td class="gap"></td>
 	         <td style="width: 20%; font-weight: bold;">이메일&nbsp;<span class="star">*</span></td>
-	         <td style="width: 80%; text-align: left;"><input type="text" name="email" id="email" class="requiredInfo" placeholder="abc@def.com" /> 
+	         <td style="width: 80%; text-align: left;"><input type="text" name="email" id="email" class="requiredInfo" placeholder="McDonald@gmail.com" /> 
 	             <span class="error">이메일 형식에 맞지 않습니다.</span>
 	             
 	             <%-- 이메일 중복체크 --%>

@@ -28,7 +28,11 @@
 
 	$(document).ready(function(){
 		
+		let flag_pwd_change = false;
+		
 		$("button#btnUpdate").click(function(){
+			
+
 			
 			const pwd = $("input#pwd").val();
 			const pwd2 = $("input#pwd2").val();
@@ -56,23 +60,43 @@
 				return;
 			}
 			else {
-				const frm = document.pwdUpdateEndFrm;
-				frm.action = "<%= ctxPath%>/login/pwdUpdateEnd.run";
-				frm.method = "POST";
-				frm.submit();
+			
+				$.ajax({
+			   		 url:"<%= ctxPath%>/member/duplicatePwdCheck.run", 
+			   		 data:{"pwd":$("input#pwd").val(), "userid":"${requestScope.userid}"},
+					 type:"post",
+					 dataType:"json",
+					 async: false,
+			         success:function(json){ // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 이 들어오게 된다.
+							
+			        	 if(json.n == -1){
+			        		alert("중복된 비밀번호는 사용할 수 없습니다.");
+			        		$("input#pwd").val("");
+			        		$("input#pwd2").val("");
+						 }          
+			        	 else if(json.n == 1){
+			        		 
+			        		alert("ID: ${requestScope.userid}의 비밀번호가 변경되었습니다.");
+						    	
+							// 자기 닫고 부모창 href 이동
+			        		parent.location.href="<%= ctxPath%>/login/login.run";
+			    			self.close();
+			        	 }
+			        	 else{ // 0
+			        		 alert("비밀번호 수정 실패 하였습니다.");
+			        	 }
+			          
+			          },
+			          
+			           error: function(request, status, error){ // 페이지없으면 404 에러
+			             alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+			           }
+			      
+			   		});
 			}
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
-		if(${requestScope.method == 'POST' && requestScope.n == 1}){
-			
-			alert("ID: ${requestScope.userid} 비밀번호가 변경되었습니다.");
-			
-			parent.location.href="<%= ctxPath%>/login/login.run";
-			self.close();
-			
-		};			
-				
 	});//end of $(document).ready(function() --------------------------------------
 	
 			
@@ -92,10 +116,8 @@
 
    <input type="hidden" name="userid" value="${requestScope.userid}"/>
 	
-	<c:if test="${requestScope.method == 'GET'}">
 		<div id="div_btnUpdate" align="center" style="margin-top: 20px;">
 	       <button type="button" class="btn btn-dark" id="btnUpdate">암호변경하기</button>
 	    </div> 
-	</c:if>
-
+	
 </form>

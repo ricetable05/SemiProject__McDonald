@@ -21,17 +21,26 @@ public class DuplicatePwdCheckAction extends AbstractController {
 		
 		if("POST".equalsIgnoreCase(method)) {
 			
-			String new_pwd = request.getParameter("new_pwd");
+			String pwd = request.getParameter("pwd");
 			String userid = request.getParameter("userid");
-				
+			
+			System.out.println(pwd);
+			System.out.println(userid);
 			
 			InterMemberDAO mdao = new MemberDAO();
 			Map<String, String> paraMap = new HashMap<>();
-			paraMap.put("new_pwd", new_pwd);
+			paraMap.put("pwd", pwd);
 			paraMap.put("userid", userid);
 			
-			int n = mdao.duplicatePwdCheck(paraMap);
+			int n = mdao.duplicatePwdCheck(paraMap); // 중복되면 1 아니면 0
 			
+			if(n != 1) { // 중복이 아닐때
+				n = mdao.pwdUpdate(paraMap);
+			}
+			else {
+				n = -1; // 중복일때
+			}
+	
 			JSONObject jsonObj = new JSONObject();
 			// n ==> 1 이라면 현재 사용중인 암호와 동일한 암호를 새암호로 준 경우
 			// n ==> 0 이라면 현재 사용중인 암호와 다른 새암호로 준 경우

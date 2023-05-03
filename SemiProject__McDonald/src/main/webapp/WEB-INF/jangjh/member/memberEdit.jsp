@@ -32,6 +32,14 @@
 
     <title>회원 정보 수정</title>
     
+<style type="text/css">
+
+	.bg1 {
+	  background-image: url(<%= ctxPath%>/images/브랜드소개상단이미지.jpg);  
+	  background-clip: border-box; 
+	} 
+</style>
+    
 </head> 
 <body>
 <script type="text/javascript">
@@ -439,8 +447,8 @@
 		let gogo = true;
 		
 		$.ajax({
-	   		 url:"<%= ctxPath%>/member/duplicatePwdCheck.run", 
-	   		 data:{"new_pwd":$("input#pwd").val(), "userid":"${sessionScope.loginuser.userid}"},
+	   		 url:"<%= ctxPath%>/member/duplicatePwdEdit.run", 
+	   		 data:{"pwd":$("input#pwd").val(), "userid":"${sessionScope.loginuser.userid}"},
 			 type:"post",
 			 dataType:"json",
 			 async: false,
@@ -499,7 +507,7 @@
 	      
 	      <tr>
 	         <td class="gap"></td>
-	         <td style="width: 20%;">비밀번호확인&nbsp;<span class="star">*</span></td>
+	         <td style="width: 20%; font-weight: bold; font-size: 10pt;">비밀번호확인&nbsp;<span class="star">*</span></td>
 	         <td style="width: 80%; text-align: left;"><input type="password" id="pwdcheck" class="requiredInfo" /> 
 	            <span class="error">암호가 일치하지 않습니다.</span>
 	         </td>

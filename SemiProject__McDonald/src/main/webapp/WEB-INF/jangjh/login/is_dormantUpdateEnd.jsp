@@ -36,7 +36,7 @@
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
-		if(${requestScope.method == 'POST' && requestScope.n == 1}){
+		if(${requestScope.method == 'POST' && requestScope.isExists == true}){
 			
 			parent.location.href="<%= ctxPath%>/";
 			self.close();

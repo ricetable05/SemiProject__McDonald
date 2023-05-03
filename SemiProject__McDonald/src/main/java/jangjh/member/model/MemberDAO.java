@@ -362,7 +362,7 @@ public class MemberDAO implements InterMemberDAO {
 				
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, paraMap.get("userid"));
-				pstmt.setString(2, Sha256.encrypt(paraMap.get("new_pwd")));
+				pstmt.setString(2, Sha256.encrypt(paraMap.get("pwd")));
 				
 				rs = pstmt.executeQuery();
 				
@@ -625,29 +625,30 @@ public class MemberDAO implements InterMemberDAO {
 
 		// 휴면 계정 풀기를 위해서 login_date 업데이트하기
 		@Override
-		public int login_date_insert(String userid, String access_ip) throws SQLException {
-			int result = 0;	
+		public boolean login_date_insert(String userid, String access_ip) throws SQLException {
+			boolean isExists = false;
 			
 			try {
+				 conn = ds.getConnection();	
 				
-				conn = ds.getConnection();  
+				 String sql = " INSERT INTO tbl_login_history (login_history_no, fk_userid, login_date,access_ip) "
+						    + " VALUES (login_history_no_seq.nextval,?,sysdate, ?) ";
 				
-				String sql = " INSERT INTO tbl_login_history (login_history_no, fk_userid, login_date,access_ip) "
-						   + " VALUES (login_history_no_seq.nextval,?,sysdate, ?) ";
-				
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setString(1, userid);
-				pstmt.setString(2, access_ip);
-				
-				result = pstmt.executeUpdate();
-				
-			}
-			finally {
+				 pstmt = conn.prepareStatement(sql);
+				 
+				 pstmt.setString(1, userid);
+				 pstmt.setString(2, access_ip);
+					
+				 rs = pstmt.executeQuery();
+				 
+				 isExists = rs.next(); // 행이 있으면(중복된 userid) true,
+				 			           // 행이 없으면(사용가능한 userid) false
+				 
+			} finally {
 				close();
 			}
 			
-			return result;
+			return isExists;
 		}//end of public int login_date_Update(String userid) throws SQLException ---------------
 
 		@Override
