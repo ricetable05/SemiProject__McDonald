@@ -9,85 +9,13 @@
 	//      /MyMVC
 %>
 
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/totalorder/totalorder.css" type="text/css"/>
+
 <style type="text/css">
-	
-	
-	
-	.topimage {
-		position: relative;
-		border: solid 0px green;
-		width:100%;
-		height: 226px;
-		margin-top: 136px;
-		margin-bottom: 30px;
-	}
-	
-	.topimage:before {
-		content:"";
-		width:100%;
-		height:100%;
-		position:absolute;
-	}
-	
-	
-	.toptext{
-		border: solid 0px red;
-	    width: 1146px;
-	    height: 150px;
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    font-size:14pt;
-	    color: #fff;
-		font-family:SpeedeeK;
-	  	font-style:normal;
-	  	font-weight:600;
-  		text-align: center;
-	}
-	
-	
-	
-	.titDep1{display:block;
-		 font-size: 50pt; 
-		 line-height:1;
-		 font-family:SpeedeeK;
-		 font-weight: 600;
-  		 font-style:normal;
-	}
 	
 	.topimage{
 		background:url(<%= request.getContextPath() %>/images/품질이야기상단이미지.jpg) 50% 50% no-repeat;
 	}
-	
-	.maincontent{
-		border: solid 0px red;
-		padding-left: 10%;
-		
-	}
-	
-	tr.totalOrderInfo:hover {
-		cursor: pointer;
-		color: #db0007;
-	}
-	
-	body {
-		font-family:SpeedeeK; 
-		font-weight:600;
-		margin-top: 138px;
-	}
-	
-	table {
-		font-family:SpeedeeK; 
-		font-weight:600;
-	}
-	
-	
-	.pagination{
-	    width: 600px;	    
-	}
-	
-	
 	
 </style>
 
@@ -255,11 +183,17 @@
 
         </tbody>
     </table>	
-    
+    <%-- 
 	<nav class="my-5" style="margin-left: 30%;" >
         <div style='display:flex; width:80%; c'>
           <ul class="pagination">${requestScope.pageBar}</ul>
        </div>
+    </nav> --%>
+    
+    <nav>
+    	<div>
+    		<ul style="border:solid 2px green; margin:auto" class="pagination">${requestScope.pageBar}</ul>
+    	</div>
     </nav>
 </div>
 	

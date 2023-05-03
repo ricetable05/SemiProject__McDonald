@@ -1,0 +1,108 @@
+.topimage {
+		position: relative;
+		border: solid 0px green;
+		width:100%;
+		height: 226px;
+		margin-top: 136px;
+		margin-bottom: 30px;
+	}
+	
+	.topimage:before { 
+		content:"";
+		width:100%;
+		height:100%;
+		position:absolute;
+	}
+	
+	
+	.toptext{
+		border: solid 0px red;
+	    width: 1146px;
+	    height: 150px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    font-size:14pt;
+	    color: #fff;
+		font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:600;
+  		text-align: center;
+	}
+	
+	
+	
+	.titDep1{display:block;
+		 font-size: 50pt; 
+		 line-height:1;
+		 font-family:SpeedeeK;
+		 font-weight: 600;
+  		 font-style:normal;
+	}
+	
+	
+	
+	#dvoInfo{
+		border: solid 0px black;
+		position: relative;
+		width:100%;
+		height: 100%;
+		font-family:SpeedeeK; 
+		font-weight:500;
+		font-size: 15pt;
+		
+	}
+	
+	#orderTable{
+		font-family: SpeedeeK;
+		margin: 0px 25% 15px 25%; 
+		width:50%;
+		padding-bottom: 30px;
+	}
+	#orderTable > ol {
+		list-style: none;
+		
+	}
+	
+	span.listt{
+		display: inline-block;
+      width: 90px;
+      margin-right: 16px;
+	}
+	
+	span.listo{
+		border-collapse: collapse;
+	}
+	
+	
+	#orderTable > div {
+		display: inline-block;
+		text-align: center;
+		
+	}
+	
+	.Detailcontent{
+		margin: 15px 25% 15px 25%; 
+		width:50%;
+		text-align: left;
+		display: inline-block;
+	}
+	
+	.Detailcontent ol{
+		list-style: none;
+	}
+	
+	
+	
+	#buttonTable{
+		margin: 15px 25% 30px 25%; 
+		width:50%;
+	}
+	
+	#buttonTable > button{
+		width: 100%;
+		font-family: SpeedeeK;
+		font-weight: 600;
+		font-size: 20pt;
+	}

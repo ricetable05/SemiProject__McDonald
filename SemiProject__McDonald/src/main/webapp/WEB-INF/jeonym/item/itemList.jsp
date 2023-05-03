@@ -27,6 +27,10 @@
 		text-align: center;
 	}
 	
+	table#itemTbl tr{
+		cursor:pointer;
+	}
+	
 	table#itemTbl th{
 		color: #000;
 		font-size: 13pt;
@@ -51,6 +55,7 @@
 		padding: 25px 0 25px 0;
 		border-bottom: 1px solid black;
 		text-align: center;
+
 		<%--border:1px solid #ffbc0d; --%>
 	}
 	
@@ -69,12 +74,7 @@
 		color:#000;
 	}
 	
-	
-	tr.itemInfo:hover {
-		background-color: #000;
-		cursor: pointer;
-	}
-	
+
 	.itemListPage > li > a
 	{
 	    background-color: #fff;
@@ -252,7 +252,7 @@
      <p class="bg1">제품목록</p>
 </div>
 
-<div class="container-fluid" style="background-color:#fafafa;">
+<div class="container-fluid">
 
 	<div class="row">
 	
@@ -268,7 +268,7 @@
 		
 		<div class="container-fluid col-md-10 col-lg-9 mt-5 ">
 			
-			 <form name="itemFrm" style="padding-left:47px;">
+			 <form name="itemFrm" style="padding-left:130px;">
 				<select id="searchType" name="searchType" style="height:28px;">
 					<option value="">선택하세요</option>
 					<option value="item_no">제품번호</option>	<%-- dao 에 보내야 하기 때문에 value 를 DB의 컬럼 name 과 일치 시켜야함 --%>		
@@ -294,7 +294,7 @@
 			         <option value="5">5개</option>
 		      	</select>
 		      	<input type="hidden" name="category_id" value=""/>
-		      	<button class="px-4 py-1 btn btn-lg btn-success" style="margin-left:150px;" type="button" onclick="goItemUpdate('')">제품등록</button>		
+		      	<button class="px-4 py-1 btn btn-lg btn-dark" style="margin-left:100px;" type="button" onclick="goItemUpdate('')">제품등록</button>		
 			</form>		
 			
 		
@@ -365,6 +365,7 @@
 		    
 		    
 		</div>
+		
 	
 	</div>
 

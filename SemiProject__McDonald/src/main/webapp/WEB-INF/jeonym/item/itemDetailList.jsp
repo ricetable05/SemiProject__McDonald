@@ -84,9 +84,10 @@
 			}
 			
 		});
-
 		
 	});
+	
+
 
 </script>   
 <!DOCTYPE html>
@@ -199,7 +200,7 @@
 			        </tbody>
 			    </table>
 			    <div class="pl-4 pt-1">
-			    	<button type="button" id="itemUpdateBtn" class="ml-2 btn btn-info">제품정보 수정</button>
+			    	<button type="button" id="itemUpdateBtn" class="ml-2 btn btn-dark">제품정보 수정</button>
 			    	<button type="button" id="itemDeleteBtn" class="ml-2 btn btn-danger">제품정보 삭제</button>
 			    </div>
 			    
