@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-div[name='total'] {
+form[name='total'] {
 	
 	
 /*  		border: solid 3px red;  */
@@ -358,9 +358,7 @@ div[name='total'] {
 	
 	}
 	
-	.topimage{
-background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 50% no-repeat;
-}
+	
 
 
 	button.prev {
@@ -392,7 +390,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 	
 	}
 	
-	p.prev {
+	p.prev_item_name {
 	
 		
 		
@@ -400,7 +398,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 		
 	}
 	
-	p.next {
+	p.next_item_name {
 	
 		
 		
@@ -426,87 +424,87 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 		
 	}
 	
-	button.prev > img.prev_hover {
+ 	button.prev > img.prev_image { 
 	
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 
-		display: none;
+ 		display: none; 
 		
 		
 
-	}
+ 	} 
 	
-	button.next > img.next_hover {
+ 	button.next > img.next_image { 
 	
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 
-		display: none;
+ 		display: none; 
 
-	}
+ 	} 
 	
 		
-	button.prev:hover  img.prev {
+	button.prev:hover  img.prev { 
 		
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 
-		display: none;
+ 		display: none; 
 
 		
-	}
+ 	} 
 	
 	
-	button.next:hover  img.next {
+ 	button.next:hover  img.next { 
 		
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 
 		 
-		display: none;		
+ 		display: none;		 
 	
-	}
+ 	} 
 	
-	button.prev:hover  img.prev_hover {
+ 	button.prev:hover  img.prev_image { 
 		
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 
-		display: block;
+ 		display: block; 
 		
-		margin: 5px auto;
+ 		margin: 5px auto;
 		
-	}
+ 	} 
 	
 	
-	button.next:hover  img.next_hover {
+ 	button.next:hover  img.next_image { 
 		
-		max-width: 100%; 
-		height: auto; 
+ 		max-width: 100%;  
+ 		height: auto;  
 		 
-		display: block;
+ 		display: block; 
 		
-		margin: 5px auto;
+ 		margin: 5px auto; 
 		
-	}
+ 	} 
 	
 	
-	button.prev:hover  p.prev {
+ 	button.prev:hover  p.prev_item_name { 
 		
-		opacity: 1;
+ 		opacity: 1; 
 		
-		font-weight:bold;
+ 		font-weight:bold; 
 		
-	}
+ 	} 
 	
-	button.next:hover  p.next {
+ 	button.next:hover  p.next_item_name { 
 	
-		opacity: 1;
+ 		opacity: 1; 
 		
-		font-weight:bold;
+ 		font-weight:bold; 
 		
-	}
+ 	} 
 
 	
 	

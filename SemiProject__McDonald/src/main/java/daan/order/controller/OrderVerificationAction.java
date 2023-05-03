@@ -71,7 +71,6 @@ public class OrderVerificationAction extends AbstractController {
 		if(priceSum_after_set_discount < 15000) {
 			priceSum_after_set_discount += 3000;
 		}
-		System.out.println("DB 상 결제 금액 확인 => "+priceSum_after_set_discount);
 		String str_total = request.getParameter("total");
 		
 		try {

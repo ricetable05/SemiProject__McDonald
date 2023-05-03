@@ -29,9 +29,7 @@ public class PlaceOrderAction extends AbstractController {
 
 		String str_totalFinal = request.getParameter("totalFinal");
 		int totalFinal = Integer.parseInt(str_totalFinal);
-		System.out.println(totalFinal);
 		String str_deliveryFee = request.getParameter("deliveryFee");
-		System.out.println(str_deliveryFee);
 		int deliveryFee = Integer.parseInt(str_deliveryFee);
 		
 
@@ -49,8 +47,8 @@ public class PlaceOrderAction extends AbstractController {
 		request.setAttribute("delivery_loc", delivery_loc);
 	 	
 	 	super.setRedirect(false);
-		// super.setViewPage("/WEB-INF/daan/paymentGateway.jsp");
-	 	super.setViewPage("/WEB-INF/daan/paymentGateway2.jsp");
+		super.setViewPage("/WEB-INF/daan/paymentGateway.jsp");
+	 	//super.setViewPage("/WEB-INF/daan/paymentGateway2.jsp");
 	}
 
 }

@@ -801,10 +801,7 @@ public class ItemDAO implements InterItemDAO {
 		
 		return result;
 	}// end of public int deleteItem(String pk_fk_item_no) throws SQLException {} ------------------------------
-
 	
-
-
-
+	
 	
 }

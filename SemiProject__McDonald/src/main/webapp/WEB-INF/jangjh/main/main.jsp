@@ -138,32 +138,10 @@
 		
 		<div id="indexdetail" class="card col-3 mb-3" style="width: 19rem; padding-right: 0px; padding-left: 0px;">
 		  <div class="divshadow">
-			<img src="<%= request.getContextPath() %>/images/index4.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
-			  <div class="card-body">
-			    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">2주간 포인트 더블로 쌓고,<br/>2주 후엔 할인 혜택 받자!</h5>
-			    <a href="<%= request.getContextPath() %>" class="stretched-link"></a>
-			  </div>
-		  </div>
-		</div>
-		
-		
-		<div id="indexdetail" class="card col-3 mb-3" style="width: 19rem; padding-right: 0px; padding-left: 0px;">
-		  <div class="divshadow">
 			<img src="<%= request.getContextPath() %>/images/index5.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
 			  <div class="card-body">
 			    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">갓성비 간식 맛집<br/>맥도날드 해피스낵!</h5>
 			    <a href="<%= request.getContextPath() %>/promotion/sideProm.run" class="stretched-link"></a>
-			  </div>
-		  </div>
-		</div>
-		
-		
-		<div id="indexdetail" class="card col-3 mb-3" style="width: 19rem; padding-right: 0px; padding-left: 0px;">
-		  <div class="divshadow">
-			<img src="<%= request.getContextPath() %>/images/index6.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
-			  <div class="card-body">
-			    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">맥도날드와 함께 성장할 <br/>크루와 매니저 찾습니다.</h5>
-			    <a href="<%=ctxPath%>" class="stretched-link"></a>
 			  </div>
 		  </div>
 		</div>
@@ -190,16 +168,6 @@
 		  </div>
 		</div>
 		
-		
-		<div id="indexdetail" class="card col-3 mb-3" style="width: 19rem; padding-right: 0px; padding-left: 0px;">
-		  <div class="divshadow">
-			<img src="<%=ctxPath%>/images/index9.jpg" class="card-img-top" alt="프로모션" style="width: 100%" />
-			  <div class="card-body">
-			    <h5 class="card-title" style="text-align: center; font-family:SpeedeeK; font-weight:600;">0.1초에 1잔!<br/>매일 커피를 더 맛있게</h5>
-			    <a href="<%=ctxPath%>" class="stretched-link"></a>
-			  </div>
-		  </div>
-		</div>
 	  </div>
 	</div>
 	<!-- McDonald's LIVE 내용물 끝 --> 

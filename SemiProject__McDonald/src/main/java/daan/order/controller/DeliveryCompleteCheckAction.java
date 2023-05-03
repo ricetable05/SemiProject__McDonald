@@ -26,7 +26,6 @@ public class DeliveryCompleteCheckAction extends AbstractController {
 		if(isLogined && "kingkingadmin".equals(loginuser.getUserid())) {
 			
 			String odr_no = request.getParameter("odr_no");
-			System.out.println("odr_no => "+odr_no);
 			ItemDAO idao = new ItemDAO();
 			
 			int complete_check = idao.checkOrderCompleted(odr_no);
