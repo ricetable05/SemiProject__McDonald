@@ -17,6 +17,7 @@
 		width:100%;
 		height: 226px;
 		margin-top: 136px;
+		margin-bottom: 30px;
 	}
 	
 	.topimage:before {
@@ -46,9 +47,10 @@
 	
 	
 	.titDep1{display:block;
-		 font-size: 55pt; 
+		 font-size: 50pt; 
 		 line-height:1;
 		 font-family:SpeedeeK;
+		 font-weight: 600;
   		 font-style:normal;
 	}
 	
@@ -57,23 +59,94 @@
 	}
 	
 	#dvoInfo{
-		border: solid 3px black;
+		border: solid 0px black;
 		position: relative;
 		width:100%;
-		height: 100%
-	}
-	
-	#orderTable{
-		border: solid 0px red;
-		position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
+		height: 100%;
+		font-family:SpeedeeK; 
+		font-weight:500;
+		font-size: 15pt;
 		
 	}
 	
-	th{
-		border: solid 2px red;
+	#orderTable{
+		font-family: SpeedeeK;
+		margin: 0px 25% 15px 25%; 
+		width:50%;
+		padding-bottom: 30px;
+		border-bottom: solid 4px gray;
+	}
+	
+	#orderTable > div {
+		display: inline-block;
+		text-align: center;
+		
+	}
+	
+	#orderTable > div:nth-child(1){
+		margin: 0 5% 0 16%;
+	}
+	
+	#orderTable > div:nth-child(2){
+		margin: 0% 15% 0 5%;
+	}
+	.Detailcontent{
+		margin: 15px 25% 15px 25%; 
+		width:50%;
+		text-align: center;
+	}
+	
+	.Detailcontent ol{
+		list-style: none;
+		padding-left: 0px;
+	}
+	
+	#deliveryTable{
+		margin: 15px 25% 15px 25%; 
+		width:50%;
+		padding-left: 5%;
+	}
+	
+	#deliveryTable > div {
+		display: inline-block;
+		text-align: center;
+		
+	}
+	
+	#deliveryTable > div:nth-child(1){
+		margin: 0px 5% 0 3%;
+	}
+	
+	#deliveryTable > div:nth-child(2){
+		margin: 0% 5% 0 5%;
+	}
+	
+	#deliveryTable > div:nth-child(3){
+		margin: 0% 13% 0 5%; 
+	}
+	
+	#deliveryclear{
+		margin: 15px 25% 15px 25%; 
+		width:50%;
+	}
+	
+	#deliveryclear > div {
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		
+	}
+	
+	#buttonTable{
+		margin: 15px 25% 30px 25%; 
+		width:50%;
+	}
+	
+	#buttonTable > button{
+		width: 100%;
+		font-family: SpeedeeK;
+		font-weight: 600;
+		font-size: 20pt;
 	}
 
 </style>
@@ -90,64 +163,32 @@
 		sale_price();
 	});
 	
-function sum_price(){
 	
-	let total_price = 0;
-	
-	let arr = document.getElementsByClassName('price');
-	
-	arr = Array.from(arr);
-	arr.forEach( (elt) => {
-		total_price += Number(elt.innerText);
-	})
-	
-	$('td#total').text(total_price);
-	
-}	
-
-function sale_price(){
-	
-	let total_price = 0;
-	
-	let arr = document.getElementsByClassName('set');
-	
-	arr = Array.from(arr);
-	arr.forEach( (elt) => {
-		let count = 0;
-		if(elt.innerText == 'O'){
-			count ++;
-		}
-		total_price += Number(count*1000);
-	})
-	
-	$('td#sale').text(total_price);
-	
-}	
-	
-
-function deliveryClear(){
 		
-		$.ajax({
-			url:"<%= request.getContextPath()%>/daan/deliveryCompleteCheck.run",
-			type:"post",
-			data:{"odr_no":${requestScope.odr_no}},
-			dataType:"json",
-			success:function(json){
-				location.href="<%= request.getContextPath()%>/totalorder/totalOrderMain.run";
-			},
-			error: function(request, status, error){
-                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-            }
-		});
-}
+	
+	function deliveryClear(){
+			
+			$.ajax({
+				url:"<%= request.getContextPath()%>/daan/deliveryCompleteCheck.run",
+				type:"post",
+				data:{"odr_no":${requestScope.odr_no}},
+				dataType:"json",
+				success:function(json){
+					location.href="<%= request.getContextPath()%>/totalorder/totalOrderMain.run";
+				},
+				error: function(request, status, error){
+	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	            }
+			});
+	}
 </script>
 
 
-<c:if test="${empty requestScope.orderDetail}">
+<c:if test="${empty requestScope.orderDetail_List}">
    존재하지 않는 회원입니다.<br>
 </c:if>
 
-<c:if test="${not empty requestScope.orderDetail}">
+<c:if test="${not empty requestScope.orderDetail_List}">
 	<div class="MCcontent">
 		<div class="topimage">
 			<div class="toptext" style="padding-top: 40px;">
@@ -156,92 +197,86 @@ function deliveryClear(){
 		</div>
 	</div>
 	<div id="dvoInfo">
-		
-    <table>
-      <thead>
-        <tr>
-          <th>주문번호</th>
-          <th>주문자</th>
-          <th>주문시간</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>${requestScope.oneOrder.odr_no}</td>
-          <td>${requestScope.oneOrder.fk_userid}</td>
-          <td>${requestScope.oneOrder.odr_date}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <table>
-      <thead>
-        <tr>
-          <th>주문내역일련번호</th>
-          <th>제품코드</th>
-          <th>제품명</th>
-          <th>제품가격</th>
-          <th>주문수량</th>
-          <th>세트유무</th>
-        </tr>
-      </thead>
-     <tbody>
-                <c:forEach var="orderDetail" items="${requestScope.orderDetail}">
-                    <tr>
-                        <td>${orderDetail.odr_product_no}</td>
-                        <td>${orderDetail.fk_item_no}</td>
-                        <td>${orderDetail.item_name}</td>
-                        <td class="price">${orderDetail.item_price}</td>
-                        <td>${orderDetail.quantity}</td>
-                        <td class="set">${orderDetail.is_set == 1 ? 'O' : 'X'}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-    </table> 
-
-    <table>
-      <thead>
-        <tr>
-          <th>제품 총가격</th>
-          <th>할인된 금액</th>
-          <th>배달비</th>
-          <th>결제할 가격</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="total"></td>
-          <td id="sale"></td>
-          <td>${requestScope.oneOrder.is_delivery_price == 1 ? '3000' : '0'}</td>
-          <td>${requestScope.oneOrder.total}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <table>
-      <thead>
-        <tr>
-          <th>배달상태</th>
-          <th>배달완료시간</th>
-          <th>배달주소</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>${requestScope.oneOrder.is_delivery == 1 ? '배송완료' : '배송전'}</td>
-          <td>${requestScope.oneOrder.delivery_time}</td>
-          <td>${requestScope.oneOrder.delivery_loc}</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <c:if test="${requestScope.oneOrder.is_delivery == 0}">
-    	<button type="button" class="btn btn-primary" onclick="deliveryClear()"> 배송완료 </button>
-    </c:if>
-    <c:if test="${requestScope.oneOrder.is_delivery == 1}">
-    	<button type="button" class="btn btn-primary" disabled onclick="deliveryClear()"> 배송완료 </button>
-    </c:if>
-    
+		<div id="orderTable">
+			<div>
+				<span style=" font-weight: 600;">주문번호</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.odr_no}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">주문자</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.fk_userid}</span>
+			</div>
+				<div>
+				<span style=" font-weight: 600;">주문시간</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.odr_date}</span>
+			</div>
+		</div>
+		<div class="Detailcontent">
+			<c:forEach var="OrderDetailVO" items="${requestScope.orderDetail_List}">
+				 <ol style="border-bottom : solid 4px gray; padding-bottom: 15px;">
+					<li><span class="myli">제품코드 : </span>${OrderDetailVO.fk_item_no}</li>
+					<li><span class="myli">제품명 : </span>${OrderDetailVO.item_name}</li>
+					<li><span class="myli">제품가격 : </span><span class="price">${OrderDetailVO.item_price}</span></li>
+					<li><span class="myli">주문수량 : </span><span class="quantity">${OrderDetailVO.quantity}</span></li>
+					<li><span class="myli">세트유무 : </span><span class="set">${OrderDetailVO.is_set == 1 ? 'O' : 'X'}</span></li>
+				</ol>
+			</c:forEach>
+		</div>
+		<div id="deliveryTable">
+			<div>
+				<span style=" font-weight: 600;">제품 총가격</span><br>
+				<span id="total" style=" font-weight: 500;">${requestScope.orderDetail_List[0].pre_total}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">할인된 금액</span><br>
+				<span id="sale" style=" font-weight: 500;">${requestScope.orderDetail_List[0].sales}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">배달비</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.is_delivery_price == 1 ? '3000' : '0'}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">결제할 가격</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.total}</span>
+			</div>
+		</div>
+		<div id="deliveryclear">
+			<div>
+				<span style=" font-weight: 600;">배달상태</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.is_delivery == 1 ? '배송완료' : '배송전'}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">배달완료시간</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.delivery_time}</span>
+			</div>
+			<div>
+				<span style=" font-weight: 600;">배달주소</span><br>
+				<span style=" font-weight: 500;">${requestScope.oneOrder.delivery_loc}</span>
+			</div>
+		</div>
+		<!-- <div id="deliveryjuso">
+			
+		</div> -->
+		<c:if test="${requestScope.sessionUserid == 'kingkingadmin'}">
+			<div id="buttonTable">
+				<c:if test="${requestScope.oneOrder.is_delivery == 0}">
+			    	<button type="button" class="btn btn-primary"onclick="deliveryClear()"> 배송완료 </button>
+			    </c:if>
+			    <c:if test="${requestScope.oneOrder.is_delivery == 1}">
+			    	<button type="button" class="btn btn-primary" disabled onclick="deliveryClear()"> 배송완료 </button>
+			    </c:if>
+		    </div>
+	    </c:if>
+	    <c:if test="${requestScope.sessionUserid == 'kingkingadmin'}">
+	    	<div id="buttonTable" style="display:none;">
+				<c:if test="${requestScope.oneOrder.is_delivery == 0}">
+			    	<button type="button" class="btn btn-primary"onclick="deliveryClear()"> 배송완료 </button>
+			    </c:if>
+			    <c:if test="${requestScope.oneOrder.is_delivery == 1}">
+			    	<button type="button" class="btn btn-primary" disabled onclick="deliveryClear()"> 배송완료 </button>
+			    </c:if>
+		    </div>
+	    </c:if>		    
   </div>
 	
 	

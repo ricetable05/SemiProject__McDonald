@@ -1,21 +1,17 @@
-package jangjh.member.controller;
+package daan.order.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class PwdUpdateEndAction extends AbstractController {
+public class AboutUsAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String userid = request.getParameter("userid");
-		
-		request.setAttribute("userid", userid);
-		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/jangjh/login/pwdUpdateEnd.jsp");
+		super.setViewPage("/WEB-INF/daan/aboutUs.jsp");
 		
 	}
 

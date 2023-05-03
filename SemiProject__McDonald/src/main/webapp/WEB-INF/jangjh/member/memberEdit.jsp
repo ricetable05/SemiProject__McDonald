@@ -114,11 +114,9 @@
 				
 			}
 			else{
-				
 				// 암호와 암호 확인 값이 같은 경우
 				$("table#tblMemberRegister :input").prop("disabled", false); 
 				$(e.target).parent().find("span.error").hide();
- 				
 			}
 
 		});// 아이디가 pwdcheck인 것은 포커스를 잃어버렸을 경우 이벤트(blur)를 처리해주는 것이다.
@@ -245,8 +243,6 @@
 		        }).open();
 						
 		});
-        
-		
 		
 		$("input#birthyyyy").keyup(function(e){
 			
@@ -291,15 +287,12 @@
 		
 		  $("select#birthdd").html(dd_html);
 		
-	      
 	      const birthday = "${sessionScope.loginuser.birthday}";
 	      
 	      $("input#birthyyyy").val(birthday.substring(0, 4));
 	      $("select#birthmm").val(birthday.substring(4, 6));
 	      $("select#birthdd").val(birthday.substring(6));
 	      
-	       
-	    
          /////////////////////////////////////////////////////////////////
 		
 		
@@ -393,7 +386,6 @@
 		
 		////////////////////////////////////////////////////////////////////////////////////////
 		
-		
 		// "이메일중복확인"을 클릭했는지 여부 알아오기 
 		if(b_flag_email_change && !b_flag_emailDuplicate_click){
 			// "이메일중복확인"을 클릭 하지 않았을 경우
@@ -480,18 +472,18 @@
       <tbody>
 	      <tr>
 	      	 <td class="gap"></td>
-	         <td style="width: 20%; font-weight: bold;">성명&nbsp;<span class="star">*</span></td>
+	         <td style="width: 20%; font-weight: bold;">성명&nbsp;</td>
 	         <td style="width: 80%; text-align: left;">
 	             <input type="hidden" name="userid" value="${sessionScope.loginuser.userid}" readonly />
-	             <input type="text" name="member_name" id="member_name" value="${sessionScope.loginuser.member_name}" class="requiredInfo" /> 
+	             <input type="text" name="member_name" id="member_name" value="${sessionScope.loginuser.member_name}" /> 
 	            <span class="error">성명은 필수입력 사항입니다.</span>
 	         </td>
 	      </tr>
 	      
 	      <tr>
 	         <td class="gap"></td>
-	         <td style="width: 20%; font-weight: bold;">비밀번호&nbsp;<span class="star">*</span></td>
-	         <td style="width: 80%; text-align: left;"><input type="password" name="pwd" id="pwd" class="requiredInfo" />
+	         <td style="width: 20%; font-weight: bold;">비밀번호&nbsp;</td>
+	         <td style="width: 80%; text-align: left;"><input type="password" name="pwd" id="pwd" />
 	            <span class="error">암호는 영문자,숫자,특수기호가 혼합된 8~15 글자로 입력하세요.</span>
 	            <span id="duplicate_pwd" style="color:red;"></span>
 	         </td>
@@ -499,16 +491,16 @@
 	      
 	      <tr>
 	         <td class="gap"></td>
-	         <td style="width: 20%;">비밀번호확인&nbsp;<span class="star">*</span></td>
-	         <td style="width: 80%; text-align: left;"><input type="password" id="pwdcheck" class="requiredInfo" /> 
+	         <td style="width: 20%;">비밀번호확인&nbsp;</td>
+	         <td style="width: 80%; text-align: left;"><input type="password" id="pwdcheck"/> 
 	            <span class="error">암호가 일치하지 않습니다.</span>
 	         </td>
 	      </tr>
 	      
 	      <tr>
 	         <td class="gap"></td>
-	         <td style="width: 20%; font-weight: bold;">이메일&nbsp;<span class="star">*</span></td>
-	         <td style="width: 80%; text-align: left;"><input type="text" name="email" id="email" value="${sessionScope.loginuser.email}" class="requiredInfo" placeholder="abc@def.com" /> 
+	         <td style="width: 20%; font-weight: bold;">이메일&nbsp;</td>
+	         <td style="width: 80%; text-align: left;"><input type="text" name="email" id="email" value="${sessionScope.loginuser.email}" placeholder="McDonald@gmail.com" /> 
 	             <span class="error">이메일 형식에 맞지 않습니다.</span>
 	             
 	             <%-- 이메일 중복체크 --%>

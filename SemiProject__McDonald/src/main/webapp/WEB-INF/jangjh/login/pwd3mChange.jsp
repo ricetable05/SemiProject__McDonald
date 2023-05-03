@@ -57,22 +57,43 @@
 				return;
 			}
 			else {
-				const frm = document.pwd3mchangeEndFrm;
-				frm.action = "<%= ctxPath%>/login/pwd3mChange.run";
-				frm.method = "POST";
-				frm.submit();
+				
+				$.ajax({
+			   		 url:"<%= ctxPath%>/member/duplicatePwdCheck.run", 
+			   		 data:{"pwd":$("input#pwd").val(), "userid":"${sessionScope.loginuser.userid}"},
+					 type:"post",
+					 dataType:"json",
+					 async: false,
+			         success:function(json){ // 파라미터 json 에 {"isExists":true} 또는 {"isExists":false} 이 들어오게 된다.
+							
+			        	 if(json.n == -1){
+			        		alert("중복된 비밀번호는 사용할 수 없습니다.");
+			        		$("input#pwd").val("");
+			        		$("input#pwd2").val("");
+						 }          
+			        	 else if(json.n == 1){
+			        		 
+			        		alert("ID: ${sessionScope.loginuser.userid}의 비밀번호가 변경되었습니다.");
+						    	
+							// 자기 닫고 부모창 href 이동
+			        		parent.location.href="<%= ctxPath%>/";
+			    			self.close();
+			        	 }
+			        	 else{ // 0
+			        		 alert("비밀번호 수정 실패 하였습니다.");
+			        	 }
+			          
+			          },
+			          
+			           error: function(request, status, error){ // 페이지없으면 404 에러
+			             alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+			           }
+			      
+			   		});
 			}
 			
 		});//end of $("button#btnUpdate").click(function() -----------------------
 		
-		if(${requestScope.method == 'POST' && requestScope.n == 1}){
-			
-			parent.location.href="<%= ctxPath%>/";
-			self.close();
-			
-			alert("ID: ${sessionScope.loginuser.userid} 비밀번호가 변경되었습니다.");
-		};			
-				
 	});//end of $(document).ready(function() --------------------------------------
 	
 			
