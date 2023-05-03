@@ -29,7 +29,7 @@ public class OrderCancelAction extends AbstractController {
 				
 				
 				if(result == 1) {
-					message = "주문취소 완료! 메인 페이지로 이동합니다.";
+					message = "주문취소 완료! 주문 페이지로 이동합니다.";
 				} else {
 					message = "주문취소 실패. 고객센터로 연결 바랍니다.";
 				}

@@ -48,7 +48,7 @@ public class PlaceOrderAction extends AbstractController {
 	 	
 	 	super.setRedirect(false);
 		super.setViewPage("/WEB-INF/daan/paymentGateway.jsp");
-	 	//super.setViewPage("/WEB-INF/daan/paymentGateway2.jsp");
+	 	// super.setViewPage("/WEB-INF/daan/paymentGateway2.jsp");
 	}
 
 }

@@ -5,15 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Our Team</title>
+</head>
+<jsp:include page="../header_footer/header.jsp"/>
 <style type="text/css">
+
+	div#div_flex1,
+    div#div_flex2,
+    div#div_flex3 {
+    	display: none;
+    }
+
+	h1 {
+		margin-top: 4vh;
+		text-align: center;
+	}
+
 	ul.nav.nav-tabs {
 		display: flex;
 	    justify-content: space-evenly;
 }
 </style>
-</head>
-<jsp:include page="../header_footer/header.jsp"/>
-
 <script type="text/javascript">
 	
 	$(document).ready(function(){
@@ -42,7 +53,18 @@
 	})
 </script>
 <div style="position: relative;top: 140px;margin-top: 1vh;">
-	<h1 style="margin-top: 4vh;">About Us</h1>
+	<h1>프로젝트 회고</h1>
+	
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	
+	
+<%-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --%>	
+	
+	
 	
 <ul class="nav nav-tabs mt-5">
     <li class="nav-item-about us">
@@ -62,15 +84,7 @@
     </li>
 </ul>
 
-<%-- 	
 
-		#### README ####
-
-		/WEB-INF/aboutUs 경로 내에 각 팀원분들 jsp 파일 생성했습니다.
-		
-		소개할 내용에 대해 각자 자유롭게 작성하시면 됩니다.
-
- --%>
 
 <div class="tab-content py-3">
     <div class="tab-pane container" id="PSJ">

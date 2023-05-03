@@ -35,8 +35,6 @@ $(document).ready(function() {
        // m_redirect_url : ''  // 휴대폰 사용시 결제 완료 후 action : 컨트롤러로 보내서 자체 db에 입력시킬것!
    }, function(rsp) {
 		if ( rsp.success ) { // PC 데스크탑용
-		
-			alert("결제 성공하였습니다.");
 			
 			let str_cart_arr = sessionStorage.getItem('cart_arr');
 			let str_quantity_arr = sessionStorage.getItem('quantity_arr');

@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="../header_footer/header.jsp"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<title>McDonald's. - 주문</title>
+
+<title>맥딜리버리®</title>
+<jsp:include page="../header_footer/header.jsp"/>
 
 <style type="text/css">
 	
@@ -279,6 +280,9 @@
 		white-space: nowrap;
     }
  </style>
+ 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" /> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script type="text/javascript">
 
@@ -326,21 +330,12 @@
 		            if(currentVal > input.attr('min')) {
 		                input.val(currentVal - 1).change();
 		            }
-<%--		            
-		            if(parseInt(input.val()) == input.attr('min')) {
-		                $(this).attr('disabled', true);
-		            }
---%>
+
 		        } else if(type == 'plus') {
 
 		            if(currentVal < input.attr('max')) {
 		                input.val(currentVal + 1).change();
 		            }
-<%--
-		            if(parseInt(input.val()) == input.attr('max')) {
-		                $(this).attr('disabled', true);
-		            }
---%>
 		        }
 		    } else {
 		        input.val(0);
@@ -1003,7 +998,12 @@
 		const delivery_loc = '('+$('input#postcode').val()+') '+$('input#address').val()+' '+$('input#detailAddress').val()+' '+$('input#extraAddress').val();
 		
 		if($('input#detailAddress').val().length == 0 ){
-			alert('주소를 입력하세요.');
+			swal({
+				  title: "주소를 입력해주세요",
+				  type: "warning",
+				  confirmButtonColor: "#a6a6a6",
+				  confirmButtonText: "확인"
+				});
 			return false;
 		}
 		
@@ -1011,7 +1011,12 @@
 		let cart_arr = JSON.parse(str_cart_arr);
 		
 		if(cart_arr.length < 1) {
-			alert('장바구니가 비었습니다.');
+			swal({
+				  title: "장바구니가 비었어요",
+				  type: "warning",
+				  confirmButtonColor: "#a6a6a6",
+				  confirmButtonText: "확인"
+				});
 			return false;
 		}
 		
@@ -1034,17 +1039,27 @@
 						return false;
 						
 					} else {
-						alert('결제 진행');
+						swal({
+							title: "결제를 요청합니다",
+							type: "success",
+							showCancelButton: true,
+							cancelButtonText : "취소",
+							cancelButtonColor: "#a6a6a6",
+							confirmButtonColor: "#ff0000",
+							confirmButtonText: "확인",
+							closeOnConfirm: false,
+							html: false
 						
-						const frm = document.placeOrderForm;
-						frm.action = '<%=request.getContextPath()%>/daan/placeOrder.run';
-						frm.method = 'POST';
-						frm.totalFinal.value = total;
-						frm.deliveryFee.value = deliveryFee;
-						frm.delivery_loc.value = delivery_loc;
-						frm.submit();
+						}, function(){
+							const frm = document.placeOrderForm;
+							frm.action = '<%=request.getContextPath()%>/daan/placeOrder.run';
+							frm.method = 'POST';
+							frm.totalFinal.value = total;
+							frm.deliveryFee.value = deliveryFee;
+							frm.delivery_loc.value = delivery_loc;
+							frm.submit();
+						});
 					}
-					
 				},
 				error: function(request, status, error){
 		               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
