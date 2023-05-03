@@ -97,6 +97,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		console.log("${requestScope.userid}");
+		
 	 if("${requestScope.searchType}" != "" && "${requestScope.searchWord}" != ""){ // searchType 이나 searchWord에 문제가 없는 경우에만 값을 넣어주겠다.	
 			
 		    $("select#searchType").val("${requestScope.searchType}");
@@ -159,11 +161,18 @@
 <div class="MCcontent">
 	<div class="topimage">
 		<div class="toptext" style="padding-top: 40px;">
-			<h1 class="titDep1">전체주문내역</h1>
+			<c:if test="${requestScope.userid == 'kingkingadmin'}">
+				<h1 class="titDep1">전체주문내역</h1>
+			</c:if>
+			<c:if test="${requestScope.userid != 'kingkingadmin'}">
+				<h1 class="titDep1">나의주문내역</h1>
+			</c:if>	
 		</div>
 	</div>
 	
-	<form name="totalOrderFrm" style="text-align: center; margin-left:10%; ">
+	
+	<c:if test="${requestScope.userid == 'kingkingadmin'}">
+		<form name="totalOrderFrm" style="text-align: center; margin-left:10%; ">
 		<select id="searchType" name="searchType">
 			<option value="">선택하세요</option>
 			<option value="odr_no">주문번호</option>	
@@ -182,10 +191,32 @@
 	         <option value="5">5개</option>
 	         <option value="3">3개</option>
       	</select>
-      	
-      	
-		
 	</form>
+	</c:if>	
+	<c:if test="${requestScope.userid != 'kingkingadmin'}">
+		<form name="totalOrderFrm" style="text-align: center; margin-left:10%; display:none;">
+			<select id="searchType" name="searchType">
+				<option value="">선택하세요</option>
+				<option value="odr_no">주문번호</option>	
+				<option value="fk_userid">아이디</option>
+			</select>
+			
+			<input type="text" id="searchWord" name="searchWord" />
+			 
+			<input type="text" style="display:none;"/>
+			
+			<button type="button" class="btn btn-secondary" style="margin-left:10px; margin-right:30px; font-weight:600;" onclick="goSearch();">검색</button> <%-- type="button" 은 꼭 넣도록 하자 --%>
+			
+			<span style="color: red; font-weight: bold; font-size: 12pt;">페이지당 주문건수:&nbsp;</span>
+	      	<select id="sizePerPage" name="sizePerPage">
+		         <option value="10">10개</option>
+		         <option value="5">5개</option>
+		         <option value="3">3개</option>
+	      	</select>
+		</form>
+	</c:if>	
+	
+	
 
 	<table id="totalOrderTbl" class="table" style="width: 90%; margin-top: 20px; text-align: center; margin-left: 5%;">
         <thead>

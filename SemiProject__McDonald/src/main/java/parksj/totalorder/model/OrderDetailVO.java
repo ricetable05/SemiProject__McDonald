@@ -9,6 +9,8 @@ public class OrderDetailVO {
 	private int item_price;
 	private int quantity;
 	private int is_set;
+	private int pre_total;
+	private int sales;
 	
 	
 	private TotalOrderVO totalOrderVO;
@@ -17,7 +19,8 @@ public class OrderDetailVO {
 
 	OrderDetailVO(){}
 	
-	OrderDetailVO(int odr_product_no, int fk_odr_no, int fk_item_no, String item_name, int item_price, int quantity, int is_set){
+	OrderDetailVO(int odr_product_no, int fk_odr_no, int fk_item_no, String item_name, int item_price, int quantity, int is_set
+			,int pre_total ,int sales ){
 		
 		this.odr_product_no = odr_product_no;
 		this.fk_odr_no = fk_odr_no;
@@ -26,6 +29,8 @@ public class OrderDetailVO {
 		this.item_price = item_price;
 		this.quantity = quantity;
 		this.is_set = is_set;
+		this.pre_total = pre_total;
+		this.sales = sales;
 	}
 
 	public int getOdr_product_no() {
@@ -91,6 +96,22 @@ public class OrderDetailVO {
 
 	public void setTotalOrderVO(TotalOrderVO totalOrderVO) {
 		this.totalOrderVO = totalOrderVO;
+	}
+
+	public int getPre_total() {
+		return pre_total;
+	}
+
+	public void setPre_total(int pre_total) {
+		this.pre_total = pre_total;
+	}
+
+	public int getSales() {
+		return sales;
+	}
+
+	public void setSales(int sales) {
+		this.sales = sales;
 	}
 	
 	

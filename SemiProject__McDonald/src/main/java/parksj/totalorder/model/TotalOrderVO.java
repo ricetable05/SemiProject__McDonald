@@ -13,7 +13,6 @@ public class TotalOrderVO {
 	private int is_delivery_price;//배달비여부
 	private String delivery_loc;
 	private int total;
-	private List<OrderDetailVO> orderDetailList; // 주문 상세 정보 리스트
 	
 	TotalOrderVO(){}
 	
@@ -102,16 +101,5 @@ public class TotalOrderVO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
-
-		
-	public List<OrderDetailVO> getOrderDetailList() {
-	    return orderDetailList;
-	}
-
-	public void setOrderDetailList(List<OrderDetailVO> orderDetailList) {
-	    this.orderDetailList = orderDetailList;
-	}
-	
-	
 
 }

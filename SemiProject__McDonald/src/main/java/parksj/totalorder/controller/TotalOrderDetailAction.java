@@ -20,7 +20,7 @@ public class TotalOrderDetailAction extends AbstractController {
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 		
-		if(loginuser != null && loginuser.getUserid().equals("kingkingadmin")) {
+		if(loginuser != null) {
 			// 관리자로 로그인 했을 때만
 			
 			int odr_no = Integer.parseInt(request.getParameter("odr_no"));
@@ -29,7 +29,7 @@ public class TotalOrderDetailAction extends AbstractController {
 			
 			TotalOrderVO oneOrder = tdao.oneOrder(odr_no);
 			
-			List<OrderDetailVO> orderDetail = tdao.orderDetail(odr_no);
+			List<OrderDetailVO> orderDetail_List = tdao.orderDetail(odr_no);
 			
 						
 			/* List<TotalOrderVO> oneoderDetail = tdao.orderDetailList(odr_no); */
@@ -41,9 +41,13 @@ public class TotalOrderDetailAction extends AbstractController {
 			//System.out.println("orderDetail 이제대로나오나?? =>" + orderDetail);
 			
 			request.setAttribute("oneOrder", oneOrder);
-			request.setAttribute("orderDetail", orderDetail);
+			request.setAttribute("orderDetail_List", orderDetail_List);
 
 			request.setAttribute("odr_no", odr_no);
+			
+			String sessionUserid = loginuser.getUserid();
+			
+			request.setAttribute("sessionUserid", sessionUserid);
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/parksj/totalorder/orderDetail.jsp");
@@ -52,7 +56,7 @@ public class TotalOrderDetailAction extends AbstractController {
 		else {
 			// 로그인을 안한 경우 또는 일반 사용자로 로그인 한 경우
 			
-			String message = "관리자만 접근이 가능합니다.";
+			String message = "회원만 접근이 가능합니다.";
 			String loc = "javascript:history.back()";
 			
 			request.setAttribute("message",message);

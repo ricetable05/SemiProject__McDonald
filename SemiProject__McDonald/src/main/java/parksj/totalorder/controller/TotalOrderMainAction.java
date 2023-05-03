@@ -22,7 +22,7 @@ public class TotalOrderMainAction extends AbstractController {
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 		
-		if(loginuser != null && loginuser.getUserid().equals("kingkingadmin")) {
+		if(loginuser != null ) {
 			// 관리자로 로그인 했을 때만 
 			
 			InterTotalOrderDAO tdao = new TotalOrderDAO();
@@ -38,16 +38,31 @@ public class TotalOrderMainAction extends AbstractController {
 			
 			
 			/////////////////////////////////////////////////////////////////////////////////////////
-			
-			if(searchType == null || 
-			   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
-				searchType = "";
+			if( loginuser.getUserid().equals("kingkingadmin")) {
+				if(searchType == null || 
+				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
+					searchType = "";
+				}
+				
+				if(searchWord == null || 
+				  (searchWord != null && searchWord.trim().isEmpty())) { // null은 아니지만 공백
+					searchWord = "";
+				}
+			}
+			else {
+				
+				if(searchType == null || 
+				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
+					searchType = "fk_userid";
+				}
+				
+				if(searchWord == null || 
+				  (searchWord != null && searchWord.trim().isEmpty())) { // null은 아니지만 공백
+					searchWord = loginuser.getUserid();
+				}
+				
 			}
 			
-			if(searchWord == null || 
-			  (searchWord != null && searchWord.trim().isEmpty())) { // null은 아니지만 공백
-				searchWord = "";
-			}
 			
 			
 			Map<String, String> paraMap = new HashMap<>();
@@ -113,12 +128,14 @@ public class TotalOrderMainAction extends AbstractController {
 			
 			List<TotalOrderVO> totalOderList = tdao.selectPagingOrder(paraMap);
 			
+			String userid = loginuser.getUserid();
+			
 			
 			request.setAttribute("totalOderList", totalOderList);	
 			request.setAttribute("searchType", searchType);
 			request.setAttribute("searchWord", searchWord);
 			request.setAttribute("sizePerPage", sizePerPage);
-			
+			request.setAttribute("userid", userid);
 			
 			// **** ==== 페이지바 만들기 시작 ==== **** //
 			
@@ -187,7 +204,7 @@ public class TotalOrderMainAction extends AbstractController {
 		else {
 			// 로그인을 안한 경우 또는 일반 사용자로 로그인 한 경우
 			
-			String message = "관리자만 접근이 가능합니다.";
+			String message = "회원만 접근이 가능합니다.";
 			String loc = "javascript:history.back()";
 			
 			request.setAttribute("message",message);
