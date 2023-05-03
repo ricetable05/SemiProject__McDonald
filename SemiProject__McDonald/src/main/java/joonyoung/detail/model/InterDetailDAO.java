@@ -1,6 +1,7 @@
 package joonyoung.detail.model;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 
 public interface InterDetailDAO {
@@ -19,8 +20,20 @@ public interface InterDetailDAO {
   
 
 
-    // 넘어온 제품번호가 속한 카테고리가 테이블에서 몇개나 있는지 조회하기
-	DetailVO getCategoryLength(int item_no)throws SQLException;
+
+
+
+//////////////////////////////////////////////////////////////////////////////// 
+	
+	// 이전 호버 이미지 제품이름 가져오기
+	Map<String, String> get_laginfo(String item_no, String fk_category_no)throws SQLException;
+
+	// 이후 호버 이미지 제품이름 가져오기
+	Map<String, String> get_leadinfo(String item_no, String fk_category_no)throws SQLException;
+
+
+	// item_no 가 DB에 존재하는지 여부 파악
+	boolean is_Exist_item_no(Map<String, String> paraMap)throws SQLException;
 
 	
 	

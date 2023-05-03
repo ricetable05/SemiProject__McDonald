@@ -1,9 +1,9 @@
 package joonyoung.detail.model;
 
 import java.sql.*;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import java.util.*;
+
+import javax.naming.*;
 import javax.sql.DataSource;
 
 
@@ -187,57 +187,181 @@ public class DetailDAO implements InterDetailDAO {
 	
 	
 	
+
+
 	
-	
-    // 넘어온 제품번호가 속한 카테고리가 테이블에서 몇개나 있는지 조회하기
+	// 이전 호버 이미지 제품이름 가져오기
 	@Override
-	public DetailVO getCategoryLength(int item_no) throws SQLException {
+	public Map<String, String> get_laginfo(String item_no , String fk_category_no)throws SQLException {
+
+		Map<String, String> paraMap = new HashMap<>();
 		
-		
-		
-		DetailVO ivo_GetCategoryLength = null;
-		
-		
-		try {
-			conn = ds.getConnection();
-			
-			String sql = " select count(fk_category_no) "
-					   + " from tbl_category A join tbl_item B "
-					   + " on A.category_id = B.fk_category_no "
-					   + " where fk_category_no in ( "
-					   + " select fk_category_no "
-					   + " from tbl_item "
-					   + " where item_no = ? "
-					   + " ) ";
-			
-			  pstmt = conn.prepareStatement(sql);
-			
-	          pstmt.setInt(1, item_no);
+	      
+	      try {
+	          conn = ds.getConnection(); 
+	          
+	         String sql = "    select lag_item_name, lag_item_no, lag_item_image  "
+		         		+ "    from "
+		         		+ "    ( "
+		         		+ "        select item_no, item_name, "
+		         		+ "               LAG(item_no) over(order by item_no desc) AS lag_item_no, "
+		         		+ "               LAG(item_name) over(order by item_no desc) AS lag_item_name, "
+		         		+ "               LAG(item_image) over(order by item_no desc) AS lag_item_image "
+		         		+ "        from tbl_item ";
+				         switch (fk_category_no) {
+							case "1":
+								sql+=  " where item_no between 100 and 199 " ;
+								break;
+							case "2":
+								sql+=  " where item_no between 200 and 299 " ;							
+								break;
+							case "3":
+								sql+=  " where item_no between 300 and 399 " ;							
+								break;	
+							case "4":
+								sql+=  " where item_no between 400 and 499 " ;							
+								break;
+							case "5":
+								sql+=  " where item_no between 500 and 599 " ;							
+								break;	
+							}				         
+				         sql +=   "    order by item_no desc "
+				         		+ "    )V "
+				         		+ "    where item_no = ? ";
+	          
+	          pstmt = conn.prepareStatement(sql);
+	          
+	          pstmt.setInt(1, Integer.parseInt(item_no) );
 	          
 	          rs = pstmt.executeQuery();
+	          
+	          if(rs.next()) {
+	             
+	            String lag_item_name = rs.getString(1);
+	            String lag_item_no = rs.getString(2);
+	            String lag_item_image = rs.getString(3);
+	             
+	            paraMap.put("lag_item_name", lag_item_name);
+	            paraMap.put("lag_item_no",  lag_item_no);
+	            paraMap.put("lag_item_image", lag_item_image);
+	            
+	             
+	          }// end of if-----------------------------
+	          
+	      } finally {
+	         close();
+	      }
+	      
+	      return paraMap;      
+		
+		
+		
+	}// end of public Map<String, String> get_laginfo(String item_no) ------------------------------------------------------
+
+	
+	
+	
+	
+	
+	
+	
+	
+	// 이후 호버 이미지 제품이름 가져오기
+	@Override
+	public Map<String, String> get_leadinfo(String item_no, String fk_category_no) throws SQLException {
+		
+		
+		
+		Map<String, String> paraMap = new HashMap<>();
+		
+	      
+	      try {
+	          conn = ds.getConnection(); 
+	          
+	         String sql = "      select lead_item_name, lead_item_no, lead_item_image "
+		         		+ "    from "
+		         		+ "    ( "
+		         		+ "        select item_no, item_name, "
+		         		+ "               LEAD(item_no) over(order by item_no desc) AS lead_item_no, "
+		         		+ "               LEAD(item_name) over(order by item_no desc) AS lead_item_name, "
+		         		+ "               LEAD(item_image) over(order by item_no desc) AS lead_item_image "
+		         		+ "        from tbl_item ";
+	         			switch (fk_category_no) {
+						case "1":
+							sql+=  " where item_no between 100 and 199 " ;
+							break;
+						case "2":
+							sql+=  " where item_no between 200 and 299 " ;							
+							break;
+						case "3":
+							sql+=  " where item_no between 300 and 399 " ;							
+							break;	
+						case "4":
+							sql+=  " where item_no between 400 and 499 " ;							
+							break;
+						case "5":
+							sql+=  " where item_no between 500 and 599 " ;							
+							break;	
+						}
+	         			sql += " order by item_no desc "
+			         		 + "    )V "
+			         		 + "    where item_no = ? ";
+	          
+	          pstmt = conn.prepareStatement(sql);
+	          
+	          pstmt.setInt(1, Integer.parseInt(item_no) );
+	          
+	          rs = pstmt.executeQuery();
+	          
+	          if(rs.next()) {
+	             
+	            String lead_item_name = rs.getString(1);
+	            String lead_item_no = rs.getString(2);
+	            String lead_item_image = rs.getString(3);
+	             
+	            paraMap.put("lead_item_name", lead_item_name);
+	            paraMap.put("lead_item_no",  lead_item_no);
+	            paraMap.put("lead_item_image", lead_item_image);
+	            
+	             
+	          }// end of if-----------------------------
+	          
+	      } finally {
+	         close();
+	      }
+	      
+	      return paraMap;   
+	      
+	      
+	}
+
+	
+	// item_no 가 DB에 존재하는지 여부 파악
+	@Override
+	public boolean is_Exist_item_no(Map<String, String> paraMap) throws SQLException {
+		
+	
+		boolean is_Exist_item_no = false;
+		
+		try {
 			
-		      if(rs.next()) {
-		             
-		             int ctLength = rs.getInt(1);  // 제품이름
-		             
-		             
-		             
-		             ivo_GetCategoryLength = new DetailVO(); 
-		             
-		             
-		             ivo_GetCategoryLength.setCtLength(ctLength);
-		          
-		             
-		             
-		          }// end of if-----------------------------
+			conn = ds.getConnection();			
+			String sql  = " select * "
+						+ " from tbl_item "
+						+ " where item_no = ? ";
+					   
+			pstmt = conn.prepareStatement(sql);
 			
-			
-			
-		}finally {
-			close();
+			pstmt.setString(1, paraMap.get("itemno"));
+			rs = pstmt.executeQuery();
+
+			is_Exist_item_no = rs.next(); // 존재하면 true 존재하지 않으면 false
+	
+		} finally {
+			close() ;
 		}
 		
-		return ivo_GetCategoryLength;
+		return is_Exist_item_no;
 		
 		
 		
