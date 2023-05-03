@@ -24,9 +24,6 @@ public class DuplicatePwdCheckAction extends AbstractController {
 			String pwd = request.getParameter("pwd");
 			String userid = request.getParameter("userid");
 			
-			System.out.println(pwd);
-			System.out.println(userid);
-			
 			InterMemberDAO mdao = new MemberDAO();
 			Map<String, String> paraMap = new HashMap<>();
 			paraMap.put("pwd", pwd);

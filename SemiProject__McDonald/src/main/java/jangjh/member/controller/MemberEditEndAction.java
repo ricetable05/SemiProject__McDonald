@@ -38,8 +38,6 @@ public class MemberEditEndAction extends AbstractController {
 			String birthmm = request.getParameter("birthmm");	
 			String birthdd = request.getParameter("birthdd");	
 			
-			System.out.println(userid);
-			
 			// 온전한 연락처
 			String member_tel = hp1 + hp2 + hp3;
 			
