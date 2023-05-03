@@ -75,7 +75,7 @@ public class ItemDetailAction extends AbstractController {
 					char charArr[] = item_no.trim().toCharArray();
 					for(int i=0;i<charArr.length; i++) {
 						
-						if(!Character.isDigit(charArr[i])) {
+						if( charArr[0] != '-' && !Character.isDigit(charArr[i]) ) {
 							isDigit = false;
 							break;
 						}
