@@ -1,0 +1,69 @@
+.topimage {
+		position: relative;
+		border: solid 0px green;
+		width:100%;
+		height: 226px;
+		margin-top: 136px;
+		margin-bottom: 30px;
+	}
+	
+	.topimage:before {
+		content:"";
+		width:100%;
+		height:100%;
+		position:absolute;
+	}
+	
+	
+	.toptext{
+		border: solid 0px red;
+	    width: 1146px;
+	    height: 150px;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    font-size:14pt;
+	    color: #fff;
+		font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:600;
+  		text-align: center;
+	}
+	
+	
+	
+	.titDep1{display:block;
+		 font-size: 50pt; 
+		 line-height:1;
+		 font-family:SpeedeeK;
+		 font-weight: 600;
+  		 font-style:normal;
+	}
+	
+	.maincontent{
+		border: solid 0px red;
+		padding-left: 10%;
+		
+	}
+	
+	tr.totalOrderInfo:hover {
+		cursor: pointer;
+		color: #db0007;
+	}
+	
+	body {
+		font-family:SpeedeeK; 
+		font-weight:600;
+		margin-top: 138px;
+	}
+	
+	table {
+		font-family:SpeedeeK; 
+		font-weight:600;
+	}
+	
+	
+	.pagination{
+	    width: 600px;	    
+	}
