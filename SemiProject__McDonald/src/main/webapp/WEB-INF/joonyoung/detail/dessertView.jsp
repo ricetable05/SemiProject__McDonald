@@ -229,7 +229,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/dessertMain.run">Menu</a></li>
+								<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/dessertMain.run">Menu</a></li>
 			</ul>
 		</div>
 	</div>
