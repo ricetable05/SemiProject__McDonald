@@ -17,6 +17,40 @@
 		background:url(<%= request.getContextPath() %>/images/품질이야기상단이미지.jpg) 50% 50% no-repeat;
 	}
 	
+	.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #000 !important;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:600;
+}
+	
+	.page-item.active .page-link {
+	 z-index: 1;
+	 font-weight:bold;
+	 background-color: black !important;
+	 color: #fff !important;
+	 border-color: #ccc !important;
+	 font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:600;
+	 
+	}
+	
+	.page-link:focus, .page-link:hover {
+	  color: #fff;
+	  background-color: #ccc !important; 
+	  border-color: #ccc;
+	  font-family:SpeedeeK;
+	  	font-style:normal;
+	  	font-weight:600;
+	}
 
 </style>
 
@@ -190,9 +224,9 @@
        </div>
     </nav> --%>
     
-   <nav class="my-5" id="page-item" style="margin-left: 30%;" >
-        <div style='display:flex; width:80%; c'>
-          <ul class="pagination" id="page-link">${requestScope.pageBar}</ul>
+   <nav>
+        <div>
+          <ul class="pagination" style="margin:auto;">${requestScope.pageBar}</ul>
        </div>
     </nav>   
 </div>
