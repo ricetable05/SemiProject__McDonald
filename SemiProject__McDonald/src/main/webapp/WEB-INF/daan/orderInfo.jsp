@@ -432,6 +432,7 @@
 			});
 			
 		}
+		
 		// ------------------------------------------------------
 		
 		updateOrderDetail();
@@ -1234,6 +1235,10 @@ function showToast(type) {
 		text = '제품추가 완료';
 		color = '#1c8217';
 		
+	} else if(type == 3) {
+		text = '현재 시간에 주문할 수 없는 상품입니다.';
+		color = '#acacac';
+		
 	} else if(type == -1) {
 		text = '제품삭제 완료';
 		color = '#ff0000';
@@ -1244,7 +1249,7 @@ function showToast(type) {
 	}
 	
 	const html = `<div class="toast" data-toast_index="\${toast_index}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000" style="flex: 0;">
-			      	<div class="toast-body" style="position: relative; background-color: \${color}; height: 47px;font-size: 1.1rem; color: white; width: 320px;">
+			      	<div class="toast-body" style="position: relative; opacity: 0.85;background-color: \${color}; height: 47px;font-size: 1.1rem; color: white; width: 320px; border-radius: 0.25rem;">
 				    	\${text}
 				    </div>
 			      </div>`;

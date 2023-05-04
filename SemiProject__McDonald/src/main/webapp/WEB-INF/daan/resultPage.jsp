@@ -77,7 +77,7 @@
 		const countSpan = document.getElementById('count');
 
 		// Set the initial count to 1
-		let count = 5;
+		let count = 10;
 
 		// Use setInterval to update the count every second
 		const intervalId = setInterval(() => {
@@ -171,7 +171,7 @@
 		<div class="text-center" style="display: inline-block;">
 			<div class="spinner-container">
 			  	<div class="spinner-border spinner-blue spinner-border-3 spinner-border-lg" role="status"></div>
-			  	<span id="count" class="spinner-text">5</span>
+			  	<span id="count" class="spinner-text">10</span>
 			</div>
 		</div>
 		<span style="font-size: 1.5rem;padding: 24px 0;font-weight: 500;">&ensp;초 후 메인페이지로 이동합니다.</span>

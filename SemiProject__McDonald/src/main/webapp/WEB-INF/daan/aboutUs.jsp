@@ -23,12 +23,31 @@
 	ul.nav.nav-tabs {
 		display: flex;
 	    justify-content: space-evenly;
+	    
 }
+	a.us {
+		font-size: 1.5rem;
+	    text-align: center;
+	    padding: 25px 0;
+	    
+	}
+	a.us.active {
+		border: solid 3px;
+		
+	}
+	div.tab-content {
+		padding-bottom: 20px;
+	}
 </style>
 <script type="text/javascript">
 	
 	$(document).ready(function(){
 
+		$('h1').click(() => {
+			$('nav').show();
+			$('div.content').css('top','140px');
+		});
+		
 		let choose_who = $('a.nav-link.us');
 		choose_who = Array.from(choose_who);
 		
@@ -36,7 +55,12 @@
 			
 			elt.addEventListener('click', function(e) {
 				
+				$('nav').hide();
+				$('div.content').css('top','35px');
+				
 				const id = $(e.target).attr('href');
+				
+				
 				
 				$(elt).removeClass('active');
 				$(e.target).addClass('active');
@@ -48,11 +72,13 @@
 
 				$('a.nav-link.us').removeClass('active');
 				$('div'+id+'> a.nav-link.us').addClass('active');
+				$('div'+id+'> a.nav-link.us').css('border-bottom','solid 4px white');
+				
 			});
 		})
 	})
 </script>
-<div style="position: relative;top: 140px;margin-top: 1vh;">
+<div class="content" style="position: relative;top: 140px;margin-top: 1vh;">
 	<h1>프로젝트 회고</h1>
 	
 	<div></div>
