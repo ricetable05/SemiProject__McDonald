@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-form[name='total'] {
+div[name='total'] {
 	
 	
 /*  		border: solid 3px red;  */
@@ -300,7 +300,8 @@ form[name='total'] {
 	
 		width: 1000px;
 		
-		margin-left: 85px;
+		margin-left: 150px;
+		/*border:solid 1px black;*/
 	
 	}
 	

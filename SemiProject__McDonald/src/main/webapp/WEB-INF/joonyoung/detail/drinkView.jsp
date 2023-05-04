@@ -216,7 +216,7 @@ background:url(/SemiProject__McDonald/images/음료상단이미지.jpg) 50% 50% 
 <div name="total" >
 				
 
-	<div id="container"  >
+<div id="container"  >
 	<div class="topimage">
 				<div class="toptext">
 					<h1 class="titDep1">맥카페 & 음료</h1>
@@ -226,7 +226,7 @@ background:url(/SemiProject__McDonald/images/음료상단이미지.jpg) 50% 50% 
 				<div class="toptext2">
 					<ul>
 						<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-						<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+						<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/drinkMain.run">Menu</a></li>
 					</ul>
 				</div>
 			</div>

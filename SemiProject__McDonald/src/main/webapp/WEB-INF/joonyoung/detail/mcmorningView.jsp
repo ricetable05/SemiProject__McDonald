@@ -225,7 +225,7 @@ $(document).ready(function() {
 				<div class="toptext2">
 					<ul>
 						<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-						<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+						<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/mcMorningMain.run">Menu</a></li>
 					</ul>
 				</div>
 			</div>
@@ -255,8 +255,7 @@ $(document).ready(function() {
 							     
 							     <p class="next_item_name"></p>
 					</button> 
-	
-	 
+
 	</div>
 			
 	<div id="contents_2" >
