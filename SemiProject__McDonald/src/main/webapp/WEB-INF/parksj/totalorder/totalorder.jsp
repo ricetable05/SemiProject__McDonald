@@ -17,6 +17,7 @@
 		background:url(<%= request.getContextPath() %>/images/품질이야기상단이미지.jpg) 50% 50% no-repeat;
 	}
 	
+
 </style>
 
 
@@ -25,7 +26,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		console.log("${requestScope.userid}");
 		
 	 if("${requestScope.searchType}" != "" && "${requestScope.searchWord}" != ""){ // searchType 이나 searchWord에 문제가 없는 경우에만 값을 넣어주겠다.	
 			
@@ -190,12 +190,12 @@
        </div>
     </nav> --%>
     
-    <nav>
-    	<div>
-    		<ul style="border:solid 2px green; margin:auto" class="pagination">${requestScope.pageBar}</ul>
-    	</div>
-    </nav>
+   <nav class="my-5" id="page-item" style="margin-left: 30%;" >
+        <div style='display:flex; width:80%; c'>
+          <ul class="pagination" id="page-link">${requestScope.pageBar}</ul>
+       </div>
+    </nav>   
 </div>
 	
-
+</body>
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"/>	
