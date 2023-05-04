@@ -43,7 +43,7 @@
 	  <table id="Pwd3mTbl" style="margin-top: 22px;">
         <thead>
            <tr>  
-              <th colspan="2" id="th">3개월 동안 비밀번호가 바뀌지 않았습니다. <br> 비밀번호를 변경해주세요!</th>
+              <th colspan="2" id="th">3개월 동안 비밀번호가 바뀌지 않았습니다. <br> 비밀번호를 변경해주세요! (선택)</th>
            </tr>
         </thead>
         <tbody>
@@ -51,6 +51,13 @@
            <tr>  
               <td colspan="2" style="padding-top: 30px;">
                  <button id="madal" type="button" class="btn btn-dark" style="cursor: pointer; font-weight:500; margin: 10px 0 130px 550px; " data-toggle="modal" data-target="#Pwd3m" data-dismiss="modal" data-backdrop="static">비밀번호 변경</button>
+              </td>
+           </tr>
+           
+           <%-- === 현재 비밀번호 유지 === --%> 
+           <tr>  
+              <td colspan="2" style="padding-top: 30px;">
+                 <button  type="button" class="btn btn-dark" onclick="location.href='<%= request.getContextPath()%>/'" style="cursor: pointer; font-weight:500; margin: -140px 0 90px 533px; ">현재 비밀번호 유지</button>
               </td>
            </tr>
            
