@@ -214,7 +214,7 @@ $(document).ready(function() {
 <jsp:include page="/WEB-INF/header_footer/header.jsp"></jsp:include>
 	
 	
-<form name="total" method="post">
+<div name="total">
 
 <div id="container"  >
 	<div class="topimage">
@@ -327,7 +327,7 @@ $(document).ready(function() {
 
 	</div>
 
-</form>
+</div>
 	
 <jsp:include page="/WEB-INF/header_footer/footer.jsp"></jsp:include>
     

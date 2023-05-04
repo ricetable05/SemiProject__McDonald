@@ -217,7 +217,7 @@ $(document).ready(function() {
 		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/sideMain.run">Menu</a></li>
 			</ul>
 		</div>
 	</div>
@@ -241,23 +241,21 @@ $(document).ready(function() {
 					   	  
 				  </button> 
 
-	        <img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
-				<button class="next" type="button">
-					     <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">							     
-							     <img class="next_image" src="">							     
+	        			<img id="burger" src="<%=request.getContextPath()%>/images/${fn:replace(requestScope.ivo.item_image,'.png','_nbg.png')}">
+						<button class="next" type="button">
+						    	 <img class="next" src="<%=request.getContextPath()%>/images/nextIcon.png">							     
+								 <img class="next_image" src="">							     
 							     <p class="next_item_name"></p>							
 						</button> 
-</div>
+     		</div>
+
+			<div id="contents_2" >
+				        <p>${requestScope.ivo.item_info}</p>	
+			</div>
 
 
 
-		<div id="contents_2" >
-			        <p>${requestScope.ivo.item_info}</p>	
-		</div>
-
-
-
-		<div class="accordion_wrap" >
+<div class="accordion_wrap" >
 			<div class="accordion1">                        	
 				<section id="nutrients">
 					<p id="nutrients"><a href="#nutrients">영양정보</a></p>
@@ -304,9 +302,9 @@ $(document).ready(function() {
 						</div>
 					</section>                          
 				</div>
-			</div>
+</div>
 
-	</div>
+</div>
 
 </div>
 	

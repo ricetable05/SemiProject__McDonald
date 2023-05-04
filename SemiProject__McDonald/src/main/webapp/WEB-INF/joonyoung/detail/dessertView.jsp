@@ -215,7 +215,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 <div name="total" >
 				
 
-			<div id="container"  >
+<div id="container">
 					
 					
 				
@@ -229,7 +229,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 		<div class="toptext2">
 			<ul>
 				<li class="listfirst"><a href="<%= request.getContextPath()%>/main.run">Home</a></li>
-				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/burgerMain.run">Menu</a></li>
+				<li class="listsecond"><a href="<%= request.getContextPath()%>/menu/dessertMain.run">Menu</a></li>
 			</ul>
 		</div>
 	</div>
@@ -271,8 +271,6 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 
 	</div>
 	
-	
-
 	<div id="contents_2" >
 
 		            <p>${requestScope.ivo.item_info}</p>
@@ -330,7 +328,7 @@ background:url(/SemiProject__McDonald/images/디저트상단이미지.png) 50% 5
 		</div>
 	</div>
 
-	</div>
+  </div>
 				
 
 	
