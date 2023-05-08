@@ -11,7 +11,6 @@ public class DetailVO {
 	int item_price; // 제품 가격        
 	int morning_availability; // 아침판매여부         
 	int is_burger; // 버거 여부
-	int ctLength; // 특정 제품이 속한 카테고리의 전체 갯수
 	
 	
 	String categoryName; // select 용
@@ -20,7 +19,7 @@ public class DetailVO {
 	public DetailVO() {};
 	
 	public DetailVO(int item_no, int fk_category_no, String item_name, String item_image, int item_price,
-			int morning_availability, int is_burger, int ctLength, String item_info ) {
+			int morning_availability, int is_burger,  String item_info ) {
 
 		this.item_no = item_no;
 		this.fk_category_no = fk_category_no;
@@ -30,7 +29,7 @@ public class DetailVO {
 		this.morning_availability = morning_availability;
 		this.is_burger = is_burger;
 		this.item_info = item_info;
-		this.ctLength = ctLength;
+		
 	}
 	
 	
@@ -112,13 +111,7 @@ public class DetailVO {
 		this.categoryName = categoryName;
 	}
 
-	public int getCtLength() {
-		return ctLength;
-	}
 
-	public void setCtLength(int ctLength) {
-		this.ctLength = ctLength;
-	}
 	
 	
 	
