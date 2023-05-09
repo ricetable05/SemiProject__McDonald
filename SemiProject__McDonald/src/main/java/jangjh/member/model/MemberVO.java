@@ -278,21 +278,4 @@ public class MemberVO {
 		this.requirePwdChange = requirePwdChange;
 	}
 
-
-
-
-	public int getAge() {
-		
-		int age = 0;
-		
-		// 현재 날짜와 시간을 얻어온다.
-		Calendar currentDate = Calendar.getInstance();
-		int currentYear = currentDate.get(Calendar.YEAR);
-		
-		age = currentYear - Integer.parseInt(birthday.substring(0, 4)) + 1;
-	
-		return age;
-	}
-	
-	
 }
