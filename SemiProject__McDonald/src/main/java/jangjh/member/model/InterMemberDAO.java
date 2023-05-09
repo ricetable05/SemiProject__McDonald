@@ -46,7 +46,7 @@ public interface InterMemberDAO {
 	// 휴면 계정 풀기를 위해서 login_date 업데이트하기
 	boolean login_date_insert(String userid, String access_ip) throws SQLException;
 	
-	// 계정 탈퇴
+	// 계정탈퇴
 	int deleteMember(String userid) throws SQLException;
 
 

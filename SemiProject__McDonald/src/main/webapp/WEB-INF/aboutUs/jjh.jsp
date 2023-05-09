@@ -23,8 +23,8 @@
 		position: relative;
 		width: 69.22%;
 		left: 30%;
-		bottom: 450px; 
-		height: 460px;
+		bottom: 480px; 
+		height: 490px;
 	}	
 	
 </style>   
@@ -35,6 +35,7 @@
 		<div id="side">
 		  <h2 style="text-align: center; font-weight:600; margin: 10px 0 20px 0;">내가 구현한 기능</h2>
 		  <ol>
+		  	<li style="margin-bottom: 12px;">메인화면</li>
 		  	<li style="margin-bottom: 12px;">회원가입</li>
 		  	<li style="margin-bottom: 12px;">로그인</li>
 		  	<li style="margin-bottom: 12px;">나의 정보 수정</li>
