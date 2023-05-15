@@ -14,6 +14,8 @@ public class TotalOrderVO {
 	private String delivery_loc;
 	private int total;
 	
+	
+	
 	TotalOrderVO(){}
 	
 	TotalOrderVO(int odr_no, String fk_userid, String fk_store_id, int is_delivery, String delivery_time, 
@@ -101,5 +103,9 @@ public class TotalOrderVO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
+	
+	
+	
 
 }

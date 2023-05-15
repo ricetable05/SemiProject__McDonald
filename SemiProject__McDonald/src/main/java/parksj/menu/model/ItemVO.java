@@ -3,10 +3,10 @@ package parksj.menu.model;
 public class ItemVO {
 
 	
-	int item_no;
-	int fk_category_no; // 카테고리 번호
-	String item_name;
-	String item_image;
+	private int item_no;
+	private int fk_category_no; // 카테고리 번호
+	private String item_name;
+	private String item_image;
 	
 	private CategoryVO catevo;
 

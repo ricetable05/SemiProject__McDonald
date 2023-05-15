@@ -32,14 +32,6 @@ public class TotalOrderDetailAction extends AbstractController {
 			List<OrderDetailVO> orderDetail_List = tdao.orderDetail(odr_no);
 			
 						
-			/* List<TotalOrderVO> oneoderDetail = tdao.orderDetailList(odr_no); */
-			
-			/* request.setAttribute("oneoderDetail", oneoderDetail); */
-			
-			//System.out.println("oneOrder 이제대로나오나?? =>" + oneOrder);
-			
-			//System.out.println("orderDetail 이제대로나오나?? =>" + orderDetail);
-			
 			request.setAttribute("oneOrder", oneOrder);
 			request.setAttribute("orderDetail_List", orderDetail_List);
 

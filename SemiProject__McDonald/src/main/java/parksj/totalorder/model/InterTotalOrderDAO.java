@@ -18,5 +18,7 @@ public interface InterTotalOrderDAO {
 	
 	// 주문번호 order_no 의 상세 주문내역
 	List<OrderDetailVO> orderDetail(int odr_no) throws SQLException;
+	
+		
 
 }

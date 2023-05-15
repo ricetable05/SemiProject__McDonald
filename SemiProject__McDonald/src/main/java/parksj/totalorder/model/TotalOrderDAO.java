@@ -173,53 +173,10 @@ public class TotalOrderDAO implements InterTotalOrderDAO {
 		return totalOrderList;
 	}
 
-	/*
+	
 	  // order_no 값을 입력받아서 주문번호 1건에 대한 상세정보를 알아오기
 	  
-	  @Override public List<TotalOrderVO> orderDetailList(int odr_no) throws SQLException {
-	  
-		  		List<TotalOrderVO> orderDetailList = new ArrayList<>();
-	  
-		  		try { 
-		  			conn = ds.getConnection();
-	  
-		  			String sql = " select O.odr_no, O.fk_userid, O.is_delivery, O.odr_date, O.delivery_time, O.is_delivery_price, O.delivery_loc, O.total, "
-		  					   + "        L.odr_product_no, L.fk_item_no, L.item_name, L.item_price, L.quantity, L.is_set "
-		  					   + " from tbl_order O " + "JOIN tbl_order_list L " 
-		  					   + " ON O.odr_no = L.fk_odr_no " + "where O.odr_no = ? ";
-	  
-		  			pstmt = conn.prepareStatement(sql);
-	  
-		  			pstmt.setInt(1, odr_no);
-				  
-		  			rs = pstmt.executeQuery();
-				  
-		  			TotalOrderVO tvo = null;
-				 
-		  			while(rs.next()) { if (tvo == null) { tvo = new TotalOrderVO();
-		  			tvo.setOdr_no(rs.getInt(1)); tvo.setFk_userid(rs.getString(2));
-		  			tvo.setIs_delivery(rs.getInt(3)); tvo.setOdr_date(rs.getString(4));
-		  			tvo.setDelivery_time(rs.getString(5));
-		  			tvo.setIs_delivery_price(rs.getInt(6)); tvo.setDelivery_loc(rs.getString(7));
-		  			tvo.setTotal(rs.getInt(8)); tvo.setOrderDetailList(new
-		  			ArrayList<OrderDetailVO>()); orderDetailList.add(tvo); }
-				  
-		  			OrderDetailVO dvo = new OrderDetailVO(); dvo.setOdr_product_no(rs.getInt(9));
-		  			dvo.setFk_item_no(rs.getInt(10)); dvo.setItem_name(rs.getString(11));
-		  			dvo.setItem_price(rs.getInt(12)); dvo.setQuantity(rs.getInt(13));
-		  			dvo.setIs_set(rs.getInt(14));
-				  
-		  			tvo.getOrderDetailList().add(dvo); }
-				  
-		  			} finally { 
-		  				close(); 
-		  			}
-				  
-				  return orderDetailList;
-				  
-				  }
-	  				*/
-
+	
 	// order_no 값을 입력받아서 주문번호 한건에 대한 정보 불러오기
 	@Override
 	public TotalOrderVO oneOrder(int odr_no) throws SQLException {

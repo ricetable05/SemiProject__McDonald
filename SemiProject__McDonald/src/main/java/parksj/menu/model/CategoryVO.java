@@ -2,8 +2,8 @@ package parksj.menu.model;
 
 public class CategoryVO {
 	
-	int category_id;
-	String category_name;
+	private int category_id;
+	private String category_name;
 	
 	public CategoryVO() {};
 	
