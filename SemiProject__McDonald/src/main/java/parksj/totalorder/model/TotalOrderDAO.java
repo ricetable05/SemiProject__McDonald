@@ -125,18 +125,14 @@ public class TotalOrderDAO implements InterTotalOrderDAO {
 			int sizePerPage = Integer.parseInt(paraMap.get("sizePerPage"));
 
 			if (!"".equals(colname) && searchWord != null && !searchWord.trim().isEmpty()) {
-
 				sql += " and " + colname + " like '%' || ? || '%' "; // 이메일은 암호화 처리되기 때문에 전체 이메일을 검색창에 입력해야한다.
-
 			}
-
 			sql += "         order by odr_date desc " 
 			     + "        )V " 
 				 + "    )T " 
 				 + " where RNO between ? and ? ";
 
 			pstmt = conn.prepareStatement(sql);
-
 			/*
 			 * === 페이징 처리 공식 === WHERE RNO between (조회하고자하는 페이지번호 * 한페이지당 보여줄 행의개수) -
 			 * (한페이지당보여줄 행의개수 - 1) and (조회하고자하는 페이지번호 * 한페이지당 보여줄 행의개수);

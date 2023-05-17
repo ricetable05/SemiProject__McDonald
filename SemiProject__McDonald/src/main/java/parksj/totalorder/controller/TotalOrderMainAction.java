@@ -40,7 +40,7 @@ public class TotalOrderMainAction extends AbstractController {
 			/////////////////////////////////////////////////////////////////////////////////////////
 			if( loginuser.getUserid().equals("kingkingadmin")) {
 				if(searchType == null || 
-				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
+				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아닌 경우  
 					searchType = "";
 				}
 				
@@ -52,12 +52,12 @@ public class TotalOrderMainAction extends AbstractController {
 			else {
 				
 				if(searchType == null || 
-				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  // searchType이 name이 아니고 userid도 아니고 email도 아닌 경우  
+				   (!"odr_no".equals(searchType) && !"fk_userid".equals(searchType)) ) {  //개인유저 searchType  고정  
 					searchType = "fk_userid";
 				}
 				
 				if(searchWord == null || 
-				  (searchWord != null && searchWord.trim().isEmpty())) { // null은 아니지만 공백
+				  (searchWord != null && searchWord.trim().isEmpty())) { // searchWord 접속한 유저아이디로 고정
 					searchWord = loginuser.getUserid();
 				}
 				

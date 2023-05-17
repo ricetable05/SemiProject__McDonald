@@ -19,7 +19,7 @@
 
 </style>
 
-<jsp:include page="/WEB-INF/header_footer/header.jsp"/>
+<jsp:include page="/WEB-INF/header_footer/header.jsp"/>     
 
 <script type="text/javascript">
 
