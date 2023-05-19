@@ -10,7 +10,7 @@
 <style type="text/css">
 
 	.topimage{
-		background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;
+		background:url(<%= request.getContextPath() %>/images/버거상단이미지.jpg) 50% 50% no-repeat;   
 	}
 	
 	
