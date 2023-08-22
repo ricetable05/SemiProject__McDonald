@@ -1,4 +1,4 @@
 # SemiProject__McDonald
 SemiProject__McDonald
 
-##내가 구현한 기능
+<H2>⭐  직접 기능 구현한 페이지  </H2> 
